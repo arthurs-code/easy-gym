@@ -1,10 +1,16 @@
-const CACHE_NAME = 'easy-gym-pwa-v5';
+const CACHE_NAME = 'easy-gym-pwa-v7';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './icons/icon-180.png',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-256.png',
+  './icons/icon-384.png',
+  './icons/icon-512.png',
+  './icons/icon-1024.png',
+  './icons/favicon-32.png',
+  './icons/maskable-512.png'
 ];
 
 self.addEventListener('install', event => {

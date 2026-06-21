@@ -17,3 +17,9 @@ Update: header now shows EASY GYM - powered by Arthur Stivenson. Cache version v
 
 
 Update note: v5 uses text-link controls for menu, weekdays and actions.
+
+
+Update: this version includes responsive iPhone scaling code for different iPhone widths and Safari/Home Screen viewport changes.
+
+
+Update: custom winged dumbbell icons added. Cache version v7.

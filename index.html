@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>EASY GYM - powered by Arthur Stivenson</title>
   <meta name="theme-color" content="#2563eb" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -10,7 +10,8 @@
   <meta name="apple-mobile-web-app-title" content="Easy Gym" />
   <meta name="application-name" content="Easy Gym" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
   <style>
 
     :root {
@@ -706,7 +707,194 @@
       .day-button { font-size: 14px; }
     }
 
+
+    /* iPhone responsive sizing: one scale system for all screen widths */
+    :root {
+      --screen-scale: clamp(0.86, calc(100vw / 430), 1);
+      --page-x: clamp(7px, 2.4vw, 12px);
+      --row-gap: clamp(4px, 1.25vw, 7px);
+      --num-col: clamp(18px, 5.2vw, 26px);
+      --small-col: clamp(43px, 13.2vw, 62px);
+      --check-col: clamp(24px, 7vw, 30px);
+      --input-h: clamp(31px, 9vw, 36px);
+      --card-pad: clamp(7px, 2vw, 9px);
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding-left: max(var(--page-x), env(safe-area-inset-left));
+      padding-right: max(var(--page-x), env(safe-area-inset-right));
+    }
+
+    main {
+      padding-left: max(var(--page-x), env(safe-area-inset-left));
+      padding-right: max(var(--page-x), env(safe-area-inset-right));
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    .brand-main {
+      font-size: clamp(17px, 4.9vw, 19px);
+    }
+
+    .brand-powered {
+      font-size: clamp(8px, 2.45vw, 10px);
+    }
+
+    .app-logo {
+      width: clamp(24px, 7.2vw, 30px);
+      height: clamp(24px, 7.2vw, 30px);
+      border-radius: clamp(6px, 1.8vw, 8px);
+    }
+
+    nav {
+      gap: clamp(11px, 3.8vw, 18px);
+      width: 100%;
+    }
+
+    .tab-button {
+      font-size: clamp(12px, 3.55vw, 14px);
+      min-height: clamp(24px, 7vw, 28px);
+      padding: clamp(3px, 1vw, 5px) 0;
+    }
+
+    h3 {
+      font-size: clamp(17px, 5vw, 19px);
+      margin-top: clamp(10px, 3vw, 14px);
+    }
+
+    .button-row,
+    .day-row {
+      gap: clamp(8px, 3.25vw, 18px) clamp(12px, 4vw, 18px) !important;
+    }
+
+    button.action,
+    .day-button,
+    .download-link-button {
+      font-size: clamp(12px, 3.55vw, 14px) !important;
+      min-height: clamp(21px, 6vw, 24px) !important;
+    }
+
+    .plan-card,
+    .do-card,
+    .journal-card,
+    .info-card {
+      padding: var(--card-pad);
+      margin: clamp(7px, 2vw, 9px) 0;
+    }
+
+    .plan-row,
+    .do-row {
+      grid-template-columns: var(--num-col) minmax(0, 1fr) var(--small-col) var(--small-col) var(--small-col) var(--check-col) !important;
+      gap: var(--row-gap) !important;
+      width: 100%;
+    }
+
+    .row-number {
+      font-size: clamp(13px, 3.8vw, 15px);
+      padding-bottom: clamp(6px, 2vw, 8px);
+    }
+
+    input,
+    textarea,
+    select {
+      min-height: var(--input-h) !important;
+      font-size: clamp(12px, 3.6vw, 14px) !important;
+      padding: clamp(5px, 1.5vw, 7px) clamp(4px, 1.4vw, 7px) !important;
+    }
+
+    input[type="number"] {
+      font-size: clamp(14px, 4.8vw, 17px) !important;
+    }
+
+    label {
+      font-size: clamp(8px, 2.25vw, 10px) !important;
+      margin-bottom: clamp(2px, 0.8vw, 4px) !important;
+    }
+
+    .remove-box,
+    .plus-box {
+      min-height: var(--input-h) !important;
+    }
+
+    .remove-box input {
+      width: clamp(17px, 5vw, 20px) !important;
+      height: clamp(17px, 5vw, 20px) !important;
+      margin-bottom: clamp(6px, 2vw, 8px) !important;
+    }
+
+    .plus-btn {
+      width: clamp(24px, 7vw, 28px) !important;
+      height: clamp(24px, 7vw, 28px) !important;
+      font-size: clamp(20px, 6vw, 24px) !important;
+    }
+
+    .rep-grid {
+      grid-template-columns: repeat(auto-fill, minmax(clamp(26px, 8vw, 32px), 1fr));
+      gap: clamp(5px, 1.6vw, 7px);
+    }
+
+    .rep-check {
+      height: clamp(27px, 8vw, 31px);
+      font-size: clamp(12px, 3.4vw, 14px);
+    }
+
+    @media (max-width: 390px) {
+      :root {
+        --page-x: 6px;
+        --row-gap: 4px;
+        --small-col: clamp(40px, 12.9vw, 48px);
+        --num-col: 18px;
+        --check-col: 24px;
+        --card-pad: 6px;
+      }
+
+      .brand { gap: 7px; }
+      nav { gap: 12px; }
+      .plan-row, .do-row { align-items: end; }
+      .exercise-name { font-size: 13px !important; }
+    }
+
+    @media (max-width: 340px) {
+      :root {
+        --small-col: 39px;
+        --num-col: 16px;
+        --check-col: 22px;
+      }
+      nav { gap: 10px; }
+      .tab-button { font-size: 11px !important; }
+      .brand-main { font-size: 16px; }
+      .brand-powered { font-size: 8px; }
+    }
+
   </style>
+  <script>
+    // Keeps layout proportional to the real iPhone viewport, including Safari/Home Screen size changes.
+    (function () {
+      function fitEasyGymToScreen() {
+        var w = window.innerWidth || document.documentElement.clientWidth || 390;
+        var h = window.innerHeight || document.documentElement.clientHeight || 700;
+        document.documentElement.style.setProperty('--screen-w', w + 'px');
+        document.documentElement.style.setProperty('--screen-h', h + 'px');
+        document.documentElement.dataset.screen = w < 380 ? 'small-iphone' : (w < 430 ? 'iphone' : 'wide');
+      }
+      fitEasyGymToScreen();
+      window.addEventListener('resize', fitEasyGymToScreen, { passive: true });
+      window.addEventListener('orientationchange', fitEasyGymToScreen, { passive: true });
+    }());
+  </script>
+
 </head>
 <body>
   <div class="app">
@@ -1497,6 +1685,177 @@
       .button-row, .day-row { gap: 10px 15px; }
       button.action, .day-button, .download-link-button { font-size: 13px; min-height: 22px; padding: 3px 0 !important; }
       .day-button { font-size: 14px; }
+    }
+
+
+    /* iPhone responsive sizing: one scale system for all screen widths */
+    :root {
+      --screen-scale: clamp(0.86, calc(100vw / 430), 1);
+      --page-x: clamp(7px, 2.4vw, 12px);
+      --row-gap: clamp(4px, 1.25vw, 7px);
+      --num-col: clamp(18px, 5.2vw, 26px);
+      --small-col: clamp(43px, 13.2vw, 62px);
+      --check-col: clamp(24px, 7vw, 30px);
+      --input-h: clamp(31px, 9vw, 36px);
+      --card-pad: clamp(7px, 2vw, 9px);
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding-left: max(var(--page-x), env(safe-area-inset-left));
+      padding-right: max(var(--page-x), env(safe-area-inset-right));
+    }
+
+    main {
+      padding-left: max(var(--page-x), env(safe-area-inset-left));
+      padding-right: max(var(--page-x), env(safe-area-inset-right));
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    .brand-main {
+      font-size: clamp(17px, 4.9vw, 19px);
+    }
+
+    .brand-powered {
+      font-size: clamp(8px, 2.45vw, 10px);
+    }
+
+    .app-logo {
+      width: clamp(24px, 7.2vw, 30px);
+      height: clamp(24px, 7.2vw, 30px);
+      border-radius: clamp(6px, 1.8vw, 8px);
+    }
+
+    nav {
+      gap: clamp(11px, 3.8vw, 18px);
+      width: 100%;
+    }
+
+    .tab-button {
+      font-size: clamp(12px, 3.55vw, 14px);
+      min-height: clamp(24px, 7vw, 28px);
+      padding: clamp(3px, 1vw, 5px) 0;
+    }
+
+    h3 {
+      font-size: clamp(17px, 5vw, 19px);
+      margin-top: clamp(10px, 3vw, 14px);
+    }
+
+    .button-row,
+    .day-row {
+      gap: clamp(8px, 3.25vw, 18px) clamp(12px, 4vw, 18px) !important;
+    }
+
+    button.action,
+    .day-button,
+    .download-link-button {
+      font-size: clamp(12px, 3.55vw, 14px) !important;
+      min-height: clamp(21px, 6vw, 24px) !important;
+    }
+
+    .plan-card,
+    .do-card,
+    .journal-card,
+    .info-card {
+      padding: var(--card-pad);
+      margin: clamp(7px, 2vw, 9px) 0;
+    }
+
+    .plan-row,
+    .do-row {
+      grid-template-columns: var(--num-col) minmax(0, 1fr) var(--small-col) var(--small-col) var(--small-col) var(--check-col) !important;
+      gap: var(--row-gap) !important;
+      width: 100%;
+    }
+
+    .row-number {
+      font-size: clamp(13px, 3.8vw, 15px);
+      padding-bottom: clamp(6px, 2vw, 8px);
+    }
+
+    input,
+    textarea,
+    select {
+      min-height: var(--input-h) !important;
+      font-size: clamp(12px, 3.6vw, 14px) !important;
+      padding: clamp(5px, 1.5vw, 7px) clamp(4px, 1.4vw, 7px) !important;
+    }
+
+    input[type="number"] {
+      font-size: clamp(14px, 4.8vw, 17px) !important;
+    }
+
+    label {
+      font-size: clamp(8px, 2.25vw, 10px) !important;
+      margin-bottom: clamp(2px, 0.8vw, 4px) !important;
+    }
+
+    .remove-box,
+    .plus-box {
+      min-height: var(--input-h) !important;
+    }
+
+    .remove-box input {
+      width: clamp(17px, 5vw, 20px) !important;
+      height: clamp(17px, 5vw, 20px) !important;
+      margin-bottom: clamp(6px, 2vw, 8px) !important;
+    }
+
+    .plus-btn {
+      width: clamp(24px, 7vw, 28px) !important;
+      height: clamp(24px, 7vw, 28px) !important;
+      font-size: clamp(20px, 6vw, 24px) !important;
+    }
+
+    .rep-grid {
+      grid-template-columns: repeat(auto-fill, minmax(clamp(26px, 8vw, 32px), 1fr));
+      gap: clamp(5px, 1.6vw, 7px);
+    }
+
+    .rep-check {
+      height: clamp(27px, 8vw, 31px);
+      font-size: clamp(12px, 3.4vw, 14px);
+    }
+
+    @media (max-width: 390px) {
+      :root {
+        --page-x: 6px;
+        --row-gap: 4px;
+        --small-col: clamp(40px, 12.9vw, 48px);
+        --num-col: 18px;
+        --check-col: 24px;
+        --card-pad: 6px;
+      }
+
+      .brand { gap: 7px; }
+      nav { gap: 12px; }
+      .plan-row, .do-row { align-items: end; }
+      .exercise-name { font-size: 13px !important; }
+    }
+
+    @media (max-width: 340px) {
+      :root {
+        --small-col: 39px;
+        --num-col: 16px;
+        --check-col: 22px;
+      }
+      nav { gap: 10px; }
+      .tab-button { font-size: 11px !important; }
+      .brand-main { font-size: 16px; }
+      .brand-powered { font-size: 8px; }
     }
 
   </style>
