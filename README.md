@@ -1,25 +1,19 @@
-{
-  "name": "Easy Gym",
-  "short_name": "Easy Gym",
-  "description": "Simple gym plan, training and progress journal.",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#f6f8fc",
-  "theme_color": "#2563eb",
-  "icons": [
-    {
-      "src": "icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
-}
+# Easy Gym PWA
+
+Updated compact iPhone layout and new winged dumbbell app icon.
+
+## Publish update on GitHub Pages
+
+1. Open your `easy-gym` GitHub repository.
+2. Click **Add file → Upload files**.
+3. Drag the **contents** of this folder into the repository.
+4. Choose **Commit directly to the main branch**.
+5. Click **Commit changes**.
+
+The service worker cache was updated to v2, so the new design should refresh after reopening the app. If iPhone still shows the old version, close the app completely and open it again.
+
+
+Update: header now shows EASY GYM - powered by Arthur Stivenson. Cache version v4.
+
+
+Update note: v5 uses text-link controls for menu, weekdays and actions.

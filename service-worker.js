@@ -1,13 +1,27 @@
-# Easy Gym PWA
+const CACHE_NAME = 'easy-gym-pwa-v5';
+const ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
+];
 
-Updated compact iPhone layout and new winged dumbbell app icon.
+self.addEventListener('install', event => {
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
+  self.skipWaiting();
+});
 
-## Publish update on GitHub Pages
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+  );
+  self.clients.claim();
+});
 
-1. Open your `easy-gym` GitHub repository.
-2. Click **Add file → Upload files**.
-3. Drag the **contents** of this folder into the repository.
-4. Choose **Commit directly to the main branch**.
-5. Click **Commit changes**.
-
-The service worker cache was updated to v2, so the new design should refresh after reopening the app. If iPhone still shows the old version, close the app completely and open it again.
+self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+  event.respondWith(
+    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => caches.match('./index.html')))
+  );
+});
