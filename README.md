@@ -1,33 +1,13 @@
 # Easy Gym PWA
 
-This is the installable iPhone web-app version.
+Updated compact iPhone layout and new winged dumbbell app icon.
 
-## Test on Windows
+## Publish update on GitHub Pages
 
-1. Unzip this folder.
-2. Open Command Prompt inside the folder.
-3. Run:
+1. Open your `easy-gym` GitHub repository.
+2. Click **Add file → Upload files**.
+3. Drag the **contents** of this folder into the repository.
+4. Choose **Commit directly to the main branch**.
+5. Click **Commit changes**.
 
-```bash
-python -m http.server 8080
-```
-
-4. Open `http://localhost:8080` in Chrome or Edge.
-
-## Install on iPhone
-
-For iPhone Home Screen install, upload the folder to an HTTPS host, for example GitHub Pages, Netlify, Vercel, or your web hosting.
-
-Then on iPhone:
-
-1. Open the HTTPS link in Safari.
-2. Tap Share.
-3. Tap Add to Home Screen.
-4. Open Easy Gym from the Home Screen icon.
-
-## Files
-
-- `index.html` — app
-- `manifest.json` — PWA install settings
-- `service-worker.js` — offline cache
-- `icons/` — app icons
+The service worker cache was updated to v2, so the new design should refresh after reopening the app. If iPhone still shows the old version, close the app completely and open it again.
