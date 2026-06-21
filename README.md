@@ -28,7 +28,13 @@ Update: custom winged dumbbell icons added. Cache version v7.
 Version v8: improved iPhone responsive exercise cards with larger readable fields.
 
 
-Version v10: iPhone-first readable layout, Mon-plan title, compact Progress table, cache refresh improved.
+Version v9: iPhone-first readable layout, Mon-plan title, compact Progress table, cache refresh improved.
 
 
-Version v10: larger iPhone exercise names and fixed Progress table date width.
+Update v13: Save labels are now Save Mon-plan / Save Tue-plan, and Plan/Train boxes are tighter for iPhone readability.
+
+
+Update v13: hard CSS override keeps Sets, kg, and Reps on the same line with equal-width boxes.
+
+
+Version v14: full-width menu/day navigation and balanced Progress table proportions for iPhone.

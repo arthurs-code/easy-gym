@@ -1271,118 +1271,364 @@
     }
 
 
+    /* v11/v13: tighter iPhone-readable controls. */
+    :root {
+      --eg-ui-size: clamp(16px, 4.35vw, 18px);
+      --eg-title-size: clamp(16px, 4.35vw, 18px);
+      --eg-small-size: clamp(12px, 3.3vw, 14px);
+      --eg-input-h: clamp(34px, 9.2vw, 38px);
+      --eg-card-pad: clamp(8px, 2.6vw, 11px);
+      --eg-page-x: clamp(13px, 3.8vw, 16px);
+    }
 
-    /* v10: iPhone readability fixes */
-    @media (max-width: 700px) {
-      :root {
-        --eg-menu-size: clamp(18px, 4.75vw, 20px);
-        --eg-exercise-size: clamp(18px, 4.85vw, 21px);
-      }
+    #planDayTitle {
+      font-size: var(--eg-title-size) !important;
+      margin: 14px 0 7px !important;
+      font-weight: 780 !important;
+      letter-spacing: -0.02em !important;
+    }
 
-      .tab-button,
-      .day-button,
-      button.action,
-      .download-link-button {
-        font-size: var(--eg-menu-size) !important;
-        line-height: 1.15 !important;
-      }
+    .plan-card,
+    .do-card {
+      padding: var(--eg-card-pad) !important;
+      margin: 9px 0 !important;
+      border-radius: 14px !important;
+    }
 
-      #planDayTitle {
-        font-size: var(--eg-menu-size) !important;
-        font-weight: 820 !important;
-      }
+    .plan-row,
+    .do-row {
+      grid-template-columns: 22px minmax(0, 1fr) 30px !important;
+      column-gap: 8px !important;
+      row-gap: 6px !important;
+      align-items: center !important;
+    }
 
-      .plan-name input,
-      .do-name input {
-        font-size: var(--eg-exercise-size) !important;
-        font-weight: 720 !important;
-        line-height: 1.12 !important;
-        color: var(--text) !important;
-        letter-spacing: -0.03em !important;
-        min-height: 52px !important;
-        height: 52px !important;
-        padding: 10px 12px !important;
-      }
+    .row-number {
+      font-size: var(--eg-ui-size) !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      padding: 0 !important;
+    }
 
-      .plan-card,
-      .do-card {
-        padding: 14px 14px 15px !important;
-      }
+    label {
+      font-size: var(--eg-small-size) !important;
+      line-height: 1 !important;
+      margin: 0 0 3px !important;
+      font-weight: 800 !important;
+    }
 
+    input,
+    textarea,
+    select {
+      min-height: var(--eg-input-h) !important;
+      height: var(--eg-input-h) !important;
+      border-radius: 10px !important;
+      border-width: 1.2px !important;
+      padding: 4px 8px !important;
+      font-size: var(--eg-ui-size) !important;
+      line-height: 1.05 !important;
+    }
+
+    .plan-name input,
+    .do-name input {
+      font-size: var(--eg-ui-size) !important;
+      font-weight: 600 !important;
+      padding-left: 9px !important;
+      padding-right: 9px !important;
+    }
+
+    input[type="number"] {
+      font-size: clamp(20px, 5.8vw, 23px) !important;
+      font-weight: 850 !important;
+      padding: 3px 4px !important;
+    }
+
+    .remove-box,
+    .plus-box {
+      min-height: var(--eg-input-h) !important;
+    }
+
+    .remove-box input {
+      width: 26px !important;
+      height: 26px !important;
+    }
+
+    .plus-btn {
+      width: 31px !important;
+      height: 31px !important;
+      font-size: 28px !important;
+      line-height: 1 !important;
+    }
+
+    .rep-grid {
+      gap: 7px !important;
+      margin-top: 8px !important;
+    }
+
+    .rep-check {
+      height: 35px !important;
+      border-radius: 10px !important;
+      font-size: var(--eg-ui-size) !important;
+    }
+
+    .button-row {
+      margin: 6px 0 9px !important;
+    }
+
+    button.action,
+    .download-link-button,
+    .tab-button,
+    .day-button {
+      font-size: var(--eg-ui-size) !important;
+      min-height: 28px !important;
+      padding: 2px 0 4px !important;
+    }
+
+
+
+    /* v13 FINAL OVERRIDE: Sets, kg, Reps must stay on one row with equal boxes. */
+    .plan-row,
+    .do-row {
+      display: grid !important;
+      grid-template-columns: 24px repeat(3, minmax(0, 1fr)) 32px !important;
+      grid-template-areas:
+        "num name name name action"
+        ". sets kg reps ." !important;
+      column-gap: 8px !important;
+      row-gap: 6px !important;
+      align-items: center !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .row-number {
+      grid-area: num !important;
+      justify-self: end !important;
+      align-self: center !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .plan-name,
+    .do-name {
+      grid-area: name !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    .remove-box,
+    .plus-box {
+      grid-area: action !important;
+      justify-self: center !important;
+      align-self: center !important;
+      min-height: 34px !important;
+      height: 34px !important;
+    }
+
+    .plan-row > div:nth-child(3), .do-row > div:nth-child(3) { grid-area: sets !important; }
+    .plan-row > div:nth-child(4), .do-row > div:nth-child(4) { grid-area: kg !important; }
+    .plan-row > div:nth-child(5), .do-row > div:nth-child(5) { grid-area: reps !important; }
+
+    .plan-row > div:nth-child(3), .do-row > div:nth-child(3),
+    .plan-row > div:nth-child(4), .do-row > div:nth-child(4),
+    .plan-row > div:nth-child(5), .do-row > div:nth-child(5) {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .plan-row > div:nth-child(3) input, .do-row > div:nth-child(3) input,
+    .plan-row > div:nth-child(4) input, .do-row > div:nth-child(4) input,
+    .plan-row > div:nth-child(5) input, .do-row > div:nth-child(5) input {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 42px !important;
+      min-height: 42px !important;
+      box-sizing: border-box !important;
+      text-align: center !important;
+      padding: 3px 4px !important;
+    }
+
+    .plan-name input,
+    .do-name input {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    @media (max-width: 390px) {
       .plan-row,
       .do-row {
-        grid-template-columns: 26px minmax(0, 1fr) 34px !important;
-        column-gap: 8px !important;
+        grid-template-columns: 22px repeat(3, minmax(0, 1fr)) 30px !important;
+        column-gap: 6px !important;
       }
-
-      .row-number {
-        font-size: var(--eg-menu-size) !important;
-      }
-
-      .progress-table-wrap {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-      }
-
-      table.progress-table {
-        width: 100% !important;
-        table-layout: fixed !important;
-      }
-
-      .progress-col-date { width: 23% !important; }
-      .progress-col-exercise { width: 37% !important; }
-      .progress-col-small { width: 13.333% !important; }
-
-      .progress-table th,
-      .progress-table td {
-        padding: 9px 3px !important;
-        font-size: clamp(16px, 4.2vw, 18px) !important;
-        line-height: 1.12 !important;
-      }
-
-      .progress-table th {
-        font-size: clamp(15px, 4vw, 17px) !important;
-      }
-
-      .progress-table td:first-child,
-      .progress-table th:first-child {
-        white-space: nowrap !important;
-        word-break: keep-all !important;
-        overflow-wrap: normal !important;
+      .plan-card,
+      .do-card {
         padding-left: 8px !important;
-        padding-right: 1px !important;
-      }
-
-      .progress-table td:nth-child(2),
-      .progress-table th:nth-child(2) {
-        padding-left: 5px !important;
-        padding-right: 2px !important;
-      }
-
-      .progress-table td:nth-child(2) strong {
-        font-size: clamp(17px, 4.45vw, 19px) !important;
-        line-height: 1.08 !important;
-        font-weight: 780 !important;
-        letter-spacing: -0.025em !important;
-      }
-
-      .journal-card {
-        padding: 14px 14px 16px !important;
-      }
-
-      main {
-        padding-bottom: max(96px, env(safe-area-inset-bottom)) !important;
+        padding-right: 8px !important;
       }
     }
 
-    @media (max-width: 370px) {
-      .progress-col-date { width: 24% !important; }
-      .progress-col-exercise { width: 36% !important; }
-      .progress-col-small { width: 13.333% !important; }
+
+
+    /* v14 FINAL: full-width iPhone navigation and balanced progress table. */
+    :root {
+      --eg-nav-size: clamp(16px, 4.25vw, 18px);
+      --eg-table-size: clamp(15px, 4.05vw, 17px);
+      --eg-table-head-size: clamp(14px, 3.75vw, 16px);
+    }
+
+    header {
+      width: 100% !important;
+      max-width: 100vw !important;
+    }
+
+    nav {
+      width: 100% !important;
+      max-width: 100% !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 0 !important;
+      overflow-x: visible !important;
+    }
+
+    .tab-button {
+      flex: 0 0 auto !important;
+      font-size: var(--eg-nav-size) !important;
+      line-height: 1.05 !important;
+      min-height: 30px !important;
+      padding: 4px 0 5px !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+    }
+
+    .day-row {
+      width: 100% !important;
+      max-width: 100% !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+      gap: 0 !important;
+      margin: 12px 0 8px !important;
+    }
+
+    .day-button {
+      flex: 0 0 auto !important;
+      font-size: var(--eg-nav-size) !important;
+      line-height: 1.05 !important;
+      min-height: 30px !important;
+      padding: 4px 0 5px !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+    }
+
+    .progress-table-wrap {
+      width: 100% !important;
+      overflow-x: hidden !important;
+      border-radius: 14px !important;
+      border: 1px solid var(--line) !important;
+      background: var(--card) !important;
+    }
+
+    table.progress-table {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      table-layout: fixed !important;
+      border-collapse: collapse !important;
+      font-size: var(--eg-table-size) !important;
+      line-height: 1.15 !important;
+    }
+
+    .progress-col-date { width: 21% !important; }
+    .progress-col-exercise { width: 31% !important; }
+    .progress-col-small { width: 16% !important; }
+
+    .progress-table th,
+    .progress-table td {
+      padding: 10px 6px !important;
+      vertical-align: middle !important;
+      border-bottom: 1px solid var(--line) !important;
+      overflow: hidden !important;
+      text-overflow: clip !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      white-space: normal !important;
+    }
+
+    .progress-table th {
+      font-size: var(--eg-table-head-size) !important;
+      font-weight: 820 !important;
+      color: var(--muted) !important;
+      background: #f7f9fc !important;
+      text-align: left !important;
+    }
+
+    .progress-table td {
+      font-weight: 520 !important;
+      color: var(--text) !important;
+    }
+
+    .progress-table th:nth-child(1),
+    .progress-table td:nth-child(1) {
+      text-align: left !important;
+      white-space: nowrap !important;
+      padding-left: 8px !important;
+      font-size: clamp(14px, 3.8vw, 16px) !important;
+    }
+
+    .progress-table th:nth-child(2),
+    .progress-table td:nth-child(2) {
+      text-align: left !important;
+      padding-left: 8px !important;
+      padding-right: 5px !important;
+    }
+
+    .progress-table td:nth-child(2) strong {
+      font-size: var(--eg-table-size) !important;
+      font-weight: 780 !important;
+      line-height: 1.1 !important;
+      display: block !important;
+    }
+
+    .progress-table th.number-cell,
+    .progress-table td.number-cell {
+      text-align: center !important;
+      padding-left: 3px !important;
+      padding-right: 3px !important;
+      font-size: var(--eg-table-size) !important;
+    }
+
+    .progress-table tr.exercise-group-start td {
+      border-top: 3px solid var(--text) !important;
+    }
+
+    .progress-table tbody tr:last-child td {
+      border-bottom: 0 !important;
+    }
+
+    @media (max-width: 380px) {
+      :root {
+        --eg-nav-size: 15px;
+        --eg-table-size: 15px;
+        --eg-table-head-size: 14px;
+      }
+      .progress-col-date { width: 22% !important; }
+      .progress-col-exercise { width: 30% !important; }
+      .progress-col-small { width: 16% !important; }
       .progress-table th,
-      .progress-table td { font-size: 15px !important; }
-      .progress-table td:nth-child(2) strong { font-size: 16px !important; }
+      .progress-table td { padding: 9px 4px !important; }
+      .progress-table th:nth-child(1),
+      .progress-table td:nth-child(1) { padding-left: 6px !important; font-size: 14px !important; }
+      .tab-button,
+      .day-button { font-size: 15px !important; }
     }
 
 </style>
@@ -1430,7 +1676,7 @@
           <h3 id="planDayTitle">Mon-plan</h3>
           <div id="planList"></div>
           <div class="button-row">
-            <button class="action" id="saveDailyPlanBtn">Save Monday</button>
+            <button class="action" id="saveDailyPlanBtn">Save Mon-plan</button>
           </div>
         </section>
 
@@ -1637,7 +1883,7 @@
       syncTrainWithPlan(selectedPlanDay, false);
       persistAll();
       renderAll();
-      showToast(`${dayLong(selectedPlanDay)} plan saved`);
+      showToast(`${dayShort(selectedPlanDay)}-plan saved`);
     });
 
     document.getElementById('saveWorkoutBtn').addEventListener('click', () => {
@@ -1721,7 +1967,7 @@
     function renderPlan() {
       const plan = currentPlan();
       planDayTitle.textContent = `${dayShort(selectedPlanDay)}-plan`;
-      saveDailyPlanBtn.textContent = `Save ${dayLong(selectedPlanDay)}`;
+      saveDailyPlanBtn.textContent = `Save ${dayShort(selectedPlanDay)}-plan`;
       saveDailyPlanBtn.disabled = !plan.length;
 
       if (!plan.length) {
@@ -2374,119 +2620,129 @@
 
   
 
-    /* v10: iPhone readability fixes */
-    @media (max-width: 700px) {
-      :root {
-        --eg-menu-size: clamp(18px, 4.75vw, 20px);
-        --eg-exercise-size: clamp(18px, 4.85vw, 21px);
-      }
+    /* v13: Sets, kg and Reps on one equal-width line on iPhone. */
+    .plan-row,
+    .do-row {
+      display: grid !important;
+      grid-template-columns: 26px repeat(3, minmax(0, 1fr)) 36px !important;
+      grid-template-areas:
+        "num name name name action"
+        ". sets kg reps ." !important;
+      column-gap: 8px !important;
+      row-gap: 6px !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
 
-      .tab-button,
-      .day-button,
-      button.action,
-      .download-link-button {
-        font-size: var(--eg-menu-size) !important;
-        line-height: 1.15 !important;
-      }
+    .row-number {
+      grid-area: num !important;
+      align-self: center !important;
+      justify-self: end !important;
+      text-align: right !important;
+      font-size: clamp(20px, 5.6vw, 24px) !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
 
-      #planDayTitle {
-        font-size: var(--eg-menu-size) !important;
-        font-weight: 820 !important;
-      }
+    .plan-name,
+    .do-name {
+      grid-area: name !important;
+      min-width: 0 !important;
+      width: 100% !important;
+    }
 
-      .plan-name input,
-      .do-name input {
-        font-size: var(--eg-exercise-size) !important;
-        font-weight: 720 !important;
-        line-height: 1.12 !important;
-        color: var(--text) !important;
-        letter-spacing: -0.03em !important;
-        min-height: 52px !important;
-        height: 52px !important;
-        padding: 10px 12px !important;
-      }
+    .plan-row > div:nth-child(3), .do-row > div:nth-child(3) { grid-area: sets !important; }
+    .plan-row > div:nth-child(4), .do-row > div:nth-child(4) { grid-area: kg !important; }
+    .plan-row > div:nth-child(5), .do-row > div:nth-child(5) { grid-area: reps !important; }
 
-      .plan-card,
-      .do-card {
-        padding: 14px 14px 15px !important;
-      }
+    .plan-row > div:nth-child(3), .do-row > div:nth-child(3),
+    .plan-row > div:nth-child(4), .do-row > div:nth-child(4),
+    .plan-row > div:nth-child(5), .do-row > div:nth-child(5) {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
 
+    .remove-box,
+    .plus-box {
+      grid-area: action !important;
+      min-height: 40px !important;
+      height: 40px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+    }
+
+    .plan-card,
+    .do-card {
+      padding: 11px 10px !important;
+      margin: 9px 0 !important;
+      border-radius: 16px !important;
+    }
+
+    .plan-name input,
+    .do-name input {
+      height: 42px !important;
+      min-height: 42px !important;
+      border-radius: 12px !important;
+      font-size: clamp(23px, 6.4vw, 27px) !important;
+      font-weight: 550 !important;
+      line-height: 1.05 !important;
+      padding: 5px 12px !important;
+      text-align: left !important;
+      width: 100% !important;
+    }
+
+    label {
+      display: block !important;
+      font-size: clamp(15px, 4.2vw, 17px) !important;
+      line-height: 1 !important;
+      margin: 0 0 3px !important;
+      font-weight: 800 !important;
+    }
+
+    input[type="number"] {
+      height: 42px !important;
+      min-height: 42px !important;
+      border-radius: 12px !important;
+      font-size: clamp(24px, 7vw, 30px) !important;
+      font-weight: 850 !important;
+      line-height: 1 !important;
+      padding: 3px 4px !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    .remove-box input {
+      width: 28px !important;
+      height: 28px !important;
+      min-height: 28px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .plus-btn {
+      width: 34px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      font-size: 31px !important;
+      line-height: 0.85 !important;
+      padding: 0 !important;
+    }
+
+    @media (max-width: 380px) {
       .plan-row,
       .do-row {
-        grid-template-columns: 26px minmax(0, 1fr) 34px !important;
-        column-gap: 8px !important;
+        grid-template-columns: 23px repeat(3, minmax(0, 1fr)) 32px !important;
+        column-gap: 6px !important;
       }
-
-      .row-number {
-        font-size: var(--eg-menu-size) !important;
-      }
-
-      .progress-table-wrap {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-      }
-
-      table.progress-table {
-        width: 100% !important;
-        table-layout: fixed !important;
-      }
-
-      .progress-col-date { width: 23% !important; }
-      .progress-col-exercise { width: 37% !important; }
-      .progress-col-small { width: 13.333% !important; }
-
-      .progress-table th,
-      .progress-table td {
-        padding: 9px 3px !important;
-        font-size: clamp(16px, 4.2vw, 18px) !important;
-        line-height: 1.12 !important;
-      }
-
-      .progress-table th {
-        font-size: clamp(15px, 4vw, 17px) !important;
-      }
-
-      .progress-table td:first-child,
-      .progress-table th:first-child {
-        white-space: nowrap !important;
-        word-break: keep-all !important;
-        overflow-wrap: normal !important;
-        padding-left: 8px !important;
-        padding-right: 1px !important;
-      }
-
-      .progress-table td:nth-child(2),
-      .progress-table th:nth-child(2) {
-        padding-left: 5px !important;
-        padding-right: 2px !important;
-      }
-
-      .progress-table td:nth-child(2) strong {
-        font-size: clamp(17px, 4.45vw, 19px) !important;
-        line-height: 1.08 !important;
-        font-weight: 780 !important;
-        letter-spacing: -0.025em !important;
-      }
-
-      .journal-card {
-        padding: 14px 14px 16px !important;
-      }
-
-      main {
-        padding-bottom: max(96px, env(safe-area-inset-bottom)) !important;
-      }
+      .plan-card,
+      .do-card { padding: 10px 8px !important; }
+      .plan-name input,
+      .do-name input { font-size: clamp(22px, 6.2vw, 25px) !important; }
+      input[type="number"] { font-size: clamp(23px, 6.8vw, 28px) !important; }
     }
-
-    @media (max-width: 370px) {
-      .progress-col-date { width: 24% !important; }
-      .progress-col-exercise { width: 36% !important; }
-      .progress-col-small { width: 13.333% !important; }
-      .progress-table th,
-      .progress-table td { font-size: 15px !important; }
-      .progress-table td:nth-child(2) strong { font-size: 16px !important; }
-    }
-
 </style>
       </head><body><h1>Easy Gym Progress</h1>${progressTableHtml(rows)}</body></html>`;
       downloadBlob(html, `easy_gym_progress_${new Date().toISOString().slice(0, 10)}.doc`, 'application/msword;charset=utf-8');
