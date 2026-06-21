@@ -1170,10 +1170,11 @@
     .plan-row,
     .do-row {
       display: grid !important;
-      grid-template-columns: 26px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 36px !important;
+      grid-template-columns: 26px minmax(0, 1fr) 36px !important;
       grid-template-areas:
-        "num name name name action"
-        ". sets kg reps ." !important;
+        "num name action"
+        ". sets sets"
+        ". kg reps" !important;
       column-gap: 10px !important;
       row-gap: 9px !important;
       align-items: center !important;
@@ -1267,6 +1268,121 @@
 
     @media (min-width: 700px) {
       .app { max-width: 700px; }
+    }
+
+
+
+    /* v10: iPhone readability fixes */
+    @media (max-width: 700px) {
+      :root {
+        --eg-menu-size: clamp(18px, 4.75vw, 20px);
+        --eg-exercise-size: clamp(18px, 4.85vw, 21px);
+      }
+
+      .tab-button,
+      .day-button,
+      button.action,
+      .download-link-button {
+        font-size: var(--eg-menu-size) !important;
+        line-height: 1.15 !important;
+      }
+
+      #planDayTitle {
+        font-size: var(--eg-menu-size) !important;
+        font-weight: 820 !important;
+      }
+
+      .plan-name input,
+      .do-name input {
+        font-size: var(--eg-exercise-size) !important;
+        font-weight: 720 !important;
+        line-height: 1.12 !important;
+        color: var(--text) !important;
+        letter-spacing: -0.03em !important;
+        min-height: 52px !important;
+        height: 52px !important;
+        padding: 10px 12px !important;
+      }
+
+      .plan-card,
+      .do-card {
+        padding: 14px 14px 15px !important;
+      }
+
+      .plan-row,
+      .do-row {
+        grid-template-columns: 26px minmax(0, 1fr) 34px !important;
+        column-gap: 8px !important;
+      }
+
+      .row-number {
+        font-size: var(--eg-menu-size) !important;
+      }
+
+      .progress-table-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+
+      table.progress-table {
+        width: 100% !important;
+        table-layout: fixed !important;
+      }
+
+      .progress-col-date { width: 23% !important; }
+      .progress-col-exercise { width: 37% !important; }
+      .progress-col-small { width: 13.333% !important; }
+
+      .progress-table th,
+      .progress-table td {
+        padding: 9px 3px !important;
+        font-size: clamp(16px, 4.2vw, 18px) !important;
+        line-height: 1.12 !important;
+      }
+
+      .progress-table th {
+        font-size: clamp(15px, 4vw, 17px) !important;
+      }
+
+      .progress-table td:first-child,
+      .progress-table th:first-child {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        overflow-wrap: normal !important;
+        padding-left: 8px !important;
+        padding-right: 1px !important;
+      }
+
+      .progress-table td:nth-child(2),
+      .progress-table th:nth-child(2) {
+        padding-left: 5px !important;
+        padding-right: 2px !important;
+      }
+
+      .progress-table td:nth-child(2) strong {
+        font-size: clamp(17px, 4.45vw, 19px) !important;
+        line-height: 1.08 !important;
+        font-weight: 780 !important;
+        letter-spacing: -0.025em !important;
+      }
+
+      .journal-card {
+        padding: 14px 14px 16px !important;
+      }
+
+      main {
+        padding-bottom: max(96px, env(safe-area-inset-bottom)) !important;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .progress-col-date { width: 24% !important; }
+      .progress-col-exercise { width: 36% !important; }
+      .progress-col-small { width: 13.333% !important; }
+      .progress-table th,
+      .progress-table td { font-size: 15px !important; }
+      .progress-table td:nth-child(2) strong { font-size: 16px !important; }
     }
 
 </style>
@@ -2256,7 +2372,122 @@
       .brand-powered { font-size: 8px; }
     }
 
-  </style>
+  
+
+    /* v10: iPhone readability fixes */
+    @media (max-width: 700px) {
+      :root {
+        --eg-menu-size: clamp(18px, 4.75vw, 20px);
+        --eg-exercise-size: clamp(18px, 4.85vw, 21px);
+      }
+
+      .tab-button,
+      .day-button,
+      button.action,
+      .download-link-button {
+        font-size: var(--eg-menu-size) !important;
+        line-height: 1.15 !important;
+      }
+
+      #planDayTitle {
+        font-size: var(--eg-menu-size) !important;
+        font-weight: 820 !important;
+      }
+
+      .plan-name input,
+      .do-name input {
+        font-size: var(--eg-exercise-size) !important;
+        font-weight: 720 !important;
+        line-height: 1.12 !important;
+        color: var(--text) !important;
+        letter-spacing: -0.03em !important;
+        min-height: 52px !important;
+        height: 52px !important;
+        padding: 10px 12px !important;
+      }
+
+      .plan-card,
+      .do-card {
+        padding: 14px 14px 15px !important;
+      }
+
+      .plan-row,
+      .do-row {
+        grid-template-columns: 26px minmax(0, 1fr) 34px !important;
+        column-gap: 8px !important;
+      }
+
+      .row-number {
+        font-size: var(--eg-menu-size) !important;
+      }
+
+      .progress-table-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+
+      table.progress-table {
+        width: 100% !important;
+        table-layout: fixed !important;
+      }
+
+      .progress-col-date { width: 23% !important; }
+      .progress-col-exercise { width: 37% !important; }
+      .progress-col-small { width: 13.333% !important; }
+
+      .progress-table th,
+      .progress-table td {
+        padding: 9px 3px !important;
+        font-size: clamp(16px, 4.2vw, 18px) !important;
+        line-height: 1.12 !important;
+      }
+
+      .progress-table th {
+        font-size: clamp(15px, 4vw, 17px) !important;
+      }
+
+      .progress-table td:first-child,
+      .progress-table th:first-child {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        overflow-wrap: normal !important;
+        padding-left: 8px !important;
+        padding-right: 1px !important;
+      }
+
+      .progress-table td:nth-child(2),
+      .progress-table th:nth-child(2) {
+        padding-left: 5px !important;
+        padding-right: 2px !important;
+      }
+
+      .progress-table td:nth-child(2) strong {
+        font-size: clamp(17px, 4.45vw, 19px) !important;
+        line-height: 1.08 !important;
+        font-weight: 780 !important;
+        letter-spacing: -0.025em !important;
+      }
+
+      .journal-card {
+        padding: 14px 14px 16px !important;
+      }
+
+      main {
+        padding-bottom: max(96px, env(safe-area-inset-bottom)) !important;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .progress-col-date { width: 24% !important; }
+      .progress-col-exercise { width: 36% !important; }
+      .progress-col-small { width: 13.333% !important; }
+      .progress-table th,
+      .progress-table td { font-size: 15px !important; }
+      .progress-table td:nth-child(2) strong { font-size: 16px !important; }
+    }
+
+</style>
       </head><body><h1>Easy Gym Progress</h1>${progressTableHtml(rows)}</body></html>`;
       downloadBlob(html, `easy_gym_progress_${new Date().toISOString().slice(0, 10)}.doc`, 'application/msword;charset=utf-8');
       showToast('Word download started');
