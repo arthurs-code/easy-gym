@@ -23,3 +23,6 @@ Update: this version includes responsive iPhone scaling code for different iPhon
 
 
 Update: custom winged dumbbell icons added. Cache version v7.
+
+
+Version v8: improved iPhone responsive exercise cards with larger readable fields.
