@@ -40,7 +40,7 @@ Update v13: hard CSS override keeps Sets, kg, and Reps on the same line with equ
 Version v15: compact inside-label metric boxes, balanced spacing, compact Donate table, and Saved! button feedback.
 
 
-Version v21: added professional Explanations text, contact email and copyright notice.
+Version v22: added professional Explanations text, contact email and copyright notice.
 
 
-Version v21: copyright subtitle and fixed Remove behavior.
+Version v22: copyright subtitle and fixed Remove behavior.

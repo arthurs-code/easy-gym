@@ -1831,7 +1831,7 @@
 
 
 
-    /* v21: Explanations are deliberately prominent and readable */
+    /* v22: Explanations are deliberately prominent and readable */
     .explanation-entry p {
       font-size: clamp(18px, 5vw, 22px) !important;
       font-weight: 800 !important;
@@ -1841,7 +1841,7 @@
     .explanation-entry a { font-weight: 850 !important; }
 
 
-    /* v21: Training can only be saved from a currently saved day-plan. */
+    /* v22: Training can only be saved from a currently saved day-plan. */
     #saveWorkoutBtn:disabled {
       color: var(--muted) !important;
       opacity: 0.45 !important;
@@ -2098,10 +2098,7 @@
 
     removeSelectedBtn.addEventListener('click', () => {
       const selected = [...document.querySelectorAll('[data-remove-check]:checked')].map(input => input.value);
-      if (!selected.length) {
-        showToast('Select an exercise first');
-        return;
-      }
+      if (!selected.length) return;
       weekPlans[selectedPlanDay] = currentPlan().filter(item => !selected.includes(item.id));
       trainSessions[selectedPlanDay] = currentTrainForDay(selectedPlanDay).filter(item => !selected.includes(item.exerciseId));
       markPlanDirty(selectedPlanDay);
@@ -2127,11 +2124,13 @@
         return;
       }
 
+      if (savedWorkoutDay === selectedTrainDay) return;
+
       syncTrainWithPlan(selectedTrainDay, false);
       const completedExercises = collectCompletedExercises(selectedTrainDay);
 
       if (!completedExercises.length) {
-        showToast('No completed sets to save');
+        if (workoutButton) workoutButton.disabled = true;
         return;
       }
 
@@ -2147,8 +2146,10 @@
       savedWorkoutDay = selectedTrainDay;
       renderJournal();
       renderDo();
-      const workoutButton = document.getElementById('saveWorkoutBtn');
-      if (workoutButton) workoutButton.textContent = 'Saved!';
+      if (workoutButton) {
+        workoutButton.textContent = 'Saved';
+        workoutButton.disabled = true;
+      }
       showToast('Training saved');
     });
 
@@ -2266,6 +2267,8 @@
       const item = currentPlan().find(exercise => exercise.id === id);
       if (!item) return;
       markPlanDirty(selectedPlanDay);
+      saveDailyPlanBtn.textContent = `Save ${dayShort(selectedPlanDay)}-plan`;
+      saveDailyPlanBtn.disabled = currentPlan().length === 0;
 
       const trainRows = currentTrainForDay(selectedPlanDay).filter(exercise => exercise.exerciseId === id);
       const primaryRow = getPrimaryTrainItem(selectedPlanDay, id);
@@ -2326,9 +2329,10 @@
       if (trainActionRow) trainActionRow.classList.remove('hidden');
       const workoutButton = document.getElementById('saveWorkoutBtn');
       const workoutAlreadySaved = savedWorkoutDay === selectedTrainDay;
+      const hasCompletedWorkout = hasCompletedSets(selectedTrainDay);
       if (workoutButton) {
-        const canSaveWorkout = hasSavedPlan(selectedTrainDay) && session.length > 0 && !workoutAlreadySaved;
-        workoutButton.textContent = workoutAlreadySaved ? 'Saved!' : 'Save training';
+        const canSaveWorkout = hasSavedPlan(selectedTrainDay) && session.length > 0 && hasCompletedWorkout && !workoutAlreadySaved;
+        workoutButton.textContent = workoutAlreadySaved ? 'Saved' : 'Save training';
         workoutButton.disabled = !canSaveWorkout;
       }
 
@@ -2338,7 +2342,7 @@
         item.done = normalizeDone(item.done, sets);
         const checks = Array.from({ length: sets }, (_, setIndex) => `
           <label class="rep-check ${isCompletedSet(item.done[setIndex]) ? 'checked' : ''}" data-set-label="${sessionId}:${setIndex}">
-            <input type="checkbox" ${isCompletedSet(item.done[setIndex]) ? 'checked' : ''} data-set-check="${sessionId}:${setIndex}" />
+            <input type="checkbox" ${isCompletedSet(item.done[setIndex]) ? 'checked' : ''} ${workoutAlreadySaved ? 'disabled' : ''} data-set-check="${sessionId}:${setIndex}" />
             ${setIndex + 1}
           </label>
         `).join('');
@@ -2351,13 +2355,13 @@
                 <input value="${escapeAttr(item.name)}" readonly aria-label="Exercise name" />
               </div>
               <div class="metric-field metric-set" data-unit="Set">
-                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" data-do-sets="${sessionId}" aria-label="Set" />
+                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-sets="${sessionId}" aria-label="Set" />
               </div>
               <div class="metric-field metric-kg" data-unit="kg">
-                <input type="number" inputmode="decimal" step="0.5" min="0" value="${escapeAttr(numberText(item.kg))}" data-do-kg="${sessionId}" aria-label="kg" />
+                <input type="number" inputmode="decimal" step="0.5" min="0" value="${escapeAttr(numberText(item.kg))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-kg="${sessionId}" aria-label="kg" />
               </div>
               <div class="metric-field metric-rep" data-unit="Rep">
-                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" data-do-reps="${sessionId}" aria-label="Rep" />
+                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-reps="${sessionId}" aria-label="Rep" />
               </div>
               ${workoutAlreadySaved ? '' : `
               <div class="plus-box" title="Add same exercise with different kg">
@@ -2378,7 +2382,7 @@
     }
 
     function addSameExerciseInTrain(event) {
-      if (!selectedTrainDay) return;
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay)) return;
       const sessionId = event.currentTarget.dataset.addSame;
       const session = currentTrainForDay(selectedTrainDay);
       const item = session.find(exercise => exercise.sessionId === sessionId);
@@ -2409,7 +2413,7 @@
     }
 
     function updateDo(event) {
-      if (!selectedTrainDay) return;
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay)) return;
       const target = event.target;
       const sessionId = target.dataset.doSets || target.dataset.doReps || target.dataset.doKg;
       const session = currentTrainForDay(selectedTrainDay);
@@ -2462,7 +2466,7 @@
     }
 
     function updateCheck(event) {
-      if (!selectedTrainDay) return;
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay)) return;
       const [sessionId, indexText] = event.target.dataset.setCheck.split(':');
       const index = parseInt(indexText, 10);
       const session = currentTrainForDay(selectedTrainDay);
@@ -3007,7 +3011,7 @@
     }
 
 
-    /* v21: Explanations are deliberately prominent and readable */
+    /* v22: Explanations are deliberately prominent and readable */
     .explanation-entry p {
       font-size: clamp(18px, 5vw, 22px) !important;
       font-weight: 800 !important;
@@ -3502,10 +3506,18 @@
       return (DAYS.find(item => item.key === day) || {}).short || '';
     }
 
+
+    function hasCompletedSets(day) {
+      if (!day || !hasSavedPlan(day)) return false;
+      return currentTrainForDay(day).some(item => {
+        const done = normalizeDone(item.done, item.sets);
+        return done.some(set => isCompletedSet(set));
+      });
+    }
+
     function updateRemoveButton() {
-      const hasAnyExercise = currentPlan().length > 0;
       const hasSelection = Boolean(document.querySelector('[data-remove-check]:checked'));
-      removeSelectedBtn.disabled = !hasAnyExercise;
+      removeSelectedBtn.disabled = !hasSelection;
       removeSelectedBtn.classList.toggle('ready', hasSelection);
     }
 
