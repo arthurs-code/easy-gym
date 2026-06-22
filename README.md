@@ -1,1 +1,1 @@
-Easy Gym PWA v40 - fixed plan day selection, inline Train start, responsive header, and working script.
+PWA_v51: header icon embedded; Donate QR with side text and download; responsive iPhone/Android.
