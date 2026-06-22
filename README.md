@@ -1,6 +1,6 @@
 # Easy Gym PWA
 
-Version v27.
+Version v29.
 
 Changes in this version:
 
@@ -9,7 +9,7 @@ Changes in this version:
 - Added **Remove last added** in Train, only for exercises added during the current Train session.
 - Train-added exercises can also be removed directly with the row remove control before saving.
 - After Save training, Train remains locked as before.
-- Service worker cache updated to v27.
+- Service worker cache updated to v29.
 
 ## Publish update on GitHub Pages
 

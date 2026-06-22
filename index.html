@@ -456,6 +456,7 @@
       z-index: 80;
     }
     .exercise-modal.hidden { display: none; }
+    .hidden-control { display: none !important; }
     .exercise-dialog {
       width: min(760px, 100%);
       max-height: calc(100vh - 24px);
@@ -1868,7 +1869,7 @@
 
 
 
-    /* v27: Train + adds removable pending row; defaults are 1; save waits for chosen exercise. */
+    /* v29: positive metric validation, hidden disabled custom add button, and cleaner Train add flow. */
 
     .remove-train-btn {
       color: #b91c1c !important;
@@ -2038,7 +2039,7 @@
           <label for="customExerciseName">Your own exercise</label>
           <input id="customExerciseName" type="text" placeholder="Write exercise name" />
         </div>
-        <button class="action" id="addCustomExerciseBtn" type="button" disabled>Add</button>
+        <button class="action hidden-control" id="addCustomExerciseBtn" type="button" disabled>Add</button>
       </div>
     </div>
   </div>
@@ -2163,7 +2164,7 @@
     });
 
     saveDailyPlanBtn.addEventListener('click', () => {
-      if (!currentPlan().length || isPlanSaved(selectedPlanDay)) return;
+      if (!currentPlan().length || !isPlanValid(selectedPlanDay) || isPlanSaved(selectedPlanDay)) return;
       syncTrainWithPlan(selectedPlanDay, false);
       savedPlanDays[selectedPlanDay] = currentPlan().length > 0;
       persistAll();
@@ -2201,11 +2202,11 @@
       savedWorkoutDay = selectedTrainDay;
       renderJournal();
       renderDo();
-      const workoutButton = document.getElementById('saveWorkoutBtn');
-      if (workoutButton) {
-        workoutButton.textContent = 'Saved';
-        workoutButton.disabled = true;
-        workoutButton.classList.add('saved-state');
+      const savedWorkoutButton = document.getElementById('saveWorkoutBtn');
+      if (savedWorkoutButton) {
+        savedWorkoutButton.textContent = 'Saved';
+        savedWorkoutButton.disabled = true;
+        savedWorkoutButton.classList.add('saved-state');
       }
       if (removeLastTrainBtn) removeLastTrainBtn.disabled = true;
       showToast('Training saved');
@@ -2282,9 +2283,10 @@
     function renderPlan() {
       const plan = currentPlan();
       planDayTitle.textContent = `${dayShort(selectedPlanDay)}-plan`;
+      const planValid = isPlanValid(selectedPlanDay);
       const planAlreadySaved = isPlanSaved(selectedPlanDay);
       saveDailyPlanBtn.textContent = planAlreadySaved ? 'Saved' : `Save ${dayShort(selectedPlanDay)}-plan`;
-      saveDailyPlanBtn.disabled = planAlreadySaved || !plan.length;
+      saveDailyPlanBtn.disabled = planAlreadySaved || !plan.length || !planValid;
       saveDailyPlanBtn.classList.toggle('saved-state', planAlreadySaved);
 
       if (!plan.length) {
@@ -2301,13 +2303,13 @@
               <input value="${escapeAttr(item.name)}" data-plan-name="${item.id}" aria-label="Exercise name" />
             </div>
             <div class="metric-field metric-set" data-unit="Set">
-              <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" data-plan-sets="${item.id}" aria-label="Set" />
+              <input type="number" inputmode="numeric" step="1" min="1" max="100" value="${escapeAttr(numberText(item.sets))}" data-plan-sets="${item.id}" aria-label="Set" />
             </div>
             <div class="metric-field metric-kg" data-unit="kg">
-              <input type="number" inputmode="decimal" step="0.5" min="0" value="${escapeAttr(numberText(item.kg))}" data-plan-kg="${item.id}" aria-label="kg" />
+              <input type="number" inputmode="decimal" step="0.5" min="0.5" value="${escapeAttr(numberText(item.kg))}" data-plan-kg="${item.id}" aria-label="kg" />
             </div>
             <div class="metric-field metric-rep" data-unit="Rep">
-              <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" data-plan-reps="${item.id}" aria-label="Rep" />
+              <input type="number" inputmode="numeric" step="1" min="1" max="100" value="${escapeAttr(numberText(item.reps))}" data-plan-reps="${item.id}" aria-label="Rep" />
             </div>
             <div class="remove-box" title="Select for removal">
               <input type="checkbox" value="${item.id}" data-remove-check aria-label="Select ${escapeAttr(item.name)} for removal" />
@@ -2343,7 +2345,7 @@
       if (!item) return;
       markPlanDirty(selectedPlanDay);
       saveDailyPlanBtn.textContent = `Save ${dayShort(selectedPlanDay)}-plan`;
-      saveDailyPlanBtn.disabled = currentPlan().length === 0;
+      saveDailyPlanBtn.disabled = currentPlan().length === 0 || !isPlanValid(selectedPlanDay);
       saveDailyPlanBtn.classList.remove('saved-state');
 
       const trainRows = currentTrainForDay(selectedPlanDay).filter(exercise => exercise.exerciseId === id);
@@ -2355,7 +2357,8 @@
       }
 
       if (target.dataset.planSets) {
-        item.sets = sanitizeInt(target.value, 0, 100);
+        item.sets = sanitizePositiveInt(target.value, 100);
+        target.value = numberText(item.sets);
         if (primaryRow) {
           primaryRow.sets = item.sets;
           primaryRow.done = normalizeDone(primaryRow.done, primaryRow.sets);
@@ -2363,15 +2366,18 @@
       }
 
       if (target.dataset.planReps) {
-        item.reps = sanitizeInt(target.value, 0, 100);
+        item.reps = sanitizePositiveInt(target.value, 100);
+        target.value = numberText(item.reps);
         if (primaryRow) primaryRow.reps = item.reps;
       }
 
       if (target.dataset.planKg) {
-        item.kg = sanitizeNumber(target.value, 0);
+        item.kg = sanitizePositiveNumber(target.value);
+        target.value = numberText(item.kg);
         if (primaryRow) primaryRow.kg = item.kg;
       }
 
+      saveDailyPlanBtn.disabled = currentPlan().length === 0 || !isPlanValid(selectedPlanDay);
       persistAll();
       renderTrainDayButtons();
       if (selectedTrainDay === selectedPlanDay) renderDo();
@@ -2440,20 +2446,20 @@
                 <input value="${escapeAttr(item.name || '')}" placeholder="Choose exercise" readonly ${workoutAlreadySaved ? 'disabled' : ''} aria-label="Exercise name" />
               </div>
               <div class="metric-field metric-set" data-unit="Set">
-                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-sets="${sessionId}" aria-label="Set" />
+                <input type="number" inputmode="numeric" step="1" min="1" max="100" value="${escapeAttr(numberText(item.sets))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-sets="${sessionId}" aria-label="Set" />
               </div>
               <div class="metric-field metric-kg" data-unit="kg">
-                <input type="number" inputmode="decimal" step="0.5" min="0" value="${escapeAttr(numberText(item.kg))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-kg="${sessionId}" aria-label="kg" />
+                <input type="number" inputmode="decimal" step="0.5" min="0.5" value="${escapeAttr(numberText(item.kg))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-kg="${sessionId}" aria-label="kg" />
               </div>
               <div class="metric-field metric-rep" data-unit="Rep">
-                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-reps="${sessionId}" aria-label="Rep" />
+                <input type="number" inputmode="numeric" step="1" min="1" max="100" value="${escapeAttr(numberText(item.reps))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-reps="${sessionId}" aria-label="Rep" />
               </div>
               ${workoutAlreadySaved ? '' : `
               <div class="plus-box" title="${item.addedInTrain ? 'Remove exercise from training' : 'Add exercise to training'}">
                 ${item.addedInTrain ? `<button class="plus-btn remove-train-btn" type="button" data-remove-train-exercise="${sessionId}" aria-label="Remove exercise from training">×</button>` : `<button class="plus-btn" type="button" data-add-train-exercise="${sessionId}" aria-label="Add exercise to training">+</button>`}
               </div>`}
             </div>
-            <div class="rep-grid">${checks || '<p class="small-note">Set must be above 0.</p>'}</div>
+            <div class="rep-grid">${checks || '<p class="small-note">Set must be at least 1.</p>'}</div>
           </div>
         `;
       }).join('');
@@ -2565,7 +2571,8 @@
       const planItem = planForDay(selectedTrainDay).find(exercise => exercise.id === item.exerciseId);
 
       if (target.dataset.doSets) {
-        item.sets = sanitizeInt(target.value, 0, 100);
+        item.sets = sanitizePositiveInt(target.value, 100);
+        target.value = numberText(item.sets);
         item.done = normalizeDone(item.done, item.sets);
         if (planItem) planItem.sets = item.sets;
         trainSessions[selectedTrainDay] = session;
@@ -2577,21 +2584,25 @@
       }
 
       if (target.dataset.doReps) {
-        item.reps = sanitizeInt(target.value, 0, 100);
+        item.reps = sanitizePositiveInt(target.value, 100);
+        target.value = numberText(item.reps);
         if (planItem) planItem.reps = item.reps;
         trainSessions[selectedTrainDay] = session;
         persistAll();
         if (selectedPlanDay === selectedTrainDay) renderPlan();
+        renderDo();
         focusDoInput('[data-do-reps]', sessionId);
         return;
       }
 
       if (target.dataset.doKg) {
-        item.kg = sanitizeNumber(target.value, 0);
+        item.kg = sanitizePositiveNumber(target.value);
+        target.value = numberText(item.kg);
         if (planItem) planItem.kg = item.kg;
         trainSessions[selectedTrainDay] = session;
         persistAll();
         if (selectedPlanDay === selectedTrainDay) renderPlan();
+        renderDo();
         focusDoInput('[data-do-kg]', sessionId);
         return;
       }
@@ -3371,7 +3382,10 @@
     }
 
     function updateCustomAddButton() {
-      if (addCustomExerciseBtn) addCustomExerciseBtn.disabled = !customExerciseName.value.trim();
+      if (!addCustomExerciseBtn) return;
+      const hasName = Boolean(customExerciseName.value.trim());
+      addCustomExerciseBtn.disabled = !hasName;
+      addCustomExerciseBtn.classList.toggle('hidden-control', !hasName);
     }
 
     function closeAddExerciseModal() {
@@ -3566,9 +3580,9 @@
       return {
         id: item?.id || uid(),
         name: item?.name || 'Exercise',
-        sets: sanitizeInt(sets, 0, 100),
-        reps: sanitizeInt(reps, 0, 100),
-        kg: sanitizeNumber(item?.kg, 0)
+        sets: positiveIntOrDefault(sets, 1, 100),
+        reps: positiveIntOrDefault(reps, 1, 100),
+        kg: positiveNumberOrDefault(item?.kg, 1)
       };
     }
 
@@ -3648,9 +3662,9 @@
         return {
           id,
           name: String(item.name || '').trim() || 'Exercise',
-          sets: boundedInt(item.sets, 0, 100),
-          reps: boundedInt(item.reps, 0, 100),
-          kg: sanitizeNumber(item.kg, 0)
+          sets: positiveIntOrDefault(item.sets, 1, 100),
+          reps: positiveIntOrDefault(item.reps, 1, 100),
+          kg: positiveNumberOrDefault(item.kg, 1)
         };
       });
 
@@ -3702,8 +3716,20 @@
       return hasDay(day) && planForDay(day).length > 0;
     }
 
+    function isPlanValid(day) {
+      if (!hasPlan(day)) return false;
+      return planForDay(day).every(isExerciseMetricValid);
+    }
+
+    function isExerciseMetricValid(item) {
+      return Boolean(String(item?.name || '').trim())
+        && isPositiveIntegerValue(item?.sets)
+        && isPositiveIntegerValue(item?.reps)
+        && isPositiveNumberValue(item?.kg);
+    }
+
     function isPlanSaved(day) {
-      return hasPlan(day) && Boolean(savedPlanDays[day]);
+      return hasPlan(day) && isPlanValid(day) && Boolean(savedPlanDays[day]);
     }
 
     function hasSavedPlan(day) {
@@ -3735,12 +3761,13 @@
 
     function hasInvalidTrainExercises(day) {
       if (!day || !hasSavedPlan(day)) return true;
-      return currentTrainForDay(day).some(item => !String(item.name || '').trim() || item.pendingChoice);
+      return currentTrainForDay(day).some(item => !isExerciseMetricValid(item) || item.pendingChoice);
     }
 
     function hasCompletedSets(day) {
       if (!day || !hasSavedPlan(day)) return false;
       return currentTrainForDay(day).some(item => {
+        if (!isExerciseMetricValid(item)) return false;
         const done = normalizeDone(item.done, item.sets);
         return done.some(set => isCompletedSet(set));
       });
@@ -3782,6 +3809,42 @@
       const result = Array.isArray(done) ? done.slice(0, length) : [];
       while (result.length < length) result.push(false);
       return result;
+    }
+
+    function sanitizePositiveNumber(value) {
+      if (value === '') return '';
+      const n = Number(value);
+      if (!Number.isFinite(n) || n <= 0) return '';
+      return n;
+    }
+
+    function sanitizePositiveInt(value, max) {
+      if (value === '') return '';
+      const n = parseInt(value, 10);
+      if (!Number.isFinite(n) || n <= 0) return '';
+      return Math.min(max, n);
+    }
+
+    function positiveIntOrDefault(value, fallback, max) {
+      const n = parseInt(value, 10);
+      if (!Number.isFinite(n) || n <= 0) return fallback;
+      return Math.min(max, n);
+    }
+
+    function positiveNumberOrDefault(value, fallback) {
+      const n = Number(value);
+      if (!Number.isFinite(n) || n <= 0) return fallback;
+      return n;
+    }
+
+    function isPositiveIntegerValue(value) {
+      const n = parseInt(value, 10);
+      return value !== '' && Number.isFinite(n) && n > 0;
+    }
+
+    function isPositiveNumberValue(value) {
+      const n = Number(value);
+      return value !== '' && Number.isFinite(n) && n > 0;
     }
 
     function sanitizeNumber(value, fallback) {
