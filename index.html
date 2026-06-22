@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>EASY GYM - powered by Arthur Stivenson</title>
+  <title>EASY GYM - © 2026 Arthur Stivenson</title>
   <meta name="theme-color" content="#2563eb" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1476,7 +1476,7 @@
 
 
 
-    /* v14 FINAL: full-width iPhone navigation and balanced progress table. */
+    /* v15 FINAL: full-width iPhone navigation and balanced progress table. */
     :root {
       --eg-nav-size: clamp(16px, 4.25vw, 18px);
       --eg-table-size: clamp(15px, 4.05vw, 17px);
@@ -1631,6 +1631,204 @@
       .day-button { font-size: 15px !important; }
     }
 
+
+
+    /* v15 FINAL: compact metric boxes with labels inside, balanced spacing, compact Donate table. */
+    main { padding-top: 6px !important; }
+
+    nav { margin-top: 4px !important; margin-bottom: 3px !important; }
+    .day-row { margin: 10px 0 6px !important; }
+    .button-row { margin: 5px 0 8px !important; gap: clamp(16px, 5vw, 26px) !important; }
+    h3#planDayTitle { margin: 8px 0 7px !important; }
+    .plan-card, .do-card { margin: 7px 0 !important; }
+
+    .metric-field {
+      position: relative !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .metric-field > label { display: none !important; }
+
+    .metric-field::before {
+      content: attr(data-unit) !important;
+      position: absolute !important;
+      left: 8px !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      z-index: 2 !important;
+      color: var(--muted) !important;
+      font-size: clamp(12px, 3.4vw, 14px) !important;
+      font-weight: 850 !important;
+      line-height: 1 !important;
+      pointer-events: none !important;
+    }
+
+    .metric-field input[type="number"] {
+      width: 100% !important;
+      height: 42px !important;
+      min-height: 42px !important;
+      max-height: 42px !important;
+      padding: 3px 8px 3px 38px !important;
+      box-sizing: border-box !important;
+      text-align: center !important;
+      font-size: clamp(20px, 5.9vw, 24px) !important;
+      line-height: 1 !important;
+      border-radius: 12px !important;
+    }
+
+    .metric-field.metric-kg input[type="number"] { padding-left: 32px !important; }
+    .metric-field.metric-set input[type="number"],
+    .metric-field.metric-rep input[type="number"] { padding-left: 38px !important; }
+
+    .plan-row,
+    .do-row {
+      grid-template-columns: 24px repeat(3, minmax(0, 1fr)) 32px !important;
+      grid-template-areas:
+        "num name name name action"
+        ". sets kg reps ." !important;
+      column-gap: 8px !important;
+      row-gap: 6px !important;
+      align-items: center !important;
+    }
+
+    .plan-row > .metric-field:nth-child(3), .do-row > .metric-field:nth-child(3) { grid-area: sets !important; }
+    .plan-row > .metric-field:nth-child(4), .do-row > .metric-field:nth-child(4) { grid-area: kg !important; }
+    .plan-row > .metric-field:nth-child(5), .do-row > .metric-field:nth-child(5) { grid-area: reps !important; }
+
+    .plan-name input,
+    .do-name input {
+      height: 44px !important;
+      min-height: 44px !important;
+      padding: 7px 10px !important;
+      font-size: clamp(18px, 5.15vw, 22px) !important;
+      line-height: 1.1 !important;
+      border-radius: 12px !important;
+    }
+
+    .donate-table-wrap { overflow-x: hidden !important; }
+    table.donate-table {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      table-layout: auto !important;
+    }
+    .donate-table th {
+      width: 92px !important;
+      min-width: 92px !important;
+      max-width: 92px !important;
+      padding: 8px 6px 8px 8px !important;
+      font-size: clamp(12px, 3.35vw, 14px) !important;
+      line-height: 1.15 !important;
+      white-space: normal !important;
+    }
+    .donate-table td {
+      width: auto !important;
+      padding: 8px 8px 8px 6px !important;
+      font-size: clamp(12px, 3.45vw, 14px) !important;
+      line-height: 1.2 !important;
+      word-break: break-word !important;
+    }
+
+    @media (max-width: 380px) {
+      .plan-row,
+      .do-row { grid-template-columns: 22px repeat(3, minmax(0, 1fr)) 30px !important; column-gap: 6px !important; }
+      .metric-field::before { left: 7px !important; font-size: 12px !important; }
+      .metric-field input[type="number"] { padding-left: 34px !important; font-size: clamp(19px, 5.8vw, 23px) !important; }
+      .metric-field.metric-kg input[type="number"] { padding-left: 29px !important; }
+      .donate-table th { width: 86px !important; min-width: 86px !important; max-width: 86px !important; }
+    }
+
+
+    /* v19 FINAL: compact copyright subtitle and fixed remove selection. */
+    .tab-button,
+    .tab-button.active,
+    .tab-button:hover,
+    .tab-button:focus,
+    .day-button,
+    .day-button.active,
+    .day-button:hover,
+    .day-button:focus,
+    button.action,
+    button.action:hover,
+    button.action:focus,
+    .download-link-button,
+    .download-link-button:hover,
+    .download-link-button:focus {
+      border-bottom: 0 !important;
+      text-decoration: none !important;
+      box-shadow: none !important;
+    }
+
+    .tab-button.active,
+    .day-button.active {
+      color: var(--primary) !important;
+      background: transparent !important;
+    }
+
+    nav {
+      padding-bottom: 0 !important;
+      margin-bottom: 8px !important;
+    }
+
+    #planDayButtons.day-row,
+    #trainDayButtons.day-row {
+      margin-top: 10px !important;
+      margin-bottom: 15px !important;
+    }
+
+    #plan .top-actions {
+      margin-top: 0 !important;
+      margin-bottom: 15px !important;
+    }
+
+    h3#planDayTitle {
+      margin-top: 0 !important;
+      margin-bottom: 9px !important;
+    }
+
+    #doList {
+      margin-top: 8px !important;
+    }
+
+    .button-row:not(.top-actions) {
+      margin-top: 10px !important;
+    }
+
+
+
+    /* v19: compact copyright line and stronger remove selection behavior. */
+    .brand-powered {
+      font-size: clamp(10px, 2.7vw, 12px) !important;
+      line-height: 1.12 !important;
+      letter-spacing: 0.01em !important;
+      white-space: nowrap !important;
+    }
+
+    .remove-box {
+      cursor: pointer !important;
+    }
+
+    .remove-box input[type="checkbox"] {
+      cursor: pointer !important;
+      appearance: auto !important;
+      -webkit-appearance: checkbox !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    button.action.danger:not(:disabled) {
+      color: #d11d2a !important;
+      opacity: 1 !important;
+    }
+
+    button.action.danger:disabled {
+      color: #d89098 !important;
+      opacity: 0.7 !important;
+    }
+
 </style>
   <script>
     // Keeps layout proportional to the real iPhone viewport, including Safari/Home Screen size changes.
@@ -1654,7 +1852,7 @@
     <header>
       <div class="brand">
         <img class="app-logo" src="icons/icon-192.png" alt="" aria-hidden="true" />
-        <h1 class="brand-title"><span class="brand-main">EASY GYM</span><span class="brand-powered">powered by Arthur Stivenson</span></h1>
+        <h1 class="brand-title"><span class="brand-main">EASY GYM</span><span class="brand-powered">© 2026 Arthur Stivenson · All rights reserved</span></h1>
       </div>
       <nav aria-label="Main menu">
         <button class="tab-button active" data-tab="plan">Plan</button>
@@ -1732,12 +1930,17 @@
         <section id="explanations" class="section">
           <div class="info-card explanation-menu">
             <div class="explanation-entry">
+              <p><strong>About Easy Gym</strong></p>
+              <p>I created Easy Gym for my personal training and decided to share it with friends and anyone who enjoys exercise. The app is designed to keep planning, training and progress tracking simple.</p>
+              <p>If you would like to suggest additional functionality or improvements, please contact me at <a href="mailto:stivenson@stivenson.com">stivenson@stivenson.com</a>.</p>
+            </div>
+            <div class="explanation-entry">
               <p><strong>Plan</strong></p>
               <p>Choose Mon or Tue or Wed etc. Create a daily plan and save it. Use AddExercise to choose from a weightlifting exercise list or write your own exercise.</p>
             </div>
             <div class="explanation-entry">
               <p><strong>Train</strong></p>
-              <p>Choose your day for training. Days without a saved plan are disabled. Here You can change Sets, kg and Reps. Use + to add the same exercise again with different kg.</p>
+              <p>Choose your day for training. Days without a saved plan are disabled. Here you can change Set, kg and Rep. Use + to add the same exercise again with different kg.</p>
             </div>
             <div class="explanation-entry">
               <p><strong>Progress</strong></p>
@@ -1746,6 +1949,10 @@
             <div class="explanation-entry">
               <p><strong>Donate</strong></p>
               <p>If you like the app, go to Donate.</p>
+            </div>
+            <div class="explanation-entry copyright-entry">
+              <p><strong>Copyright</strong></p>
+              <p>© 2026 Arthur Stivenson. Easy Gym. All rights reserved.</p>
             </div>
           </div>
         </section>
@@ -1868,12 +2075,13 @@
 
     removeSelectedBtn.addEventListener('click', () => {
       const selected = [...document.querySelectorAll('[data-remove-check]:checked')].map(input => input.value);
-      if (!selected.length) return;
-      const message = selected.length === 1 ? 'Remove selected exercise?' : `Remove ${selected.length} selected exercises?`;
-      if (!confirm(message)) return;
+      if (!selected.length) {
+        showToast('Select an exercise first');
+        return;
+      }
       weekPlans[selectedPlanDay] = currentPlan().filter(item => !selected.includes(item.id));
       trainSessions[selectedPlanDay] = currentTrainForDay(selectedPlanDay).filter(item => !selected.includes(item.exerciseId));
-      if (selectedTrainDay === selectedPlanDay && !hasPlan(selectedTrainDay)) selectedTrainDay = firstPlannedDay();
+      if (selectedTrainDay === selectedPlanDay && !hasPlan(selectedTrainDay)) selectedTrainDay = null;
       persistAll();
       renderAll();
       showToast('Removed');
@@ -1883,6 +2091,7 @@
       syncTrainWithPlan(selectedPlanDay, false);
       persistAll();
       renderAll();
+      saveDailyPlanBtn.textContent = 'Saved!';
       showToast(`${dayShort(selectedPlanDay)}-plan saved`);
     });
 
@@ -1910,6 +2119,8 @@
       journal.unshift(entry);
       save(JOURNAL_KEY, journal);
       renderJournal();
+      const workoutButton = document.getElementById('saveWorkoutBtn');
+      if (workoutButton) workoutButton.textContent = 'Saved!';
       showToast('Training saved');
     });
 
@@ -1983,17 +2194,14 @@
             <div class="plan-name">
               <input value="${escapeAttr(item.name)}" data-plan-name="${item.id}" aria-label="Exercise name" />
             </div>
-            <div>
-              <label>Sets</label>
-              <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" data-plan-sets="${item.id}" aria-label="Sets" />
+            <div class="metric-field metric-set" data-unit="Set">
+              <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" data-plan-sets="${item.id}" aria-label="Set" />
             </div>
-            <div>
-              <label>kg</label>
+            <div class="metric-field metric-kg" data-unit="kg">
               <input type="number" inputmode="decimal" step="0.5" min="0" value="${escapeAttr(numberText(item.kg))}" data-plan-kg="${item.id}" aria-label="kg" />
             </div>
-            <div>
-              <label>Reps</label>
-              <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" data-plan-reps="${item.id}" aria-label="Reps" />
+            <div class="metric-field metric-rep" data-unit="Rep">
+              <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" data-plan-reps="${item.id}" aria-label="Rep" />
             </div>
             <div class="remove-box" title="Select for removal">
               <input type="checkbox" value="${item.id}" data-remove-check aria-label="Select ${escapeAttr(item.name)} for removal" />
@@ -2006,7 +2214,19 @@
       document.querySelectorAll('[data-plan-sets]').forEach(input => input.addEventListener('input', updatePlan));
       document.querySelectorAll('[data-plan-reps]').forEach(input => input.addEventListener('input', updatePlan));
       document.querySelectorAll('[data-plan-kg]').forEach(input => input.addEventListener('input', updatePlan));
-      document.querySelectorAll('[data-remove-check]').forEach(input => input.addEventListener('change', updateRemoveButton));
+      document.querySelectorAll('[data-remove-check]').forEach(input => {
+        input.addEventListener('change', updateRemoveButton);
+        input.addEventListener('click', event => event.stopPropagation());
+      });
+      document.querySelectorAll('.remove-box').forEach(box => {
+        box.addEventListener('click', event => {
+          if (event.target && event.target.matches('input')) return;
+          const check = box.querySelector('[data-remove-check]');
+          if (!check) return;
+          check.checked = !check.checked;
+          updateRemoveButton();
+        });
+      });
       updateRemoveButton();
     }
 
@@ -2068,6 +2288,8 @@
       }
 
       if (trainActionRow) trainActionRow.classList.remove('hidden');
+      const workoutButton = document.getElementById('saveWorkoutBtn');
+      if (workoutButton) workoutButton.textContent = 'Save training';
 
       doList.innerHTML = session.map((item, index) => {
         const sessionId = item.sessionId;
@@ -2087,17 +2309,14 @@
               <div class="do-name">
                 <input value="${escapeAttr(item.name)}" readonly aria-label="Exercise name" />
               </div>
-              <div>
-                <label>Sets</label>
-                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" data-do-sets="${sessionId}" aria-label="Sets" />
+              <div class="metric-field metric-set" data-unit="Set">
+                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" data-do-sets="${sessionId}" aria-label="Set" />
               </div>
-              <div>
-                <label>kg</label>
+              <div class="metric-field metric-kg" data-unit="kg">
                 <input type="number" inputmode="decimal" step="0.5" min="0" value="${escapeAttr(numberText(item.kg))}" data-do-kg="${sessionId}" aria-label="kg" />
               </div>
-              <div>
-                <label>Reps</label>
-                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" data-do-reps="${sessionId}" aria-label="Reps" />
+              <div class="metric-field metric-rep" data-unit="Rep">
+                <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" data-do-reps="${sessionId}" aria-label="Rep" />
               </div>
               <div class="plus-box" title="Add same exercise with different kg">
                 <button class="plus-btn" type="button" data-add-same="${sessionId}" aria-label="Add same exercise">+</button>
@@ -3197,7 +3416,10 @@
     }
 
     function updateRemoveButton() {
-      removeSelectedBtn.disabled = !document.querySelector('[data-remove-check]:checked');
+      const hasAnyExercise = currentPlan().length > 0;
+      const hasSelection = Boolean(document.querySelector('[data-remove-check]:checked'));
+      removeSelectedBtn.disabled = !hasAnyExercise;
+      removeSelectedBtn.classList.toggle('ready', hasSelection);
     }
 
     function isCompletedSet(set) {

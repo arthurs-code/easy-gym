@@ -37,4 +37,10 @@ Update v13: Save labels are now Save Mon-plan / Save Tue-plan, and Plan/Train bo
 Update v13: hard CSS override keeps Sets, kg, and Reps on the same line with equal-width boxes.
 
 
-Version v14: full-width menu/day navigation and balanced Progress table proportions for iPhone.
+Version v15: compact inside-label metric boxes, balanced spacing, compact Donate table, and Saved! button feedback.
+
+
+Version v19: added professional Explanations text, contact email and copyright notice.
+
+
+Version v19: copyright subtitle and fixed Remove behavior.
