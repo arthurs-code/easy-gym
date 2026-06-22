@@ -1878,6 +1878,12 @@
       color: #991b1b !important;
     }
 
+
+    /* v32: Train-added exercise is marked by red number until one set is completed. */
+    .row-number.train-added-pending {
+      color: var(--danger) !important;
+    }
+
     .train-name-box {
       cursor: pointer !important;
       touch-action: manipulation !important;
@@ -1894,6 +1900,219 @@
       cursor: default !important;
       pointer-events: none !important;
     }
+  
+
+    /* v36: train heading/start layout, no day checkmarks, and Finished state with duration */
+    .training-timer {
+      color: var(--text);
+      font-weight: 850;
+      font-size: clamp(12px, 3.55vw, 14px);
+      padding: 3px 0;
+      white-space: nowrap;
+    }
+    .modal-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+    .modal-text-action {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 850;
+      font-size: 16px;
+      padding: 0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .modal-text-action:disabled {
+      color: var(--muted);
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .exercise-library-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .exercise-library-row .exercise-option {
+      border-bottom: 0 !important;
+      text-align: left;
+    }
+    .library-edit-list {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 14px;
+    }
+    .library-edit-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      padding: 5px 0;
+    }
+    .library-edit-check {
+      width: 24px;
+      height: 24px;
+      accent-color: var(--primary);
+    }
+    .library-edit-name {
+      color: var(--text);
+      font-weight: 850;
+      font-size: 16px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+    .library-delete-btn {
+      border: 0;
+      background: transparent;
+      color: var(--danger);
+      font-weight: 850;
+      font-size: 15px;
+      padding: 0;
+      cursor: pointer;
+      min-width: 44px;
+      text-align: right;
+    }
+    .library-add-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .library-add-row input {
+      width: 100%;
+      min-height: 42px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 750;
+      padding: 8px 12px;
+      color: var(--text);
+    }
+    .library-add-btn {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+    .library-add-btn:disabled {
+      color: var(--muted);
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .workout-date-row td {
+      background: #f8fafc;
+      color: var(--text);
+      font-weight: 850;
+      border-top: 3px solid var(--text) !important;
+    }
+    .workout-date-row:first-child td { border-top-width: 0 !important; }
+    .data-actions { margin-top: 4px; }
+
+    @media (max-width: 430px) {
+      .modal-title-row { gap: 10px; }
+      .modal-text-action { font-size: 14px; }
+      .modal-header h2 { font-size: 20px; }
+      .library-edit-name { font-size: 15px; }
+      .library-delete-btn { font-size: 14px; }
+    }
+
+  
+    /* v36: selected days use blue text only; no checkmark symbol. */
+    .day-button.has-plan::after { content: none !important; }
+
+    .train-heading-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(10px, 3vw, 18px);
+      margin: clamp(10px, 2.8vw, 16px) 0 clamp(10px, 2.8vw, 16px);
+    }
+
+    .train-heading-row.hidden { display: none !important; }
+
+    .train-day-title {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-size: var(--eg-ui-size);
+      line-height: 1.12;
+      font-weight: 850;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .train-heading-row #startTrainingBtn {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .train-heading-row .training-timer {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 430px) {
+      .train-heading-row { gap: 8px; }
+      .train-day-title { font-size: clamp(18px, 5.4vw, 22px); }
+      .train-heading-row #startTrainingBtn { font-size: clamp(15px, 4.5vw, 18px) !important; }
+      .train-heading-row .training-timer { font-size: clamp(14px, 4.1vw, 16px) !important; }
+    }
+
+  
+
+    /* v36: remove duplicate Training Day title and place Start exercise next to selected day. */
+    .train-day-title { display: none !important; }
+    .train-heading-row { display: none !important; }
+    #trainDayButtons.day-row.single-selected {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: clamp(12px, 4.2vw, 18px) !important;
+      margin-bottom: clamp(10px, 3vw, 14px) !important;
+    }
+    #trainDayButtons.day-row.single-selected .day-button {
+      flex: 0 0 auto !important;
+      width: auto !important;
+      min-width: 0 !important;
+    }
+    #trainDayButtons.day-row.single-selected #startTrainingBtn.inline-start-exercise {
+      flex: 0 0 auto !important;
+      border: 0 !important;
+      background: transparent !important;
+      color: var(--primary) !important;
+      font-size: var(--eg-ui-size) !important;
+      font-weight: 850 !important;
+      line-height: 1.1 !important;
+      min-height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      white-space: nowrap !important;
+    }
+    #trainDayButtons.day-row.single-selected #startTrainingBtn.inline-start-exercise:disabled {
+      color: var(--muted) !important;
+      opacity: 0.48 !important;
+      cursor: not-allowed !important;
+    }
+    #trainDayButtons.day-row.single-selected .inline-training-timer {
+      flex: 0 0 auto !important;
+      color: var(--text) !important;
+      font-size: clamp(14px, 4.2vw, 17px) !important;
+      font-weight: 850 !important;
+      white-space: nowrap !important;
+    }
+
   </style>
   <script>
     // Keeps layout proportional to the real iPhone viewport, including Safari/Home Screen size changes.
@@ -1945,7 +2164,11 @@
 
         <section id="do" class="section">
           <div id="trainDayButtons" class="day-row" aria-label="Train week days"></div>
-          <div id="trainDayTitle" hidden></div>
+          <div id="trainHeadingRow" class="train-heading-row hidden">
+            <div id="trainDayTitle" class="train-day-title"></div>
+            <button class="action" id="startTrainingBtn" type="button">Start exercise</button>
+            <span id="trainingTimer" class="training-timer" hidden>00:00</span>
+          </div>
           <p id="trainDayNote" class="small-note" hidden></p>
           <div id="doList"></div>
           <div id="trainActionRow" class="button-row train-actions hidden">
@@ -2010,11 +2233,19 @@
             </div>
             <div class="explanation-entry">
               <p><strong>Progress</strong></p>
-              <p>Completed checked sets are saved in a table with Date, Exercise, Sets, kg and Reps. Planned sets are not saved. The table can be downloaded as Word or PDF.</p>
+              <p>Completed checked sets are saved under the training date together with total training time. Planned sets are not saved. The table can be downloaded as Word or PDF.</p>
             </div>
             <div class="explanation-entry">
               <p><strong>Donate</strong></p>
               <p>If you like the app, go to Donate.</p>
+            </div>
+            <div class="explanation-entry data-entry">
+              <p><strong>Data</strong></p>
+              <p>You can export a backup of all app data. After the backup is saved, Reset data becomes available.</p>
+              <div class="button-row data-actions">
+                <button class="action" id="backupDataBtn" type="button">Backup data</button>
+                <button class="action danger" id="resetDataBtn" type="button" disabled>Reset data</button>
+              </div>
             </div>
             <div class="explanation-entry copyright-entry">
               <p><strong>Copyright</strong></p>
@@ -2029,12 +2260,16 @@
   <div id="addExerciseModal" class="exercise-modal hidden" role="dialog" aria-modal="true" aria-labelledby="addExerciseTitle">
     <div class="exercise-dialog">
       <div class="modal-header">
-        <h2 id="addExerciseTitle">Add exercise</h2>
+        <div class="modal-title-row">
+          <h2 id="addExerciseTitle">Choose exercise</h2>
+          <button class="modal-text-action" id="editExercisesBtn" type="button">Edit-exercises</button>
+          <button class="modal-text-action" id="saveExerciseListBtn" type="button" disabled>Save</button>
+        </div>
         <button class="modal-close" id="closeAddExerciseModal" type="button" aria-label="Close">×</button>
       </div>
-      <p>Choose from the list or write your own exercise.</p>
+      <p id="exerciseModalHelp">Choose from the list or write your own exercise.</p>
       <div id="exerciseOptions" class="exercise-grid"></div>
-      <div class="custom-add-row">
+      <div class="custom-add-row" id="customAddRow">
         <div>
           <label for="customExerciseName">Your own exercise</label>
           <input id="customExerciseName" type="text" placeholder="Write exercise name" />
@@ -2051,6 +2286,9 @@
     const TRAIN_KEY = 'easyGym.trainSessions.v1';
     const SAVED_PLANS_KEY = 'easyGym.savedPlans.v1';
     const JOURNAL_KEY = 'easyGym.journal.v1';
+    const EXERCISE_LIBRARY_KEY = 'easyGym.exerciseLibrary.v1';
+    const TRAIN_START_KEY = 'easyGym.trainStartTimes.v1';
+    const BACKUP_READY_KEY = 'easyGym.backupReady.v1';
     const LEGACY_PLAN_KEY = 'fitnessEasy.plan.v4';
     const LEGACY_DO_KEY = 'fitnessEasy.do.v4';
     const LEGACY_JOURNAL_KEY = 'fitnessEasy.journal.v4';
@@ -2065,7 +2303,7 @@
       { key: 'sun', short: 'Sun', long: 'Sunday' }
     ];
 
-    const EXERCISE_LIBRARY = [
+    const DEFAULT_EXERCISE_LIBRARY = [
       'Snatch',
       'Clean and Jerk',
       'Clean',
@@ -2093,11 +2331,19 @@
     let savedPlanDays = loadSavedPlanDays();
     let trainSessions = loadTrainSessions();
     let journal = load(JOURNAL_KEY, load(LEGACY_JOURNAL_KEY, []));
+    let exerciseLibrary = loadExerciseLibrary();
+    let trainStartTimes = load(TRAIN_START_KEY, {});
+    let backupReady = Boolean(load(BACKUP_READY_KEY, false));
+    let timerInterval = null;
     let selectedPlanDay = 'mon';
     let selectedTrainDay = null;
     let savedWorkoutDay = null;
+    let finishedTrainingDurations = {};
     let addExerciseTarget = 'plan';
     let trainChoiceSessionId = null;
+    let modalEditMode = false;
+    let exerciseLibraryDraft = [];
+    let exerciseLibraryDirty = false;
 
     const tabs = document.querySelectorAll('.tab-button');
     const sections = document.querySelectorAll('.section');
@@ -2112,13 +2358,22 @@
     const removeSelectedBtn = document.getElementById('removeSelectedBtn');
     const saveDailyPlanBtn = document.getElementById('saveDailyPlanBtn');
     const trainActionRow = document.getElementById('trainActionRow');
+    const trainHeadingRow = document.getElementById('trainHeadingRow');
     const downloadWordBtn = document.getElementById('downloadWordBtn');
     const downloadPdfBtn = document.getElementById('downloadPdfBtn');
     const addExerciseModal = document.getElementById('addExerciseModal');
     const exerciseOptions = document.getElementById('exerciseOptions');
     const customExerciseName = document.getElementById('customExerciseName');
     const addCustomExerciseBtn = document.getElementById('addCustomExerciseBtn');
+    const editExercisesBtn = document.getElementById('editExercisesBtn');
+    const saveExerciseListBtn = document.getElementById('saveExerciseListBtn');
+    const exerciseModalHelp = document.getElementById('exerciseModalHelp');
+    const customAddRow = document.getElementById('customAddRow');
     const removeLastTrainBtn = document.getElementById('removeLastTrainBtn');
+    const startTrainingBtn = document.getElementById('startTrainingBtn');
+    const trainingTimer = document.getElementById('trainingTimer');
+    const backupDataBtn = document.getElementById('backupDataBtn');
+    const resetDataBtn = document.getElementById('resetDataBtn');
 
 
     tabs.forEach(button => {
@@ -2126,18 +2381,28 @@
         const tab = button.dataset.tab;
         tabs.forEach(b => b.classList.toggle('active', b === button));
         sections.forEach(section => section.classList.toggle('active', section.id === tab));
-        if (tab === 'do') { selectedTrainDay = null; savedWorkoutDay = null; }
+        if (tab === 'do') { selectedTrainDay = null; savedWorkoutDay = null; finishedTrainingDurations = {}; }
         renderAll();
       });
     });
 
     document.getElementById('addExerciseBtn').addEventListener('click', () => openAddExerciseModal('plan'));
     document.getElementById('closeAddExerciseModal').addEventListener('click', closeAddExerciseModal);
+    editExercisesBtn.addEventListener('click', () => {
+      modalEditMode = true;
+      exerciseLibraryDraft = [...exerciseLibrary];
+      exerciseLibraryDirty = false;
+      renderExerciseLibrary();
+    });
+    saveExerciseListBtn.addEventListener('click', saveExerciseLibraryDraft);
     addCustomExerciseBtn.addEventListener('click', () => {
       const name = customExerciseName.value.trim();
       if (!name) return;
       addExerciseFromName(name);
     });
+    startTrainingBtn.addEventListener('click', startTraining);
+    backupDataBtn.addEventListener('click', backupAllData);
+    resetDataBtn.addEventListener('click', resetAllData);
     customExerciseName.addEventListener('input', updateCustomAddButton);
     customExerciseName.addEventListener('keydown', event => {
       if (event.key === 'Enter') {
@@ -2181,6 +2446,11 @@
       }
 
       if (savedWorkoutDay === selectedTrainDay) return;
+      if (!isTrainingStarted(selectedTrainDay)) {
+        showToast('Start exercise first');
+        renderDo();
+        return;
+      }
 
       const completedExercises = collectCompletedExercises(selectedTrainDay);
 
@@ -2189,17 +2459,27 @@
         return;
       }
 
+      const startedAt = Number(trainStartTimes[selectedTrainDay]) || Date.now();
+      const endedAt = Date.now();
+      const durationMs = Math.max(0, endedAt - startedAt);
       const entry = {
         id: uid(),
         date: new Date().toISOString().slice(0, 10),
         day: selectedTrainDay,
+        startedAt: new Date(startedAt).toISOString(),
+        endedAt: new Date(endedAt).toISOString(),
+        durationMs,
         notes: '',
         exercises: completedExercises
       };
       journal.unshift(entry);
       save(JOURNAL_KEY, journal);
+      finishedTrainingDurations[selectedTrainDay] = durationMs;
+      delete trainStartTimes[selectedTrainDay];
+      save(TRAIN_START_KEY, trainStartTimes);
       overwritePlanFromTrain(selectedTrainDay);
       savedWorkoutDay = selectedTrainDay;
+      updateTimerLoop();
       renderJournal();
       renderDo();
       const savedWorkoutButton = document.getElementById('saveWorkoutBtn');
@@ -2215,16 +2495,15 @@
     removeLastTrainBtn.addEventListener('click', () => {
       if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay) return;
       const session = currentTrainForDay(selectedTrainDay);
-      for (let i = session.length - 1; i >= 0; i -= 1) {
-        if (session[i].addedInTrain) {
-          session.splice(i, 1);
-          trainSessions[selectedTrainDay] = session;
-          save(TRAIN_KEY, trainSessions);
-          renderDo();
-          showToast('Last added exercise removed');
-          return;
-        }
-      }
+      const lastAdded = findLastTrainAddedExercise(session);
+      if (!lastAdded || exerciseHasCompletedSet(lastAdded)) return;
+      const index = session.findIndex(item => item.sessionId === lastAdded.sessionId);
+      if (index < 0) return;
+      session.splice(index, 1);
+      trainSessions[selectedTrainDay] = session;
+      save(TRAIN_KEY, trainSessions);
+      renderDo();
+      showToast('Last added exercise removed');
     });
 
     downloadWordBtn.addEventListener('click', downloadProgressWord);
@@ -2236,6 +2515,8 @@
       renderPlan();
       renderDo();
       renderJournal();
+      updateDataButtons();
+      updateTimerLoop();
     }
 
     function renderPlanDayButtons() {
@@ -2256,6 +2537,7 @@
       if (selectedTrainDay && !hasSavedPlan(selectedTrainDay)) selectedTrainDay = null;
 
       const daysToShow = selectedTrainDay ? DAYS.filter(day => day.key === selectedTrainDay) : DAYS;
+      trainDayButtons.classList.toggle('single-selected', Boolean(selectedTrainDay));
       trainDayButtons.innerHTML = daysToShow.map(day => {
         const disabled = !hasSavedPlan(day.key) ? 'disabled' : '';
         return `<button class="day-button secondary ${selectedTrainDay === day.key ? 'active' : ''} ${hasSavedPlan(day.key) ? 'has-plan' : ''}" type="button" data-train-day="${day.key}" ${disabled}>${day.short}</button>`;
@@ -2268,9 +2550,11 @@
           if (selectedTrainDay === day) {
             selectedTrainDay = null;
             savedWorkoutDay = null;
+            finishedTrainingDurations = {};
           } else {
             selectedTrainDay = day;
             savedWorkoutDay = null;
+            finishedTrainingDurations = {};
             syncTrainWithPlan(selectedTrainDay, false);
             clearTrainChecks(selectedTrainDay);
           }
@@ -2278,6 +2562,25 @@
           renderDo();
         });
       });
+      placeTrainStartControls();
+    }
+
+    function placeTrainStartControls() {
+      if (!startTrainingBtn || !trainingTimer || !trainHeadingRow || !trainDayButtons) return;
+      if (selectedTrainDay && hasSavedPlan(selectedTrainDay)) {
+        const activeDayButton = trainDayButtons.querySelector('[data-train-day].active');
+        if (activeDayButton) {
+          startTrainingBtn.classList.add('inline-start-exercise');
+          trainingTimer.classList.add('inline-training-timer');
+          activeDayButton.insertAdjacentElement('afterend', startTrainingBtn);
+          startTrainingBtn.insertAdjacentElement('afterend', trainingTimer);
+          return;
+        }
+      }
+      startTrainingBtn.classList.remove('inline-start-exercise');
+      trainingTimer.classList.remove('inline-training-timer');
+      trainHeadingRow.appendChild(startTrainingBtn);
+      trainHeadingRow.appendChild(trainingTimer);
     }
 
     function renderPlan() {
@@ -2394,8 +2697,16 @@
           workoutButton.disabled = true;
           workoutButton.classList.remove('saved-state');
         }
+        if (startTrainingBtn) {
+          startTrainingBtn.textContent = 'Start exercise';
+          startTrainingBtn.disabled = true;
+          startTrainingBtn.classList.remove('saved-state');
+        }
+        if (trainingTimer) trainingTimer.hidden = true;
         if (trainActionRow) trainActionRow.classList.add('hidden');
+        if (trainHeadingRow) trainHeadingRow.classList.add('hidden');
         if (removeLastTrainBtn) removeLastTrainBtn.disabled = true;
+        placeTrainStartControls();
         return;
       }
 
@@ -2406,24 +2717,50 @@
       if (!session.length) {
         doList.innerHTML = '<div class="empty">This day has no exercises.</div>';
         if (trainActionRow) trainActionRow.classList.add('hidden');
+        if (trainHeadingRow) trainHeadingRow.classList.add('hidden');
         if (removeLastTrainBtn) removeLastTrainBtn.disabled = true;
+        if (startTrainingBtn) startTrainingBtn.disabled = true;
+        if (trainingTimer) trainingTimer.hidden = true;
+        placeTrainStartControls();
         return;
       }
 
       if (trainActionRow) trainActionRow.classList.remove('hidden');
+      if (trainHeadingRow) trainHeadingRow.classList.remove('hidden');
+      if (trainDayTitle) trainDayTitle.textContent = ''; // v35: day title removed; selected day already shown
       const workoutButton = document.getElementById('saveWorkoutBtn');
       const workoutAlreadySaved = savedWorkoutDay === selectedTrainDay;
+      const trainingStarted = isTrainingStarted(selectedTrainDay);
+      const finishedDurationMs = Number(finishedTrainingDurations[selectedTrainDay] || 0);
       const hasCompletedWorkout = hasCompletedSets(selectedTrainDay);
       const hasInvalidExercise = hasInvalidTrainExercises(selectedTrainDay);
-      const hasAddedExercise = session.some(item => item.addedInTrain);
+      const lastAddedExercise = findLastTrainAddedExercise(session);
+      const lastAddedIsDone = lastAddedExercise ? exerciseHasCompletedSet(lastAddedExercise) : false;
+
+      if (startTrainingBtn) {
+        startTrainingBtn.textContent = workoutAlreadySaved ? 'Finished' : (trainingStarted ? 'Started' : 'Start exercise');
+        startTrainingBtn.disabled = workoutAlreadySaved || trainingStarted || hasInvalidExercise;
+        startTrainingBtn.classList.toggle('saved-state', workoutAlreadySaved || trainingStarted);
+      }
+      placeTrainStartControls();
+
+      if (trainingTimer) {
+        trainingTimer.hidden = !trainingStarted && !workoutAlreadySaved;
+        if (workoutAlreadySaved) {
+          trainingTimer.textContent = formatDuration(finishedDurationMs);
+        } else {
+          trainingTimer.textContent = trainingStarted ? formatDuration(Date.now() - Number(trainStartTimes[selectedTrainDay])) : '00:00';
+        }
+      }
+
       if (workoutButton) {
-        const canSaveWorkout = hasSavedPlan(selectedTrainDay) && session.length > 0 && hasCompletedWorkout && !hasInvalidExercise && !workoutAlreadySaved;
+        const canSaveWorkout = hasSavedPlan(selectedTrainDay) && session.length > 0 && trainingStarted && hasCompletedWorkout && !hasInvalidExercise && !workoutAlreadySaved;
         workoutButton.textContent = workoutAlreadySaved ? 'Saved' : 'Save training';
         workoutButton.disabled = !canSaveWorkout;
         workoutButton.classList.toggle('saved-state', workoutAlreadySaved);
       }
       if (removeLastTrainBtn) {
-        removeLastTrainBtn.disabled = workoutAlreadySaved || !hasAddedExercise;
+        removeLastTrainBtn.disabled = workoutAlreadySaved || !lastAddedExercise || lastAddedIsDone;
         removeLastTrainBtn.classList.toggle('ready', !removeLastTrainBtn.disabled);
       }
 
@@ -2441,7 +2778,7 @@
         return `
           <div class="do-card">
             <div class="do-row">
-              <div class="row-number">${index + 1}.</div>
+              <div class="row-number ${item.addedInTrain && !exerciseHasCompletedSet(item) ? 'train-added-pending' : ''}">${index + 1}.</div>
               <div class="do-name train-name-box ${workoutAlreadySaved ? 'disabled' : ''}" ${workoutAlreadySaved ? '' : `data-train-name-box="${sessionId}"`} title="Choose exercise">
                 <input value="${escapeAttr(item.name || '')}" placeholder="Choose exercise" readonly ${workoutAlreadySaved ? 'disabled' : ''} aria-label="Exercise name" />
               </div>
@@ -2455,8 +2792,8 @@
                 <input type="number" inputmode="numeric" step="1" min="1" max="100" value="${escapeAttr(numberText(item.reps))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-reps="${sessionId}" aria-label="Rep" />
               </div>
               ${workoutAlreadySaved ? '' : `
-              <div class="plus-box" title="${item.addedInTrain ? 'Remove exercise from training' : 'Add exercise to training'}">
-                ${item.addedInTrain ? `<button class="plus-btn remove-train-btn" type="button" data-remove-train-exercise="${sessionId}" aria-label="Remove exercise from training">×</button>` : `<button class="plus-btn" type="button" data-add-train-exercise="${sessionId}" aria-label="Add exercise to training">+</button>`}
+              <div class="plus-box" title="${item.addedInTrain ? '' : 'Add exercise to training'}">
+                ${item.addedInTrain ? '' : `<button class="plus-btn" type="button" data-add-train-exercise="${sessionId}" aria-label="Add exercise to training">+</button>`}
               </div>`}
             </div>
             <div class="rep-grid">${checks || '<p class="small-note">Set must be at least 1.</p>'}</div>
@@ -2469,7 +2806,6 @@
       document.querySelectorAll('[data-do-kg]').forEach(input => input.addEventListener('input', updateDo));
       document.querySelectorAll('[data-set-check]').forEach(input => input.addEventListener('change', updateCheck));
       document.querySelectorAll('[data-add-train-exercise]').forEach(button => button.addEventListener('click', addBlankTrainExercise));
-      document.querySelectorAll('[data-remove-train-exercise]').forEach(button => button.addEventListener('click', () => removeTrainExercise(button.dataset.removeTrainExercise)));
       document.querySelectorAll('[data-train-name-box]').forEach(box => {
         box.addEventListener('click', () => {
           if (savedWorkoutDay === selectedTrainDay) return;
@@ -2477,6 +2813,7 @@
         });
       });
       save(TRAIN_KEY, trainSessions);
+      updateTimerLoop();
     }
 
     function replaceTrainExerciseNameFromName(name) {
@@ -2650,6 +2987,60 @@
       save(TRAIN_KEY, trainSessions);
     }
 
+    function startTraining() {
+      if (!selectedTrainDay || !hasSavedPlan(selectedTrainDay) || savedWorkoutDay === selectedTrainDay) return;
+      if (hasInvalidTrainExercises(selectedTrainDay)) {
+        showToast('Complete exercise names and numbers first');
+        return;
+      }
+      if (!trainStartTimes[selectedTrainDay]) {
+        trainStartTimes[selectedTrainDay] = Date.now();
+        save(TRAIN_START_KEY, trainStartTimes);
+      }
+      updateTimerLoop();
+      renderDo();
+      showToast('Timer started');
+    }
+
+    function isTrainingStarted(day) {
+      return Boolean(day && Number(trainStartTimes[day]));
+    }
+
+    function updateTimerLoop() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      if (selectedTrainDay && isTrainingStarted(selectedTrainDay) && savedWorkoutDay !== selectedTrainDay) {
+        timerInterval = setInterval(updateVisibleTimer, 1000);
+      }
+      updateVisibleTimer();
+    }
+
+    function updateVisibleTimer() {
+      if (!trainingTimer || !selectedTrainDay || !isTrainingStarted(selectedTrainDay) || savedWorkoutDay === selectedTrainDay) return;
+      trainingTimer.hidden = false;
+      trainingTimer.textContent = formatDuration(Date.now() - Number(trainStartTimes[selectedTrainDay]));
+    }
+
+    function formatDuration(ms) {
+      const totalSeconds = Math.max(0, Math.floor(Number(ms || 0) / 1000));
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      if (hours > 0) return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      return `${minutes}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function formatDurationWords(ms) {
+      const totalSeconds = Math.max(0, Math.floor(Number(ms || 0) / 1000));
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      if (hours > 0) return `${hours}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+      return `${minutes}m ${String(seconds).padStart(2, '0')}s`;
+    }
+
     function renderJournal() {
       const rows = progressRows();
       const hasRows = rows.length > 0;
@@ -2660,12 +3051,10 @@
         return;
       }
 
-      const displayRows = progressDisplayRows(rows);
       journalList.innerHTML = `
         <div class="progress-table-wrap">
           <table class="progress-table">
             <colgroup>
-              <col class="progress-col-date" />
               <col class="progress-col-exercise" />
               <col class="progress-col-small" />
               <col class="progress-col-small" />
@@ -2673,7 +3062,6 @@
             </colgroup>
             <thead>
               <tr>
-                <th>Date</th>
                 <th>Exercise</th>
                 <th class="number-cell">Sets</th>
                 <th class="number-cell">kg</th>
@@ -2681,14 +3069,16 @@
               </tr>
             </thead>
             <tbody>
-              ${displayRows.map(row => `
-                <tr class="${row.groupStart ? 'exercise-group-start' : ''}">
-                  <td>${escapeHtml(row.dateDisplay)}</td>
-                  <td><strong>${escapeHtml(row.exerciseDisplay)}</strong></td>
-                  <td class="number-cell">${escapeHtml(row.sets)}</td>
-                  <td class="number-cell">${escapeHtml(row.kg)}</td>
-                  <td class="number-cell">${escapeHtml(row.reps)}</td>
-                </tr>
+              ${progressWorkoutGroups(rows).map(group => `
+                <tr class="workout-date-row"><td colspan="4">${escapeHtml(group.dateDisplay)} · Total training time: ${escapeHtml(group.durationDisplay)}</td></tr>
+                ${group.rows.map(row => `
+                  <tr class="${row.groupStart ? 'exercise-group-start' : ''}">
+                    <td><strong>${escapeHtml(row.exerciseDisplay)}</strong></td>
+                    <td class="number-cell">${escapeHtml(row.sets)}</td>
+                    <td class="number-cell">${escapeHtml(row.kg)}</td>
+                    <td class="number-cell">${escapeHtml(row.reps)}</td>
+                  </tr>
+                `).join('')}
               `).join('')}
             </tbody>
           </table>
@@ -2698,7 +3088,10 @@
 
     function progressRows() {
       const rows = [];
-      journal.forEach(entry => {
+      journal.forEach((entry, entryIndex) => {
+        const workoutKey = entry.id || `${entry.date || 'date'}-${entryIndex}`;
+        const entryDate = entry.date || '';
+        const durationMs = Number(entry.durationMs || 0);
         (entry.exercises || []).forEach(ex => {
           const sets = Array.isArray(ex.sets) ? ex.sets : [];
           if (sets.length) {
@@ -2706,7 +3099,10 @@
               const setCount = boundedInt(set.sets ?? set.reps ?? ex.completed, 0, 100);
               if (setCount <= 0) return;
               rows.push({
-                date: entry.date || '',
+                workoutKey,
+                date: entryDate,
+                sortTime: entry.endedAt || entry.startedAt || entry.date || '',
+                durationMs,
                 day: entry.day ? dayShort(entry.day) : '',
                 exercise: ex.name || 'Exercise',
                 sets: String(setCount),
@@ -2718,7 +3114,10 @@
             const completed = boundedInt(ex.completed, 0, 100);
             if (completed <= 0) return;
             rows.push({
-              date: entry.date || '',
+              workoutKey,
+              date: entryDate,
+              sortTime: entry.endedAt || entry.startedAt || entry.date || '',
+              durationMs,
               day: entry.day ? dayShort(entry.day) : '',
               exercise: ex.name || 'Exercise',
               sets: '1',
@@ -2728,7 +3127,7 @@
           }
         });
       });
-      return rows.sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(a.exercise).localeCompare(String(b.exercise)));
+      return rows.sort((a, b) => String(b.sortTime).localeCompare(String(a.sortTime)) || String(a.exercise).localeCompare(String(b.exercise)));
     }
 
     function downloadProgressWord() {
@@ -2738,456 +3137,52 @@
         return;
       }
       const html = `<!doctype html><html><head><meta charset="utf-8"><title>Easy Gym Progress</title>
-        <style>body{font-family:Arial,sans-serif;} h1{font-size:22pt;} h2{font-size:15pt;margin-top:18pt;} table{border-collapse:collapse;width:100%;margin-bottom:16pt;} th,td{border:1px solid #777;padding:6pt;text-align:left;} th{background:#eeeeee;} .num{text-align:center;} tr.exercise-group-start td{border-top:3pt solid #111;}
-    /* Elegant compact tap targets */
-    nav button, .day-row button { -webkit-tap-highlight-color: transparent; }
-    .tab-button:focus-visible, .day-button:focus-visible { outline: 2px solid rgba(37, 99, 235, 0.35); outline-offset: 3px; }
+        <style>
+          body{font-family:Arial,sans-serif;} h1{font-size:22pt;}
+          table{border-collapse:collapse;width:100%;margin-bottom:16pt;}
+          th,td{border:1px solid #777;padding:6pt;text-align:left;}
+          th{background:#eeeeee;} .num{text-align:center;}
+          tr.workout-date-row td{background:#f2f2f2;font-weight:bold;border-top:3pt solid #111;}
+          tr.exercise-group-start td{border-top:2pt solid #111;}
+        
+    /* v36: selected days use blue text only; no checkmark symbol. */
+    .day-button.has-plan::after { content: none !important; }
 
-
-    /* Text-link controls: all clickable names are light, not heavy buttons */
-    .button-row,
-    .day-row {
-      display: flex !important;
-      flex-wrap: wrap;
+    .train-heading-row {
+      display: flex;
       align-items: center;
-      gap: 12px 18px;
-      margin-top: 8px;
+      justify-content: space-between;
+      gap: clamp(10px, 3vw, 18px);
+      margin: clamp(10px, 2.8vw, 16px) 0 clamp(10px, 2.8vw, 16px);
     }
 
-    button.action,
-    .day-button,
-    .download-link-button {
-      border: 0 !important;
-      background: transparent !important;
-      color: var(--primary);
-      padding: 4px 0 !important;
-      min-height: 24px;
-      width: auto;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      font-size: 13px;
-      font-weight: 820;
-      line-height: 1.15;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 2px solid transparent !important;
+    .train-heading-row.hidden { display: none !important; }
+
+    .train-day-title {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-size: var(--eg-ui-size);
+      line-height: 1.12;
+      font-weight: 850;
+      color: var(--text);
       white-space: nowrap;
     }
 
-    button.action:hover,
-    .day-button:hover,
-    .download-link-button:hover {
-      background: transparent !important;
-      color: var(--primary-dark);
-      border-bottom-color: currentColor !important;
+    .train-heading-row #startTrainingBtn {
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
 
-    button.action.danger,
-    button.danger {
-      background: transparent !important;
-      color: #b91c1c;
-    }
-
-    button.action.danger:hover,
-    button.danger:hover {
-      background: transparent !important;
-      color: #991b1b;
-      border-bottom-color: currentColor !important;
-    }
-
-    button.action:disabled,
-    .day-button:disabled,
-    .download-link-button:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-      border-bottom-color: transparent !important;
-    }
-
-    .day-button {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .day-button.active {
-      background: transparent !important;
-      color: var(--primary) !important;
-      border-bottom-color: var(--primary) !important;
-    }
-
-    .day-button.has-plan::after {
-      content: "✓";
-      margin-left: 3px;
-      font-weight: 850;
-    }
-
-    .top-actions {
-      margin: 8px 0 10px;
-    }
-
-    .plus-btn {
-      border: 0;
-      background: transparent;
-      color: var(--primary);
-      width: 26px;
-      height: 26px;
-      font-size: 22px;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .plus-btn:hover {
-      background: transparent;
-      color: var(--primary-dark);
-    }
-
-    .exercise-option {
-      border: 0;
-      border-bottom: 1px solid var(--line);
-      border-radius: 0;
-      background: transparent;
-      color: var(--primary);
-      min-height: 30px;
-      padding: 7px 0;
-      font-size: 13px;
-      font-weight: 760;
-    }
-
-    .exercise-option:hover {
-      border-color: var(--primary);
-      background: transparent;
-      color: var(--primary-dark);
+    .train-heading-row .training-timer {
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
 
     @media (max-width: 430px) {
-      .button-row, .day-row { gap: 10px 15px; }
-      button.action, .day-button, .download-link-button { font-size: 13px; min-height: 22px; padding: 3px 0 !important; }
-      .day-button { font-size: 14px; }
-    }
-
-
-    /* iPhone responsive sizing: one scale system for all screen widths */
-    :root {
-      --screen-scale: clamp(0.86, calc(100vw / 430), 1);
-      --page-x: clamp(7px, 2.4vw, 12px);
-      --row-gap: clamp(4px, 1.25vw, 7px);
-      --num-col: clamp(18px, 5.2vw, 26px);
-      --small-col: clamp(43px, 13.2vw, 62px);
-      --check-col: clamp(24px, 7vw, 30px);
-      --input-h: clamp(31px, 9vw, 36px);
-      --card-pad: clamp(7px, 2vw, 9px);
-    }
-
-    html,
-    body {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 820px;
-      margin: 0 auto;
-    }
-
-    header {
-      padding-left: max(var(--page-x), env(safe-area-inset-left));
-      padding-right: max(var(--page-x), env(safe-area-inset-right));
-    }
-
-    main {
-      padding-left: max(var(--page-x), env(safe-area-inset-left));
-      padding-right: max(var(--page-x), env(safe-area-inset-right));
-      padding-bottom: max(24px, env(safe-area-inset-bottom));
-    }
-
-    .brand-main {
-      font-size: clamp(17px, 4.9vw, 19px);
-    }
-
-    .brand-powered {
-      font-size: clamp(8px, 2.45vw, 10px);
-    }
-
-    .app-logo {
-      width: clamp(24px, 7.2vw, 30px);
-      height: clamp(24px, 7.2vw, 30px);
-      border-radius: clamp(6px, 1.8vw, 8px);
-    }
-
-    nav {
-      gap: clamp(11px, 3.8vw, 18px);
-      width: 100%;
-    }
-
-    .tab-button {
-      font-size: clamp(12px, 3.55vw, 14px);
-      min-height: clamp(24px, 7vw, 28px);
-      padding: clamp(3px, 1vw, 5px) 0;
-    }
-
-    h3 {
-      font-size: clamp(17px, 5vw, 19px);
-      margin-top: clamp(10px, 3vw, 14px);
-    }
-
-    .button-row,
-    .day-row {
-      gap: clamp(8px, 3.25vw, 18px) clamp(12px, 4vw, 18px) !important;
-    }
-
-    button.action,
-    .day-button,
-    .download-link-button {
-      font-size: clamp(12px, 3.55vw, 14px) !important;
-      min-height: clamp(21px, 6vw, 24px) !important;
-    }
-
-    .plan-card,
-    .do-card,
-    .journal-card,
-    .info-card {
-      padding: var(--card-pad);
-      margin: clamp(7px, 2vw, 9px) 0;
-    }
-
-    .plan-row,
-    .do-row {
-      grid-template-columns: var(--num-col) minmax(0, 1fr) var(--small-col) var(--small-col) var(--small-col) var(--check-col) !important;
-      gap: var(--row-gap) !important;
-      width: 100%;
-    }
-
-    .row-number {
-      font-size: clamp(13px, 3.8vw, 15px);
-      padding-bottom: clamp(6px, 2vw, 8px);
-    }
-
-    input,
-    textarea,
-    select {
-      min-height: var(--input-h) !important;
-      font-size: clamp(12px, 3.6vw, 14px) !important;
-      padding: clamp(5px, 1.5vw, 7px) clamp(4px, 1.4vw, 7px) !important;
-    }
-
-    input[type="number"] {
-      font-size: clamp(14px, 4.8vw, 17px) !important;
-    }
-
-    label {
-      font-size: clamp(8px, 2.25vw, 10px) !important;
-      margin-bottom: clamp(2px, 0.8vw, 4px) !important;
-    }
-
-    .remove-box,
-    .plus-box {
-      min-height: var(--input-h) !important;
-    }
-
-    .remove-box input {
-      width: clamp(17px, 5vw, 20px) !important;
-      height: clamp(17px, 5vw, 20px) !important;
-      margin-bottom: clamp(6px, 2vw, 8px) !important;
-    }
-
-    .plus-btn {
-      width: clamp(24px, 7vw, 28px) !important;
-      height: clamp(24px, 7vw, 28px) !important;
-      font-size: clamp(20px, 6vw, 24px) !important;
-    }
-
-    .rep-grid {
-      grid-template-columns: repeat(auto-fill, minmax(clamp(26px, 8vw, 32px), 1fr));
-      gap: clamp(5px, 1.6vw, 7px);
-    }
-
-    .rep-check {
-      height: clamp(27px, 8vw, 31px);
-      font-size: clamp(12px, 3.4vw, 14px);
-    }
-
-    @media (max-width: 390px) {
-      :root {
-        --page-x: 6px;
-        --row-gap: 4px;
-        --small-col: clamp(40px, 12.9vw, 48px);
-        --num-col: 18px;
-        --check-col: 24px;
-        --card-pad: 6px;
-      }
-
-      .brand { gap: 7px; }
-      nav { gap: 12px; }
-      .plan-row, .do-row { align-items: end; }
-      .exercise-name { font-size: 13px !important; }
-    }
-
-    @media (max-width: 340px) {
-      :root {
-        --small-col: 39px;
-        --num-col: 16px;
-        --check-col: 22px;
-      }
-      nav { gap: 10px; }
-      .tab-button { font-size: 11px !important; }
-      .brand-main { font-size: 16px; }
-      .brand-powered { font-size: 8px; }
-    }
-
-  
-
-    /* v13: Sets, kg and Reps on one equal-width line on iPhone. */
-    .plan-row,
-    .do-row {
-      display: grid !important;
-      grid-template-columns: 26px repeat(3, minmax(0, 1fr)) 36px !important;
-      grid-template-areas:
-        "num name name name action"
-        ". sets kg reps ." !important;
-      column-gap: 8px !important;
-      row-gap: 6px !important;
-      align-items: center !important;
-      width: 100% !important;
-    }
-
-    .row-number {
-      grid-area: num !important;
-      align-self: center !important;
-      justify-self: end !important;
-      text-align: right !important;
-      font-size: clamp(20px, 5.6vw, 24px) !important;
-      line-height: 1 !important;
-      font-weight: 800 !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-
-    .plan-name,
-    .do-name {
-      grid-area: name !important;
-      min-width: 0 !important;
-      width: 100% !important;
-    }
-
-    .plan-row > div:nth-child(3), .do-row > div:nth-child(3) { grid-area: sets !important; }
-    .plan-row > div:nth-child(4), .do-row > div:nth-child(4) { grid-area: kg !important; }
-    .plan-row > div:nth-child(5), .do-row > div:nth-child(5) { grid-area: reps !important; }
-
-    .plan-row > div:nth-child(3), .do-row > div:nth-child(3),
-    .plan-row > div:nth-child(4), .do-row > div:nth-child(4),
-    .plan-row > div:nth-child(5), .do-row > div:nth-child(5) {
-      min-width: 0 !important;
-      width: 100% !important;
-    }
-
-    .remove-box,
-    .plus-box {
-      grid-area: action !important;
-      min-height: 40px !important;
-      height: 40px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-end !important;
-    }
-
-    .plan-card,
-    .do-card {
-      padding: 11px 10px !important;
-      margin: 9px 0 !important;
-      border-radius: 16px !important;
-    }
-
-    .plan-name input,
-    .do-name input {
-      height: 42px !important;
-      min-height: 42px !important;
-      border-radius: 12px !important;
-      font-size: clamp(23px, 6.4vw, 27px) !important;
-      font-weight: 550 !important;
-      line-height: 1.05 !important;
-      padding: 5px 12px !important;
-      text-align: left !important;
-      width: 100% !important;
-    }
-
-    label {
-      display: block !important;
-      font-size: clamp(15px, 4.2vw, 17px) !important;
-      line-height: 1 !important;
-      margin: 0 0 3px !important;
-      font-weight: 800 !important;
-    }
-
-    input[type="number"] {
-      height: 42px !important;
-      min-height: 42px !important;
-      border-radius: 12px !important;
-      font-size: clamp(24px, 7vw, 30px) !important;
-      font-weight: 850 !important;
-      line-height: 1 !important;
-      padding: 3px 4px !important;
-      text-align: center !important;
-      width: 100% !important;
-    }
-
-    .remove-box input {
-      width: 28px !important;
-      height: 28px !important;
-      min-height: 28px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    .plus-btn {
-      width: 34px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      font-size: 31px !important;
-      line-height: 0.85 !important;
-      padding: 0 !important;
-    }
-
-    @media (max-width: 380px) {
-      .plan-row,
-      .do-row {
-        grid-template-columns: 23px repeat(3, minmax(0, 1fr)) 32px !important;
-        column-gap: 6px !important;
-      }
-      .plan-card,
-      .do-card { padding: 10px 8px !important; }
-      .plan-name input,
-      .do-name input { font-size: clamp(22px, 6.2vw, 25px) !important; }
-      input[type="number"] { font-size: clamp(23px, 6.8vw, 28px) !important; }
-    }
-
-
-    /* v23: Explanations are deliberately prominent and readable */
-    .explanation-entry p {
-      font-size: clamp(18px, 5vw, 22px) !important;
-      font-weight: 800 !important;
-      line-height: 1.34 !important;
-      color: var(--text) !important;
-    }
-    .explanation-entry a { font-weight: 850 !important; }
-
-
-    /* v23: Saved labels are plain non-clickable text. */
-    button.action.saved-state,
-    #saveWorkoutBtn.saved-state {
-      color: var(--muted) !important;
-      opacity: 1 !important;
-      cursor: default !important;
-      pointer-events: none !important;
-      border-bottom-color: transparent !important;
-    }
-
-    /* v23: Explanation section names use the same grey visual language as the menu. */
-    .explanation-entry p:first-child,
-    .explanation-entry p:first-child strong {
-      color: var(--muted) !important;
+      .train-heading-row { gap: 8px; }
+      .train-day-title { font-size: clamp(18px, 5.4vw, 22px); }
+      .train-heading-row #startTrainingBtn { font-size: clamp(15px, 4.5vw, 18px) !important; }
+      .train-heading-row .training-timer { font-size: clamp(14px, 4.1vw, 16px) !important; }
     }
 
   </style>
@@ -3207,32 +3202,51 @@
       showToast('PDF download started');
     }
 
-    function progressDisplayRows(rows) {
-      let lastDate = null;
-      let lastExerciseKey = null;
-
-      return rows.map((row, index) => {
-        const dateKey = row.date || '';
-        const exerciseKey = `${dateKey}||${row.exercise || ''}`;
-        const isNewExercise = exerciseKey !== lastExerciseKey;
-        const output = {
-          ...row,
-          dateDisplay: dateKey !== lastDate ? formatDateScreen(row.date) : '',
-          exerciseDisplay: isNewExercise ? row.exercise : '',
-          groupStart: isNewExercise && index > 0
-        };
-        lastDate = dateKey;
-        lastExerciseKey = exerciseKey;
-        return output;
+    function progressWorkoutGroups(rows) {
+      const groups = [];
+      const byKey = new Map();
+      rows.forEach(row => {
+        const key = row.workoutKey || row.date || 'workout';
+        if (!byKey.has(key)) {
+          const group = {
+            key,
+            dateDisplay: formatDateScreen(row.date),
+            durationDisplay: row.durationMs ? formatDurationWords(row.durationMs) : 'not recorded',
+            rows: []
+          };
+          byKey.set(key, group);
+          groups.push(group);
+        }
+        byKey.get(key).rows.push(row);
       });
+
+      groups.forEach(group => {
+        let lastExercise = null;
+        group.rows = group.rows.map((row, index) => {
+          const isNewExercise = row.exercise !== lastExercise;
+          lastExercise = row.exercise;
+          return {
+            ...row,
+            exerciseDisplay: isNewExercise ? row.exercise : '',
+            groupStart: isNewExercise && index > 0
+          };
+        });
+      });
+      return groups;
+    }
+
+    function progressDisplayRows(rows) {
+      return progressWorkoutGroups(rows).flatMap(group => group.rows);
     }
 
     function progressTableHtml(rows) {
-      const displayRows = progressDisplayRows(rows);
       return `
         <table>
-          <thead><tr><th>Date</th><th>Exercise</th><th>Sets</th><th>kg</th><th>Reps</th></tr></thead>
-          <tbody>${displayRows.map(row => `<tr class="${row.groupStart ? 'exercise-group-start' : ''}"><td>${escapeHtml(row.dateDisplay)}</td><td>${escapeHtml(row.exerciseDisplay)}</td><td class="num">${escapeHtml(row.sets)}</td><td class="num">${escapeHtml(row.kg)}</td><td class="num">${escapeHtml(row.reps)}</td></tr>`).join('')}</tbody>
+          <thead><tr><th>Exercise</th><th>Sets</th><th>kg</th><th>Reps</th></tr></thead>
+          <tbody>${progressWorkoutGroups(rows).map(group => `
+            <tr class="workout-date-row"><td colspan="4">${escapeHtml(group.dateDisplay)} · Total training time: ${escapeHtml(group.durationDisplay)}</td></tr>
+            ${group.rows.map(row => `<tr class="${row.groupStart ? 'exercise-group-start' : ''}"><td>${escapeHtml(row.exerciseDisplay)}</td><td class="num">${escapeHtml(row.sets)}</td><td class="num">${escapeHtml(row.kg)}</td><td class="num">${escapeHtml(row.reps)}</td></tr>`).join('')}
+          `).join('')}</tbody>
         </table>
       `;
     }
@@ -3278,10 +3292,10 @@
     }
 
     function pdfPageContent(rows, page, totalPages) {
-      const displayRows = progressDisplayRows(rows);
+      const groups = progressWorkoutGroups(rows);
       let content = '';
-      const columns = [40, 145, 330, 395, 455];
-      const headers = ['Date', 'Exercise', 'Sets', 'kg', 'Reps'];
+      const columns = [40, 330, 395, 455];
+      const headers = ['Exercise', 'Sets', 'kg', 'Reps'];
       const rowHeight = 24;
       let y = 790;
       content += pdfText(40, 815, 16, 'Easy Gym - Progress');
@@ -3291,12 +3305,17 @@
       content += pdfLine(40, y - 8, 555, y - 8);
       y -= rowHeight;
 
-      displayRows.forEach(row => {
-        if (row.groupStart) content += pdfLine(40, y + 13, 555, y + 13, 2.2);
-        const cells = [row.dateDisplay, truncateText(row.exerciseDisplay, 28), row.sets, row.kg, row.reps];
-        cells.forEach((cell, i) => content += pdfText(columns[i], y, 10, cell));
-        content += pdfLine(40, y - 8, 555, y - 8);
+      groups.forEach(group => {
+        content += pdfLine(40, y + 13, 555, y + 13, 2.2);
+        content += pdfText(40, y, 10, `${group.dateDisplay} - Total training time: ${group.durationDisplay}`);
         y -= rowHeight;
+        group.rows.forEach(row => {
+          if (row.groupStart) content += pdfLine(40, y + 13, 555, y + 13, 1.8);
+          const cells = [truncateText(row.exerciseDisplay, 32), row.sets, row.kg, row.reps];
+          cells.forEach((cell, i) => content += pdfText(columns[i], y, 10, cell));
+          content += pdfLine(40, y - 8, 555, y - 8);
+          y -= rowHeight;
+        });
       });
       return content;
     }
@@ -3362,6 +3381,37 @@
       return Number.isInteger(n) ? String(n) : String(Math.round(n * 10) / 10);
     }
 
+    function backupAllData() {
+      const backup = {
+        app: 'Easy Gym',
+        version: 'v36',
+        exportedAt: new Date().toISOString(),
+        weekPlans,
+        savedPlanDays,
+        trainSessions,
+        trainStartTimes,
+        journal,
+        exerciseLibrary
+      };
+      downloadBlob(JSON.stringify(backup, null, 2), `easy_gym_backup_${new Date().toISOString().slice(0, 10)}.json`, 'application/json;charset=utf-8');
+      backupReady = true;
+      save(BACKUP_READY_KEY, true);
+      updateDataButtons();
+      showToast('Backup saved');
+    }
+
+    function resetAllData() {
+      if (!backupReady) return;
+      if (!window.confirm('Reset all Easy Gym data?')) return;
+      [WEEK_KEY, TRAIN_KEY, SAVED_PLANS_KEY, JOURNAL_KEY, EXERCISE_LIBRARY_KEY, TRAIN_START_KEY, BACKUP_READY_KEY].forEach(key => localStorage.removeItem(key));
+      showToast('Data reset');
+      setTimeout(() => window.location.reload(), 300);
+    }
+
+    function updateDataButtons() {
+      if (resetDataBtn) resetDataBtn.disabled = !backupReady;
+    }
+
     function openAddExerciseModal(target = 'plan', sessionId = null) {
       if (target === 'train-replace') {
         addExerciseTarget = 'train-replace';
@@ -3370,10 +3420,9 @@
         addExerciseTarget = target === 'train' ? 'train' : 'plan';
         trainChoiceSessionId = null;
       }
-      const title = document.getElementById('addExerciseTitle');
-      if (title) {
-        title.textContent = addExerciseTarget === 'plan' ? 'Add exercise' : 'Choose exercise';
-      }
+      modalEditMode = false;
+      exerciseLibraryDraft = [...exerciseLibrary];
+      exerciseLibraryDirty = false;
       renderExerciseLibrary();
       addExerciseModal.classList.remove('hidden');
       customExerciseName.value = '';
@@ -3392,28 +3441,134 @@
       addExerciseModal.classList.add('hidden');
       addExerciseTarget = 'plan';
       trainChoiceSessionId = null;
+      modalEditMode = false;
+      exerciseLibraryDraft = [];
+      exerciseLibraryDirty = false;
     }
 
     function renderExerciseLibrary() {
-      exerciseOptions.innerHTML = EXERCISE_LIBRARY.map(name => `
-        <button class="exercise-option" type="button" data-add-library-exercise="${escapeAttr(name)}">${escapeHtml(name)}</button>
+      const title = document.getElementById('addExerciseTitle');
+      if (title) title.textContent = 'Choose exercise';
+      if (saveExerciseListBtn) {
+        saveExerciseListBtn.disabled = !exerciseLibraryDirty;
+        saveExerciseListBtn.classList.toggle('ready', exerciseLibraryDirty);
+      }
+      if (editExercisesBtn) {
+        editExercisesBtn.textContent = modalEditMode ? 'Editing' : 'Edit-exercises';
+        editExercisesBtn.disabled = modalEditMode;
+      }
+      if (exerciseModalHelp) {
+        exerciseModalHelp.textContent = modalEditMode
+          ? 'Edit the exercise list. Check exercises to delete them, or add new names below. Save when finished.'
+          : 'Choose from the list or write your own exercise.';
+      }
+      if (customAddRow) customAddRow.classList.toggle('hidden-control', modalEditMode);
+
+      if (modalEditMode) {
+        renderExerciseLibraryEditor();
+        return;
+      }
+
+      exerciseOptions.className = 'exercise-grid';
+      exerciseOptions.innerHTML = exerciseLibrary.map(name => `
+        <div class="exercise-library-row">
+          <button class="exercise-option" type="button" data-add-library-exercise="${escapeAttr(name)}">${escapeHtml(name)}</button>
+        </div>
       `).join('');
       document.querySelectorAll('[data-add-library-exercise]').forEach(button => {
         button.addEventListener('click', () => addExerciseFromName(button.dataset.addLibraryExercise));
       });
     }
 
+    function renderExerciseLibraryEditor() {
+      exerciseOptions.className = 'library-edit-list';
+      const rows = exerciseLibraryDraft.map((name, index) => `
+        <div class="library-edit-row">
+          <input class="library-edit-check" type="checkbox" data-library-select="${index}" aria-label="Select ${escapeAttr(name)}" />
+          <div class="library-edit-name">${escapeHtml(name)}</div>
+          <button class="library-delete-btn hidden-control" type="button" data-library-delete="${index}">${window.innerWidth < 390 ? 'Del' : 'Delete'}</button>
+        </div>
+      `).join('');
+      exerciseOptions.innerHTML = rows + `
+        <div class="library-add-row">
+          <input id="libraryNewExerciseName" type="text" placeholder="New exercise name" aria-label="New exercise name" />
+          <button class="library-add-btn" id="libraryAddExerciseBtn" type="button" disabled aria-label="Add new exercise">+</button>
+        </div>
+      `;
+      document.querySelectorAll('[data-library-select]').forEach(input => {
+        input.addEventListener('change', () => {
+          const row = input.closest('.library-edit-row');
+          const del = row ? row.querySelector('[data-library-delete]') : null;
+          if (del) del.classList.toggle('hidden-control', !input.checked);
+        });
+      });
+      document.querySelectorAll('[data-library-delete]').forEach(button => {
+        button.addEventListener('click', () => removeDraftExercise(Number(button.dataset.libraryDelete)));
+      });
+      const newInput = document.getElementById('libraryNewExerciseName');
+      const newButton = document.getElementById('libraryAddExerciseBtn');
+      if (newInput && newButton) {
+        const update = () => {
+          const name = newInput.value.trim();
+          newButton.disabled = !name || exerciseLibraryDraft.some(item => item.toLowerCase() === name.toLowerCase());
+        };
+        newInput.addEventListener('input', update);
+        newInput.addEventListener('keydown', event => {
+          if (event.key === 'Enter' && !newButton.disabled) addDraftExercise(newInput.value);
+        });
+        newButton.addEventListener('click', () => addDraftExercise(newInput.value));
+        update();
+        setTimeout(() => newInput.focus(), 0);
+      }
+    }
+
+    function addDraftExercise(name) {
+      const cleanName = String(name || '').trim();
+      if (!cleanName) return;
+      if (exerciseLibraryDraft.some(item => item.toLowerCase() === cleanName.toLowerCase())) return;
+      exerciseLibraryDraft.push(cleanName);
+      exerciseLibraryDraft.sort((a, b) => a.localeCompare(b));
+      exerciseLibraryDirty = true;
+      renderExerciseLibrary();
+    }
+
+    function removeDraftExercise(index) {
+      if (!Number.isInteger(index) || index < 0 || index >= exerciseLibraryDraft.length) return;
+      exerciseLibraryDraft.splice(index, 1);
+      exerciseLibraryDirty = true;
+      renderExerciseLibrary();
+    }
+
+    function saveExerciseLibraryDraft() {
+      if (!exerciseLibraryDirty) return;
+      const cleaned = [];
+      exerciseLibraryDraft.forEach(name => {
+        const cleanName = String(name || '').trim();
+        if (!cleanName) return;
+        if (!cleaned.some(item => item.toLowerCase() === cleanName.toLowerCase())) cleaned.push(cleanName);
+      });
+      exerciseLibrary = cleaned.sort((a, b) => a.localeCompare(b));
+      save(EXERCISE_LIBRARY_KEY, exerciseLibrary);
+      modalEditMode = false;
+      exerciseLibraryDraft = [...exerciseLibrary];
+      exerciseLibraryDirty = false;
+      renderExerciseLibrary();
+      showToast('Exercise list saved');
+    }
+
     function addExerciseFromName(name) {
+      const cleanName = String(name || '').trim();
+      if (!cleanName) return;
+      ensureExerciseInLibrary(cleanName);
+
       if (addExerciseTarget === 'train-replace') {
-        replaceTrainExerciseNameFromName(name);
+        replaceTrainExerciseNameFromName(cleanName);
         return;
       }
       if (addExerciseTarget === 'train') {
-        addTrainExerciseFromName(name);
+        addTrainExerciseFromName(cleanName);
         return;
       }
-      const cleanName = String(name || '').trim();
-      if (!cleanName) return;
       const exercise = { id: uid(), name: cleanName, sets: 1, reps: 1, kg: 1 };
       weekPlans[selectedPlanDay].push(exercise);
       markPlanDirty(selectedPlanDay);
@@ -3427,6 +3582,16 @@
         input.select();
       }
       showToast('Exercise added');
+    }
+
+    function ensureExerciseInLibrary(name) {
+      const cleanName = String(name || '').trim();
+      if (!cleanName) return;
+      if (!exerciseLibrary.some(item => item.toLowerCase() === cleanName.toLowerCase())) {
+        exerciseLibrary.push(cleanName);
+        exerciseLibrary.sort((a, b) => a.localeCompare(b));
+        save(EXERCISE_LIBRARY_KEY, exerciseLibrary);
+      }
     }
 
     function collectCompletedExercises(day) {
@@ -3494,6 +3659,12 @@
       const completed = boundedInt(ex.completed, 0, 100);
       if (completed > 0) return `${completed} ${repWord(completed)} ${numberText(ex.kg)} kg`;
       return '';
+    }
+
+    function loadExerciseLibrary() {
+      const stored = load(EXERCISE_LIBRARY_KEY, null);
+      const base = Array.isArray(stored) && stored.length ? stored : DEFAULT_EXERCISE_LIBRARY;
+      return [...new Set(base.map(item => String(item || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
     }
 
     function loadWeekPlans() {
@@ -3742,6 +3913,7 @@
       if (selectedTrainDay === day) {
         selectedTrainDay = null;
         savedWorkoutDay = null;
+        delete finishedTrainingDurations[day];
       }
       save(SAVED_PLANS_KEY, savedPlanDays);
     }
@@ -3758,6 +3930,21 @@
       return (DAYS.find(item => item.key === day) || {}).short || '';
     }
 
+
+
+    function exerciseHasCompletedSet(item) {
+      if (!item) return false;
+      const done = normalizeDone(item.done, item.sets);
+      return done.some(set => isCompletedSet(set));
+    }
+
+    function findLastTrainAddedExercise(session) {
+      if (!Array.isArray(session)) return null;
+      for (let i = session.length - 1; i >= 0; i -= 1) {
+        if (session[i]?.addedInTrain) return session[i];
+      }
+      return null;
+    }
 
     function hasInvalidTrainExercises(day) {
       if (!day || !hasSavedPlan(day)) return true;
@@ -3880,6 +4067,8 @@
       save(WEEK_KEY, weekPlans);
       save(SAVED_PLANS_KEY, savedPlanDays);
       save(TRAIN_KEY, trainSessions);
+      save(TRAIN_START_KEY, trainStartTimes);
+      save(EXERCISE_LIBRARY_KEY, exerciseLibrary);
     }
 
     function save(key, value) {

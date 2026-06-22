@@ -1,4 +1,4 @@
-const CACHE_NAME = 'easy-gym-pwa-v29';
+const CACHE_NAME = 'easy-gym-pwa-v36';
 const ASSETS = [
   './',
   './index.html',
