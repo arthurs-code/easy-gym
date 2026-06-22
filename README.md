@@ -1,6 +1,15 @@
 # Easy Gym PWA
 
-Updated compact iPhone layout and new winged dumbbell app icon.
+Version v27.
+
+Changes in this version:
+
+- New Train exercise defaults are now Set 1, kg 1, Rep 1.
+- A blank Train-added exercise cannot be saved until an exercise name is chosen from the list or typed manually.
+- Added **Remove last added** in Train, only for exercises added during the current Train session.
+- Train-added exercises can also be removed directly with the row remove control before saving.
+- After Save training, Train remains locked as before.
+- Service worker cache updated to v27.
 
 ## Publish update on GitHub Pages
 
@@ -10,37 +19,4 @@ Updated compact iPhone layout and new winged dumbbell app icon.
 4. Choose **Commit directly to the main branch**.
 5. Click **Commit changes**.
 
-The service worker cache was updated to v2, so the new design should refresh after reopening the app. If iPhone still shows the old version, close the app completely and open it again.
-
-
-Update: header now shows EASY GYM - powered by Arthur Stivenson. Cache version v4.
-
-
-Update note: v5 uses text-link controls for menu, weekdays and actions.
-
-
-Update: this version includes responsive iPhone scaling code for different iPhone widths and Safari/Home Screen viewport changes.
-
-
-Update: custom winged dumbbell icons added. Cache version v7.
-
-
-Version v8: improved iPhone responsive exercise cards with larger readable fields.
-
-
-Version v9: iPhone-first readable layout, Mon-plan title, compact Progress table, cache refresh improved.
-
-
-Update v13: Save labels are now Save Mon-plan / Save Tue-plan, and Plan/Train boxes are tighter for iPhone readability.
-
-
-Update v13: hard CSS override keeps Sets, kg, and Reps on the same line with equal-width boxes.
-
-
-Version v15: compact inside-label metric boxes, balanced spacing, compact Donate table, and Saved! button feedback.
-
-
-Version v22: added professional Explanations text, contact email and copyright notice.
-
-
-Version v22: copyright subtitle and fixed Remove behavior.
+If iPhone still shows the old version, close the app completely and open it again.

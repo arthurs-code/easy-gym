@@ -1831,7 +1831,7 @@
 
 
 
-    /* v22: Explanations are deliberately prominent and readable */
+    /* v23: Explanations are deliberately prominent and readable */
     .explanation-entry p {
       font-size: clamp(18px, 5vw, 22px) !important;
       font-weight: 800 !important;
@@ -1841,7 +1841,7 @@
     .explanation-entry a { font-weight: 850 !important; }
 
 
-    /* v22: Training can only be saved from a currently saved day-plan. */
+    /* v23: Training can only be saved from a currently saved day-plan. */
     #saveWorkoutBtn:disabled {
       color: var(--muted) !important;
       opacity: 0.45 !important;
@@ -1849,6 +1849,50 @@
       pointer-events: none !important;
     }
 
+
+    /* v23: Saved labels are plain non-clickable text. */
+    button.action.saved-state,
+    #saveWorkoutBtn.saved-state {
+      color: var(--muted) !important;
+      opacity: 1 !important;
+      cursor: default !important;
+      pointer-events: none !important;
+      border-bottom-color: transparent !important;
+    }
+
+    /* v23: Explanation section names use the same grey visual language as the menu. */
+    .explanation-entry p:first-child,
+    .explanation-entry p:first-child strong {
+      color: var(--muted) !important;
+    }
+
+
+
+    /* v27: Train + adds removable pending row; defaults are 1; save waits for chosen exercise. */
+
+    .remove-train-btn {
+      color: #b91c1c !important;
+    }
+    .remove-train-btn:hover {
+      color: #991b1b !important;
+    }
+
+    .train-name-box {
+      cursor: pointer !important;
+      touch-action: manipulation !important;
+    }
+    .train-name-box input {
+      cursor: pointer !important;
+      caret-color: transparent !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      pointer-events: none !important;
+    }
+    .train-name-box.disabled,
+    .train-name-box.disabled input {
+      cursor: default !important;
+      pointer-events: none !important;
+    }
   </style>
   <script>
     // Keeps layout proportional to the real iPhone viewport, including Safari/Home Screen size changes.
@@ -1905,6 +1949,7 @@
           <div id="doList"></div>
           <div id="trainActionRow" class="button-row train-actions hidden">
             <button class="action" id="saveWorkoutBtn">Save training</button>
+            <button class="action danger" id="removeLastTrainBtn" type="button" disabled>Remove last added</button>
           </div>
         </section>
 
@@ -1960,7 +2005,7 @@
             </div>
             <div class="explanation-entry">
               <p><strong>Train</strong></p>
-              <p>Choose your day for training. Days without a saved plan are disabled. Here you can change Set, kg and Rep. Before saving, use + to add the same exercise again with different kg.</p>
+              <p>Choose your day for training. Days without a saved plan are disabled. Here you can change Set, kg and Rep. Before saving, use + to add another exercise to the training.</p>
             </div>
             <div class="explanation-entry">
               <p><strong>Progress</strong></p>
@@ -1993,7 +2038,7 @@
           <label for="customExerciseName">Your own exercise</label>
           <input id="customExerciseName" type="text" placeholder="Write exercise name" />
         </div>
-        <button class="action" id="addCustomExerciseBtn" type="button">Add</button>
+        <button class="action" id="addCustomExerciseBtn" type="button" disabled>Add</button>
       </div>
     </div>
   </div>
@@ -2050,6 +2095,8 @@
     let selectedPlanDay = 'mon';
     let selectedTrainDay = null;
     let savedWorkoutDay = null;
+    let addExerciseTarget = 'plan';
+    let trainChoiceSessionId = null;
 
     const tabs = document.querySelectorAll('.tab-button');
     const sections = document.querySelectorAll('.section');
@@ -2069,6 +2116,8 @@
     const addExerciseModal = document.getElementById('addExerciseModal');
     const exerciseOptions = document.getElementById('exerciseOptions');
     const customExerciseName = document.getElementById('customExerciseName');
+    const addCustomExerciseBtn = document.getElementById('addCustomExerciseBtn');
+    const removeLastTrainBtn = document.getElementById('removeLastTrainBtn');
 
 
     tabs.forEach(button => {
@@ -2081,13 +2130,19 @@
       });
     });
 
-    document.getElementById('addExerciseBtn').addEventListener('click', openAddExerciseModal);
+    document.getElementById('addExerciseBtn').addEventListener('click', () => openAddExerciseModal('plan'));
     document.getElementById('closeAddExerciseModal').addEventListener('click', closeAddExerciseModal);
-    document.getElementById('addCustomExerciseBtn').addEventListener('click', () => {
-      addExerciseFromName(customExerciseName.value.trim() || 'New exercise');
+    addCustomExerciseBtn.addEventListener('click', () => {
+      const name = customExerciseName.value.trim();
+      if (!name) return;
+      addExerciseFromName(name);
     });
+    customExerciseName.addEventListener('input', updateCustomAddButton);
     customExerciseName.addEventListener('keydown', event => {
-      if (event.key === 'Enter') addExerciseFromName(customExerciseName.value.trim() || 'New exercise');
+      if (event.key === 'Enter') {
+        const name = customExerciseName.value.trim();
+        if (name) addExerciseFromName(name);
+      }
     });
     addExerciseModal.addEventListener('click', event => {
       if (event.target === addExerciseModal) closeAddExerciseModal();
@@ -2108,11 +2163,11 @@
     });
 
     saveDailyPlanBtn.addEventListener('click', () => {
+      if (!currentPlan().length || isPlanSaved(selectedPlanDay)) return;
       syncTrainWithPlan(selectedPlanDay, false);
       savedPlanDays[selectedPlanDay] = currentPlan().length > 0;
       persistAll();
       renderAll();
-      saveDailyPlanBtn.textContent = 'Saved!';
       showToast(`${dayShort(selectedPlanDay)}-plan saved`);
     });
 
@@ -2126,7 +2181,6 @@
 
       if (savedWorkoutDay === selectedTrainDay) return;
 
-      syncTrainWithPlan(selectedTrainDay, false);
       const completedExercises = collectCompletedExercises(selectedTrainDay);
 
       if (!completedExercises.length) {
@@ -2143,14 +2197,33 @@
       };
       journal.unshift(entry);
       save(JOURNAL_KEY, journal);
+      overwritePlanFromTrain(selectedTrainDay);
       savedWorkoutDay = selectedTrainDay;
       renderJournal();
       renderDo();
+      const workoutButton = document.getElementById('saveWorkoutBtn');
       if (workoutButton) {
         workoutButton.textContent = 'Saved';
         workoutButton.disabled = true;
+        workoutButton.classList.add('saved-state');
       }
+      if (removeLastTrainBtn) removeLastTrainBtn.disabled = true;
       showToast('Training saved');
+    });
+
+    removeLastTrainBtn.addEventListener('click', () => {
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay) return;
+      const session = currentTrainForDay(selectedTrainDay);
+      for (let i = session.length - 1; i >= 0; i -= 1) {
+        if (session[i].addedInTrain) {
+          session.splice(i, 1);
+          trainSessions[selectedTrainDay] = session;
+          save(TRAIN_KEY, trainSessions);
+          renderDo();
+          showToast('Last added exercise removed');
+          return;
+        }
+      }
     });
 
     downloadWordBtn.addEventListener('click', downloadProgressWord);
@@ -2209,8 +2282,10 @@
     function renderPlan() {
       const plan = currentPlan();
       planDayTitle.textContent = `${dayShort(selectedPlanDay)}-plan`;
-      saveDailyPlanBtn.textContent = isPlanSaved(selectedPlanDay) ? 'Saved!' : `Save ${dayShort(selectedPlanDay)}-plan`;
-      saveDailyPlanBtn.disabled = !plan.length;
+      const planAlreadySaved = isPlanSaved(selectedPlanDay);
+      saveDailyPlanBtn.textContent = planAlreadySaved ? 'Saved' : `Save ${dayShort(selectedPlanDay)}-plan`;
+      saveDailyPlanBtn.disabled = planAlreadySaved || !plan.length;
+      saveDailyPlanBtn.classList.toggle('saved-state', planAlreadySaved);
 
       if (!plan.length) {
         planList.innerHTML = '<div class="empty">No exercises for this day yet. Use AddExercise.</div>';
@@ -2269,6 +2344,7 @@
       markPlanDirty(selectedPlanDay);
       saveDailyPlanBtn.textContent = `Save ${dayShort(selectedPlanDay)}-plan`;
       saveDailyPlanBtn.disabled = currentPlan().length === 0;
+      saveDailyPlanBtn.classList.remove('saved-state');
 
       const trainRows = currentTrainForDay(selectedPlanDay).filter(exercise => exercise.exerciseId === id);
       const primaryRow = getPrimaryTrainItem(selectedPlanDay, id);
@@ -2310,12 +2386,13 @@
         if (workoutButton) {
           workoutButton.textContent = 'Save training';
           workoutButton.disabled = true;
+          workoutButton.classList.remove('saved-state');
         }
         if (trainActionRow) trainActionRow.classList.add('hidden');
+        if (removeLastTrainBtn) removeLastTrainBtn.disabled = true;
         return;
       }
 
-      syncTrainWithPlan(selectedTrainDay, false);
       const session = currentTrainForDay(selectedTrainDay);
       trainDayTitle.textContent = '';
       trainDayNote.textContent = '';
@@ -2323,6 +2400,7 @@
       if (!session.length) {
         doList.innerHTML = '<div class="empty">This day has no exercises.</div>';
         if (trainActionRow) trainActionRow.classList.add('hidden');
+        if (removeLastTrainBtn) removeLastTrainBtn.disabled = true;
         return;
       }
 
@@ -2330,10 +2408,17 @@
       const workoutButton = document.getElementById('saveWorkoutBtn');
       const workoutAlreadySaved = savedWorkoutDay === selectedTrainDay;
       const hasCompletedWorkout = hasCompletedSets(selectedTrainDay);
+      const hasInvalidExercise = hasInvalidTrainExercises(selectedTrainDay);
+      const hasAddedExercise = session.some(item => item.addedInTrain);
       if (workoutButton) {
-        const canSaveWorkout = hasSavedPlan(selectedTrainDay) && session.length > 0 && hasCompletedWorkout && !workoutAlreadySaved;
+        const canSaveWorkout = hasSavedPlan(selectedTrainDay) && session.length > 0 && hasCompletedWorkout && !hasInvalidExercise && !workoutAlreadySaved;
         workoutButton.textContent = workoutAlreadySaved ? 'Saved' : 'Save training';
         workoutButton.disabled = !canSaveWorkout;
+        workoutButton.classList.toggle('saved-state', workoutAlreadySaved);
+      }
+      if (removeLastTrainBtn) {
+        removeLastTrainBtn.disabled = workoutAlreadySaved || !hasAddedExercise;
+        removeLastTrainBtn.classList.toggle('ready', !removeLastTrainBtn.disabled);
       }
 
       doList.innerHTML = session.map((item, index) => {
@@ -2351,8 +2436,8 @@
           <div class="do-card">
             <div class="do-row">
               <div class="row-number">${index + 1}.</div>
-              <div class="do-name">
-                <input value="${escapeAttr(item.name)}" readonly aria-label="Exercise name" />
+              <div class="do-name train-name-box ${workoutAlreadySaved ? 'disabled' : ''}" ${workoutAlreadySaved ? '' : `data-train-name-box="${sessionId}"`} title="Choose exercise">
+                <input value="${escapeAttr(item.name || '')}" placeholder="Choose exercise" readonly ${workoutAlreadySaved ? 'disabled' : ''} aria-label="Exercise name" />
               </div>
               <div class="metric-field metric-set" data-unit="Set">
                 <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.sets))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-sets="${sessionId}" aria-label="Set" />
@@ -2364,11 +2449,11 @@
                 <input type="number" inputmode="numeric" step="1" min="0" max="100" value="${escapeAttr(numberText(item.reps))}" ${workoutAlreadySaved ? 'disabled' : ''} data-do-reps="${sessionId}" aria-label="Rep" />
               </div>
               ${workoutAlreadySaved ? '' : `
-              <div class="plus-box" title="Add same exercise with different kg">
-                <button class="plus-btn" type="button" data-add-same="${sessionId}" aria-label="Add same exercise">+</button>
+              <div class="plus-box" title="${item.addedInTrain ? 'Remove exercise from training' : 'Add exercise to training'}">
+                ${item.addedInTrain ? `<button class="plus-btn remove-train-btn" type="button" data-remove-train-exercise="${sessionId}" aria-label="Remove exercise from training">×</button>` : `<button class="plus-btn" type="button" data-add-train-exercise="${sessionId}" aria-label="Add exercise to training">+</button>`}
               </div>`}
             </div>
-            <div class="rep-grid">${checks || '<p class="small-note">Set number of Sets above 0 to show check squares.</p>'}</div>
+            <div class="rep-grid">${checks || '<p class="small-note">Set must be above 0.</p>'}</div>
           </div>
         `;
       }).join('');
@@ -2377,39 +2462,96 @@
       document.querySelectorAll('[data-do-reps]').forEach(input => input.addEventListener('input', updateDo));
       document.querySelectorAll('[data-do-kg]').forEach(input => input.addEventListener('input', updateDo));
       document.querySelectorAll('[data-set-check]').forEach(input => input.addEventListener('change', updateCheck));
-      document.querySelectorAll('[data-add-same]').forEach(button => button.addEventListener('click', addSameExerciseInTrain));
+      document.querySelectorAll('[data-add-train-exercise]').forEach(button => button.addEventListener('click', addBlankTrainExercise));
+      document.querySelectorAll('[data-remove-train-exercise]').forEach(button => button.addEventListener('click', () => removeTrainExercise(button.dataset.removeTrainExercise)));
+      document.querySelectorAll('[data-train-name-box]').forEach(box => {
+        box.addEventListener('click', () => {
+          if (savedWorkoutDay === selectedTrainDay) return;
+          openAddExerciseModal('train-replace', box.dataset.trainNameBox);
+        });
+      });
       save(TRAIN_KEY, trainSessions);
     }
 
-    function addSameExerciseInTrain(event) {
-      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay)) return;
-      const sessionId = event.currentTarget.dataset.addSame;
+    function replaceTrainExerciseNameFromName(name) {
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay) || !trainChoiceSessionId) {
+        closeAddExerciseModal();
+        return;
+      }
+      const cleanName = String(name || '').trim();
+      if (!cleanName) return;
       const session = currentTrainForDay(selectedTrainDay);
-      const item = session.find(exercise => exercise.sessionId === sessionId);
-      if (!item) return;
+      const item = session.find(exercise => exercise.sessionId === trainChoiceSessionId);
+      if (!item) {
+        closeAddExerciseModal();
+        return;
+      }
+      item.name = cleanName;
+      item.pendingChoice = false;
+      trainSessions[selectedTrainDay] = session;
+      closeAddExerciseModal();
+      save(TRAIN_KEY, trainSessions);
+      renderDo();
+      showToast('Exercise changed');
+    }
 
-      const copy = {
+    function addBlankTrainExercise() {
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay)) return;
+      const sets = 1;
+      const exercise = {
         sessionId: uid(),
-        exerciseId: item.exerciseId,
-        name: item.name,
-        sets: item.sets,
-        reps: item.reps,
-        kg: item.kg,
-        done: Array(boundedInt(item.sets, 0, 100)).fill(false)
+        exerciseId: uid(),
+        name: '',
+        sets,
+        reps: 1,
+        kg: 1,
+        done: Array(sets).fill(false),
+        addedInTrain: true,
+        pendingChoice: true
       };
-
-      const index = session.findIndex(exercise => exercise.sessionId === sessionId);
-      session.splice(index + 1, 0, copy);
+      const session = currentTrainForDay(selectedTrainDay);
+      session.push(exercise);
       trainSessions[selectedTrainDay] = session;
       save(TRAIN_KEY, trainSessions);
       renderDo();
+      showToast('Choose exercise');
+    }
 
-      const kgInput = [...document.querySelectorAll('[data-do-kg]')].find(input => input.dataset.doKg === copy.sessionId);
-      if (kgInput) {
-        kgInput.focus();
-        kgInput.select();
+    function removeTrainExercise(sessionId) {
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !sessionId) return;
+      const session = currentTrainForDay(selectedTrainDay).filter(item => item.sessionId !== sessionId);
+      trainSessions[selectedTrainDay] = session;
+      save(TRAIN_KEY, trainSessions);
+      renderDo();
+      showToast('Exercise removed');
+    }
+
+    function addTrainExerciseFromName(name) {
+      if (!selectedTrainDay || savedWorkoutDay === selectedTrainDay || !hasSavedPlan(selectedTrainDay)) {
+        closeAddExerciseModal();
+        return;
       }
-      showToast('Same exercise added');
+      const cleanName = String(name || '').trim();
+      if (!cleanName) return;
+      const sets = 1;
+      const exercise = {
+        sessionId: uid(),
+        exerciseId: uid(),
+        name: cleanName,
+        sets,
+        reps: 1,
+        kg: 1,
+        done: Array(sets).fill(false),
+        addedInTrain: true,
+        pendingChoice: false
+      };
+      const session = currentTrainForDay(selectedTrainDay);
+      session.push(exercise);
+      trainSessions[selectedTrainDay] = session;
+      closeAddExerciseModal();
+      save(TRAIN_KEY, trainSessions);
+      renderDo();
+      showToast('Exercise added to training');
     }
 
     function updateDo(event) {
@@ -3011,7 +3153,7 @@
     }
 
 
-    /* v22: Explanations are deliberately prominent and readable */
+    /* v23: Explanations are deliberately prominent and readable */
     .explanation-entry p {
       font-size: clamp(18px, 5vw, 22px) !important;
       font-weight: 800 !important;
@@ -3019,6 +3161,23 @@
       color: var(--text) !important;
     }
     .explanation-entry a { font-weight: 850 !important; }
+
+
+    /* v23: Saved labels are plain non-clickable text. */
+    button.action.saved-state,
+    #saveWorkoutBtn.saved-state {
+      color: var(--muted) !important;
+      opacity: 1 !important;
+      cursor: default !important;
+      pointer-events: none !important;
+      border-bottom-color: transparent !important;
+    }
+
+    /* v23: Explanation section names use the same grey visual language as the menu. */
+    .explanation-entry p:first-child,
+    .explanation-entry p:first-child strong {
+      color: var(--muted) !important;
+    }
 
   </style>
       </head><body><h1>Easy Gym Progress</h1>${progressTableHtml(rows)}</body></html>`;
@@ -3192,15 +3351,33 @@
       return Number.isInteger(n) ? String(n) : String(Math.round(n * 10) / 10);
     }
 
-    function openAddExerciseModal() {
+    function openAddExerciseModal(target = 'plan', sessionId = null) {
+      if (target === 'train-replace') {
+        addExerciseTarget = 'train-replace';
+        trainChoiceSessionId = sessionId;
+      } else {
+        addExerciseTarget = target === 'train' ? 'train' : 'plan';
+        trainChoiceSessionId = null;
+      }
+      const title = document.getElementById('addExerciseTitle');
+      if (title) {
+        title.textContent = addExerciseTarget === 'plan' ? 'Add exercise' : 'Choose exercise';
+      }
       renderExerciseLibrary();
       addExerciseModal.classList.remove('hidden');
       customExerciseName.value = '';
+      updateCustomAddButton();
       setTimeout(() => customExerciseName.focus(), 0);
+    }
+
+    function updateCustomAddButton() {
+      if (addCustomExerciseBtn) addCustomExerciseBtn.disabled = !customExerciseName.value.trim();
     }
 
     function closeAddExerciseModal() {
       addExerciseModal.classList.add('hidden');
+      addExerciseTarget = 'plan';
+      trainChoiceSessionId = null;
     }
 
     function renderExerciseLibrary() {
@@ -3213,8 +3390,17 @@
     }
 
     function addExerciseFromName(name) {
-      const cleanName = String(name || '').trim() || 'New exercise';
-      const exercise = { id: uid(), name: cleanName, sets: 3, reps: 10, kg: 0 };
+      if (addExerciseTarget === 'train-replace') {
+        replaceTrainExerciseNameFromName(name);
+        return;
+      }
+      if (addExerciseTarget === 'train') {
+        addTrainExerciseFromName(name);
+        return;
+      }
+      const cleanName = String(name || '').trim();
+      if (!cleanName) return;
+      const exercise = { id: uid(), name: cleanName, sets: 1, reps: 1, kg: 1 };
       weekPlans[selectedPlanDay].push(exercise);
       markPlanDirty(selectedPlanDay);
       syncTrainWithPlan(selectedPlanDay, false);
@@ -3238,7 +3424,7 @@
 
         const key = item.exerciseId || item.sessionId || item.name || uid();
         if (!byExercise.has(key)) {
-          byExercise.set(key, { name: item.name || 'Exercise', sets: [] });
+          byExercise.set(key, { name: String(item.name || '').trim() || 'Exercise', sets: [] });
         }
 
         const target = byExercise.get(key);
@@ -3358,14 +3544,17 @@
         const normalized = normalizeExercise(item);
         const exerciseId = item?.exerciseId || item?.planId || item?.id || uid();
         const sessionId = item?.sessionId || item?.rowId || item?.id || uid();
+        const rawName = Object.prototype.hasOwnProperty.call(item || {}, 'name') ? String(item.name || '') : normalized.name;
         return {
           sessionId,
           exerciseId,
-          name: item?.name || normalized.name,
+          name: rawName,
           sets: normalized.sets,
           reps: normalized.reps,
           kg: normalized.kg,
-          done: normalizeDone(item?.done, normalized.sets)
+          done: normalizeDone(item?.done, normalized.sets),
+          addedInTrain: Boolean(item?.addedInTrain),
+          pendingChoice: Boolean(item?.pendingChoice) || !rawName.trim()
         };
       });
     }
@@ -3447,6 +3636,43 @@
       save(TRAIN_KEY, trainSessions);
     }
 
+
+    function overwritePlanFromTrain(day) {
+      if (!day || !hasDay(day)) return;
+      const session = currentTrainForDay(day).filter(item => String(item.name || '').trim());
+      const usedIds = new Set();
+      const nextPlan = session.map(item => {
+        let id = item.exerciseId || uid();
+        if (usedIds.has(id)) id = uid();
+        usedIds.add(id);
+        return {
+          id,
+          name: String(item.name || '').trim() || 'Exercise',
+          sets: boundedInt(item.sets, 0, 100),
+          reps: boundedInt(item.reps, 0, 100),
+          kg: sanitizeNumber(item.kg, 0)
+        };
+      });
+
+      weekPlans[day] = nextPlan;
+      trainSessions[day] = session.map((item, index) => {
+        const planItem = nextPlan[index];
+        return {
+          ...item,
+          exerciseId: planItem.id,
+          name: planItem.name,
+          sets: planItem.sets,
+          reps: planItem.reps,
+          kg: planItem.kg,
+          done: normalizeDone(item.done, planItem.sets),
+          addedInTrain: false,
+          pendingChoice: false
+        };
+      });
+      savedPlanDays[day] = nextPlan.length > 0;
+      persistAll();
+    }
+
     function planForDay(day) {
       if (!weekPlans[day]) weekPlans[day] = [];
       return weekPlans[day];
@@ -3506,6 +3732,11 @@
       return (DAYS.find(item => item.key === day) || {}).short || '';
     }
 
+
+    function hasInvalidTrainExercises(day) {
+      if (!day || !hasSavedPlan(day)) return true;
+      return currentTrainForDay(day).some(item => !String(item.name || '').trim() || item.pendingChoice);
+    }
 
     function hasCompletedSets(day) {
       if (!day || !hasSavedPlan(day)) return false;
