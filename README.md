@@ -1,3 +1,1 @@
-# PWA_v36
-
-Easy Gym PWA v36. Train Save changes Started to Finished and shows total training time beside it.
+Easy Gym PWA v40 - fixed plan day selection, inline Train start, responsive header, and working script.
