@@ -8,7 +8,7 @@
 (function(){try{var m=localStorage.getItem('easyGym.theme.v1');if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
 </script>
 <title>Easy Gym</title>
-<!-- Easy Gym v87: About section with Arthur foreword and app guide -->
+<!-- Easy Gym v89: Do Add Exercise control beside Start/Started -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <style>:root{
@@ -905,7 +905,7 @@ body{font-variant-numeric:tabular-nums;}
 @media(min-width:640px){.manage-actions{grid-template-columns:1fr 1fr;gap:14px;}.manage-actions .action.wide{grid-column:1/-1;}}
 
 
-/* v87 About and six-item menu */
+/* v88 About file movement guide */
 .main-nav{gap:clamp(4px,1.4vw,12px)!important;}
 .nav-link{font-size:clamp(13px,3.55vw,18px)!important;font-weight:650!important;letter-spacing:-.012em!important;}
 .theme-toggle{min-width:36px!important;min-height:40px!important;font-size:18px!important;border-radius:10px!important;}
@@ -918,6 +918,12 @@ body{font-variant-numeric:tabular-nums;}
 .about-note{color:var(--text-muted)!important;}
 @media(max-width:390px){.nav-link{font-size:12.5px!important;}.main-nav{gap:3px!important;}.theme-toggle{min-width:32px!important;font-size:17px!important;}}
 @media(min-width:760px){.nav-link{font-size:clamp(18px,2.2vw,25px)!important;}.theme-toggle{min-width:44px!important;min-height:44px!important;font-size:22px!important;}}
+
+
+/* v89: Do Add Exercise control */
+#trainControls{gap:clamp(10px,3.2vw,22px)!important;}
+#addTrainExerciseBtn{white-space:nowrap!important;}
+@media(max-width:390px){#trainControls{gap:9px!important;}#addTrainExerciseBtn{font-size:13.5px!important;}}
 
 </style>
 </head>
@@ -1016,10 +1022,25 @@ body{font-variant-numeric:tabular-nums;}
   </div>
   <div class="about-card">
     <h2>Sharing and data</h2>
-    <p><strong>Share Plan</strong> and <strong>Share Report</strong> use the phone share sheet when available.</p>
-    <p><strong>Insert Plan</strong> imports a plan file and overrides existing plans after confirmation.</p>
+    <p><strong>Share Plan</strong> creates an Easy Gym plan file and opens the phone share sheet. You can send the file through AirDrop, WhatsApp, Mail, Messages or another available app.</p>
+    <p><strong>Save Plan</strong> saves the plan file locally. <strong>Insert Plan</strong> imports a saved plan file and overrides existing plans after confirmation.</p>
+    <p><strong>Share Report</strong> creates an Easy Gym report file and opens the phone share sheet. <strong>Save Report</strong> saves the report locally.</p>
     <p><strong>Save All Data</strong> creates a full backup. <strong>Restore all Data</strong> replaces all Easy Gym data after confirmation.</p>
     <p class="about-note">All data stays on this phone/browser unless you save, share, restore or delete it.</p>
+  </div>
+  <div class="about-card">
+    <h2>Receive a Plan file</h2>
+    <p>You receive <strong>easy-gym-plan.json</strong> in WhatsApp or another app.</p>
+    <p>Tap the file and choose <strong>Save to Files</strong>.</p>
+    <p>Open <strong>Easy Gym → Manage → Insert Plan</strong>.</p>
+    <p>The iPhone file picker opens. Go to <strong>Files</strong> and select the saved <strong>.json</strong> file.</p>
+    <p>Easy Gym inserts the Plan into your app after confirmation: <strong>Insert will override Plans - confirm</strong>.</p>
+  </div>
+  <div class="about-card">
+    <h2>Move Easy Gym files</h2>
+    <p><strong>Plan files</strong> are for sharing or inserting plans only.</p>
+    <p><strong>Report files</strong> are for saving or sharing training history.</p>
+    <p><strong>All Data backup files</strong> are for moving or restoring the complete Easy Gym data on the same or another phone.</p>
   </div>
 </section>
 </main>
@@ -1038,7 +1059,7 @@ body{font-variant-numeric:tabular-nums;}
     datePlans:'easyGym.datePlans.v1', savedDatePlans:'easyGym.savedDatePlans.v1', activeDatePlans:'easyGym.activeDatePlans.v1'
   };
   const LEGACY_KEYS = ['fitnessEasy.journal.v4','fitnessEasy.exercises.v4','fitnessEasy.activeWorkout.v4'];
-  const DEV_BUILD = 'v87';
+  const DEV_BUILD = 'v89';
   const DEV_BUILD_KEY = 'easyGym.devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
@@ -1574,7 +1595,8 @@ body{font-variant-numeric:tabular-nums;}
       setTrainSaveState(); return;
     }
     const startText = open ? 'Started' : 'Start Training';
-    els.trainControls.innerHTML = `<button class="action small" id="startInlineBtn" ${open?'disabled':''}>${esc(startText)}</button><button class="action danger small disabled" id="removeTrainSelectedBtn" type="button" disabled>Remove</button><span class="timer" id="liveTimer">${open?formatDuration(Date.now()-Number(trainStartTimes[iso])):''}</span>`;
+    els.trainControls.innerHTML = `<button class="action small" id="addTrainExerciseBtn" type="button">Add Exercise</button><button class="action small" id="startInlineBtn" ${open?'disabled':''}>${esc(startText)}</button><button class="action danger small disabled" id="removeTrainSelectedBtn" type="button" disabled>Remove</button><span class="timer" id="liveTimer">${open?formatDuration(Date.now()-Number(trainStartTimes[iso])):''}</span>`;
+    const addBtn=$('addTrainExerciseBtn'); if(addBtn) addBtn.addEventListener('click',()=>openExerciseModal('train-add'));
     const startBtn=$('startInlineBtn'); if(startBtn) startBtn.addEventListener('click', startTraining);
     const removeBtn=$('removeTrainSelectedBtn'); if(removeBtn) removeBtn.addEventListener('click', removeSelectedTrain);
     els.trainList.innerHTML = trainGroups(list).map((g,i)=>trainGroupCard(g,i)).join('');
@@ -1638,7 +1660,16 @@ body{font-variant-numeric:tabular-nums;}
     list.splice(lastIdx+1,0,line);
     saveAll(); renderTrain();
   }
-  function addTrainExercise(){ addTrainLine(null); }
+  function addTrainExercise(name){
+    const iso=selectedTrainDate; if(!iso||isTrainLocked())return;
+    name=normalExercise(name);
+    if(!name){ openExerciseModal('train-add'); return; }
+    const list=(trainSessions[iso]=trainSessions[iso]||[]);
+    list.push({sessionId:uid(),exerciseId:null,manualGroupId:uid(),name,sets:1,kg:1,reps:1,checked:0,trainAdded:true,addedStarted:false});
+    closeExerciseModal();
+    saveAll();
+    renderTrain();
+  }
   function replaceTrainExercise(sessionId,name){const it=findTrain(sessionId); if(!it)return; if(it.exerciseId){ (trainSessions[selectedTrainDate]||[]).forEach(x=>{if(x.exerciseId===it.exerciseId)x.name=name;}); } else if(it.manualGroupId){ (trainSessions[selectedTrainDate]||[]).forEach(x=>{if(x.manualGroupId===it.manualGroupId)x.name=name;}); } else { it.name=name; } closeExerciseModal(); saveAll(); renderTrain();}
   function updateTrainRemoveState(){
     const btn=$('removeTrainSelectedBtn');
@@ -1748,7 +1779,7 @@ body{font-variant-numeric:tabular-nums;}
   function renderLibrarySaveOnly(){ updateCustomAdd(); }
   function updateCustomAdd(){ const has=!!normalExercise(els.customExerciseName.value); els.addCustomExerciseBtn.style.display='none'; const enabled=editMode?(libraryDirty||has):has; els.saveLibraryBtn.disabled=!enabled; els.saveLibraryBtn.classList.toggle('disabled',!enabled); }
   function addCustomFromModal(){ const name=normalExercise(els.customExerciseName.value); if(name) chooseExercise(name); }
-  function chooseExercise(name){ name=normalExercise(name); if(!name)return; if(!exerciseLibrary.includes(name)){exerciseLibrary.push(name); save(KEYS.library, exerciseLibrary);} if(modalTarget==='date-add') addDatePlanExercise(name); else if(modalTarget==='date-replace') replaceDatePlanExercise(modalSessionId,name); else if(modalTarget==='plan-add') addPlanExercise(name); else if(modalTarget==='plan-replace') replacePlanExercise(modalSessionId,name); else if(modalTarget==='train-replace') replaceTrainExercise(modalSessionId,name); }
+  function chooseExercise(name){ name=normalExercise(name); if(!name)return; if(!exerciseLibrary.includes(name)){exerciseLibrary.push(name); save(KEYS.library, exerciseLibrary);} if(modalTarget==='date-add') addDatePlanExercise(name); else if(modalTarget==='date-replace') replaceDatePlanExercise(modalSessionId,name); else if(modalTarget==='plan-add') addPlanExercise(name); else if(modalTarget==='plan-replace') replacePlanExercise(modalSessionId,name); else if(modalTarget==='train-add') addTrainExercise(name); else if(modalTarget==='train-replace') replaceTrainExercise(modalSessionId,name); }
   function removeExerciseNamesFromPlans(names){
     const removeSet = new Set([...names].map(normalExercise).filter(Boolean));
     if(!removeSet.size) return false;
@@ -1815,13 +1846,13 @@ body{font-variant-numeric:tabular-nums;}
     });
   }
   function allDataPayload(){
-    return {type:'easy-gym-backup',version:87,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
+    return {type:'easy-gym-backup',version:89,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
   }
   function planPayload(){
-    return {type:'easy-gym-plan',version:87,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
+    return {type:'easy-gym-plan',version:89,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
   }
   function reportPayload(){
-    return {type:'easy-gym-report',version:87,exportedAt:new Date().toISOString(),text:progressText(),journal};
+    return {type:'easy-gym-report',version:89,exportedAt:new Date().toISOString(),text:progressText(),journal};
   }
   function savePlanFile(){ downloadFile(`easy-gym-plan-${todayISO()}.json`,'application/json',JSON.stringify(planPayload(),null,2)); toast('Plan saved'); }
   function saveReportFile(){ downloadFile(`easy-gym-report-${todayISO()}.txt`,'text/plain',progressText()||'No report'); toast('Report saved'); }
