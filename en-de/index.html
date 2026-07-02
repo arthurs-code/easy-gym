@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <script>
-(function(){try{var m=localStorage.getItem('easyGym.theme.v1');if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
+(function(){try{var m=(localStorage.getItem('easyGym.enDe.theme.v1')||localStorage.getItem('easyGym.theme.v1'));if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
 </script>
 <title>Easy Gym</title>
-<!-- Easy Gym v122: English and German only -->
+<!-- Easy Gym v123: isolated EN-DE package storage and cache -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <style>:root{
@@ -2119,25 +2119,25 @@ body{font-variant-numeric:tabular-nums;}
   const LANGS = ['en','de'];
   function normalizeLang(lang){ return LANGS.includes(lang) ? lang : 'en'; }
   const KEYS = {
-    week:'easyGym.weekPlans.v1', train:'easyGym.trainSessions.v1', saved:'easyGym.savedPlans.v1', journal:'easyGym.journal.v1',
-    library:'easyGym.exerciseLibrary.v1', start:'easyGym.trainStartTimes.v1', backup:'easyGym.backupReady.v1', theme:'easyGym.theme.v1',
-    datePlans:'easyGym.datePlans.v1', savedDatePlans:'easyGym.savedDatePlans.v1', activeDatePlans:'easyGym.activeDatePlans.v1', lang:'easyGym.lang.v1'
+    week:'easyGym.enDe.weekPlans.v1', train:'easyGym.enDe.trainSessions.v1', saved:'easyGym.enDe.savedPlans.v1', journal:'easyGym.enDe.journal.v1',
+    library:'easyGym.enDe.exerciseLibrary.v1', start:'easyGym.enDe.trainStartTimes.v1', backup:'easyGym.enDe.backupReady.v1', theme:'easyGym.enDe.theme.v1',
+    datePlans:'easyGym.enDe.datePlans.v1', savedDatePlans:'easyGym.enDe.savedDatePlans.v1', activeDatePlans:'easyGym.enDe.activeDatePlans.v1', lang:'easyGym.enDe.lang.v1'
   };
   const LEGACY_KEYS = ['fitnessEasy.journal.v4','fitnessEasy.exercises.v4','fitnessEasy.activeWorkout.v4'];
-  const DEV_BUILD = 'v122';
-  const DEV_BUILD_KEY = 'easyGym.devBuild.v1';
+  const DEV_BUILD = 'v123';
+  const DEV_BUILD_KEY = 'easyGym.enDe.devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
   // The visual theme is preserved because it is a UI preference, not workout data.
   try{
     const previousBuild = localStorage.getItem(DEV_BUILD_KEY);
     if(previousBuild !== DEV_BUILD){
-      const theme = localStorage.getItem(KEYS.theme);
-      let langPref = localStorage.getItem(KEYS.lang);
+      const theme = localStorage.getItem(KEYS.theme) || localStorage.getItem('easyGym.theme.v1');
+      let langPref = localStorage.getItem(KEYS.lang) || localStorage.getItem('easyGym.lang.v1');
       try{ langPref = JSON.parse(langPref); }catch(e){}
       for(let i = localStorage.length - 1; i >= 0; i--){
         const k = localStorage.key(i);
-        if(k && (k.startsWith('easyGym.') || k.startsWith('fitnessEasy.'))){ localStorage.removeItem(k); }
+        if(k && k.startsWith('easyGym.enDe.')){ localStorage.removeItem(k); }
       }
       if(theme === 'light' || theme === 'dark'){ localStorage.setItem(KEYS.theme, theme); }
       if(LANGS.includes(langPref)){ localStorage.setItem(KEYS.lang, JSON.stringify(langPref)); }
@@ -2147,7 +2147,7 @@ body{font-variant-numeric:tabular-nums;}
   let weekPlans = load(KEYS.week, emptyDays());
   let trainSessions = load(KEYS.train, emptyDays());
   let savedPlanDays = load(KEYS.saved, {});
-  let journal = load(KEYS.journal, load('fitnessEasy.journal.v4', []));
+  let journal = load(KEYS.journal, []);
   let exerciseLibrary = load(KEYS.library, DEFAULT_LIBRARY).filter(Boolean);
   let trainStartTimes = load(KEYS.start, {});
   let backupReady = !!load(KEYS.backup, false);
@@ -2315,7 +2315,7 @@ body{font-variant-numeric:tabular-nums;}
     toast(t('themeToast')+next);
   }
 
-  function init(){ currentLang=normalizeLang(load(KEYS.lang,'en')); applyTheme(load(KEYS.theme,'system')); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop();}
+  function init(){ currentLang=normalizeLang(load(KEYS.lang, normalizeLang(load('easyGym.lang.v1','en')))); applyTheme(load(KEYS.theme,'system')); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop();}
   function normalizeData(){
     for(const d of DAYS){ if(!Array.isArray(weekPlans[d])) weekPlans[d]=[]; if(!Array.isArray(trainSessions[d])) trainSessions[d]=[]; }
     if(!datePlans || typeof datePlans!=='object' || Array.isArray(datePlans)) datePlans={};
@@ -3288,7 +3288,7 @@ body{font-variant-numeric:tabular-nums;}
   }
   function deleteAllData(){
     if(!confirm(t('confirmDelete')))return;
-    [...Object.keys(localStorage)].forEach(k=>{if(k.startsWith('easyGym.')||k.startsWith('fitnessEasy.'))localStorage.removeItem(k);});
+    [...Object.keys(localStorage)].forEach(k=>{if(k.startsWith('easyGym.enDe.'))localStorage.removeItem(k);});
     weekPlans=emptyDays(); trainSessions=emptyDays(); savedPlanDays={}; journal=[]; exerciseLibrary=[...DEFAULT_LIBRARY]; trainStartTimes={}; datePlans={}; savedDatePlans={}; activeDatePlans={}; backupReady=false; selectedPlanDay=null; selectedTrainDay=null; selectedPlanDate=null; selectedTrainDate=null; savedWorkout=null;
     saveAll(); renderAll(); toast(t('dataDeleted'));
   }
