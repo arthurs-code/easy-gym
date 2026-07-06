@@ -2147,7 +2147,7 @@ body{font-variant-numeric:tabular-nums;}
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v138';
+  const DEV_BUILD = 'v139';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
@@ -3228,7 +3228,7 @@ body{font-variant-numeric:tabular-nums;}
     if(hasPlan) preparePlanLinkCache();
   }
   function allDataPayload(){
-    return {type:'easy-gym-backup',version:138,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
+    return {type:'easy-gym-backup',version:139,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
   }
   function planPayload(){
     const exportWeekPlans=JSON.parse(JSON.stringify(weekPlans||emptyDays()));
@@ -3251,7 +3251,7 @@ body{font-variant-numeric:tabular-nums;}
 
     return {
       type:'easy-gym-plan',
-      version:138,
+      version:139,
       exportedAt:new Date().toISOString(),
       weekPlans:exportWeekPlans,
       savedPlanDays:exportSavedPlanDays,
@@ -3262,7 +3262,7 @@ body{font-variant-numeric:tabular-nums;}
     };
   }
   function reportPayload(){
-    return {type:'easy-gym-report',version:138,exportedAt:new Date().toISOString(),text:progressText(),journal};
+    return {type:'easy-gym-report',version:139,exportedAt:new Date().toISOString(),text:progressText(),journal};
   }
   function savePlanFile(){ downloadFile(`easy-gym-plan-${todayISO()}.json`,'application/json',JSON.stringify(planPayload(),null,2)); toast(t('planSaved')); }
   function saveReportFile(){ downloadFile(`easy-gym-report-${todayISO()}.doc`,'application/msword',reportDownloadHtml()); toast(t('reportSaved')); }
@@ -3292,22 +3292,33 @@ body{font-variant-numeric:tabular-nums;}
   }
   function base64UrlEncodeUnicode(str){ return base64UrlEncodeBytes(new TextEncoder().encode(str)); }
   function base64UrlDecodeUnicode(str){ return new TextDecoder().decode(base64UrlDecodeBytes(str)); }
+  function timeoutValue(promise, ms, fallback=null){
+    let timer;
+    return Promise.race([
+      promise.finally(()=>clearTimeout(timer)),
+      new Promise(resolve=>{ timer=setTimeout(()=>resolve(fallback),ms); })
+    ]);
+  }
   async function gzipBase64UrlEncode(str){
     if(typeof CompressionStream==='undefined') return null;
-    const stream=new CompressionStream('gzip');
-    const writer=stream.writable.getWriter();
-    await writer.write(new TextEncoder().encode(str));
-    await writer.close();
-    const compressed=new Uint8Array(await new Response(stream.readable).arrayBuffer());
-    return base64UrlEncodeBytes(compressed);
+    try{
+      const input=new Blob([new TextEncoder().encode(str)]).stream();
+      const compressedStream=input.pipeThrough(new CompressionStream('gzip'));
+      const buffer=await timeoutValue(new Response(compressedStream).arrayBuffer(),2500,null);
+      if(!buffer) return null;
+      return base64UrlEncodeBytes(new Uint8Array(buffer));
+    }catch(e){
+      return null;
+    }
   }
   async function gzipBase64UrlDecode(str){
     if(typeof DecompressionStream==='undefined') throw new Error('compression not supported');
-    const stream=new DecompressionStream('gzip');
-    const writer=stream.writable.getWriter();
-    await writer.write(base64UrlDecodeBytes(str));
-    await writer.close();
-    return new TextDecoder().decode(await new Response(stream.readable).arrayBuffer());
+    const bytes=base64UrlDecodeBytes(str);
+    const input=new Blob([bytes]).stream();
+    const decompressedStream=input.pipeThrough(new DecompressionStream('gzip'));
+    const buffer=await timeoutValue(new Response(decompressedStream).arrayBuffer(),3500,null);
+    if(!buffer) throw new Error('compression timeout');
+    return new TextDecoder().decode(buffer);
   }
   function compactExerciseList(list){
     return (Array.isArray(list)?list:[]).filter(item=>item&&item.name).map(item=>{
@@ -3335,7 +3346,7 @@ body{font-variant-numeric:tabular-nums;}
       const first=lines[0];
       return {id:uid(),name,kg:first.kg,reps:first.reps,sets:first.sets,lines};
     }).filter(Boolean);
-    const expanded={type:'easy-gym-plan',version:138,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
+    const expanded={type:'easy-gym-plan',version:139,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
     (Array.isArray(data.w)?data.w:[]).forEach(pair=>{
       const day=String(pair&&pair[0]||'');
       const list=makeList(pair&&pair[1]);
@@ -3395,7 +3406,7 @@ body{font-variant-numeric:tabular-nums;}
       const first=lines[0];
       return {id:uid(),name,kg:first.kg,reps:first.reps,sets:first.sets,lines};
     }).filter(Boolean);
-    const expanded={type:'easy-gym-plan',version:138,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
+    const expanded={type:'easy-gym-plan',version:139,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
     (Array.isArray(data[4])?data[4]:[]).forEach(entry=>{
       const idx=Number(entry&&entry[0]);
       const list=makeList(entry&&entry[1]);
@@ -3493,9 +3504,12 @@ body{font-variant-numeric:tabular-nums;}
     toast(t('creatingPlanLink'));
     let link='';
     try{
-      link=cachedPlanLinkPromise && cachedPlanLinkSignature!==signature ? '' : await (cachedPlanLinkPromise || planShareLink());
-      if(!link) link=await planShareLink();
-    }catch(e){ toast(t('planLinkTooLarge')); return; }
+      link=await planShareLink();
+    }catch(e){
+      toast(e && e.message==='PLAN_LINK_TOO_LARGE' ? t('planLinkTooLarge') : t('copyPlanLinkPrompt'));
+      return;
+    }
+    if(!link){ toast(t('copyPlanLinkPrompt')); return; }
     shareReadyPlanLink(link);
   }
   async function handleIncomingPlanLink(){
