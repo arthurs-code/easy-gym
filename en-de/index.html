@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <script>
-(function(){try{var m=(localStorage.getItem('easyGym.enDe.theme.v1')||localStorage.getItem('easyGym.theme.v1'));if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
+(function(){try{var m=localStorage.getItem('easyGym.enDe.theme.v1');if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
 </script>
 <title>Easy Gym</title>
-<!-- Easy Gym v123: isolated EN-DE package storage and cache -->
+<!-- Easy Gym v130: EN-DE package with plan share link size limit -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <style>:root{
@@ -1456,6 +1456,7 @@ body{font-variant-numeric:tabular-nums;}
 <section id="explanations" class="section explain manage-section">
   <div class="manage-actions">
     <button class="action" id="sharePlanBtn">Share Plan</button>
+    <button class="action" id="sharePlanLinkBtn">Share Plan Link</button>
     <button class="action" id="manageSavePlanBtn">Save Plan</button>
     <button class="action" id="insertPlanBtn">Insert Plan</button>
     <button class="action" id="manageSaveReportBtn">Save Report</button>
@@ -1659,9 +1660,13 @@ body{font-variant-numeric:tabular-nums;}
             "exercise": "Exercise",
             "everMax": "Ever Max",
             "maxToday": "Max Today",
-            "sharePlan": "Share Plan",
-            "savePlan": "Save Plan",
-            "insertPlan": "Insert Plan",
+            "sharePlan": "Share Plan File",
+            "sharePlanLink": "Share Plan as Link",
+            "planLinkReady": "Plan link ready",
+            "planLinkCopied": "Plan link copied",
+            "planLinkTooLarge": "Plan too large for link - use Share Plan file",
+            "savePlan": "Save Plan File",
+            "insertPlan": "Insert Plan File",
             "saveReport": "Save Report",
             "shareReport": "Share Report",
             "saveAllData": "Save All Data",
@@ -1693,7 +1698,7 @@ body{font-variant-numeric:tabular-nums;}
             "noExercisesYet": "No exercises yet. Tap “Add Exercise” to build today’s training.",
             "noTrainingPlanned": "No training planned for this day. Create it in Plan first.",
             "reportHeader": "Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets",
-            "aboutHtml": "<div class=\"card about-card\"><h2>Arthur’s Foreword</h2><p>I made Easy Gym for my own trainings, and tried to make it simple.</p><p>Like the App? - support me in Donate.</p><p>Need an App? - contact me: arthur.stivenson@gmail.com</p></div><div class=\"card about-card\"><h2>Main functions</h2><p><strong>Plan</strong> — create a training plan for a selected date. Add exercises, add more KG/Reps/Sets lines with <strong>+</strong>, remove selected exercises or lines, and save the plan.</p><p><strong>Copy / Paste Plan</strong> — press <strong>Copy</strong>, choose another date, then press <strong>Paste</strong>. The copied plan appears on the new date and is ready for Do.</p><p><strong>Do</strong> — start the actual training. You can change KG, Reps and Sets, add another line for the same exercise with <strong>+</strong>, or add a new exercise with <strong>Add Exercise</strong>. These Do changes do not change the saved Plan.</p><p><strong>Report</strong> — saves the completed training. It shows planned values and done values. Done values are green. Report also shows start time, duration, total, Ever Max and Max Today.</p><p><strong>Manage</strong> — share, save, insert, restore and delete Easy Gym files.</p><p><strong>Donate</strong> — optional support for keeping Easy Gym free and ad-free.</p></div><div class=\"card about-card\"><h2>File movement and sharing</h2><p><strong>Share Plan</strong> creates an <code>easy-gym-plan.json</code> file and opens the phone share sheet. You can send it by AirDrop, WhatsApp, Mail, Messages or save it to Files.</p><p><strong>Receiving a plan from WhatsApp:</strong> receive <code>easy-gym-plan.json</code> in WhatsApp, tap the file, choose <strong>Save to Files</strong>, open <strong>Easy Gym → Manage → Insert Plan</strong>, select the saved <code>.json</code> file, confirm, and Easy Gym inserts the Plan.</p><p><strong>Insert Plan</strong> imports a Plan file and overrides existing Plans after confirmation.</p><p><strong>Save Plan</strong> saves the Plan locally. <strong>Save Report</strong> saves the Report locally. <strong>Share Report</strong> sends the Report through the phone share sheet.</p><p><strong>Save All Data</strong> creates a complete backup. <strong>Restore all Data</strong> replaces all current data with the backup after confirmation. <strong>Delete Data</strong> erases all Easy Gym data after confirmation.</p></div><div class=\"card about-card\"><h2>Data and privacy</h2><p>The main exercise list is translated with the app language. Exercise names created by you are not translated. Plans, reports and backups stay on this phone/browser unless you save, share, restore or delete them.</p><p>Plan files, Report files and All Data backup files are different. Use Plan files only for sharing or inserting plans. Use All Data backups only for full restore.</p></div>"
+            "aboutHtml": "<div class=\"card about-card\"><h2>Easy Gym — Plan. Train. Track.</h2><p>A free, ad-free workout tracker for real training. Plan sessions, log lifts, and turn every workout into a clear report — all on your phone.</p></div><div class=\"card about-card\"><h2>Foreword</h2><p>I built Easy Gym for my own training. It's free, with no ads. Like it? Support me through Donate. Need an app of your own? Write me: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>Plan</h2><p>Build a plan for any date. Add exercises with weight, reps, and sets, then save. Reuse a routine by copying it to another date.</p></div><div class=\"card about-card\"><h2>Train</h2><p>Start from any saved plan. Adjust weights or add exercises mid-workout — your original plan stays untouched, ready for next time.</p></div><div class=\"card about-card\"><h2>Report</h2><p>See planned values next to what you actually did, completed lifts marked in green. Export any report as Word or PDF.</p></div><div class=\"card about-card\"><h2>Manage &amp; share</h2><p><strong>Share Plan as Link</strong> — send a plan by link. The recipient taps it, Easy Gym opens, one confirm saves it.</p><p><strong>Share Plan File</strong> — for larger plans.</p><p><strong>Save Report / Share Report</strong> — export and send reports.</p></div><div class=\"card about-card\"><h2>Receive a plan file</h2><p>Got one over WhatsApp or elsewhere? Save it to your phone, open Easy Gym → Manage → Insert Plan File, select it, confirm.</p></div><div class=\"card about-card\"><h2>Back up</h2><p>Save All Data makes a full backup. Restore All Data brings it back. Delete Data clears everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym runs entirely on your phone. Your plans and reports stay on your device unless you share them.</p></div>"
       },
       "de": {
             "langName": "Deutsch",
@@ -1764,9 +1769,13 @@ body{font-variant-numeric:tabular-nums;}
             "exercise": "Übung",
             "everMax": "Ever Max",
             "maxToday": "Max Heute",
-            "sharePlan": "Plan teilen",
-            "savePlan": "Plan speichern",
-            "insertPlan": "Plan einfügen",
+            "sharePlan": "Plan-Datei teilen",
+            "sharePlanLink": "Plan als Link teilen",
+            "planLinkReady": "Plan-Link bereit",
+            "planLinkCopied": "Plan-Link kopiert",
+            "planLinkTooLarge": "Plan zu gross für Link - Plan-Datei teilen verwenden",
+            "savePlan": "Plan-Datei speichern",
+            "insertPlan": "Plan-Datei einfügen",
             "saveReport": "Bericht speichern",
             "shareReport": "Bericht teilen",
             "saveAllData": "Alle Daten speichern",
@@ -1798,7 +1807,7 @@ body{font-variant-numeric:tabular-nums;}
             "noExercisesYet": "Noch keine Übungen. Tippe „Übung hinzufügen“, um das heutige Training zu erstellen.",
             "noTrainingPlanned": "Für diesen Tag ist kein Training geplant. Erstelle es zuerst im Plan.",
             "reportHeader": "Übung / P-KG / D-KG / P-Wdh. / D-Wdh. / P-Sätze / D-Sätze",
-            "aboutHtml": "<div class=\"card about-card\"><h2>Arthurs Vorwort</h2><p>Ich habe Easy Gym für meine eigenen Trainings gemacht und versucht, es einfach zu halten.</p><p>Gefällt dir die App? - unterstütze mich unter Spenden.</p><p>Brauchst du eine App? - kontaktiere mich: arthur.stivenson@gmail.com</p></div><div class=\"card about-card\"><h2>Hauptfunktionen</h2><p><strong>Plan</strong> — erstelle einen Trainingsplan für ein gewähltes Datum. Füge Übungen hinzu, ergänze weitere KG/Wdh./Sätze-Zeilen mit <strong>+</strong>, entferne ausgewählte Übungen oder Zeilen und speichere den Plan.</p><p><strong>Plan kopieren / einfügen</strong> — drücke <strong>Kopieren</strong>, wähle ein anderes Datum und drücke danach <strong>Einfügen</strong>. Der kopierte Plan erscheint am neuen Datum und ist für Do bereit.</p><p><strong>Do</strong> — starte das tatsächliche Training. Du kannst KG, Wdh. und Sätze ändern, mit <strong>+</strong> eine weitere Zeile für dieselbe Übung hinzufügen oder mit <strong>Übung hinzufügen</strong> eine neue Übung einfügen. Diese Änderungen in Do verändern den gespeicherten Plan nicht.</p><p><strong>Bericht</strong> — speichert das abgeschlossene Training. Er zeigt geplante Werte und tatsächlich gemachte Werte. Die gemachten Werte sind grün. Der Bericht zeigt auch Startzeit, Dauer, Total, Ever Max und Max Heute.</p><p><strong>Verwalten</strong> — Easy-Gym-Dateien teilen, speichern, einfügen, wiederherstellen und löschen.</p><p><strong>Spenden</strong> — freiwillige Unterstützung, damit Easy Gym kostenlos und werbefrei bleiben kann.</p></div><div class=\"card about-card\"><h2>Dateien bewegen und teilen</h2><p><strong>Plan teilen</strong> erstellt eine <code>easy-gym-plan.json</code>-Datei und öffnet das Teilen-Menü des Handys. Du kannst sie per AirDrop, WhatsApp, Mail, Nachrichten senden oder in Dateien speichern.</p><p><strong>Plan aus WhatsApp erhalten:</strong> Du bekommst <code>easy-gym-plan.json</code> in WhatsApp, tippst auf die Datei, wählst <strong>In Dateien sichern</strong>, öffnest <strong>Easy Gym → Verwalten → Plan einfügen</strong>, wählst die gespeicherte <code>.json</code>-Datei, bestätigst, und Easy Gym fügt den Plan ein.</p><p><strong>Plan einfügen</strong> importiert eine Plan-Datei und überschreibt bestehende Pläne nach Bestätigung.</p><p><strong>Plan speichern</strong> speichert den Plan lokal. <strong>Bericht speichern</strong> speichert den Bericht lokal. <strong>Bericht teilen</strong> sendet den Bericht über das Teilen-Menü des Handys.</p><p><strong>Alle Daten speichern</strong> erstellt ein komplettes Backup. <strong>Alle Daten wiederherstellen</strong> ersetzt nach Bestätigung alle aktuellen Daten durch das Backup. <strong>Daten löschen</strong> löscht nach Bestätigung alle Easy-Gym-Daten.</p></div><div class=\"card about-card\"><h2>Daten und Privatsphäre</h2><p>Die Hauptliste der Übungen wird mit der App-Sprache übersetzt. Von dir erstellte Übungsnamen werden nicht übersetzt. Pläne, Berichte und Backups bleiben auf diesem Handy/Browser, ausser du speicherst, teilst, wiederherstellst oder löschst sie.</p><p>Plan-Dateien, Bericht-Dateien und All-Data-Backups sind unterschiedlich. Verwende Plan-Dateien nur zum Teilen oder Einfügen von Plänen. Verwende All-Data-Backups nur für eine vollständige Wiederherstellung.</p></div>"
+            "aboutHtml": "<div class=\"card about-card\"><h2>Easy Gym — Planen. Trainieren. Verfolgen.</h2><p>Ein kostenloser, werbefreier Trainings-Tracker für echtes Training. Plane Einheiten, protokolliere deine Sätze und mach aus jedem Workout einen übersichtlichen Bericht — alles auf deinem Handy.</p></div><div class=\"card about-card\"><h2>Vorwort</h2><p>Ich habe Easy Gym für mein eigenes Training entwickelt. Es ist kostenlos, ohne Werbung. Gefällt's dir? Unterstütze mich über Spenden. Brauchst du deine eigene App? Schreib mir: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>Planen</h2><p>Erstelle einen Plan für ein beliebiges Datum. Füge Übungen mit Gewicht, Wiederholungen und Sätzen hinzu und speichere. Übernimm eine Routine, indem du sie auf ein anderes Datum kopierst.</p></div><div class=\"card about-card\"><h2>Trainieren</h2><p>Starte mit einem gespeicherten Plan. Passe Gewichte an oder ergänze Übungen mitten im Training — dein ursprünglicher Plan bleibt unverändert und ist fürs nächste Mal bereit.</p></div><div class=\"card about-card\"><h2>Bericht</h2><p>Sieh die geplanten Werte neben dem, was du tatsächlich geschafft hast — erledigte Sätze grün markiert. Exportiere jeden Bericht als Word oder PDF.</p></div><div class=\"card about-card\"><h2>Verwalten &amp; teilen</h2><p><strong>Plan als Link teilen</strong> — sende einen Plan per Link. Der Empfänger tippt darauf, Easy Gym öffnet sich, ein Bestätigen speichert ihn.</p><p><strong>Plan als Datei teilen</strong> — für größere Pläne.</p><p><strong>Bericht speichern / Bericht teilen</strong> — Berichte exportieren und senden.</p></div><div class=\"card about-card\"><h2>Plan-Datei empfangen</h2><p>Über WhatsApp oder anderswo erhalten? Speichere sie auf deinem Handy, öffne Easy Gym → Verwalten → Plan-Datei einfügen, wähle sie aus, bestätige.</p></div><div class=\"card about-card\"><h2>Sichern</h2><p>Alle Daten speichern erstellt eine vollständige Sicherung. Alle Daten wiederherstellen holt sie zurück. Daten löschen entfernt alles nach Bestätigung.</p></div><div class=\"card about-card\"><h2>Datenschutz</h2><p>Easy Gym läuft vollständig auf deinem Handy. Deine Pläne und Berichte bleiben auf deinem Gerät, es sei denn, du teilst sie.</p></div>"
       },
       "fr": {
             "langName": "Français",
@@ -1870,6 +1879,10 @@ body{font-variant-numeric:tabular-nums;}
             "everMax": "Ever Max",
             "maxToday": "Max aujourd’hui",
             "sharePlan": "Partager Plan",
+            "sharePlanLink": "Partager lien Plan",
+            "planLinkReady": "Lien Plan prêt",
+            "planLinkCopied": "Lien Plan copié",
+            "planLinkTooLarge": "Plan trop grand pour le lien - utiliser le fichier Plan",
             "savePlan": "Enregistrer Plan",
             "insertPlan": "Insérer Plan",
             "saveReport": "Enregistrer Rapport",
@@ -1975,6 +1988,10 @@ body{font-variant-numeric:tabular-nums;}
             "everMax": "Ever Max",
             "maxToday": "Max oggi",
             "sharePlan": "Condividi Plan",
+            "sharePlanLink": "Condividi link Plan",
+            "planLinkReady": "Link Plan pronto",
+            "planLinkCopied": "Link Plan copiato",
+            "planLinkTooLarge": "Plan troppo grande per il link - usa file Plan",
             "savePlan": "Salva Plan",
             "insertPlan": "Inserisci Plan",
             "saveReport": "Salva Report",
@@ -2080,6 +2097,10 @@ body{font-variant-numeric:tabular-nums;}
             "everMax": "Ever Max",
             "maxToday": "Max hoy",
             "sharePlan": "Compartir Plan",
+            "sharePlanLink": "Compartir enlace Plan",
+            "planLinkReady": "Enlace Plan listo",
+            "planLinkCopied": "Enlace Plan copiado",
+            "planLinkTooLarge": "Plan demasiado grande para enlace - usa archivo Plan",
             "savePlan": "Guardar Plan",
             "insertPlan": "Insertar Plan",
             "saveReport": "Guardar Informe",
@@ -2117,27 +2138,29 @@ body{font-variant-numeric:tabular-nums;}
       }
 };
   const LANGS = ['en','de'];
+  const PLAN_LINK_MAX_LENGTH = 8000;
   function normalizeLang(lang){ return LANGS.includes(lang) ? lang : 'en'; }
+  const PACKAGE_PREFIX = 'easyGym.enDe.';
   const KEYS = {
-    week:'easyGym.enDe.weekPlans.v1', train:'easyGym.enDe.trainSessions.v1', saved:'easyGym.enDe.savedPlans.v1', journal:'easyGym.enDe.journal.v1',
-    library:'easyGym.enDe.exerciseLibrary.v1', start:'easyGym.enDe.trainStartTimes.v1', backup:'easyGym.enDe.backupReady.v1', theme:'easyGym.enDe.theme.v1',
-    datePlans:'easyGym.enDe.datePlans.v1', savedDatePlans:'easyGym.enDe.savedDatePlans.v1', activeDatePlans:'easyGym.enDe.activeDatePlans.v1', lang:'easyGym.enDe.lang.v1'
+    week:PACKAGE_PREFIX+'weekPlans.v1', train:PACKAGE_PREFIX+'trainSessions.v1', saved:PACKAGE_PREFIX+'savedPlans.v1', journal:PACKAGE_PREFIX+'journal.v1',
+    library:PACKAGE_PREFIX+'exerciseLibrary.v1', start:PACKAGE_PREFIX+'trainStartTimes.v1', backup:PACKAGE_PREFIX+'backupReady.v1', theme:PACKAGE_PREFIX+'theme.v1',
+    datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
-  const LEGACY_KEYS = ['fitnessEasy.journal.v4','fitnessEasy.exercises.v4','fitnessEasy.activeWorkout.v4'];
-  const DEV_BUILD = 'v123';
-  const DEV_BUILD_KEY = 'easyGym.enDe.devBuild.v1';
+  const LEGACY_KEYS = [];
+  const DEV_BUILD = 'v150';
+  const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
   // The visual theme is preserved because it is a UI preference, not workout data.
   try{
     const previousBuild = localStorage.getItem(DEV_BUILD_KEY);
     if(previousBuild !== DEV_BUILD){
-      const theme = localStorage.getItem(KEYS.theme) || localStorage.getItem('easyGym.theme.v1');
-      let langPref = localStorage.getItem(KEYS.lang) || localStorage.getItem('easyGym.lang.v1');
+      const theme = localStorage.getItem(KEYS.theme);
+      let langPref = localStorage.getItem(KEYS.lang);
       try{ langPref = JSON.parse(langPref); }catch(e){}
       for(let i = localStorage.length - 1; i >= 0; i--){
         const k = localStorage.key(i);
-        if(k && k.startsWith('easyGym.enDe.')){ localStorage.removeItem(k); }
+        if(k && k.startsWith(PACKAGE_PREFIX)){ localStorage.removeItem(k); }
       }
       if(theme === 'light' || theme === 'dark'){ localStorage.setItem(KEYS.theme, theme); }
       if(LANGS.includes(langPref)){ localStorage.setItem(KEYS.lang, JSON.stringify(langPref)); }
@@ -2147,7 +2170,7 @@ body{font-variant-numeric:tabular-nums;}
   let weekPlans = load(KEYS.week, emptyDays());
   let trainSessions = load(KEYS.train, emptyDays());
   let savedPlanDays = load(KEYS.saved, {});
-  let journal = load(KEYS.journal, []);
+  let journal = load(KEYS.journal, load('fitnessEasy.journal.v4', []));
   let exerciseLibrary = load(KEYS.library, DEFAULT_LIBRARY).filter(Boolean);
   let trainStartTimes = load(KEYS.start, {});
   let backupReady = !!load(KEYS.backup, false);
@@ -2173,7 +2196,7 @@ body{font-variant-numeric:tabular-nums;}
   let currentLang = load(KEYS.lang, 'en');
   const $ = (id) => document.getElementById(id);
   const els = {};
-  function cacheEls(){ ['planDayButtons','planChooseHint','planActionRow','savePlanRow','trainDayButtons','planList','trainList','planTitle','trainControls','savePlanBtn','removeSelectedBtn','copyPlanBtn','saveTrainingBtn','startTrainingBtn','timerText','addExerciseModal','libraryList','customExerciseName','addCustomExerciseBtn','editExercisesBtn','saveLibraryBtn','deleteLibraryBtn','customRow','exerciseModalHelp','journalList','downloadWordBtn','downloadPdfBtn','sharePlanBtn','manageSavePlanBtn','insertPlanBtn','insertPlanInput','manageSaveReportBtn','shareReportBtn','saveAllDataBtn','restoreAllDataBtn','restoreAllDataInput','deleteDataBtn','toast','qrImage','downloadSwissQrBtn','homeTodayCard','homeStartBtn','homeGreeting','aboutContent','languageSelect'].forEach(id=>els[id]=$(id)); }
+  function cacheEls(){ ['planDayButtons','planChooseHint','planActionRow','savePlanRow','trainDayButtons','planList','trainList','planTitle','trainControls','savePlanBtn','removeSelectedBtn','copyPlanBtn','saveTrainingBtn','startTrainingBtn','timerText','addExerciseModal','libraryList','customExerciseName','addCustomExerciseBtn','editExercisesBtn','saveLibraryBtn','deleteLibraryBtn','customRow','exerciseModalHelp','journalList','downloadWordBtn','downloadPdfBtn','sharePlanBtn','sharePlanLinkBtn','manageSavePlanBtn','insertPlanBtn','insertPlanInput','manageSaveReportBtn','shareReportBtn','saveAllDataBtn','restoreAllDataBtn','restoreAllDataInput','deleteDataBtn','toast','qrImage','downloadSwissQrBtn','homeTodayCard','homeStartBtn','homeGreeting','aboutContent','languageSelect'].forEach(id=>els[id]=$(id)); }
   function uid(){return Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4)}
   function emptyDays(){return Object.fromEntries(DAYS.map(d=>[d,[]]));}
   function load(key, fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
@@ -2286,7 +2309,7 @@ body{font-variant-numeric:tabular-nums;}
     setText('planChooseHint','selectDay'); setIconText('addExerciseBtn','addExercise','add'); setIconText('removeSelectedBtn','remove','remove');
     setIconText('downloadWordBtn','word','word'); setIconText('downloadPdfBtn','pdf','pdf');
     const dl=document.querySelector('.download-label'); if(dl) dl.textContent=t('download');
-    setIconText('sharePlanBtn','sharePlan','share'); setIconText('manageSavePlanBtn','savePlan','save'); setIconText('insertPlanBtn','insertPlan','insert'); setIconText('manageSaveReportBtn','saveReport','save'); setIconText('shareReportBtn','shareReport','share'); setIconText('saveAllDataBtn','saveAllData','save'); setIconText('restoreAllDataBtn','restoreAllData','restore'); setIconText('deleteDataBtn','deleteData','delete');
+    setIconText('sharePlanBtn','sharePlan','share'); setIconText('sharePlanLinkBtn','sharePlanLink','share'); setIconText('manageSavePlanBtn','savePlan','save'); setIconText('insertPlanBtn','insertPlan','insert'); setIconText('manageSaveReportBtn','saveReport','save'); setIconText('shareReportBtn','shareReport','share'); setIconText('saveAllDataBtn','saveAllData','save'); setIconText('restoreAllDataBtn','restoreAllData','restore'); setIconText('deleteDataBtn','deleteData','delete');
     const donateTitle=document.querySelector('#donate .donate-intro h2'); if(donateTitle) donateTitle.textContent=t('supportTitle');
     const donateIntro=document.querySelector('#donate .donate-intro p'); if(donateIntro) donateIntro.textContent=t('supportIntro');
     const theme=$('themeToggle'); if(theme){ theme.setAttribute('aria-label',t('theme')); theme.title=t('theme'); }
@@ -2315,7 +2338,7 @@ body{font-variant-numeric:tabular-nums;}
     toast(t('themeToast')+next);
   }
 
-  function init(){ currentLang=normalizeLang(load(KEYS.lang, normalizeLang(load('easyGym.lang.v1','en')))); applyTheme(load(KEYS.theme,'system')); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop();}
+  function init(){ currentLang=normalizeLang(load(KEYS.lang,'en')); applyTheme(load(KEYS.theme,'system')); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
   function normalizeData(){
     for(const d of DAYS){ if(!Array.isArray(weekPlans[d])) weekPlans[d]=[]; if(!Array.isArray(trainSessions[d])) trainSessions[d]=[]; }
     if(!datePlans || typeof datePlans!=='object' || Array.isArray(datePlans)) datePlans={};
@@ -2369,6 +2392,7 @@ body{font-variant-numeric:tabular-nums;}
     els.downloadPdfBtn.addEventListener('click', downloadPdf);
     if(els.downloadSwissQrBtn) els.downloadSwissQrBtn.addEventListener('click', downloadSwissQR);
     els.sharePlanBtn.addEventListener('click', sharePlan);
+    if(els.sharePlanLinkBtn) els.sharePlanLinkBtn.addEventListener('click', sharePlanLink);
     els.manageSavePlanBtn.addEventListener('click', savePlanFile);
     els.insertPlanBtn.addEventListener('click',()=>els.insertPlanInput.click());
     els.insertPlanInput.addEventListener('change', insertPlanFile);
@@ -3197,9 +3221,14 @@ body{font-variant-numeric:tabular-nums;}
     [['sharePlanBtn',hasPlan],['manageSavePlanBtn',hasPlan],['manageSaveReportBtn',hasReport],['shareReportBtn',hasReport],['saveAllDataBtn',hasData],['deleteDataBtn',hasData]].forEach(([id,on])=>{
       const b=els[id]; if(!b)return; b.disabled=!on; b.classList.toggle('disabled',!on);
     });
+    if(els.sharePlanLinkBtn){
+      els.sharePlanLinkBtn.disabled=false;
+      els.sharePlanLinkBtn.classList.toggle('disabled',!hasPlan);
+    }
+    if(hasPlan) preparePlanLinkCache();
   }
   function allDataPayload(){
-    return {type:'easy-gym-backup',version:122,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
+    return {type:'easy-gym-backup',version:139,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
   }
   function planPayload(){
     const exportWeekPlans=JSON.parse(JSON.stringify(weekPlans||emptyDays()));
@@ -3222,7 +3251,7 @@ body{font-variant-numeric:tabular-nums;}
 
     return {
       type:'easy-gym-plan',
-      version:117,
+      version:139,
       exportedAt:new Date().toISOString(),
       weekPlans:exportWeekPlans,
       savedPlanDays:exportSavedPlanDays,
@@ -3233,10 +3262,10 @@ body{font-variant-numeric:tabular-nums;}
     };
   }
   function reportPayload(){
-    return {type:'easy-gym-report',version:122,exportedAt:new Date().toISOString(),text:progressText(),journal};
+    return {type:'easy-gym-report',version:139,exportedAt:new Date().toISOString(),text:progressText(),journal};
   }
   function savePlanFile(){ downloadFile(`easy-gym-plan-${todayISO()}.json`,'application/json',JSON.stringify(planPayload(),null,2)); toast(t('planSaved')); }
-  function saveReportFile(){ downloadFile(`easy-gym-report-${todayISO()}.txt`,'text/plain',progressText()||t('noReport')); toast(t('reportSaved')); }
+  function saveReportFile(){ downloadFile(`easy-gym-report-${todayISO()}.doc`,'application/msword',reportDownloadHtml()); toast(t('reportSaved')); }
   function saveAllDataFile(){ downloadFile(`easy-gym-backup-${todayISO()}.json`,'application/json',JSON.stringify(allDataPayload(),null,2)); backupReady=true; save(KEYS.backup,true); renderExplanations(); toast(t('allDataSaved')); }
   async function shareFile(name,mime,content){
     try{
@@ -3248,26 +3277,289 @@ body{font-variant-numeric:tabular-nums;}
     toast(t('fileSaved'));
   }
   function sharePlan(){ const content=JSON.stringify(planPayload(),null,2); shareFile(`easy-gym-plan-${todayISO()}.json`,'application/json',content); }
-  function shareReport(){ shareFile(`easy-gym-report-${todayISO()}.txt`,'text/plain',progressText()||t('noReport')); }
+  function base64UrlEncodeBytes(bytes){
+    let bin='';
+    for(let i=0;i<bytes.length;i+=0x8000){ bin+=String.fromCharCode(...bytes.subarray(i,i+0x8000)); }
+    return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  function base64UrlDecodeBytes(str){
+    const clean=String(str||'').replace(/-/g,'+').replace(/_/g,'/');
+    const pad=clean.length%4 ? '='.repeat(4-clean.length%4) : '';
+    const bin=atob(clean+pad);
+    const bytes=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    return bytes;
+  }
+  function base64UrlEncodeUnicode(str){ return base64UrlEncodeBytes(new TextEncoder().encode(str)); }
+  function base64UrlDecodeUnicode(str){ return new TextDecoder().decode(base64UrlDecodeBytes(str)); }
+  function timeoutValue(promise, ms, fallback=null){
+    let timer;
+    return Promise.race([
+      promise.finally(()=>clearTimeout(timer)),
+      new Promise(resolve=>{ timer=setTimeout(()=>resolve(fallback),ms); })
+    ]);
+  }
+  async function gzipBase64UrlEncode(str){
+    if(typeof CompressionStream==='undefined') return null;
+    try{
+      const input=new Blob([new TextEncoder().encode(str)]).stream();
+      const compressedStream=input.pipeThrough(new CompressionStream('gzip'));
+      const buffer=await timeoutValue(new Response(compressedStream).arrayBuffer(),2500,null);
+      if(!buffer) return null;
+      return base64UrlEncodeBytes(new Uint8Array(buffer));
+    }catch(e){
+      return null;
+    }
+  }
+  async function gzipBase64UrlDecode(str){
+    if(typeof DecompressionStream==='undefined') throw new Error('compression not supported');
+    const bytes=base64UrlDecodeBytes(str);
+    const input=new Blob([bytes]).stream();
+    const decompressedStream=input.pipeThrough(new DecompressionStream('gzip'));
+    const buffer=await timeoutValue(new Response(decompressedStream).arrayBuffer(),3500,null);
+    if(!buffer) throw new Error('compression timeout');
+    return new TextDecoder().decode(buffer);
+  }
+  function compactExerciseList(list){
+    return (Array.isArray(list)?list:[]).filter(item=>item&&item.name).map(item=>{
+      const sourceLines=(Array.isArray(item.lines)&&item.lines.length)?item.lines:[item];
+      const lines=sourceLines.map(line=>[String(line.kg??1),String(line.reps??1),String(line.sets??1)]);
+      return [String(item.name||'').trim(),lines];
+    }).filter(entry=>entry[0]);
+  }
+  function compactPlanPayload(){
+    const compact={t:'egp2',v:2};
+    const d=Object.keys(datePlans||{}).sort().filter(iso=>Array.isArray(datePlans[iso])&&datePlans[iso].length).map(iso=>[iso,compactExerciseList(datePlans[iso])]).filter(entry=>entry[1].length);
+    const w=DAYS.filter(day=>Array.isArray(weekPlans[day])&&weekPlans[day].length).map(day=>[day,compactExerciseList(weekPlans[day])]).filter(entry=>entry[1].length);
+    if(d.length) compact.d=d;
+    if(w.length) compact.w=w;
+    return compact;
+  }
+  function expandCompactPlanPayload(data){
+    if(!data||data.t!=='egp2') return data;
+    const makeList=list=>(Array.isArray(list)?list:[]).map(entry=>{
+      const name=String(Array.isArray(entry)?(entry[0]||''):'').trim();
+      if(!name) return null;
+      const rawLines=Array.isArray(entry[1])?entry[1]:[];
+      const lines=rawLines.map(row=>({id:uid(),kg:String(row&&row[0]!==undefined?row[0]:1),reps:String(row&&row[1]!==undefined?row[1]:1),sets:String(row&&row[2]!==undefined?row[2]:1)}));
+      if(!lines.length) lines.push({id:uid(),kg:'1',reps:'1',sets:'1'});
+      const first=lines[0];
+      return {id:uid(),name,kg:first.kg,reps:first.reps,sets:first.sets,lines};
+    }).filter(Boolean);
+    const expanded={type:'easy-gym-plan',version:139,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
+    (Array.isArray(data.w)?data.w:[]).forEach(pair=>{
+      const day=String(pair&&pair[0]||'');
+      const list=makeList(pair&&pair[1]);
+      if(DAYS.includes(day)&&list.length){ expanded.weekPlans[day]=list; expanded.savedPlanDays[day]=true; }
+    });
+    (Array.isArray(data.d)?data.d:[]).forEach(pair=>{
+      const iso=String(pair&&pair[0]||'');
+      const list=makeList(pair&&pair[1]);
+      if(iso&&list.length){ expanded.datePlans[iso]=list; expanded.savedDatePlans[iso]=true; expanded.activeDatePlans[iso]=true; }
+    });
+    return expanded;
+  }
+  function isoDayNumber(iso){
+    const parts=String(iso||'').split('-').map(Number);
+    if(parts.length!==3 || parts.some(n=>!Number.isFinite(n))) return null;
+    return Math.floor(Date.UTC(parts[0],parts[1]-1,parts[2])/86400000);
+  }
+  function isoFromDayNumber(num){ return new Date(num*86400000).toISOString().slice(0,10); }
+  function compactValue(value){
+    const s=String(value ?? 1).trim();
+    if(/^-?\d+(?:\.\d+)?$/.test(s)){ const n=Number(s); if(Number.isFinite(n)) return n; }
+    return s || 1;
+  }
+  function ultraCompactPlanPayload(){
+    const names=[];
+    const nameMap=new Map();
+    const nameIndex=name=>{
+      const clean=String(name||'').trim();
+      if(!nameMap.has(clean)){ nameMap.set(clean,names.length); names.push(clean); }
+      return nameMap.get(clean);
+    };
+    const packList=list=>(Array.isArray(list)?list:[]).filter(item=>item&&item.name).map(item=>{
+      const sourceLines=(Array.isArray(item.lines)&&item.lines.length)?item.lines:[item];
+      const flat=[];
+      sourceLines.forEach(line=>{ flat.push(compactValue(line&&line.kg),compactValue(line&&line.reps),compactValue(line&&line.sets)); });
+      return [nameIndex(item.name),flat];
+    }).filter(row=>row[1]&&row[1].length);
+    const dateIsos=Object.keys(datePlans||{}).sort().filter(iso=>Array.isArray(datePlans[iso])&&datePlans[iso].length&&isoDayNumber(iso)!==null);
+    const baseNum=dateIsos.length?isoDayNumber(dateIsos[0]):0;
+    const dateEntries=dateIsos.map(iso=>[isoDayNumber(iso)-baseNum,packList(datePlans[iso])]).filter(entry=>entry[1].length);
+    const weekEntries=DAYS.map((day,i)=>Array.isArray(weekPlans[day])&&weekPlans[day].length?[i,packList(weekPlans[day])]:null).filter(Boolean).filter(entry=>entry[1].length);
+    return ['egp4',baseNum,names,dateEntries,weekEntries];
+  }
+  function expandUltraCompactPlanPayload(data){
+    if(!Array.isArray(data)||data[0]!=='egp4') return data;
+    const baseNum=Number(data[1]||0);
+    const names=Array.isArray(data[2])?data[2]:[];
+    const makeList=rows=>(Array.isArray(rows)?rows:[]).map(row=>{
+      const name=String(names[Number(row&&row[0])]||'').trim();
+      if(!name) return null;
+      const flat=Array.isArray(row&&row[1])?row[1]:[];
+      const lines=[];
+      for(let i=0;i<flat.length;i+=3){
+        lines.push({id:uid(),kg:String(flat[i]!==undefined?flat[i]:1),reps:String(flat[i+1]!==undefined?flat[i+1]:1),sets:String(flat[i+2]!==undefined?flat[i+2]:1)});
+      }
+      if(!lines.length) lines.push({id:uid(),kg:'1',reps:'1',sets:'1'});
+      const first=lines[0];
+      return {id:uid(),name,kg:first.kg,reps:first.reps,sets:first.sets,lines};
+    }).filter(Boolean);
+    const expanded={type:'easy-gym-plan',version:139,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
+    (Array.isArray(data[4])?data[4]:[]).forEach(entry=>{
+      const idx=Number(entry&&entry[0]);
+      const list=makeList(entry&&entry[1]);
+      if(Number.isInteger(idx)&&DAYS[idx]&&list.length){ expanded.weekPlans[DAYS[idx]]=list; expanded.savedPlanDays[DAYS[idx]]=true; }
+    });
+    (Array.isArray(data[3])?data[3]:[]).forEach(entry=>{
+      const offset=Number(entry&&entry[0]);
+      const list=makeList(entry&&entry[1]);
+      if(Number.isFinite(offset)&&list.length){ const iso=isoFromDayNumber(baseNum+offset); expanded.datePlans[iso]=list; expanded.savedDatePlans[iso]=true; expanded.activeDatePlans[iso]=true; }
+    });
+    return expanded;
+  }
+  function collectPlanExerciseNames(data){
+    const names=[];
+    const addList=list=>(Array.isArray(list)?list:[]).forEach(item=>{ if(item&&item.name) names.push(String(item.name)); });
+    if(data&&data.weekPlans){ DAYS.forEach(day=>addList(data.weekPlans[day])); }
+    if(data&&data.datePlans){ Object.keys(data.datePlans||{}).forEach(iso=>addList(data.datePlans[iso])); }
+    return names;
+  }
+  let cachedPlanLink='';
+  let cachedPlanLinkSignature='';
+  let cachedPlanLinkPromise=null;
+  function currentPlanLinkSignature(){
+    try{ return JSON.stringify(ultraCompactPlanPayload()); }catch(e){ return ''; }
+  }
+  function cleanAppPath(){ return new URL('/easy-gym/en-de/', location.origin).href; }
+  async function buildPlanLinkFromSignature(signature){
+    let encoded=await gzipBase64UrlEncode(signature);
+    let link='';
+    if(encoded){
+      link=`${cleanAppPath()}#p4=${encoded}`;
+    }else{
+      const payload=compactPlanPayload();
+      encoded=base64UrlEncodeUnicode(JSON.stringify(payload));
+      link=`${cleanAppPath()}#p2=${encoded}`;
+    }
+    if(link.length > PLAN_LINK_MAX_LENGTH){
+      const err=new Error('PLAN_LINK_TOO_LARGE');
+      err.linkLength=link.length;
+      throw err;
+    }
+    return link;
+  }
+  async function planShareLink(){
+    const signature=currentPlanLinkSignature();
+    if(cachedPlanLink && cachedPlanLinkSignature===signature) return cachedPlanLink;
+    const link=await buildPlanLinkFromSignature(signature);
+    cachedPlanLinkSignature=signature;
+    cachedPlanLink=link;
+    return link;
+  }
+  function preparePlanLinkCache(){
+    if(!hasPlanData()) return;
+    const signature=currentPlanLinkSignature();
+    if(!signature || (cachedPlanLink && cachedPlanLinkSignature===signature) || cachedPlanLinkPromise) return;
+    cachedPlanLinkPromise=buildPlanLinkFromSignature(signature)
+      .then(link=>{ cachedPlanLinkSignature=signature; cachedPlanLink=link; return link; })
+      .catch(err=>{ cachedPlanLink=''; cachedPlanLinkSignature=''; return null; })
+      .finally(()=>{ cachedPlanLinkPromise=null; });
+  }
+  async function copyOrShowPlanLink(link){
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        await navigator.clipboard.writeText(link);
+        toast(t('planLinkCopied'));
+        return;
+      }
+    }catch(e){}
+    try{
+      const copied=window.prompt(t('copyPlanLinkPrompt'),link);
+      if(copied!==null){ toast(t('planLinkReady')); return; }
+    }catch(e){}
+    downloadFile(`easy-gym-plan-link-${todayISO()}.txt`,'text/plain',link);
+    toast(t('fileSaved'));
+  }
+  function shareReadyPlanLink(link){
+    if(!link){ toast(t('planLinkTooLarge')); return; }
+    if(navigator.share){
+      try{
+        navigator.share({title:'Easy Gym Plan',text:link})
+          .then(()=>toast(t('shared')))
+          .catch(()=>copyOrShowPlanLink(link));
+        return;
+      }catch(e){}
+    }
+    copyOrShowPlanLink(link);
+  }
+  async function sharePlanLink(){
+    if(!hasPlanData()){ toast(t('savePlanFirst')); return; }
+    const signature=currentPlanLinkSignature();
+    if(cachedPlanLink && cachedPlanLinkSignature===signature){
+      shareReadyPlanLink(cachedPlanLink);
+      return;
+    }
+    toast(t('creatingPlanLink'));
+    let link='';
+    try{
+      link=await planShareLink();
+    }catch(e){
+      toast(e && e.message==='PLAN_LINK_TOO_LARGE' ? t('planLinkTooLarge') : t('copyPlanLinkPrompt'));
+      return;
+    }
+    if(!link){ toast(t('copyPlanLinkPrompt')); return; }
+    shareReadyPlanLink(link);
+  }
+  async function handleIncomingPlanLink(){
+    const source=(location.hash||'')+'&'+(location.search||'').replace(/^\?/,'#');
+    const p4=source.match(/[#&]p4=([^&]+)/);
+    const p3=source.match(/[#&]p3=([^&]+)/);
+    const p2=source.match(/[#&]p2=([^&]+)/);
+    const legacy=source.match(/[#&]plan=([^&]+)/);
+    const m=p4||p3||p2||legacy;
+    if(!m)return;
+    let data=null;
+    try{
+      if(p4){ data=JSON.parse(await gzipBase64UrlDecode(m[1])); data=expandUltraCompactPlanPayload(data); }
+      else if(p3){ data=JSON.parse(await gzipBase64UrlDecode(m[1])); data=expandCompactPlanPayload(data); }
+      else { data=JSON.parse(base64UrlDecodeUnicode(m[1])); if(p2) data=expandCompactPlanPayload(data); }
+    }catch(e){ history.replaceState(null,'',location.pathname); toast(t('importFailed')); return; }
+    if(confirm(t('confirmInsert'))){
+      try{ importPlanData(data); }catch(e){ toast(t('insertFailed')); }
+    }
+    history.replaceState(null,'',location.pathname);
+  }
+  function shareReport(){ shareFile(`easy-gym-report-${todayISO()}.doc`,'application/msword',reportDownloadHtml()); }
   function readJsonFile(file, done, failMsg){
     const reader=new FileReader();
     reader.onload=()=>{ try{ done(JSON.parse(reader.result)); }catch(e){ toast(failMsg||t('importFailed')); } };
     reader.readAsText(file);
   }
+  function importPlanData(data){
+    if(!data || typeof data!=='object') throw new Error('invalid plan');
+    weekPlans=data.weekPlans||emptyDays();
+    savedPlanDays=data.savedPlanDays||{};
+    datePlans=(data.datePlans&&typeof data.datePlans==='object'&&!Array.isArray(data.datePlans))?data.datePlans:{};
+    savedDatePlans=(data.savedDatePlans&&typeof data.savedDatePlans==='object'&&!Array.isArray(data.savedDatePlans))?data.savedDatePlans:{};
+    activeDatePlans=(data.activeDatePlans&&typeof data.activeDatePlans==='object'&&!Array.isArray(data.activeDatePlans))?data.activeDatePlans:{};
+    Object.keys(datePlans||{}).forEach(iso=>{ if(Array.isArray(datePlans[iso]) && datePlans[iso].length){ savedDatePlans[iso]=true; activeDatePlans[iso]=true; } });
+    DAYS.forEach(day=>{ if(Array.isArray(weekPlans[day]) && weekPlans[day].length){ savedPlanDays[day]=true; } });
+    const importedPlanNames=collectPlanExerciseNames({weekPlans,datePlans});
+    if(Array.isArray(data.exerciseLibrary)) exerciseLibrary=data.exerciseLibrary;
+    importedPlanNames.forEach(name=>{ if(name&&!exerciseLibrary.includes(name)) exerciseLibrary.push(name); });
+    trainSessions=emptyDays();
+    trainStartTimes={};
+    selectedPlanDate=null; selectedTrainDate=null; selectedPlanDay=null; selectedTrainDay=null; savedWorkout=null; copiedPlan=null;
+    normalizeData(); renderAll(); toast(t('planInserted'));
+  }
   function insertPlanFile(e){
     const file=e.target.files&&e.target.files[0]; if(!file)return;
     if(!confirm(t('confirmInsert'))){ e.target.value=''; return; }
     readJsonFile(file, data=>{
-      weekPlans=data.weekPlans||emptyDays();
-      savedPlanDays=data.savedPlanDays||{};
-      datePlans=(data.datePlans&&typeof data.datePlans==='object'&&!Array.isArray(data.datePlans))?data.datePlans:{};
-      savedDatePlans=(data.savedDatePlans&&typeof data.savedDatePlans==='object'&&!Array.isArray(data.savedDatePlans))?data.savedDatePlans:{};
-      activeDatePlans=(data.activeDatePlans&&typeof data.activeDatePlans==='object'&&!Array.isArray(data.activeDatePlans))?data.activeDatePlans:{};
-      if(Array.isArray(data.exerciseLibrary)) exerciseLibrary=data.exerciseLibrary;
-      trainSessions=emptyDays();
-      trainStartTimes={};
-      selectedPlanDate=null; selectedTrainDate=null; selectedPlanDay=null; selectedTrainDay=null; savedWorkout=null;
-      normalizeData(); renderAll(); toast(t('planInserted')); e.target.value='';
+      try{ importPlanData(data); }catch(err){ toast(t('insertFailed')); }
+      e.target.value='';
     },t('insertFailed'));
   }
   function restoreAllDataFile(e){
@@ -3288,7 +3580,7 @@ body{font-variant-numeric:tabular-nums;}
   }
   function deleteAllData(){
     if(!confirm(t('confirmDelete')))return;
-    [...Object.keys(localStorage)].forEach(k=>{if(k.startsWith('easyGym.enDe.'))localStorage.removeItem(k);});
+    [...Object.keys(localStorage)].forEach(k=>{if(k.startsWith(PACKAGE_PREFIX))localStorage.removeItem(k);});
     weekPlans=emptyDays(); trainSessions=emptyDays(); savedPlanDays={}; journal=[]; exerciseLibrary=[...DEFAULT_LIBRARY]; trainStartTimes={}; datePlans={}; savedDatePlans={}; activeDatePlans={}; backupReady=false; selectedPlanDay=null; selectedTrainDay=null; selectedPlanDate=null; selectedTrainDate=null; savedWorkout=null;
     saveAll(); renderAll(); toast(t('dataDeleted'));
   }
