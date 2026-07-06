@@ -2147,7 +2147,7 @@ body{font-variant-numeric:tabular-nums;}
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v152';
+  const DEV_BUILD = 'v139';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
@@ -3432,10 +3432,7 @@ body{font-variant-numeric:tabular-nums;}
   function currentPlanLinkSignature(){
     try{ return JSON.stringify(ultraCompactPlanPayload()); }catch(e){ return ''; }
   }
-  function cleanAppPath(){
-    const base=location.href.split('#')[0].split('?')[0];
-    return new URL('./', base).href;
-  }
+  function cleanAppPath(){ return location.href.split('#')[0].split('?')[0]; }
   async function buildPlanLinkFromSignature(signature){
     let encoded=await gzipBase64UrlEncode(signature);
     let link='';
@@ -3489,7 +3486,7 @@ body{font-variant-numeric:tabular-nums;}
     if(!link){ toast(t('planLinkTooLarge')); return; }
     if(navigator.share){
       try{
-        navigator.share({url:link})
+        navigator.share({title:'Easy Gym Plan',text:link})
           .then(()=>toast(t('shared')))
           .catch(()=>copyOrShowPlanLink(link));
         return;
