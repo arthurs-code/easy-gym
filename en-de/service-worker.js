@@ -1,4 +1,4 @@
-const CACHE='easy-gym-en-de-v149';
+const CACHE='easy-gym-en-de-v139';
 const ASSETS=['./','./index.html','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./icons/swiss-qr.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).catch(()=>{}));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('easy-gym-')&&k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});
