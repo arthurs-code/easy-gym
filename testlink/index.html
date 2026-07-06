@@ -2147,7 +2147,7 @@ body{font-variant-numeric:tabular-nums;}
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v139';
+  const DEV_BUILD = 'v140';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
@@ -3228,7 +3228,7 @@ body{font-variant-numeric:tabular-nums;}
     if(hasPlan) preparePlanLinkCache();
   }
   function allDataPayload(){
-    return {type:'easy-gym-backup',version:139,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
+    return {type:'easy-gym-backup',version:140,exportedAt:new Date().toISOString(),weekPlans,savedPlanDays,trainSessions,journal,exerciseLibrary,datePlans,savedDatePlans,activeDatePlans};
   }
   function planPayload(){
     const exportWeekPlans=JSON.parse(JSON.stringify(weekPlans||emptyDays()));
@@ -3251,7 +3251,7 @@ body{font-variant-numeric:tabular-nums;}
 
     return {
       type:'easy-gym-plan',
-      version:139,
+      version:140,
       exportedAt:new Date().toISOString(),
       weekPlans:exportWeekPlans,
       savedPlanDays:exportSavedPlanDays,
@@ -3262,7 +3262,7 @@ body{font-variant-numeric:tabular-nums;}
     };
   }
   function reportPayload(){
-    return {type:'easy-gym-report',version:139,exportedAt:new Date().toISOString(),text:progressText(),journal};
+    return {type:'easy-gym-report',version:140,exportedAt:new Date().toISOString(),text:progressText(),journal};
   }
   function savePlanFile(){ downloadFile(`easy-gym-plan-${todayISO()}.json`,'application/json',JSON.stringify(planPayload(),null,2)); toast(t('planSaved')); }
   function saveReportFile(){ downloadFile(`easy-gym-report-${todayISO()}.doc`,'application/msword',reportDownloadHtml()); toast(t('reportSaved')); }
@@ -3346,7 +3346,7 @@ body{font-variant-numeric:tabular-nums;}
       const first=lines[0];
       return {id:uid(),name,kg:first.kg,reps:first.reps,sets:first.sets,lines};
     }).filter(Boolean);
-    const expanded={type:'easy-gym-plan',version:139,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
+    const expanded={type:'easy-gym-plan',version:140,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
     (Array.isArray(data.w)?data.w:[]).forEach(pair=>{
       const day=String(pair&&pair[0]||'');
       const list=makeList(pair&&pair[1]);
@@ -3406,7 +3406,7 @@ body{font-variant-numeric:tabular-nums;}
       const first=lines[0];
       return {id:uid(),name,kg:first.kg,reps:first.reps,sets:first.sets,lines};
     }).filter(Boolean);
-    const expanded={type:'easy-gym-plan',version:139,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
+    const expanded={type:'easy-gym-plan',version:140,weekPlans:emptyDays(),savedPlanDays:{},datePlans:{},savedDatePlans:{},activeDatePlans:{}};
     (Array.isArray(data[4])?data[4]:[]).forEach(entry=>{
       const idx=Number(entry&&entry[0]);
       const list=makeList(entry&&entry[1]);
@@ -3433,15 +3433,22 @@ body{font-variant-numeric:tabular-nums;}
     try{ return JSON.stringify(ultraCompactPlanPayload()); }catch(e){ return ''; }
   }
   function cleanAppPath(){ return location.href.split('#')[0].split('?')[0]; }
+  function planSharePath(){
+    const base=cleanAppPath();
+    if(base.endsWith('/')) return base+'plan.html';
+    if(base.endsWith('/index.html')) return base.replace(/index\.html$/,'plan.html');
+    if(base.endsWith('/plan.html')) return base;
+    return base.replace(/\/[^\/]*$/,'/plan.html');
+  }
   async function buildPlanLinkFromSignature(signature){
     let encoded=await gzipBase64UrlEncode(signature);
     let link='';
     if(encoded){
-      link=`${cleanAppPath()}#p4=${encoded}`;
+      link=`${planSharePath()}#p4=${encoded}`;
     }else{
       const payload=compactPlanPayload();
       encoded=base64UrlEncodeUnicode(JSON.stringify(payload));
-      link=`${cleanAppPath()}#p2=${encoded}`;
+      link=`${planSharePath()}#p2=${encoded}`;
     }
     if(link.length > PLAN_LINK_MAX_LENGTH){
       const err=new Error('PLAN_LINK_TOO_LARGE');
