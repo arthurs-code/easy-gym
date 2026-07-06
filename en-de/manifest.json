@@ -1,8 +1,9 @@
 {
   "name": "Easy Gym EN-DE",
   "short_name": "Easy Gym",
-  "start_url": "./",
-  "scope": "./",
+  "id": "/easy-gym/en-de/",
+  "start_url": "/easy-gym/en-de/",
+  "scope": "/easy-gym/en-de/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
