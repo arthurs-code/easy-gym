@@ -14,13 +14,9 @@
 
   const LANGS = ['en','de','fr','it','es'];
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v185';
-  async function loadLanguagePacks(){
-    const loaded = await Promise.all(LANGS.map(async lang=>{
-      const response = await fetch(`${LANG_PACK_BASE}${lang}.json?v=${LANG_PACK_VERSION}`, {cache:'no-store'});
-      if(!response.ok) throw new Error(`Language pack failed: ${lang}`);
-      return [lang, await response.json()];
-    }));
+  const LANG_PACK_VERSION = 'v207-pwa-embedded-only';
+  const EMBEDDED_LANGUAGE_PACKS = {"en":{"code":"en","ui":{"langName":"English","days":{"mon":"Mon","tue":"Tue","wed":"Wed","thu":"Thu","fri":"Fri","sat":"Sat","sun":"Sun"},"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"plan":"PLAN","do":"GO","report":"LOG","manage":"mgmt","donate":"heart","about":"info","selectDay":"Select the Day","addExercise":"EXERCISE","remove":"del","copy":"Copy","copied":"Copied","paste":"Paste","saveTraining":"Save training","saved":"Saved","startTraining":"Start Training","started":"Started","stopSaveTraining":"Stop and Save Training","done":"Done","activateTraining":"Activate Training","plannedNotTrained":"Planned · not trained","noTrainingDay":"No training on this day.","tapAddExercise":"Tap “+ EXERCISE” to build this day’s training.","noSavedPlan":"No saved plan for this day.","noCompletedExercises":"No completed exercises.","chooseExercise":"Choose exercise","editExercises":"Edit exercises","save":"Save","modalSave":"SAVE","delete":"del","writeOwnExercise":"Write your own exercise","kg":"KG","reps":"Reps","sets":"Sets","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"No saved LOG yet.","noReport":"No LOG","date":"Date","startTime":"Start Time","duration":"Duration","total":"Total","exercise":"Exercise","everMax":"Ever Max","maxToday":"Max Today","sharePlan":"Share Plan","sharePlanLink":"Share Plan as Link","directLinkComingSoon":"PLAN-Link ready.","planLinkReady":"Plan link ready","planLinkCopied":"Plan link copied","planLinkTooLarge":"Plan too large for link - use Share Plan file","savePlanFirst":"Save a plan first","creatingPlanLink":"Creating plan link","copyPlanLinkPrompt":"Copy this plan link","savePlan":"Save Plan","insertPlan":"Insert Plan","saveReport":"Save LOG","shareReport":"Share LOG","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Delete Data","supportTitle":"Support Easy Gym","supportIntro":"Easy Gym is free and ad-free. If it helps your training, a small donation keeps it growing — thank you.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Theme","themeToast":"Theme: ","planSaved":"Plan saved","reportSaved":"LOG saved","allDataSaved":"All data saved","shared":"Shared","fileSaved":"File saved","planInserted":"Plan inserted","dataRestored":"Data restored","dataDeleted":"Data deleted","insertFailed":"Insert failed","restoreFailed":"Restore failed","importFailed":"Import failed","trainingSaved":"Training saved","exerciseRemovedPlan":"Exercise removed from Plan","exerciseListSaved":"Exercise list saved","addFirst":"Add exercises to today’s training first","resumeTraining":"Resume training","noExercisesYet":"No exercises yet. Tap “+ EXERCISE” to build today’s training.","noTrainingPlanned":"No training planned for this day. Create it in Plan first.","reportHeader":"Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>A free, ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone.</p></div><div class=\"card about-card\"><h2>Preface</h2><p>I created Easy Gym for my own training. It is free and has no ads. Like it? Support me with a donation. Want your own app? Write to: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Create a plan for any date. Use <strong>+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong>DEL</strong> to remove exercises. Save the plan when it is ready.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong>+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</p></div><div class=\"card about-card\"><h2>MGMT &amp; share</h2><p><strong>Share Plan as Link</strong> — Plan-Link will be available in Easy Gym from App Store.</p><p><strong>Share Plan File or LOG</strong> — When you share a file, we create a secure link you can send via WhatsApp or other messengers.</p><p><strong>Save File or LOG</strong> — saves it locally.</p><p><strong>Insert Plan File</strong> — imports a received plan file into Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</p></div>"},"exercises":{}},"de":{"code":"de","ui":{"langName":"Deutsch","days":{"mon":"Mo","tue":"Di","wed":"Mi","thu":"Do","fri":"Fr","sat":"Sa","sun":"So"},"months":["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"plan":"PLAN","do":"GO","report":"LOG","manage":"orga","donate":"herz","about":"info","selectDay":"Tag wählen","addExercise":"ÜBUNG","remove":"löschen","copy":"Kopieren","copied":"Kopiert","paste":"Einfügen","saveTraining":"Training speichern","saved":"Gespeichert","startTraining":"Training starten","started":"Gestartet","stopSaveTraining":"Training stoppen und speichern","done":"Erledigt","activateTraining":"Training aktivieren","plannedNotTrained":"Geplant · nicht trainiert","noTrainingDay":"Kein Training an diesem Tag.","tapAddExercise":"Tippe auf „+ ÜBUNG“, um das Training für diesen Tag zu erstellen.","noSavedPlan":"Kein gespeicherter Plan für diesen Tag.","noCompletedExercises":"Keine abgeschlossenen Übungen.","chooseExercise":"Übung wählen","editExercises":"Bearbeiten","save":"Speichern","modalSave":"SPEICHERN","delete":"löschen","writeOwnExercise":"Eigene Übung schreiben","kg":"KG","reps":"Wdh.","sets":"Sätze","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Noch kein Log gespeichert.","noReport":"Kein Log","date":"Datum","startTime":"Startzeit","duration":"Dauer","total":"Total","exercise":"Übung","everMax":"Ever Max","maxToday":"Max Heute","sharePlan":"Plan teilen","sharePlanLink":"Plan als Link teilen","directLinkComingSoon":"PLAN-Link bereit.","planLinkReady":"Plan-Link bereit","planLinkCopied":"Plan-Link kopiert","planLinkTooLarge":"Plan zu gross für Link - Plan-Datei teilen verwenden","savePlan":"Plan speichern","insertPlan":"Plan einfügen","saveReport":"Log speichern","shareReport":"Log teilen","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Daten löschen","supportTitle":"Easy Gym unterstützen","supportIntro":"Easy Gym ist kostenlos und werbefrei. Wenn es deinem Training hilft, unterstützt eine kleine Spende die Weiterentwicklung — danke.","confirmInsert":"Einfügen überschreibt Pläne - bestätigen","confirmRestore":"Wiederherstellen ersetzt alle Daten - bestätigen","confirmDelete":"Löschen entfernt alle Daten - bestätigen","theme":"Design","themeToast":"Design: ","planSaved":"Plan gespeichert","reportSaved":"Log gespeichert","allDataSaved":"Alle Daten gespeichert","shared":"Geteilt","fileSaved":"Datei gespeichert","planInserted":"Plan eingefügt","dataRestored":"Daten wiederhergestellt","dataDeleted":"Daten gelöscht","insertFailed":"Einfügen fehlgeschlagen","restoreFailed":"Wiederherstellen fehlgeschlagen","importFailed":"Import fehlgeschlagen","trainingSaved":"Training gespeichert","exerciseRemovedPlan":"Übung aus Plan entfernt","exerciseListSaved":"Übungsliste gespeichert","addFirst":"Zuerst Übungen zum heutigen Training hinzufügen","resumeTraining":"Training fortsetzen","noExercisesYet":"Noch keine Übungen. Tippe auf „+ ÜBUNG“.","noTrainingPlanned":"Für diesen Tag ist kein Training geplant. Erstelle es zuerst im Plan.","reportHeader":"Übung / P-KG / D-KG / P-Wdh. / D-Wdh. / P-Sätze / D-Sätze","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Ein kostenloser Trainings-Tracker ohne Werbung für ernsthaftes Training. Erstelle deinen PLAN, starte dein Training mit GO und speichere jedes Ergebnis im LOG — alles auf deinem Telefon.</p></div><div class=\"card about-card\"><h2>Vorwort</h2><p>Ich habe Easy Gym für mein eigenes Training erstellt. Die App ist kostenlos und ohne Werbung. Gefällt sie dir? Unterstütze mich mit einer Spende. Möchtest du deine eigene App? Schreib mir: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Erstelle einen Plan für ein beliebiges Datum. Mit <strong>+ ÜBUNG</strong> fügst du Übungen mit kg, Wiederholungen und Sätzen hinzu. Mit <strong>LÖSCHEN</strong> entfernst du Übungen. Speichere den Plan, wenn er bereit ist.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Starte mit einem gespeicherten PLAN. Du kannst kg, Wiederholungen und Sätze während des Trainings anpassen oder eine weitere <strong>+ ÜBUNG</strong> hinzufügen. Dein ursprünglicher PLAN bleibt für das nächste Mal unverändert.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Vergleiche Planvorgaben direkt mit deinen echten Ergebnissen. Erledigte Sätze werden grün markiert. Speichere oder teile deinen fertigen Trainingslog.</p></div><div class=\"card about-card\"><h2>Verwalten &amp; teilen</h2><p><strong>Plan als Link teilen</strong> — Plan-Link wird in Easy Gym aus dem App Store verfügbar sein.</p><p><strong>Plan oder Log teilen</strong> — Wenn du eine Datei teilst, erstellen wir einen sicheren Link, den du per WhatsApp oder über andere Messenger senden kannst.</p><p><strong>Plan oder Log speichern</strong> — speichert ihn lokal.</p><p><strong>Plan-Datei einfügen</strong> — importiert eine erhaltene Plan-Datei in Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup speichert eine vollständige Kopie. Restore stellt deine Daten wieder her. Daten löschen löscht alles nach Bestätigung.</p></div><div class=\"card about-card\"><h2>Datenschutz</h2><p>Easy Gym funktioniert auf deinem Telefon. Deine Pläne und Logs bleiben auf deinem Gerät, ausser du teilst sie.</p></div>"},"exercises":{"Snatch":"Reissen","Clean and Jerk":"Umsetzen & Ausstossen","Clean":"Umsetzen","Jerk":"Ausstossen","Power Snatch":"Standreissen","Power Clean":"Standumsetzen","Back Squat":"Kniebeuge hinten","Front Squat":"Kniebeuge vorne","Overhead Squat":"Überkopfkniebeuge","Deadlift":"Kreuzheben","Bench Press":"Bankdrücken","Push Press":"Schwungdrücken","Strict Press":"Schulterdrücken","Barbell Row":"Langhantelrudern","Pull-up":"Klimmzug","Dip":"Dip","Lunge":"Ausfallschritt","Romanian Deadlift":"Rumänisches Kreuzheben"}},"fr":{"code":"fr","ui":{"langName":"Français","days":{"mon":"Lun","tue":"Mar","wed":"Mer","thu":"Jeu","fri":"Ven","sat":"Sam","sun":"Dim"},"months":["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],"plan":"PLAN","do":"GO","report":"LOG","manage":"gest.","donate":"don","about":"info","selectDay":"Choisir le jour","addExercise":"EXERCICE","remove":"elimine","copy":"Copier","copied":"Copié","paste":"Coller","saveTraining":"Sauver training","saved":"Sauvé","startTraining":"Démarrer training","started":"Démarré","stopSaveTraining":"Arrêter et sauver","done":"Terminé","activateTraining":"Activer training","plannedNotTrained":"Planifié · non entraîné","noTrainingDay":"Pas de training ce jour.","tapAddExercise":"Tape “+ EXERCICE” pour créer le training du jour.","noSavedPlan":"Pas de plan sauvé pour ce jour.","noCompletedExercises":"Aucun exercice terminé.","chooseExercise":"Choisir exercice","editExercises":"Modifier","save":"Sauver","modalSave":"SAUVER","delete":"elimine","writeOwnExercise":"Écrire ton exercice","kg":"KG","reps":"Rép.","sets":"Séries","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Aucun log sauvé.","noReport":"Aucun log","date":"Date","startTime":"Heure début","duration":"Durée","total":"Total","exercise":"Exercice","everMax":"Ever Max","maxToday":"Max aujourd’hui","sharePlan":"envoi plan","sharePlanLink":"envoi plan-lien","directLinkComingSoon":"PLAN-Link prêt.","planLinkReady":"Lien Plan prêt","planLinkCopied":"Lien Plan copié","planLinkTooLarge":"Plan trop grand pour le lien - utiliser le fichier Plan","savePlan":"archive plan","insertPlan":"import plan","saveReport":"archive log","shareReport":"envoi log","saveAllData":"Backup","restoreAllData":"Restaurer","deleteData":"Effacer data","supportTitle":"Soutenir Easy Gym","supportIntro":"Easy Gym est gratuit et sans publicité. Si l’app aide ton training, un petit don aide à continuer — merci.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Thème","themeToast":"Thème: ","planSaved":"Plan sauvé","reportSaved":"Log sauvé","allDataSaved":"Toutes les données sauvées","shared":"Partagé","fileSaved":"Fichier sauvé","planInserted":"Plan inséré","dataRestored":"Données restaurées","dataDeleted":"Données supprimées","insertFailed":"Insertion échouée","restoreFailed":"Restauration échouée","importFailed":"Import échoué","trainingSaved":"Training sauvé","exerciseRemovedPlan":"Exercice supprimé du Plan","exerciseListSaved":"Liste d’exercices sauvée","addFirst":"Ajoute d’abord des exercices au training du jour","resumeTraining":"Reprendre training","noExercisesYet":"Aucun exercice. Tape “+ EXERCICE”.","noTrainingPlanned":"Aucun training prévu pour ce jour. Crée-le d’abord dans Plan.","reportHeader":"Exercice / P-KG / D-KG / P-Rép. / D-Rép. / P-Séries / D-Séries","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Un tracker de training gratuit et sans publicité. Préparez votre PLAN, lancez votre séance dans GO et gardez chaque résultat dans LOG — le tout sur votre téléphone.</p></div><div class=\"card about-card\"><h2>Avant-propos</h2><p>J'ai créé Easy Gym pour mon propre entraînement. C'est gratuit et sans publicité. Ça vous plaît ? Soutenez-moi via Don. Vous voulez votre propre app ? Écrivez-moi : arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Créez un plan pour n'importe quelle date. Utilisez <strong>+ EXERCICE</strong> pour ajouter des exercices avec kg, répétitions et séries. Utilisez <strong>ELIMINE</strong> pour supprimer des exercices. Sauvez le plan quand il est prêt.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Démarrez à partir d'un PLAN sauvé. Vous pouvez ajuster kg, répétitions et séries pendant la séance ou ajouter un autre <strong>+ EXERCICE</strong>. Votre PLAN d'origine reste inchangé pour la prochaine fois.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Comparez vos objectifs planifiés avec vos résultats réels. Les séries terminées sont marquées en vert. Sauvegardez ou partagez votre log de training final.</p></div><div class=\"card about-card\"><h2>GEST. &amp; partage</h2><p><strong>envoi plan-lien</strong> — Plan-Link sera disponible dans Easy Gym depuis l’App Store.</p><p><strong>envoi plan</strong> — partage un fichier plan via un lien sécurisé que vous pouvez envoyer par WhatsApp ou d'autres messengers.</p><p><strong>envoi log</strong> — partage votre log via un lien sécurisé.</p><p><strong>import plan</strong> — insère un fichier plan reçu dans Easy Gym.</p><p><strong>archive plan</strong> — sauvegarde le plan localement.</p><p><strong>archive log</strong> — sauvegarde le log localement.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup sauvegarde une copie complète. Restaurer récupère vos données. Effacer data efface tout après confirmation.</p></div><div class=\"card about-card\"><h2>Confidentialité</h2><p>Easy Gym fonctionne sur votre téléphone. Vos plans et logs restent sur votre appareil, sauf si vous les partagez.</p></div>"},"exercises":{"Snatch":"Arraché","Clean and Jerk":"Épaulé-jeté","Clean":"Épaulé","Jerk":"Jeté","Power Snatch":"Arraché puissance","Power Clean":"Épaulé puissance","Back Squat":"Squat arrière","Front Squat":"Squat avant","Overhead Squat":"Squat au-dessus de la tête","Deadlift":"Soulevé de terre","Bench Press":"Développé couché","Push Press":"Développé avec jambes","Strict Press":"Développé strict","Barbell Row":"Rowing barre","Pull-up":"Traction","Dip":"Dips","Lunge":"Fente","Romanian Deadlift":"Soulevé de terre roumain"}},"it":{"code":"it","ui":{"langName":"Italiano","days":{"mon":"Lun","tue":"Mar","wed":"Mer","thu":"Gio","fri":"Ven","sat":"Sab","sun":"Dom"},"months":["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],"plan":"PLAN","do":"GO","report":"LOG","manage":"gest.","donate":"dono","about":"info","selectDay":"Scegli giorno","addExercise":"ESERCIZIO","remove":"elimina","copy":"Copia","copied":"Copiato","paste":"Incolla","saveTraining":"Salva training","saved":"Salvato","startTraining":"Inizia training","started":"Iniziato","stopSaveTraining":"Ferma e salva training","done":"Fatto","activateTraining":"Attiva training","plannedNotTrained":"Pianificato · non allenato","noTrainingDay":"Nessun training in questo giorno.","tapAddExercise":"Tocca “+ ESERCIZIO” per creare il training del giorno.","noSavedPlan":"Nessun piano salvato per questo giorno.","noCompletedExercises":"Nessun esercizio completato.","chooseExercise":"Scegli esercizio","editExercises":"Modifica esercizi","save":"Salva","modalSave":"SALVA","delete":"elimina","writeOwnExercise":"Scrivi il tuo esercizio","kg":"KG","reps":"Rip.","sets":"Serie","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Nessun log salvato.","noReport":"Nessun log","date":"Data","startTime":"Ora inizio","duration":"Durata","total":"Total","exercise":"Esercizio","everMax":"Ever Max","maxToday":"Max oggi","sharePlan":"invio plan","sharePlanLink":"invio plan-link","directLinkComingSoon":"PLAN-Link pronto.","planLinkReady":"Link Plan pronto","planLinkCopied":"Link Plan copiato","planLinkTooLarge":"Plan troppo grande per il link - usa file Plan","savePlan":"archivio plan","insertPlan":"import plan","saveReport":"archivio log","shareReport":"invio log","saveAllData":"Backup","restoreAllData":"Ripristina","deleteData":"Elimina dati","supportTitle":"Sostieni Easy Gym","supportIntro":"Easy Gym è gratis e senza pubblicità. Se aiuta il tuo training, una piccola donazione sostiene lo sviluppo — grazie.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Tema","themeToast":"Tema: ","planSaved":"Plan salvato","reportSaved":"Log salvato","allDataSaved":"Tutti i dati salvati","shared":"Condiviso","fileSaved":"File salvato","planInserted":"Plan inserito","dataRestored":"Dati ripristinati","dataDeleted":"Dati eliminati","insertFailed":"Inserimento fallito","restoreFailed":"Ripristino fallito","importFailed":"Import fallito","trainingSaved":"Training salvato","exerciseRemovedPlan":"Esercizio rimosso dal Plan","exerciseListSaved":"Lista esercizi salvata","addFirst":"Aggiungi prima esercizi al training di oggi","resumeTraining":"Riprendi training","noExercisesYet":"Nessun esercizio. Tocca “+ ESERCIZIO”.","noTrainingPlanned":"Nessun training pianificato per questo giorno. Crealo prima in Plan.","reportHeader":"Esercizio / P-KG / D-KG / P-Rip. / D-Rip. / P-Serie / D-Serie","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Un tracker di training gratuito e senza pubblicità. Prepara il tuo PLAN, avvia la sessione in GO e conserva ogni risultato nel LOG — tutto sul tuo telefono.</p></div><div class=\"card about-card\"><h2>Prefazione</h2><p>Ho creato Easy Gym per il mio allenamento. È gratis e senza pubblicità. Ti piace? Sostienimi con una Donazione. Vuoi la tua app? Scrivimi: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Crea un plan per qualsiasi data. Usa <strong>+ ESERCIZIO</strong> per aggiungere esercizi con kg, ripetizioni e serie. Usa <strong>ELIMINA</strong> per rimuovere esercizi. Salva il plan quando è pronto.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Parti da un PLAN salvato. Puoi modificare kg, ripetizioni e serie durante la sessione o aggiungere un altro <strong>+ ESERCIZIO</strong>. Il tuo PLAN originale resta invariato per la prossima volta.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Confronta i target pianificati con i risultati reali. I set completati sono evidenziati in verde. Salva o condividi il tuo log di training finale.</p></div><div class=\"card about-card\"><h2>GEST. &amp; condivisione</h2><p><strong>invio plan-link</strong> — Plan-Link sarà disponibile in Easy Gym dall’App Store.</p><p><strong>invio plan</strong> — condivide un file plan tramite un link sicuro che puoi inviare via WhatsApp o altri messenger.</p><p><strong>invio log</strong> — condivide il tuo log tramite un link sicuro.</p><p><strong>import plan</strong> — inserisce un file plan ricevuto in Easy Gym.</p><p><strong>archivio plan</strong> — salva il plan localmente.</p><p><strong>archivio log</strong> — salva il log localmente.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup salva una copia completa. Ripristina recupera i tuoi dati. Elimina dati cancella tutto dopo conferma.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym funziona sul tuo telefono. I tuoi plan e log restano sul dispositivo, a meno che tu non li condivida.</p></div>"},"exercises":{"Snatch":"Strappo","Clean and Jerk":"Slancio","Clean":"Girata","Jerk":"Spinta","Power Snatch":"Strappo in piedi","Power Clean":"Girata in piedi","Back Squat":"Squat posteriore","Front Squat":"Squat frontale","Overhead Squat":"Squat overhead","Deadlift":"Stacco da terra","Bench Press":"Panca piana","Push Press":"Push press","Strict Press":"Military press","Barbell Row":"Rematore con bilanciere","Pull-up":"Trazione","Dip":"Dip","Lunge":"Affondo","Romanian Deadlift":"Stacco rumeno"}},"es":{"code":"es","ui":{"langName":"Español","days":{"mon":"Lun","tue":"Mar","wed":"Mié","thu":"Jue","fri":"Vie","sat":"Sáb","sun":"Dom"},"months":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],"plan":"PLAN","do":"GO","report":"LOG","manage":"gest.","donate":"apoyo","about":"info","selectDay":"Elegir día","addExercise":"EJERCICIO","remove":"eliminar","copy":"Copiar","copied":"Copiado","paste":"Pegar","saveTraining":"Guardar training","saved":"Guardado","startTraining":"Iniciar training","started":"Iniciado","stopSaveTraining":"Parar y guardar training","done":"Hecho","activateTraining":"Activar training","plannedNotTrained":"Planificado · no entrenado","noTrainingDay":"Sin training este día.","tapAddExercise":"Toca “+ EJERCICIO” para crear el training del día.","noSavedPlan":"No hay plan guardado para este día.","noCompletedExercises":"No hay ejercicios completados.","chooseExercise":"Elegir ejercicio","editExercises":"Editar","save":"Guardar","modalSave":"GUARDAR","delete":"eliminar","writeOwnExercise":"Escribe tu ejercicio","kg":"KG","reps":"Reps","sets":"Series","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Todavía no hay log guardado.","noReport":"Sin log","date":"Fecha","startTime":"Hora inicio","duration":"Duración","total":"Total","exercise":"Ejercicio","everMax":"Ever Max","maxToday":"Max hoy","sharePlan":"envio plan","sharePlanLink":"envio plan-link","directLinkComingSoon":"PLAN-Link listo.","planLinkReady":"Enlace Plan listo","planLinkCopied":"Enlace Plan copiado","planLinkTooLarge":"Plan demasiado grande para enlace - usa archivo Plan","savePlanFirst":"Primero guarda un Plan","creatingPlanLink":"Creando enlace del Plan","copyPlanLinkPrompt":"Copia este enlace del Plan","savePlan":"archivo plan","insertPlan":"import plan","saveReport":"archivo log","shareReport":"envio log","saveAllData":"Backup","restoreAllData":"Restaurar","deleteData":"Eliminar datos","supportTitle":"Apoyar Easy Gym","supportIntro":"Easy Gym es gratis y sin anuncios. Si ayuda a tu training, una pequeña donación ayuda a seguir — gracias.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Tema","themeToast":"Tema: ","planSaved":"Plan guardado","reportSaved":"Log guardado","allDataSaved":"Todos los datos guardados","shared":"Compartido","fileSaved":"Archivo guardado","planInserted":"Plan insertado","dataRestored":"Datos restaurados","dataDeleted":"Datos eliminados","insertFailed":"Inserción fallida","restoreFailed":"Restauración fallida","importFailed":"Importación fallida","trainingSaved":"Training guardado","exerciseRemovedPlan":"Ejercicio eliminado del Plan","exerciseListSaved":"Lista de ejercicios guardada","addFirst":"Añade primero ejercicios al training de hoy","resumeTraining":"Continuar training","noExercisesYet":"Sin ejercicios. Toca “+ EJERCICIO”.","noTrainingPlanned":"No hay training planificado para este día. Créalo primero en Plan.","reportHeader":"Ejercicio / P-KG / D-KG / P-Reps / D-Reps / P-Series / D-Series","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Un tracker de training gratuito y sin anuncios. Prepara tu PLAN, empieza en GO y guarda cada resultado en LOG — todo en tu teléfono.</p></div><div class=\"card about-card\"><h2>Prólogo</h2><p>Creé Easy Gym para mi propio entrenamiento. Es gratis y sin anuncios. ¿Te gusta? Apóyame con una Donación. ¿Necesitas tu propia app? Escríbeme: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Crea un plan para cualquier fecha. Usa <strong>+ EJERCICIO</strong> para añadir ejercicios con kg, repeticiones y series. Usa <strong>ELIMINAR</strong> para quitar ejercicios. Guarda el plan cuando esté listo.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Empieza desde un PLAN guardado. Puedes ajustar kg, repeticiones y series durante la sesión o añadir otro <strong>+ EJERCICIO</strong>. Tu PLAN original queda sin cambios para la próxima vez.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compara los objetivos planificados con tus resultados reales. Las series completadas se marcan en verde. Guarda o comparte tu log de training final.</p></div><div class=\"card about-card\"><h2>GEST. &amp; compartir</h2><p><strong>envio plan-link</strong> — Plan-Link estará disponible en Easy Gym desde App Store.</p><p><strong>envio plan</strong> — comparte un archivo plan mediante un enlace seguro que puedes enviar por WhatsApp u otros messengers.</p><p><strong>envio log</strong> — comparte tu log mediante un enlace seguro.</p><p><strong>import plan</strong> — inserta un archivo plan recibido en Easy Gym.</p><p><strong>archivo plan</strong> — guarda el plan localmente.</p><p><strong>archivo log</strong> — guarda el log localmente.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup guarda una copia completa. Restaurar recupera tus datos. Eliminar datos borra todo después de la confirmación.</p></div><div class=\"card about-card\"><h2>Privacidad</h2><p>Easy Gym funciona en tu teléfono. Tus planes y logs permanecen en tu dispositivo, a menos que los compartas.</p></div>"},"exercises":{"Snatch":"Arrancada","Clean and Jerk":"Dos tiempos","Clean":"Cargada","Jerk":"Envión","Power Snatch":"Arrancada de potencia","Power Clean":"Cargada de potencia","Back Squat":"Sentadilla trasera","Front Squat":"Sentadilla frontal","Overhead Squat":"Sentadilla sobre la cabeza","Deadlift":"Peso muerto","Bench Press":"Press de banca","Push Press":"Push press","Strict Press":"Press estricto","Barbell Row":"Remo con barra","Pull-up":"Dominada","Dip":"Fondos","Lunge":"Zancada","Romanian Deadlift":"Peso muerto rumano"}}};
+  function applyLanguagePacks(loaded){
     I18N = {};
     EXERCISE_TRANSLATIONS = {};
     loaded.forEach(([lang,pack])=>{
@@ -28,6 +24,14 @@
       EXERCISE_TRANSLATIONS[lang] = (pack && pack.exercises) || {};
     });
     rebuildExerciseIndex();
+  }
+  function loadEmbeddedLanguagePacks(){
+    applyLanguagePacks(LANGS.map(lang=>[lang, EMBEDDED_LANGUAGE_PACKS[lang]]));
+  }
+  async function loadLanguagePacks(){
+    // v194: use embedded language packs only. This prevents iPhone/Safari from opening
+    // lang/*.json as a visible page and keeps the PWA file-safe/offline-safe.
+    loadEmbeddedLanguagePacks();
   }
   const PLAN_LINK_MAX_LENGTH = 8000;
   const APP_PLAN_LINK_BASE = 'https://easygym.ch/p';
@@ -39,7 +43,7 @@
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v190-5lang-pwa-donation-lang-dropdown';
+  const DEV_BUILD = 'v209-5lang-pwa-embedded-plan-activate-row';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.
@@ -90,7 +94,7 @@
   let currentLang = load(KEYS.lang, 'en');
   const $ = (id) => document.getElementById(id);
   const els = {};
-  function cacheEls(){ ['planDayButtons','planChooseHint','planActionRow','savePlanRow','trainDayButtons','planList','trainList','planTitle','trainControls','savePlanBtn','removeSelectedBtn','copyPlanBtn','saveTrainingBtn','startTrainingBtn','timerText','addExerciseModal','libraryList','customExerciseName','addCustomExerciseBtn','editExercisesBtn','saveLibraryBtn','deleteLibraryBtn','customRow','exerciseModalHelp','journalList','downloadWordBtn','downloadPdfBtn','sharePlanBtn','sharePlanLinkBtn','manageSavePlanBtn','insertPlanBtn','insertPlanInput','manageSaveReportBtn','shareReportBtn','saveAllDataBtn','restoreAllDataBtn','restoreAllDataInput','deleteDataBtn','toast','homeTodayCard','homeStartBtn','homeGreeting','aboutContent','languageSelect','languageSwitch','languageMenu'].forEach(id=>els[id]=$(id)); }
+  function cacheEls(){ ['planDayButtons','planChooseHint','planActionRow','savePlanRow','trainDayButtons','planList','trainList','planTitle','trainControls','savePlanBtn','removeSelectedBtn','copyPlanBtn','activatePlanBtn','saveTrainingBtn','startTrainingBtn','timerText','addExerciseModal','libraryList','customExerciseName','addCustomExerciseBtn','editExercisesBtn','saveLibraryBtn','deleteLibraryBtn','customRow','exerciseModalHelp','journalList','downloadWordBtn','downloadPdfBtn','sharePlanBtn','sharePlanLinkBtn','manageSavePlanBtn','insertPlanBtn','insertPlanInput','manageSaveReportBtn','shareReportBtn','saveAllDataBtn','restoreAllDataBtn','restoreAllDataInput','deleteDataBtn','toast','homeTodayCard','homeStartBtn','homeGreeting','aboutContent','languageSelect','languageSwitch','languageMenu'].forEach(id=>els[id]=$(id)); }
   function uid(){return Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4)}
   function emptyDays(){return Object.fromEntries(DAYS.map(d=>[d,[]]));}
   function load(key, fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
@@ -158,9 +162,9 @@
     </div>`).join('');
   }
   function doneRowHtml(activateIso=null){
-    return `<div class="home-row done-action-row"><span class="home-label done-label">${esc(t('done'))}</span>${activateIso?`<button class="action small" type="button" data-activate-date="${esc(activateIso)}">${buttonHtml('start',t('activateTraining'))}</button>`:''}</div>`;
+    return activateIso ? `<div class="home-row done-action-row"><button class="action small" type="button" data-activate-date="${esc(activateIso)}">${buttonHtml('start',t('activateTraining'))}</button></div>` : '';
   }
-  function toast(msg){ if(!els.toast) return; els.toast.textContent=msg; els.toast.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>els.toast.classList.remove('show'),1700); }
+  function toast(msg){ return; }
 
 
   function setText(id,key){ const el=$(id); if(el) el.textContent=t(key); }
@@ -214,37 +218,24 @@
     document.querySelectorAll('[data-tab]').forEach(b=>{ const k=navKeys[b.dataset.tab]; if(k) setNavButtonLabel(b,TAB_ICONS[b.dataset.tab]||'about',t(k)); });
     setText('planChooseHint','selectDay'); setIconText('addExerciseBtn','addExercise','add'); setIconText('removeSelectedBtn','remove','remove');
     setIconText('downloadWordBtn','word','word'); setIconText('downloadPdfBtn','pdf','pdf');
-    const dl=document.querySelector('.download-label'); if(dl) dl.textContent=t('download');
     setIconText('sharePlanBtn','sharePlan','share'); setIconText('sharePlanLinkBtn','sharePlanLink','share'); setIconText('manageSavePlanBtn','savePlan','save'); setIconText('insertPlanBtn','insertPlan','insert'); setIconText('manageSaveReportBtn','saveReport','save'); setIconText('shareReportBtn','shareReport','share'); setIconText('saveAllDataBtn','saveAllData','save'); setIconText('restoreAllDataBtn','restoreAllData','restore'); setIconText('deleteDataBtn','deleteData','delete');
     const donateTitle=document.querySelector('#donate .donate-intro h2'); if(donateTitle) donateTitle.textContent=t('supportTitle');
     const donateIntro=document.querySelector('#donate .donate-intro p'); if(donateIntro) donateIntro.textContent=t('supportIntro');
-    const theme=$('themeToggle'); if(theme){ theme.setAttribute('aria-label',t('theme')); theme.title=t('theme'); }
     setText('modalTitle','chooseExercise'); setIconText('editExercisesBtn','editExercises','edit'); setIconText('saveLibraryBtn','modalSave','save'); setIconText('deleteLibraryBtn','delete','delete');
     setIconText('homeStartBtn','startTraining','start');
     const custom=$('customExerciseName'); if(custom) custom.placeholder=t('writeOwnExercise');
     const close=$('closeModalBtn'); if(close) close.setAttribute('aria-label','Close');
     if(els.aboutContent) els.aboutContent.innerHTML=t('aboutHtml');
   }
-  function changeLanguage(lang){ currentLang=normalizeLang(lang); save(KEYS.lang,currentLang); renderAll(); toast((I18N[currentLang]&&I18N[currentLang].langName)||currentLang.toUpperCase()); }
+  function changeLanguage(lang){ currentLang=normalizeLang(lang); save(KEYS.lang,currentLang); renderAll(); }
 
-  const THEMES = ['system','light','dark'];
-  function applyTheme(mode){
-    const root = document.documentElement;
-    if(mode==='light'||mode==='dark') root.setAttribute('data-theme',mode);
-    else root.removeAttribute('data-theme');
-    const dark = (mode==='dark') || (mode!=='light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  function applyTheme(){
+    document.documentElement.setAttribute('data-theme','dark');
     const meta = document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute('content', dark ? '#000000' : '#ffffff');
-  }
-  function cycleTheme(){
-    const cur = load(KEYS.theme, 'system');
-    const next = THEMES[(THEMES.indexOf(cur)+1) % THEMES.length];
-    save(KEYS.theme, next);
-    applyTheme(next);
-    toast(t('themeToast')+next);
+    if(meta) meta.setAttribute('content', '#000000');
   }
 
-  function init(){ currentLang=normalizeLang(load(KEYS.lang,'en')); applyTheme(load(KEYS.theme,'system')); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
+  function init(){ currentLang=normalizeLang(load(KEYS.lang,'en')); applyTheme(); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
   function normalizeData(){
     for(const d of DAYS){ if(!Array.isArray(weekPlans[d])) weekPlans[d]=[]; if(!Array.isArray(trainSessions[d])) trainSessions[d]=[]; }
     if(!datePlans || typeof datePlans!=='object' || Array.isArray(datePlans)) datePlans={};
@@ -277,11 +268,6 @@
     document.querySelectorAll('[data-lang-option]').forEach(btn=>btn.addEventListener('click',(e)=>{ e.stopPropagation(); changeLanguage(btn.dataset.langOption); }));
     document.addEventListener('click',()=>{ if(els.languageSwitch) els.languageSwitch.classList.remove('open'); if(els.languageSelect) els.languageSelect.setAttribute('aria-expanded','false'); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ if(els.languageSwitch) els.languageSwitch.classList.remove('open'); if(els.languageSelect) els.languageSelect.setAttribute('aria-expanded','false'); } });
-    const tt = document.getElementById('themeToggle');
-    if(tt) tt.addEventListener('click', cycleTheme);
-    if(window.matchMedia){
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ if(load(KEYS.theme,'system')==='system') applyTheme('system'); });
-    }
     document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{activeTab=btn.dataset.tab; if(activeTab==='train'){savedWorkout=null; if(selectedPlanDate) selectedTrainDate=selectedPlanDate;} if(activeTab==='plan' && selectedTrainDate){selectedPlanDate=selectedTrainDate;} renderAll();}));
     els.addExerciseModal.addEventListener('click',e=>{if(e.target===els.addExerciseModal)closeExerciseModal();});
     $('closeModalBtn').addEventListener('click', closeExerciseModal);
@@ -325,7 +311,7 @@
       // Already trained today — show the completed session (read-only)
       card.classList.remove('home-editor');
       card.onclick = ()=>{ selectedPlanDate=iso; planWeekOffset=0; goTab('plan'); };
-      card.innerHTML = `<div class="home-row"><span class="home-label">${esc(t('done'))}</span><span class="home-sub">${esc(formatDuration(done.durationMs))}</span></div>`+ completedListHtml(done);
+      card.innerHTML = `<div class="home-row"><span class="home-sub">${esc(formatDuration(done.durationMs))}</span></div>`+ completedListHtml(done);
     } else if(hasDatePlan(iso)){
       // Planned training exists for today — show it (read-only)
       card.classList.remove('home-editor');
@@ -411,7 +397,6 @@
     }
     saveAll();
     renderAll();
-    toast(t('trainingSaved'));
   }
   function hasDateRemoveSelection(root){ return !!root.querySelector('[data-remove-check]:checked,[data-plan-line-check]:checked'); }
   function removeSelectedFromDatePlan(iso, root){
@@ -499,31 +484,66 @@
   function currentPlan(){return weekPlans[selectedPlanDay]||[];}
   function isPlanValid(day){const list=weekPlans[day]||[]; return list.length>0 && list.every(x=>normalExercise(x.name)&&isPositive(x.sets)&&isPositive(x.kg)&&isPositive(x.reps));}
   function markPlanDirty(day){savedPlanDays[day]=false; if(selectedTrainDay===day){selectedTrainDay=null;savedWorkout=null;} delete trainStartTimes[day]; saveAll();}
+  function updatePlanActivateState(iso){
+    const btn=els.activatePlanBtn;
+    if(!btn) return;
+    setButtonLabel(btn,'start',t('activateTraining'));
+    const can=!!(iso && journalForDate(iso) && !activeDatePlans[iso]);
+    btn.disabled=!can;
+    btn.classList.toggle('disabled',!can);
+    btn.onclick = can ? (()=>activateTraining(iso)) : null;
+  }
   function renderPlan(){
     const iso=selectedPlanDate; const has=!!iso;
     els.planChooseHint.style.display = has ? 'none' : '';
     els.planTitle.style.display = 'none'; els.planTitle.textContent='';
     els.planList.style.display = has ? '' : 'none';
-    if(!has){ els.planActionRow.style.display='none'; els.savePlanRow.style.display='none'; els.planList.innerHTML=''; updatePlanCopyState(); return; }
+    if(!has){
+      els.planActionRow.style.display='none';
+      els.savePlanRow.style.display='none';
+      els.planList.innerHTML='';
+      updatePlanCopyState();
+      updatePlanActivateState(null);
+      return;
+    }
+
+    // PLAN controls stay visible for every selected day. App logic only enables/disables them.
+    els.planActionRow.style.display='';
+    els.savePlanRow.style.display='flex';
+    const setDisabled=(btn,disabled)=>{ if(!btn)return; btn.disabled=!!disabled; btn.classList.toggle('disabled',!!disabled); };
     const today=todayISO(); const done=journalForDate(iso); const isPast = iso<today;
+    updatePlanActivateState(iso);
+
     if(done && !activeDatePlans[iso]){
-      // Done: Progress keeps the performed session; Plan still shows the original saved plan unchanged.
-      els.planActionRow.style.display='none'; els.savePlanRow.style.display='none'; updatePlanCopyState();
+      // Completed date: keep PLAN read-only, show SAVED, and keep all controls visible.
+      setDisabled($('addExerciseBtn'), true);
+      setDisabled(els.removeSelectedBtn, true);
+      updatePlanCopyState();
+      setButtonLabel(els.savePlanBtn,'copied',t('saved'));
+      els.savePlanBtn.disabled = true;
+      els.savePlanBtn.classList.add('saved');
+      els.savePlanBtn.classList.remove('disabled');
       const originalPlan = (datePlans[iso]||[]);
-      els.planList.innerHTML = doneRowHtml(iso) + (originalPlan.length ? readOnlyPlanExerciseCardsHtml(originalPlan) : completedExerciseCardsHtml(done));
-      const activateBtn = els.planList.querySelector('[data-activate-date]');
-      if(activateBtn) activateBtn.addEventListener('click',()=>activateTraining(iso));
+      els.planList.innerHTML = originalPlan.length ? readOnlyPlanExerciseCardsHtml(originalPlan) : completedExerciseCardsHtml(done);
       return;
     }
+
     if(isPast && !activeDatePlans[iso]){
-      // Past date, never trained — read-only
-      els.planActionRow.style.display='none'; els.savePlanRow.style.display='none'; updatePlanCopyState();
+      // Past date, never trained — read-only, but controls remain visible and disabled.
+      setDisabled($('addExerciseBtn'), true);
+      setDisabled(els.removeSelectedBtn, true);
+      updatePlanCopyState();
+      setButtonLabel(els.savePlanBtn,'save',t('saveTraining'));
+      els.savePlanBtn.disabled = true;
+      els.savePlanBtn.classList.remove('saved');
+      els.savePlanBtn.classList.add('disabled');
       const plan=datePlans[iso]||[];
-      els.planList.innerHTML = plan.length ? (`<div class="home-row"><span class="home-label">${esc(t('plannedNotTrained'))}</span></div>`+planListHtml(plan)) : `<div class="empty">${esc(t('noTrainingDay'))}</div>`;
+      els.planList.innerHTML = plan.length ? planListHtml(plan) : `<div class="empty">${esc(t('noTrainingDay'))}</div>`;
       return;
     }
-    // Today or future — editable plan for this exact date
-    els.planActionRow.style.display=''; els.savePlanRow.style.display='';
+
+    // Today or future — editable plan for this exact date.
+    setDisabled($('addExerciseBtn'), false);
     const list=datePlans[iso]||[]; const saved=hasDatePlan(iso);
     updatePlanCopyState();
     setButtonLabel(els.savePlanBtn, saved?'copied':'save', saved ? t('saved') : t('saveTraining'));
@@ -679,48 +699,86 @@
     });
   }
   function removeSelectedPlan(){ if(!selectedPlanDay)return; const ids=[...els.planList.querySelectorAll('[data-remove-check]:checked')].map(x=>x.value); if(!ids.length)return; weekPlans[selectedPlanDay]=currentPlan().filter(x=>!ids.includes(x.id)); markPlanDirty(selectedPlanDay); renderAll(); }
-  function saveCurrentPlan(){ if(!selectedPlanDay||!isPlanValid(selectedPlanDay))return; savedPlanDays[selectedPlanDay]=true; syncTrainFromPlan(selectedPlanDay); saveAll(); renderAll(); toast(`${dayShort(selectedPlanDay)}-plan ${t('saved')}`); }
+  function saveCurrentPlan(){ if(!selectedPlanDay||!isPlanValid(selectedPlanDay))return; savedPlanDays[selectedPlanDay]=true; syncTrainFromPlan(selectedPlanDay); saveAll(); renderAll(); }
   function addPlanExercise(name){ if(!selectedPlanDay)return; weekPlans[selectedPlanDay].push({id:uid(),name,sets:1,kg:1,reps:1});markPlanDirty(selectedPlanDay);closeExerciseModal();renderAll();}
   function replacePlanExercise(id,name){ if(!selectedPlanDay)return; const it=currentPlan().find(x=>x.id===id); if(!it)return; it.name=name; markPlanDirty(selectedPlanDay); closeExerciseModal(); renderAll();}
   function syncTrainFromPlan(day){trainSessions[day]=(weekPlans[day]||[]).map(p=>({sessionId:uid(),exerciseId:p.id,name:p.name,sets:p.sets,kg:p.kg,reps:p.reps,checked:0,trainAdded:false,addedStarted:false}));}
 
   function selectTrainDay(day){ if(!hasSavedPlan(day)) return; selectedTrainDay=day; savedWorkout=null; syncTrainFromPlan(day); delete trainStartTimes[day]; saveAll(); renderAll(); }
+
+  function placeSaveTrainingButtonInline(mode='open'){
+    const row=$('saveTrainingRow');
+    if(!row || !els.saveTrainingBtn) return;
+    // Stop/Save belongs below exercise cards, same position logic as PLAN save.
+    if(els.saveTrainingBtn.parentNode !== row){
+      row.innerHTML='';
+      row.appendChild(els.saveTrainingBtn);
+    }
+    els.saveTrainingBtn.classList.remove('train-save-inline');
+    els.saveTrainingBtn.classList.add('train-save-bottom');
+    els.saveTrainingBtn.style.display='';
+  }
+
+
   function renderTrain(){
-    // Do-it: swipeable date strip; train the selected date's planned session
+    // Do-it: swipeable date strip; train the selected date's planned session.
     buildDateStrip(els.trainDayButtons, selectedTrainDate, 'data-train-iso');
     ensureStripBehavior(els.trainDayButtons, 'data-train-iso', iso=>{ selectedTrainDate=iso; renderAll(); });
     const iso=selectedTrainDate;
-    els.trainControls.classList.remove('done-state');
+    els.trainControls.classList.remove('done-state','saved-state');
     els.trainControls.style.display = iso ? '' : 'none';
-    if(!iso){ els.trainControls.innerHTML=''; els.trainList.innerHTML=`<div class="empty">${esc(t('selectDay'))}</div>`; setTrainSaveState(); return; }
+
+    const trainControlsHtml=({open=false, locked=false, hasList=false, activate=false}={})=>{
+      const addDisabled = locked || !hasList;
+      const removeDisabled = true;
+      const startDisabled = locked || open || !hasList;
+      const startLabel = activate ? t('activateTraining') : (open ? t('started') : t('startTraining'));
+      const startIcon = open ? 'copied' : 'start';
+      return `<button class="action small ${addDisabled?'disabled':''}" id="addTrainExerciseBtn" type="button" ${addDisabled?'disabled':''}>${buttonHtml('add',t('addExercise'))}</button>`+
+        `<button class="action small ${startDisabled && !activate?'disabled':''}" id="startInlineBtn" type="button" ${startDisabled && !activate?'disabled':''}>${buttonHtml(startIcon,startLabel)}</button>`+
+        `<span class="timer" id="liveTimer">${open?formatDuration(Date.now()-Number(trainStartTimes[iso])):''}</span>`+
+        `<button class="action danger small disabled train-remove-end" id="removeTrainSelectedBtn" type="button" disabled>${buttonHtml('remove',t('remove'))}</button>`;
+    };
+
+    if(!iso){
+      els.trainControls.innerHTML='';
+      els.trainList.innerHTML=`<div class="empty">${esc(t('selectDay'))}</div>`;
+      setTrainSaveState();
+      return;
+    }
+
     const open=!!trainStartTimes[iso]; const finished=savedWorkout?.date===iso; const done=journalForDate(iso);
     if(done && !activeDatePlans[iso] && !open && !finished){
-      els.trainControls.classList.add('done-state');
-      els.trainControls.style.display='none';
-      els.trainControls.innerHTML='';
-      els.trainList.innerHTML=doneRowHtml()+completedExerciseCardsHtml(done);
+      els.trainControls.classList.add('saved-state');
+      els.trainControls.style.display='';
+      els.trainControls.innerHTML=trainControlsHtml({locked:true, hasList:true, activate:false});
+      els.trainList.innerHTML=completedExerciseCardsHtml(done);
+      placeSaveTrainingButtonInline('saved');
       setTrainSaveState();
-      const saveRow=els.saveTrainingBtn.closest('.action-row'); if(saveRow) saveRow.style.display='none';
       return;
     }
     if(finished){
-      els.trainControls.classList.add('done-state');
-      els.trainControls.style.display='none';
-      els.trainControls.innerHTML='';
-      els.trainList.innerHTML=doneRowHtml()+completedExerciseCardsHtml(done);
+      els.trainControls.classList.add('saved-state');
+      els.trainControls.style.display='';
+      els.trainControls.innerHTML=trainControlsHtml({locked:true, hasList:true, activate:false});
+      els.trainList.innerHTML=completedExerciseCardsHtml(done);
+      placeSaveTrainingButtonInline('saved');
       setTrainSaveState();
-      const saveRow=els.saveTrainingBtn.closest('.action-row'); if(saveRow) saveRow.style.display='none';
       return;
     }
+
     if(!open && !finished && !(trainSessions[iso]||[]).length && isDatePlanValid(iso)){ seedTrainFromDate(iso); saveAll(); }
     const list=trainSessions[iso]||[];
     if(!list.length){
-      els.trainControls.style.display='none'; els.trainControls.innerHTML='';
+      els.trainControls.style.display='';
+      els.trainControls.innerHTML=trainControlsHtml({open:false, locked:false, hasList:false});
       els.trainList.innerHTML=`<div class="empty">${esc(t('noTrainingPlanned'))}</div>`;
-      setTrainSaveState(); return;
+      setTrainSaveState();
+      return;
     }
-    const startText = open ? t('started') : t('startTraining');
-    els.trainControls.innerHTML = `<button class="action small" id="addTrainExerciseBtn" type="button">${buttonHtml('add',t('addExercise'))}</button><button class="action small" id="startInlineBtn" ${open?'disabled':''}>${buttonHtml(open?'copied':'start',startText)}</button><span class="timer" id="liveTimer">${open?formatDuration(Date.now()-Number(trainStartTimes[iso])):''}</span><button class="action danger small disabled train-remove-end" id="removeTrainSelectedBtn" type="button" disabled>${buttonHtml('remove',t('remove'))}</button>`;
+
+    els.trainControls.innerHTML=trainControlsHtml({open, locked:false, hasList:true});
+    placeSaveTrainingButtonInline('open');
     const addBtn=$('addTrainExerciseBtn'); if(addBtn) addBtn.addEventListener('click',()=>openExerciseModal('train-add'));
     const startBtn=$('startInlineBtn'); if(startBtn) startBtn.addEventListener('click', startTraining);
     const removeBtn=$('removeTrainSelectedBtn'); if(removeBtn) removeBtn.addEventListener('click', removeSelectedTrain);
@@ -747,7 +805,8 @@
     els.trainList.querySelectorAll('[data-set-n]').forEach(btn=>btn.addEventListener('click',()=>{if(isTrainLocked())return; const card=btn.closest('[data-card-id]'); const it=findTrain(card.dataset.cardId); if(!it)return; const n=Number(btn.dataset.setN); it.checked = Number(it.checked)>=n ? n-1 : n; if(it.trainAdded && it.checked>0){it.addedStarted=true;} saveAll(); renderTrain();}));
   }
   function findTrain(sessionId){return (trainSessions[selectedTrainDate]||[]).find(x=>x.sessionId===sessionId);}
-  function isTrainLocked(){return savedWorkout?.date===selectedTrainDate;}
+  function isTrainSavedState(iso=selectedTrainDate){ return !!iso && ((savedWorkout?.date===iso) || (!!journalForDate(iso) && !activeDatePlans[iso] && !trainStartTimes[iso])); }
+  function isTrainLocked(){return isTrainSavedState(selectedTrainDate);}
   function weekdayOf(iso){ return DAYS[(new Date(iso+'T00:00:00').getDay()+6)%7]; }
   function activateTraining(iso){
     if(!iso) return;
@@ -768,7 +827,7 @@
     selectedTrainDate=iso;
     saveAll();
     renderAll();
-    toast('Training activated');
+    
   }
   function startTraining(){ const iso=selectedTrainDate; if(!iso||isTrainLocked())return; if(!(trainSessions[iso]||[]).length){ if(!isDatePlanValid(iso))return; seedTrainFromDate(iso); } if(!trainStartTimes[iso]){ trainStartTimes[iso]=Date.now(); savedDatePlans[iso]=true; saveAll(); } renderTrain(); updateTimerLoop(); }
   function addTrainLine(sessionId){
@@ -836,11 +895,14 @@
   }
   function setTrainSaveState(){
     const iso=selectedTrainDate;
-    const row=els.saveTrainingBtn.closest('.action-row');
-    const visible=!!(iso&&trainStartTimes[iso]) || isTrainLocked();
-    if(row) row.style.display=visible?'':'none';
+    const row=$('saveTrainingRow');
+    const hasSession=!!(iso && ((trainSessions[iso]||[]).length || journalForDate(iso)));
+    const visible=!!iso && hasSession;
+    if(row) row.style.display=visible?'flex':'none';
+    if(els.saveTrainingBtn) els.saveTrainingBtn.style.display=visible?'':'none';
     if(!visible){ resetSaveTrainingConfirm(false); return; }
-    const locked=isTrainLocked();
+    placeSaveTrainingButtonInline(isTrainLocked() ? 'saved' : 'open');
+    const locked=isTrainSavedState(iso);
     const can=canSaveTraining();
     if((locked||!can) && saveTrainingConfirmArmed) resetSaveTrainingConfirm(false);
     const confirmActive=!locked && can && saveTrainingConfirmArmed;
@@ -850,6 +912,7 @@
     els.saveTrainingBtn.classList.toggle('disabled',!locked&&!can);
     els.saveTrainingBtn.classList.toggle('confirming',confirmActive);
   }
+
   function canSaveTraining(){ const iso=selectedTrainDate; if(!iso||!trainStartTimes[iso])return false; const list=trainSessions[iso]||[]; if(!list.length)return false; if(!list.every(x=>normalExercise(x.name)&&isPositive(x.sets)&&isPositive(x.kg)&&isPositive(x.reps)))return false; return list.some(x=>Number(x.checked)>0); }
   function planSnapshotForDate(iso){
     return (datePlans[iso]||[]).map(ex=>{
@@ -888,7 +951,7 @@
     const exercises=collectCompleted(plannedExercises);
     if(!exercises.length)return;
     journal.unshift({id:uid(),date:iso,day:weekdayOf(iso),startedAt:new Date(start).toISOString(),endedAt:new Date(end).toISOString(),durationMs:end-start,plannedExercises,exercises});
-    savedDatePlans[iso]=true; activeDatePlans[iso]=false; savedWorkout={date:iso,durationMs:end-start}; delete trainStartTimes[iso]; saveAll(); renderAll(); toast(t('trainingSaved'));
+    savedDatePlans[iso]=true; activeDatePlans[iso]=false; savedWorkout={date:iso,durationMs:end-start}; delete trainStartTimes[iso]; saveAll(); renderAll();
   }
   function collectCompleted(plannedExercises=null){
     const out=[];
@@ -1018,7 +1081,271 @@
       return `<h2>${esc(g.date)}</h2>${meta}<table class="report">${head}${body}</table>`;
     };
     const content=groups.length?groups.map(tableForGroup).join(''):`<p class="empty">${esc(t('noReport'))}</p>`;
-    return `<!doctype html><html><head><meta charset="utf-8"><title>Report</title><style>${css}</style></head><body>${content}</body></html>`;
+    return `<!doctype html><html><head><meta charset="utf-8"><title>Report</title><style>${css}
+/* v190: PWA language menu changed to website/app-style dropdown list (no boxed popup) */
+.language-switch{
+  position:relative!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.language-select{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--gold)!important;
+  font-weight:800!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1!important;
+  letter-spacing:-.01em!important;
+  min-width:30px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  cursor:pointer!important;
+}
+.language-menu{
+  display:none;
+  position:absolute!important;
+  right:0!important;
+  top:calc(100% + 4px)!important;
+  z-index:1000!important;
+  min-width:30px!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:2px 0 0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.language-switch.open .language-menu{display:block!important;}
+.language-menu button{
+  display:block!important;
+  width:100%!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+  font-weight:800!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1!important;
+  padding:5px 0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.language-menu button.active{display:none!important;}
+.language-menu button:active,.language-menu button:hover{
+  color:var(--gold)!important;
+  background:transparent!important;
+}
+@media(max-width:420px){
+  .language-select{font-size:14px!important;min-width:28px!important;}
+  .language-menu{top:calc(100% + 3px)!important;min-width:28px!important;}
+  .language-menu button{font-size:14px!important;padding:5px 0!important;}
+}
+@media(min-width:760px){
+  .language-select{font-size:18px!important;min-width:36px!important;}
+  .language-menu{min-width:36px!important;}
+  .language-menu button{font-size:18px!important;}
+}
+
+
+
+/* v191: dark mode only; language selector replaces removed Theme control */
+html{color-scheme:dark!important;}
+.theme-toggle{display:none!important;}
+.header-controls{
+  grid-column:3!important;
+  grid-row:1!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:flex-end!important;
+  justify-content:flex-end!important;
+  align-self:end!important;
+  gap:0!important;
+  min-width:0!important;
+  padding-top:0!important;
+}
+.language-switch{
+  position:relative!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.language-select{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--gold)!important;
+  font-weight:900!important;
+  font-size:clamp(15px,3.8vw,20px)!important;
+  line-height:1!important;
+  letter-spacing:-.01em!important;
+  min-width:34px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.language-menu{
+  display:none!important;
+  position:absolute!important;
+  right:0!important;
+  top:calc(100% + 6px)!important;
+  z-index:1000!important;
+  min-width:34px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.language-switch.open .language-menu{display:block!important;}
+.language-menu button{
+  display:block!important;
+  width:100%!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+  font-weight:900!important;
+  font-size:clamp(15px,3.8vw,20px)!important;
+  line-height:1!important;
+  padding:6px 0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.language-menu button.active{display:none!important;}
+.language-menu button:active,.language-menu button:hover{color:var(--gold)!important;background:transparent!important;}
+@media(max-width:420px){
+  .header-controls{align-self:end!important;}
+  .language-select{font-size:15px!important;min-width:30px!important;}
+  .language-menu{top:calc(100% + 5px)!important;min-width:30px!important;}
+  .language-menu button{font-size:15px!important;padding:6px 0!important;}
+}
+@media(min-width:760px){
+  .language-select{font-size:20px!important;min-width:40px!important;}
+  .language-menu{min-width:40px!important;}
+  .language-menu button{font-size:20px!important;}
+}
+
+
+/* v192: language selector belongs to the main menu row, same level as PLAN / GO / LOG */
+.header-controls{display:none!important;}
+.main-nav{
+  grid-column:1/-1!important;
+  grid-row:2!important;
+  width:100%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  overflow:visible!important;
+}
+.main-nav .language-switch.nav-lang{
+  position:relative!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+  min-width:auto!important;
+  height:auto!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  align-self:center!important;
+}
+.main-nav .language-select{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--gold)!important;
+  font-weight:900!important;
+  font-size:inherit!important;
+  line-height:1!important;
+  letter-spacing:-.01em!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.main-nav .language-menu{
+  display:none!important;
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  top:calc(100% + 8px)!important;
+  z-index:1000!important;
+  min-width:auto!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.main-nav .language-switch.open .language-menu{display:block!important;}
+.main-nav .language-menu button{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+  font-weight:900!important;
+  font-size:inherit!important;
+  line-height:1!important;
+  padding:5px 0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.main-nav .language-menu button.active{display:none!important;}
+.main-nav .language-menu button:active,.main-nav .language-menu button:hover{color:var(--gold)!important;background:transparent!important;}
+@media(max-width:420px){
+  .main-nav{gap:clamp(8px,2.7vw,16px)!important;}
+  .main-nav .language-select,.main-nav .language-menu button{font-size:12.5px!important;}
+}
+@media(min-width:760px){
+  .main-nav{justify-content:flex-end!important;gap:clamp(18px,2.5vw,34px)!important;}
+}
+
+
+/* v197: language dropdown letters only — no visible rectangle/background */
+.main-nav .language-menu{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  outline:0!important;
+}
+.main-nav .language-menu button{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.main-nav .language-menu button:active,
+.main-nav .language-menu button:hover{
+  background:transparent!important;
+}
+
+</style></head><body>${content}</body></html>`;
   }
   function downloadWord(){ downloadFile('easy-gym-report.doc','application/msword',reportDownloadHtml()); }
   function downloadPdf(){ const pdf=makeReportTablePdf(); downloadFile('easy-gym-report.pdf','application/pdf',pdf,true); }
@@ -1510,7 +1837,7 @@
       init();
     }catch(e){
       console.error(e);
-      document.body.innerHTML = '<div style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;padding:24px;line-height:1.4"><h1>Easy Gym</h1><p>Language files could not be loaded. Please open the app through the local server or reinstall/update the app package.</p></div>';
+      document.body.innerHTML = '<div style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;padding:24px;line-height:1.4"><h1>Easy Gym</h1><p>Language files could not be loaded. Please reinstall/update the app package.</p></div>';
     }
   }
   window.addEventListener('DOMContentLoaded', boot);
