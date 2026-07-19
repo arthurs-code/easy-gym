@@ -8,7 +8,7 @@
 (function(){try{var m=localStorage.getItem('easyGym.enDeFrItEs.theme.v1');if(m==='light'||m==='dark'){document.documentElement.setAttribute('data-theme',m);}}catch(e){}})();
 </script>
 <title>Easy Gym</title>
-<!-- Easy Gym v185: 5-language App Store prep with language packs -->
+<!-- Easy Gym v190: 5-language PWA donation with app-style language dropdown -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <style>:root{
@@ -1487,6 +1487,78 @@ body{font-variant-numeric:tabular-nums;}
 @media(max-width:420px){.language-select{font-size:13px!important;min-width:30px!important;height:22px!important;}.language-menu{min-width:34px;top:calc(100% + 1px);}.language-menu button{font-size:15px;padding:7px 0;}}
 @media(min-width:760px){.language-select{font-size:18px!important;min-width:44px!important;height:26px!important;}.language-menu{min-width:48px;max-height:178px;}.language-menu button{font-size:18px;}}
 
+
+/* v190: PWA language menu changed to website/app-style dropdown list (no boxed popup) */
+.language-switch{
+  position:relative!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.language-select{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--gold)!important;
+  font-weight:800!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1!important;
+  letter-spacing:-.01em!important;
+  min-width:30px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  cursor:pointer!important;
+}
+.language-menu{
+  display:none;
+  position:absolute!important;
+  right:0!important;
+  top:calc(100% + 4px)!important;
+  z-index:1000!important;
+  min-width:30px!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:2px 0 0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.language-switch.open .language-menu{display:block!important;}
+.language-menu button{
+  display:block!important;
+  width:100%!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+  font-weight:800!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1!important;
+  padding:5px 0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.language-menu button.active{display:none!important;}
+.language-menu button:active,.language-menu button:hover{
+  color:var(--gold)!important;
+  background:transparent!important;
+}
+@media(max-width:420px){
+  .language-select{font-size:14px!important;min-width:28px!important;}
+  .language-menu{top:calc(100% + 3px)!important;min-width:28px!important;}
+  .language-menu button{font-size:14px!important;padding:5px 0!important;}
+}
+@media(min-width:760px){
+  .language-select{font-size:18px!important;min-width:36px!important;}
+  .language-menu{min-width:36px!important;}
+  .language-menu button{font-size:18px!important;}
+}
+
 </style>
 </head>
 <body>
@@ -2619,7 +2691,79 @@ body{font-variant-numeric:tabular-nums;}
       return `<h2>${esc(g.date)}</h2>${meta}<table class="report">${head}${body}</table>`;
     };
     const content=groups.length?groups.map(tableForGroup).join(''):`<p class="empty">${esc(t('noReport'))}</p>`;
-    return `<!doctype html><html><head><meta charset="utf-8"><title>Report</title><style>${css}</style></head><body>${content}</body></html>`;
+    return `<!doctype html><html><head><meta charset="utf-8"><title>Report</title><style>${css}
+/* v190: PWA language menu changed to website/app-style dropdown list (no boxed popup) */
+.language-switch{
+  position:relative!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.language-select{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--gold)!important;
+  font-weight:800!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1!important;
+  letter-spacing:-.01em!important;
+  min-width:30px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  cursor:pointer!important;
+}
+.language-menu{
+  display:none;
+  position:absolute!important;
+  right:0!important;
+  top:calc(100% + 4px)!important;
+  z-index:1000!important;
+  min-width:30px!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:2px 0 0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.language-switch.open .language-menu{display:block!important;}
+.language-menu button{
+  display:block!important;
+  width:100%!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+  font-weight:800!important;
+  font-size:clamp(14px,3.2vw,17px)!important;
+  line-height:1!important;
+  padding:5px 0!important;
+  text-align:center!important;
+  cursor:pointer!important;
+}
+.language-menu button.active{display:none!important;}
+.language-menu button:active,.language-menu button:hover{
+  color:var(--gold)!important;
+  background:transparent!important;
+}
+@media(max-width:420px){
+  .language-select{font-size:14px!important;min-width:28px!important;}
+  .language-menu{top:calc(100% + 3px)!important;min-width:28px!important;}
+  .language-menu button{font-size:14px!important;padding:5px 0!important;}
+}
+@media(min-width:760px){
+  .language-select{font-size:18px!important;min-width:36px!important;}
+  .language-menu{min-width:36px!important;}
+  .language-menu button{font-size:18px!important;}
+}
+
+</style></head><body>${content}</body></html>`;
   }
   function downloadWord(){ downloadFile('easy-gym-report.doc','application/msword',reportDownloadHtml()); }
   function downloadPdf(){ const pdf=makeReportTablePdf(); downloadFile('easy-gym-report.pdf','application/pdf',pdf,true); }

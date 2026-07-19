@@ -39,7 +39,7 @@
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v189-5lang-pwa-donation-stop-save-confirm';
+  const DEV_BUILD = 'v190-5lang-pwa-donation-lang-dropdown';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Development mode: whenever the build version changes, remove all app data
   // from localStorage so test plans/progress do not survive into the next change.

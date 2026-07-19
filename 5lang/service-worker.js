@@ -1,4 +1,4 @@
-const CACHE='easy-gym-5lang-v189-pwa-iphone-donation-stop-save-confirm';
+const CACHE='easy-gym-5lang-v190-pwa-donation-lang-dropdown';
 const ASSETS=['./','./index.html','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./lang/en.json','./lang/de.json','./lang/fr.json','./lang/it.json','./lang/es.json'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).catch(()=>{}));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('easy-gym-')&&k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});
