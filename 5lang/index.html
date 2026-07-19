@@ -8,7 +8,7 @@
 document.documentElement.setAttribute('data-theme','dark');
 </script>
 <title>Easy Gym</title>
-<!-- Easy Gym v194: 5-language PWA donation, dark-only, embedded language packs only -->
+<!-- Easy Gym v196: 5-language PWA donation, dark-only, embedded language packs only, uniform language dropdown spacing -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <style>:root{
@@ -1698,6 +1698,45 @@ body{font-variant-numeric:tabular-nums;}
 @media(min-width:760px){
   .main-nav .language-select,
   .main-nav .language-menu button{font-size:clamp(10px,2.7vw,15px)!important;}
+}
+
+
+
+/* v195: tighten language dropdown gap under selected menu-level language */
+.main-nav .language-menu{
+  top:calc(50% + .58em)!important;
+  margin-top:0!important;
+  padding-top:0!important;
+}
+.main-nav .language-menu button:first-child{
+  padding-top:2px!important;
+}
+
+
+
+/* v196: uniform language dropdown spacing, same distance between all language labels */
+.main-nav .language-menu{
+  top:calc(50% + clamp(12px,3vw,15px))!important;
+  margin:0!important;
+  padding:0!important;
+  background:#000!important;
+  border:0!important;
+  box-shadow:none!important;
+  min-width:100%!important;
+  z-index:2000!important;
+}
+.main-nav .language-menu button{
+  height:clamp(24px,6vw,30px)!important;
+  min-height:clamp(24px,6vw,30px)!important;
+  padding:0!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  line-height:1!important;
+}
+.main-nav .language-menu button:first-child{
+  padding-top:0!important;
 }
 
 </style>

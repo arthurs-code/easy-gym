@@ -1,4 +1,4 @@
-const CACHE='easy-gym-5lang-v194-pwa-donation-embedded-lang-only';
+const CACHE='easy-gym-pwa-v196-pwa-donation-embedded-lang-tight-menu';
 const ASSETS=['./','./index.html','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).catch(()=>{}));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('easy-gym-')&&k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});
