@@ -8,7 +8,7 @@
 document.documentElement.setAttribute('data-theme','dark');
 </script>
 <title>Easy Gym</title>
-<!-- Easy Gym v202: 5-language PWA donation, GO SAVED visible above completed log -->
+<!-- Easy Gym v223: A4 portrait Word/PDF LOG, full Max icons, and modular language packages; app UI unchanged -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <style>:root{
@@ -1782,13 +1782,7 @@ body{font-variant-numeric:tabular-nums;}
     <button class="nav-link nav-text-only active" data-tab="plan" aria-label="PLAN" title="PLAN"><span class="btn-text">PLAN</span></button><button class="nav-link nav-text-only" data-tab="train" aria-label="GO" title="GO"><span class="btn-text">GO</span></button><button class="nav-link nav-text-only" data-tab="progress" aria-label="LOG" title="LOG"><span class="btn-text">LOG</span></button><button class="nav-link nav-text-only" data-tab="explanations" aria-label="mgmt" title="mgmt"><span class="btn-text">mgmt</span></button><button class="nav-link nav-icon-only" data-tab="donate" aria-label="heart" title="heart"><svg class="ui-icon ui-icon-donate" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 8.7c0 5.2-8.8 10.3-8.8 10.3S3.2 13.9 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6z"></path></svg></button><button class="nav-link nav-icon-only" data-tab="about" aria-label="info" title="info"><svg class="ui-icon ui-icon-about" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></button>
       <div class="language-switch nav-lang" id="languageSwitch" aria-label="Language">
       <button id="languageSelect" class="language-select" type="button" aria-label="Language" aria-haspopup="listbox" aria-expanded="false">EN</button>
-      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language options">
-        <button type="button" role="option" data-lang-option="en">EN</button>
-        <button type="button" role="option" data-lang-option="de">DE</button>
-        <button type="button" role="option" data-lang-option="fr">FR</button>
-        <button type="button" role="option" data-lang-option="it">IT</button>
-        <button type="button" role="option" data-lang-option="es">ES</button>
-      </div>
+      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language options"></div>
     </div>
   </nav>
 </header>
@@ -1863,6 +1857,15 @@ body{font-variant-numeric:tabular-nums;}
 </div>
 <div class="modal hidden" id="addExerciseModal"><div class="modal-panel"><div class="modal-head"><div><div class="modal-title-row"><h2 id="modalTitle">Choose exercise</h2><button class="action small" id="editExercisesBtn">Edit-exercises</button><button class="action small disabled" id="saveLibraryBtn" disabled>Save</button><button class="action small danger disabled" id="deleteLibraryBtn" disabled>Delete</button></div></div><button class="modal-close" id="closeModalBtn">×</button></div><p class="help" id="exerciseModalHelp"></p><div class="custom-row" id="customRow"><input id="customExerciseName" placeholder="Write your own exercise"><button class="add-mini" id="addCustomExerciseBtn" style="display:none">+</button></div><div id="libraryList" class="library-list"></div></div></div>
 <div class="toast" id="toast"></div>
+<!-- Easy Gym v223 language packages: keep these core files as separate editable packages. -->
+<script src="./lang/config.js"></script>
+<script src="./lang/en.js"></script>
+<script src="./lang/de.js"></script>
+<script src="./lang/fr.js"></script>
+<script src="./lang/it.js"></script>
+<script src="./lang/es.js"></script>
+<!-- loader.js loads only additional enabled language files not listed above. -->
+<script src="./lang/loader.js"></script>
 <script>
 (() => {
   'use strict';
@@ -1878,30 +1881,47 @@ body{font-variant-numeric:tabular-nums;}
   }
   let I18N = {};
 
-  const LANGS = ['en','de','fr','it','es'];
+  const LANGUAGE_CONFIG = window.EASY_GYM_LANGUAGE_CONFIG || {};
+  let LANGS = Array.isArray(window.EASY_GYM_ENABLED_LANGUAGES)
+    ? [...window.EASY_GYM_ENABLED_LANGUAGES]
+    : ['en'];
+  const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v207-pwa-embedded-only';
-  const EMBEDDED_LANGUAGE_PACKS = {"en":{"code":"en","ui":{"langName":"English","days":{"mon":"Mon","tue":"Tue","wed":"Wed","thu":"Thu","fri":"Fri","sat":"Sat","sun":"Sun"},"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"plan":"PLAN","do":"GO","report":"LOG","manage":"mgmt","donate":"heart","about":"info","selectDay":"Select the Day","addExercise":"EXERCISE","remove":"del","copy":"Copy","copied":"Copied","paste":"Paste","saveTraining":"Save training","saved":"Saved","startTraining":"Start Training","started":"Started","stopSaveTraining":"Stop and Save Training","done":"Done","activateTraining":"Activate Training","plannedNotTrained":"Planned · not trained","noTrainingDay":"No training on this day.","tapAddExercise":"Tap “+ EXERCISE” to build this day’s training.","noSavedPlan":"No saved plan for this day.","noCompletedExercises":"No completed exercises.","chooseExercise":"Choose exercise","editExercises":"Edit exercises","save":"Save","modalSave":"SAVE","delete":"del","writeOwnExercise":"Write your own exercise","kg":"KG","reps":"Reps","sets":"Sets","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"No saved LOG yet.","noReport":"No LOG","date":"Date","startTime":"Start Time","duration":"Duration","total":"Total","exercise":"Exercise","everMax":"Ever Max","maxToday":"Max Today","sharePlan":"Share Plan","sharePlanLink":"Share Plan as Link","directLinkComingSoon":"PLAN-Link ready.","planLinkReady":"Plan link ready","planLinkCopied":"Plan link copied","planLinkTooLarge":"Plan too large for link - use Share Plan file","savePlanFirst":"Save a plan first","creatingPlanLink":"Creating plan link","copyPlanLinkPrompt":"Copy this plan link","savePlan":"Save Plan","insertPlan":"Insert Plan","saveReport":"Save LOG","shareReport":"Share LOG","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Delete Data","supportTitle":"Support Easy Gym","supportIntro":"Easy Gym is free and ad-free. If it helps your training, a small donation keeps it growing — thank you.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Theme","themeToast":"Theme: ","planSaved":"Plan saved","reportSaved":"LOG saved","allDataSaved":"All data saved","shared":"Shared","fileSaved":"File saved","planInserted":"Plan inserted","dataRestored":"Data restored","dataDeleted":"Data deleted","insertFailed":"Insert failed","restoreFailed":"Restore failed","importFailed":"Import failed","trainingSaved":"Training saved","exerciseRemovedPlan":"Exercise removed from Plan","exerciseListSaved":"Exercise list saved","addFirst":"Add exercises to today’s training first","resumeTraining":"Resume training","noExercisesYet":"No exercises yet. Tap “+ EXERCISE” to build today’s training.","noTrainingPlanned":"No training planned for this day. Create it in Plan first.","reportHeader":"Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>A free, ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone.</p></div><div class=\"card about-card\"><h2>Preface</h2><p>I created Easy Gym for my own training. It is free and has no ads. Like it? Support me with a donation. Want your own app? Write to: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Create a plan for any date. Use <strong>+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong>DEL</strong> to remove exercises. Save the plan when it is ready.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong>+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</p></div><div class=\"card about-card\"><h2>MGMT &amp; share</h2><p><strong>Share Plan as Link</strong> — Plan-Link will be available in Easy Gym from App Store.</p><p><strong>Share Plan File or LOG</strong> — When you share a file, we create a secure link you can send via WhatsApp or other messengers.</p><p><strong>Save File or LOG</strong> — saves it locally.</p><p><strong>Insert Plan File</strong> — imports a received plan file into Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</p></div>"},"exercises":{}},"de":{"code":"de","ui":{"langName":"Deutsch","days":{"mon":"Mo","tue":"Di","wed":"Mi","thu":"Do","fri":"Fr","sat":"Sa","sun":"So"},"months":["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"plan":"PLAN","do":"GO","report":"LOG","manage":"orga","donate":"herz","about":"info","selectDay":"Tag wählen","addExercise":"ÜBUNG","remove":"löschen","copy":"Kopieren","copied":"Kopiert","paste":"Einfügen","saveTraining":"Training speichern","saved":"Gespeichert","startTraining":"Training starten","started":"Gestartet","stopSaveTraining":"Training stoppen und speichern","done":"Erledigt","activateTraining":"Training aktivieren","plannedNotTrained":"Geplant · nicht trainiert","noTrainingDay":"Kein Training an diesem Tag.","tapAddExercise":"Tippe auf „+ ÜBUNG“, um das Training für diesen Tag zu erstellen.","noSavedPlan":"Kein gespeicherter Plan für diesen Tag.","noCompletedExercises":"Keine abgeschlossenen Übungen.","chooseExercise":"Übung wählen","editExercises":"Bearbeiten","save":"Speichern","modalSave":"SPEICHERN","delete":"löschen","writeOwnExercise":"Eigene Übung schreiben","kg":"KG","reps":"Wdh.","sets":"Sätze","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Noch kein Log gespeichert.","noReport":"Kein Log","date":"Datum","startTime":"Startzeit","duration":"Dauer","total":"Total","exercise":"Übung","everMax":"Ever Max","maxToday":"Max Heute","sharePlan":"Plan teilen","sharePlanLink":"Plan als Link teilen","directLinkComingSoon":"PLAN-Link bereit.","planLinkReady":"Plan-Link bereit","planLinkCopied":"Plan-Link kopiert","planLinkTooLarge":"Plan zu gross für Link - Plan-Datei teilen verwenden","savePlan":"Plan speichern","insertPlan":"Plan einfügen","saveReport":"Log speichern","shareReport":"Log teilen","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Daten löschen","supportTitle":"Easy Gym unterstützen","supportIntro":"Easy Gym ist kostenlos und werbefrei. Wenn es deinem Training hilft, unterstützt eine kleine Spende die Weiterentwicklung — danke.","confirmInsert":"Einfügen überschreibt Pläne - bestätigen","confirmRestore":"Wiederherstellen ersetzt alle Daten - bestätigen","confirmDelete":"Löschen entfernt alle Daten - bestätigen","theme":"Design","themeToast":"Design: ","planSaved":"Plan gespeichert","reportSaved":"Log gespeichert","allDataSaved":"Alle Daten gespeichert","shared":"Geteilt","fileSaved":"Datei gespeichert","planInserted":"Plan eingefügt","dataRestored":"Daten wiederhergestellt","dataDeleted":"Daten gelöscht","insertFailed":"Einfügen fehlgeschlagen","restoreFailed":"Wiederherstellen fehlgeschlagen","importFailed":"Import fehlgeschlagen","trainingSaved":"Training gespeichert","exerciseRemovedPlan":"Übung aus Plan entfernt","exerciseListSaved":"Übungsliste gespeichert","addFirst":"Zuerst Übungen zum heutigen Training hinzufügen","resumeTraining":"Training fortsetzen","noExercisesYet":"Noch keine Übungen. Tippe auf „+ ÜBUNG“.","noTrainingPlanned":"Für diesen Tag ist kein Training geplant. Erstelle es zuerst im Plan.","reportHeader":"Übung / P-KG / D-KG / P-Wdh. / D-Wdh. / P-Sätze / D-Sätze","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Ein kostenloser Trainings-Tracker ohne Werbung für ernsthaftes Training. Erstelle deinen PLAN, starte dein Training mit GO und speichere jedes Ergebnis im LOG — alles auf deinem Telefon.</p></div><div class=\"card about-card\"><h2>Vorwort</h2><p>Ich habe Easy Gym für mein eigenes Training erstellt. Die App ist kostenlos und ohne Werbung. Gefällt sie dir? Unterstütze mich mit einer Spende. Möchtest du deine eigene App? Schreib mir: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Erstelle einen Plan für ein beliebiges Datum. Mit <strong>+ ÜBUNG</strong> fügst du Übungen mit kg, Wiederholungen und Sätzen hinzu. Mit <strong>LÖSCHEN</strong> entfernst du Übungen. Speichere den Plan, wenn er bereit ist.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Starte mit einem gespeicherten PLAN. Du kannst kg, Wiederholungen und Sätze während des Trainings anpassen oder eine weitere <strong>+ ÜBUNG</strong> hinzufügen. Dein ursprünglicher PLAN bleibt für das nächste Mal unverändert.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Vergleiche Planvorgaben direkt mit deinen echten Ergebnissen. Erledigte Sätze werden grün markiert. Speichere oder teile deinen fertigen Trainingslog.</p></div><div class=\"card about-card\"><h2>Verwalten &amp; teilen</h2><p><strong>Plan als Link teilen</strong> — Plan-Link wird in Easy Gym aus dem App Store verfügbar sein.</p><p><strong>Plan oder Log teilen</strong> — Wenn du eine Datei teilst, erstellen wir einen sicheren Link, den du per WhatsApp oder über andere Messenger senden kannst.</p><p><strong>Plan oder Log speichern</strong> — speichert ihn lokal.</p><p><strong>Plan-Datei einfügen</strong> — importiert eine erhaltene Plan-Datei in Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup speichert eine vollständige Kopie. Restore stellt deine Daten wieder her. Daten löschen löscht alles nach Bestätigung.</p></div><div class=\"card about-card\"><h2>Datenschutz</h2><p>Easy Gym funktioniert auf deinem Telefon. Deine Pläne und Logs bleiben auf deinem Gerät, ausser du teilst sie.</p></div>"},"exercises":{"Snatch":"Reissen","Clean and Jerk":"Umsetzen & Ausstossen","Clean":"Umsetzen","Jerk":"Ausstossen","Power Snatch":"Standreissen","Power Clean":"Standumsetzen","Back Squat":"Kniebeuge hinten","Front Squat":"Kniebeuge vorne","Overhead Squat":"Überkopfkniebeuge","Deadlift":"Kreuzheben","Bench Press":"Bankdrücken","Push Press":"Schwungdrücken","Strict Press":"Schulterdrücken","Barbell Row":"Langhantelrudern","Pull-up":"Klimmzug","Dip":"Dip","Lunge":"Ausfallschritt","Romanian Deadlift":"Rumänisches Kreuzheben"}},"fr":{"code":"fr","ui":{"langName":"Français","days":{"mon":"Lun","tue":"Mar","wed":"Mer","thu":"Jeu","fri":"Ven","sat":"Sam","sun":"Dim"},"months":["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],"plan":"PLAN","do":"GO","report":"LOG","manage":"gest.","donate":"don","about":"info","selectDay":"Choisir le jour","addExercise":"EXERCICE","remove":"elimine","copy":"Copier","copied":"Copié","paste":"Coller","saveTraining":"Sauver training","saved":"Sauvé","startTraining":"Démarrer training","started":"Démarré","stopSaveTraining":"Arrêter et sauver","done":"Terminé","activateTraining":"Activer training","plannedNotTrained":"Planifié · non entraîné","noTrainingDay":"Pas de training ce jour.","tapAddExercise":"Tape “+ EXERCICE” pour créer le training du jour.","noSavedPlan":"Pas de plan sauvé pour ce jour.","noCompletedExercises":"Aucun exercice terminé.","chooseExercise":"Choisir exercice","editExercises":"Modifier","save":"Sauver","modalSave":"SAUVER","delete":"elimine","writeOwnExercise":"Écrire ton exercice","kg":"KG","reps":"Rép.","sets":"Séries","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Aucun log sauvé.","noReport":"Aucun log","date":"Date","startTime":"Heure début","duration":"Durée","total":"Total","exercise":"Exercice","everMax":"Ever Max","maxToday":"Max aujourd’hui","sharePlan":"envoi plan","sharePlanLink":"envoi plan-lien","directLinkComingSoon":"PLAN-Link prêt.","planLinkReady":"Lien Plan prêt","planLinkCopied":"Lien Plan copié","planLinkTooLarge":"Plan trop grand pour le lien - utiliser le fichier Plan","savePlan":"archive plan","insertPlan":"import plan","saveReport":"archive log","shareReport":"envoi log","saveAllData":"Backup","restoreAllData":"Restaurer","deleteData":"Effacer data","supportTitle":"Soutenir Easy Gym","supportIntro":"Easy Gym est gratuit et sans publicité. Si l’app aide ton training, un petit don aide à continuer — merci.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Thème","themeToast":"Thème: ","planSaved":"Plan sauvé","reportSaved":"Log sauvé","allDataSaved":"Toutes les données sauvées","shared":"Partagé","fileSaved":"Fichier sauvé","planInserted":"Plan inséré","dataRestored":"Données restaurées","dataDeleted":"Données supprimées","insertFailed":"Insertion échouée","restoreFailed":"Restauration échouée","importFailed":"Import échoué","trainingSaved":"Training sauvé","exerciseRemovedPlan":"Exercice supprimé du Plan","exerciseListSaved":"Liste d’exercices sauvée","addFirst":"Ajoute d’abord des exercices au training du jour","resumeTraining":"Reprendre training","noExercisesYet":"Aucun exercice. Tape “+ EXERCICE”.","noTrainingPlanned":"Aucun training prévu pour ce jour. Crée-le d’abord dans Plan.","reportHeader":"Exercice / P-KG / D-KG / P-Rép. / D-Rép. / P-Séries / D-Séries","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Un tracker de training gratuit et sans publicité. Préparez votre PLAN, lancez votre séance dans GO et gardez chaque résultat dans LOG — le tout sur votre téléphone.</p></div><div class=\"card about-card\"><h2>Avant-propos</h2><p>J'ai créé Easy Gym pour mon propre entraînement. C'est gratuit et sans publicité. Ça vous plaît ? Soutenez-moi via Don. Vous voulez votre propre app ? Écrivez-moi : arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Créez un plan pour n'importe quelle date. Utilisez <strong>+ EXERCICE</strong> pour ajouter des exercices avec kg, répétitions et séries. Utilisez <strong>ELIMINE</strong> pour supprimer des exercices. Sauvez le plan quand il est prêt.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Démarrez à partir d'un PLAN sauvé. Vous pouvez ajuster kg, répétitions et séries pendant la séance ou ajouter un autre <strong>+ EXERCICE</strong>. Votre PLAN d'origine reste inchangé pour la prochaine fois.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Comparez vos objectifs planifiés avec vos résultats réels. Les séries terminées sont marquées en vert. Sauvegardez ou partagez votre log de training final.</p></div><div class=\"card about-card\"><h2>GEST. &amp; partage</h2><p><strong>envoi plan-lien</strong> — Plan-Link sera disponible dans Easy Gym depuis l’App Store.</p><p><strong>envoi plan</strong> — partage un fichier plan via un lien sécurisé que vous pouvez envoyer par WhatsApp ou d'autres messengers.</p><p><strong>envoi log</strong> — partage votre log via un lien sécurisé.</p><p><strong>import plan</strong> — insère un fichier plan reçu dans Easy Gym.</p><p><strong>archive plan</strong> — sauvegarde le plan localement.</p><p><strong>archive log</strong> — sauvegarde le log localement.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup sauvegarde une copie complète. Restaurer récupère vos données. Effacer data efface tout après confirmation.</p></div><div class=\"card about-card\"><h2>Confidentialité</h2><p>Easy Gym fonctionne sur votre téléphone. Vos plans et logs restent sur votre appareil, sauf si vous les partagez.</p></div>"},"exercises":{"Snatch":"Arraché","Clean and Jerk":"Épaulé-jeté","Clean":"Épaulé","Jerk":"Jeté","Power Snatch":"Arraché puissance","Power Clean":"Épaulé puissance","Back Squat":"Squat arrière","Front Squat":"Squat avant","Overhead Squat":"Squat au-dessus de la tête","Deadlift":"Soulevé de terre","Bench Press":"Développé couché","Push Press":"Développé avec jambes","Strict Press":"Développé strict","Barbell Row":"Rowing barre","Pull-up":"Traction","Dip":"Dips","Lunge":"Fente","Romanian Deadlift":"Soulevé de terre roumain"}},"it":{"code":"it","ui":{"langName":"Italiano","days":{"mon":"Lun","tue":"Mar","wed":"Mer","thu":"Gio","fri":"Ven","sat":"Sab","sun":"Dom"},"months":["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],"plan":"PLAN","do":"GO","report":"LOG","manage":"gest.","donate":"dono","about":"info","selectDay":"Scegli giorno","addExercise":"ESERCIZIO","remove":"elimina","copy":"Copia","copied":"Copiato","paste":"Incolla","saveTraining":"Salva training","saved":"Salvato","startTraining":"Inizia training","started":"Iniziato","stopSaveTraining":"Ferma e salva training","done":"Fatto","activateTraining":"Attiva training","plannedNotTrained":"Pianificato · non allenato","noTrainingDay":"Nessun training in questo giorno.","tapAddExercise":"Tocca “+ ESERCIZIO” per creare il training del giorno.","noSavedPlan":"Nessun piano salvato per questo giorno.","noCompletedExercises":"Nessun esercizio completato.","chooseExercise":"Scegli esercizio","editExercises":"Modifica esercizi","save":"Salva","modalSave":"SALVA","delete":"elimina","writeOwnExercise":"Scrivi il tuo esercizio","kg":"KG","reps":"Rip.","sets":"Serie","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Nessun log salvato.","noReport":"Nessun log","date":"Data","startTime":"Ora inizio","duration":"Durata","total":"Total","exercise":"Esercizio","everMax":"Ever Max","maxToday":"Max oggi","sharePlan":"invio plan","sharePlanLink":"invio plan-link","directLinkComingSoon":"PLAN-Link pronto.","planLinkReady":"Link Plan pronto","planLinkCopied":"Link Plan copiato","planLinkTooLarge":"Plan troppo grande per il link - usa file Plan","savePlan":"archivio plan","insertPlan":"import plan","saveReport":"archivio log","shareReport":"invio log","saveAllData":"Backup","restoreAllData":"Ripristina","deleteData":"Elimina dati","supportTitle":"Sostieni Easy Gym","supportIntro":"Easy Gym è gratis e senza pubblicità. Se aiuta il tuo training, una piccola donazione sostiene lo sviluppo — grazie.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Tema","themeToast":"Tema: ","planSaved":"Plan salvato","reportSaved":"Log salvato","allDataSaved":"Tutti i dati salvati","shared":"Condiviso","fileSaved":"File salvato","planInserted":"Plan inserito","dataRestored":"Dati ripristinati","dataDeleted":"Dati eliminati","insertFailed":"Inserimento fallito","restoreFailed":"Ripristino fallito","importFailed":"Import fallito","trainingSaved":"Training salvato","exerciseRemovedPlan":"Esercizio rimosso dal Plan","exerciseListSaved":"Lista esercizi salvata","addFirst":"Aggiungi prima esercizi al training di oggi","resumeTraining":"Riprendi training","noExercisesYet":"Nessun esercizio. Tocca “+ ESERCIZIO”.","noTrainingPlanned":"Nessun training pianificato per questo giorno. Crealo prima in Plan.","reportHeader":"Esercizio / P-KG / D-KG / P-Rip. / D-Rip. / P-Serie / D-Serie","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Un tracker di training gratuito e senza pubblicità. Prepara il tuo PLAN, avvia la sessione in GO e conserva ogni risultato nel LOG — tutto sul tuo telefono.</p></div><div class=\"card about-card\"><h2>Prefazione</h2><p>Ho creato Easy Gym per il mio allenamento. È gratis e senza pubblicità. Ti piace? Sostienimi con una Donazione. Vuoi la tua app? Scrivimi: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Crea un plan per qualsiasi data. Usa <strong>+ ESERCIZIO</strong> per aggiungere esercizi con kg, ripetizioni e serie. Usa <strong>ELIMINA</strong> per rimuovere esercizi. Salva il plan quando è pronto.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Parti da un PLAN salvato. Puoi modificare kg, ripetizioni e serie durante la sessione o aggiungere un altro <strong>+ ESERCIZIO</strong>. Il tuo PLAN originale resta invariato per la prossima volta.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Confronta i target pianificati con i risultati reali. I set completati sono evidenziati in verde. Salva o condividi il tuo log di training finale.</p></div><div class=\"card about-card\"><h2>GEST. &amp; condivisione</h2><p><strong>invio plan-link</strong> — Plan-Link sarà disponibile in Easy Gym dall’App Store.</p><p><strong>invio plan</strong> — condivide un file plan tramite un link sicuro che puoi inviare via WhatsApp o altri messenger.</p><p><strong>invio log</strong> — condivide il tuo log tramite un link sicuro.</p><p><strong>import plan</strong> — inserisce un file plan ricevuto in Easy Gym.</p><p><strong>archivio plan</strong> — salva il plan localmente.</p><p><strong>archivio log</strong> — salva il log localmente.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup salva una copia completa. Ripristina recupera i tuoi dati. Elimina dati cancella tutto dopo conferma.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym funziona sul tuo telefono. I tuoi plan e log restano sul dispositivo, a meno che tu non li condivida.</p></div>"},"exercises":{"Snatch":"Strappo","Clean and Jerk":"Slancio","Clean":"Girata","Jerk":"Spinta","Power Snatch":"Strappo in piedi","Power Clean":"Girata in piedi","Back Squat":"Squat posteriore","Front Squat":"Squat frontale","Overhead Squat":"Squat overhead","Deadlift":"Stacco da terra","Bench Press":"Panca piana","Push Press":"Push press","Strict Press":"Military press","Barbell Row":"Rematore con bilanciere","Pull-up":"Trazione","Dip":"Dip","Lunge":"Affondo","Romanian Deadlift":"Stacco rumeno"}},"es":{"code":"es","ui":{"langName":"Español","days":{"mon":"Lun","tue":"Mar","wed":"Mié","thu":"Jue","fri":"Vie","sat":"Sáb","sun":"Dom"},"months":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],"plan":"PLAN","do":"GO","report":"LOG","manage":"gest.","donate":"apoyo","about":"info","selectDay":"Elegir día","addExercise":"EJERCICIO","remove":"eliminar","copy":"Copiar","copied":"Copiado","paste":"Pegar","saveTraining":"Guardar training","saved":"Guardado","startTraining":"Iniciar training","started":"Iniciado","stopSaveTraining":"Parar y guardar training","done":"Hecho","activateTraining":"Activar training","plannedNotTrained":"Planificado · no entrenado","noTrainingDay":"Sin training este día.","tapAddExercise":"Toca “+ EJERCICIO” para crear el training del día.","noSavedPlan":"No hay plan guardado para este día.","noCompletedExercises":"No hay ejercicios completados.","chooseExercise":"Elegir ejercicio","editExercises":"Editar","save":"Guardar","modalSave":"GUARDAR","delete":"eliminar","writeOwnExercise":"Escribe tu ejercicio","kg":"KG","reps":"Reps","sets":"Series","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"Todavía no hay log guardado.","noReport":"Sin log","date":"Fecha","startTime":"Hora inicio","duration":"Duración","total":"Total","exercise":"Ejercicio","everMax":"Ever Max","maxToday":"Max hoy","sharePlan":"envio plan","sharePlanLink":"envio plan-link","directLinkComingSoon":"PLAN-Link listo.","planLinkReady":"Enlace Plan listo","planLinkCopied":"Enlace Plan copiado","planLinkTooLarge":"Plan demasiado grande para enlace - usa archivo Plan","savePlanFirst":"Primero guarda un Plan","creatingPlanLink":"Creando enlace del Plan","copyPlanLinkPrompt":"Copia este enlace del Plan","savePlan":"archivo plan","insertPlan":"import plan","saveReport":"archivo log","shareReport":"envio log","saveAllData":"Backup","restoreAllData":"Restaurar","deleteData":"Eliminar datos","supportTitle":"Apoyar Easy Gym","supportIntro":"Easy Gym es gratis y sin anuncios. Si ayuda a tu training, una pequeña donación ayuda a seguir — gracias.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Tema","themeToast":"Tema: ","planSaved":"Plan guardado","reportSaved":"Log guardado","allDataSaved":"Todos los datos guardados","shared":"Compartido","fileSaved":"Archivo guardado","planInserted":"Plan insertado","dataRestored":"Datos restaurados","dataDeleted":"Datos eliminados","insertFailed":"Inserción fallida","restoreFailed":"Restauración fallida","importFailed":"Importación fallida","trainingSaved":"Training guardado","exerciseRemovedPlan":"Ejercicio eliminado del Plan","exerciseListSaved":"Lista de ejercicios guardada","addFirst":"Añade primero ejercicios al training de hoy","resumeTraining":"Continuar training","noExercisesYet":"Sin ejercicios. Toca “+ EJERCICIO”.","noTrainingPlanned":"No hay training planificado para este día. Créalo primero en Plan.","reportHeader":"Ejercicio / P-KG / D-KG / P-Reps / D-Reps / P-Series / D-Series","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>Un tracker de training gratuito y sin anuncios. Prepara tu PLAN, empieza en GO y guarda cada resultado en LOG — todo en tu teléfono.</p></div><div class=\"card about-card\"><h2>Prólogo</h2><p>Creé Easy Gym para mi propio entrenamiento. Es gratis y sin anuncios. ¿Te gusta? Apóyame con una Donación. ¿Necesitas tu propia app? Escríbeme: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Crea un plan para cualquier fecha. Usa <strong>+ EJERCICIO</strong> para añadir ejercicios con kg, repeticiones y series. Usa <strong>ELIMINAR</strong> para quitar ejercicios. Guarda el plan cuando esté listo.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Empieza desde un PLAN guardado. Puedes ajustar kg, repeticiones y series durante la sesión o añadir otro <strong>+ EJERCICIO</strong>. Tu PLAN original queda sin cambios para la próxima vez.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compara los objetivos planificados con tus resultados reales. Las series completadas se marcan en verde. Guarda o comparte tu log de training final.</p></div><div class=\"card about-card\"><h2>GEST. &amp; compartir</h2><p><strong>envio plan-link</strong> — Plan-Link estará disponible en Easy Gym desde App Store.</p><p><strong>envio plan</strong> — comparte un archivo plan mediante un enlace seguro que puedes enviar por WhatsApp u otros messengers.</p><p><strong>envio log</strong> — comparte tu log mediante un enlace seguro.</p><p><strong>import plan</strong> — inserta un archivo plan recibido en Easy Gym.</p><p><strong>archivo plan</strong> — guarda el plan localmente.</p><p><strong>archivo log</strong> — guarda el log localmente.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup guarda una copia completa. Restaurar recupera tus datos. Eliminar datos borra todo después de la confirmación.</p></div><div class=\"card about-card\"><h2>Privacidad</h2><p>Easy Gym funciona en tu teléfono. Tus planes y logs permanecen en tu dispositivo, a menos que los compartas.</p></div>"},"exercises":{"Snatch":"Arrancada","Clean and Jerk":"Dos tiempos","Clean":"Cargada","Jerk":"Envión","Power Snatch":"Arrancada de potencia","Power Clean":"Cargada de potencia","Back Squat":"Sentadilla trasera","Front Squat":"Sentadilla frontal","Overhead Squat":"Sentadilla sobre la cabeza","Deadlift":"Peso muerto","Bench Press":"Press de banca","Push Press":"Push press","Strict Press":"Press estricto","Barbell Row":"Remo con barra","Pull-up":"Dominada","Dip":"Fondos","Lunge":"Zancada","Romanian Deadlift":"Peso muerto rumano"}}};
+  const LANG_PACK_VERSION = 'v223-language-packages';
+  const EMBEDDED_LANGUAGE_PACKS = {"en":{"code":"en","ui":{"langName":"English","days":{"mon":"Mon","tue":"Tue","wed":"Wed","thu":"Thu","fri":"Fri","sat":"Sat","sun":"Sun"},"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"plan":"PLAN","do":"GO","report":"LOG","manage":"mgmt","donate":"heart","about":"info","selectDay":"Select the Day","addExercise":"EXERCISE","remove":"del","copy":"Copy","copied":"Copied","paste":"Paste","saveTraining":"Save training","saved":"Saved","startTraining":"Start Training","started":"Started","stopSaveTraining":"Stop and Save Training","done":"Done","activateTraining":"Activate Training","plannedNotTrained":"Planned · not trained","noTrainingDay":"No training on this day.","tapAddExercise":"Tap “+ EXERCISE” to build this day’s training.","noSavedPlan":"No saved plan for this day.","noCompletedExercises":"No completed exercises.","chooseExercise":"Choose exercise","editExercises":"Edit exercises","save":"Save","modalSave":"SAVE","delete":"del","writeOwnExercise":"Write your own exercise","kg":"KG","reps":"Reps","sets":"Sets","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"No saved LOG yet.","noReport":"No LOG","date":"Date","startTime":"Start Time","duration":"Duration","total":"Total","exercise":"Exercise","everMax":"Ever Max","maxToday":"Max Today","sharePlan":"Share Plan","sharePlanLink":"Share Plan as Link","directLinkComingSoon":"PLAN-Link ready.","planLinkReady":"Plan link ready","planLinkCopied":"Plan link copied","planLinkTooLarge":"Plan too large for link - use Share Plan file","savePlanFirst":"Save a plan first","creatingPlanLink":"Creating plan link","copyPlanLinkPrompt":"Copy this plan link","savePlan":"Save Plan","insertPlan":"Insert Plan","saveReport":"Save LOG","shareReport":"Share LOG","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Delete Data","supportTitle":"Support Easy Gym","supportIntro":"Easy Gym is free and ad-free. If it helps your training, a small donation keeps it growing — thank you.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Theme","themeToast":"Theme: ","planSaved":"Plan saved","reportSaved":"LOG saved","allDataSaved":"All data saved","shared":"Shared","fileSaved":"File saved","planInserted":"Plan inserted","dataRestored":"Data restored","dataDeleted":"Data deleted","insertFailed":"Insert failed","restoreFailed":"Restore failed","importFailed":"Import failed","trainingSaved":"Training saved","exerciseRemovedPlan":"Exercise removed from Plan","exerciseListSaved":"Exercise list saved","addFirst":"Add exercises to today’s training first","resumeTraining":"Resume training","noExercisesYet":"No exercises yet. Tap “+ EXERCISE” to build today’s training.","noTrainingPlanned":"No training planned for this day. Create it in Plan first.","reportHeader":"Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>A free, ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone.</p></div><div class=\"card about-card\"><h2>Preface</h2><p>I created Easy Gym for my own training. It is free and has no ads. Like it? Support me with a donation. Want your own app? Write to: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Create a plan for any date. Use <strong>+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong>DEL</strong> to remove exercises. Save the plan when it is ready.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong>+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</p></div><div class=\"card about-card\"><h2>MGMT &amp; share</h2><p><strong>Share Plan as Link</strong> — Plan-Link will be available in Easy Gym from App Store.</p><p><strong>Share Plan File or LOG</strong> — When you share a file, we create a secure link you can send via WhatsApp or other messengers.</p><p><strong>Save File or LOG</strong> — saves it locally.</p><p><strong>Insert Plan File</strong> — imports a received plan file into Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</p></div>"},"exercises":{}}};
   function applyLanguagePacks(loaded){
-    I18N = {};
-    EXERCISE_TRANSLATIONS = {};
-    loaded.forEach(([lang,pack])=>{
-      I18N[lang] = (pack && pack.ui) || {};
-      EXERCISE_TRANSLATIONS[lang] = (pack && pack.exercises) || {};
+    const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
+    const englishPack = packMap.en || EMBEDDED_LANGUAGE_PACKS.en;
+    const englishUi = (englishPack && englishPack.ui) || {};
+    I18N = {en: englishUi};
+    EXERCISE_TRANSLATIONS = {en: (englishPack && englishPack.exercises) || {}};
+
+    LANGS.forEach(lang=>{
+      const pack = packMap[lang];
+      if(!pack) return;
+      const ui = pack.ui || {};
+      I18N[lang] = {
+        ...englishUi,
+        ...ui,
+        days: {...(englishUi.days||{}), ...(ui.days||{})},
+        months: Array.isArray(ui.months) && ui.months.length===12 ? ui.months : (englishUi.months||[])
+      };
+      EXERCISE_TRANSLATIONS[lang] = pack.exercises || {};
     });
     rebuildExerciseIndex();
   }
-  function loadEmbeddedLanguagePacks(){
-    applyLanguagePacks(LANGS.map(lang=>[lang, EMBEDDED_LANGUAGE_PACKS[lang]]));
-  }
-  async function loadLanguagePacks(){
-    // v194: use embedded language packs only. This prevents iPhone/Safari from opening
-    // lang/*.json as a visible page and keeps the PWA file-safe/offline-safe.
-    loadEmbeddedLanguagePacks();
+  function loadLanguagePacks(){
+    const external = window.EASY_GYM_LANGUAGE_PACKS || {};
+    const configured = [...LANGS];
+    const available = configured.filter(lang=>external[lang] || EMBEDDED_LANGUAGE_PACKS[lang]);
+    LANGS = available.length ? available : ['en'];
+    const loaded = LANGS.map(lang=>[lang, external[lang] || EMBEDDED_LANGUAGE_PACKS[lang]]);
+    if(!loaded.some(([lang])=>lang==='en')) loaded.unshift(['en', external.en || EMBEDDED_LANGUAGE_PACKS.en]);
+    applyLanguagePacks(loaded);
   }
   const PLAN_LINK_MAX_LENGTH = 8000;
   const APP_PLAN_LINK_BASE = 'https://easygym.ch/p';
-  function normalizeLang(lang){ return LANGS.includes(lang) ? lang : 'en'; }
+  function normalizeLang(lang){ return LANGS.includes(lang) ? lang : (LANGS.includes(DEFAULT_LANGUAGE) ? DEFAULT_LANGUAGE : (LANGS[0] || 'en')); }
   const PACKAGE_PREFIX = 'easyGym.enDeFrItEs.appStore.';
   const KEYS = {
     week:PACKAGE_PREFIX+'weekPlans.v1', train:PACKAGE_PREFIX+'trainSessions.v1', saved:PACKAGE_PREFIX+'savedPlans.v1', journal:PACKAGE_PREFIX+'journal.v1',
@@ -2074,6 +2094,18 @@ body{font-variant-numeric:tabular-nums;}
     el.title=text;
   }
   function setIconText(id,key,iconName){ const el=$(id); if(el) setButtonLabel(el,iconName,t(key)); }
+  function buildLanguageMenu(){
+    if(!els.languageMenu) return;
+    els.languageMenu.replaceChildren();
+    LANGS.forEach(lang=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.setAttribute('role','option');
+      button.dataset.langOption=lang;
+      button.textContent=lang.toUpperCase();
+      els.languageMenu.appendChild(button);
+    });
+  }
   function applyLanguageUi(){
     currentLang=normalizeLang(currentLang);
     document.documentElement.lang=currentLang;
@@ -2101,7 +2133,7 @@ body{font-variant-numeric:tabular-nums;}
     if(meta) meta.setAttribute('content', '#000000');
   }
 
-  function init(){ currentLang=normalizeLang(load(KEYS.lang,'en')); applyTheme(); cacheEls(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
+  function init(){ currentLang=normalizeLang(load(KEYS.lang,DEFAULT_LANGUAGE)); applyTheme(); cacheEls(); buildLanguageMenu(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
   function normalizeData(){
     for(const d of DAYS){ if(!Array.isArray(weekPlans[d])) weekPlans[d]=[]; if(!Array.isArray(trainSessions[d])) trainSessions[d]=[]; }
     if(!datePlans || typeof datePlans!=='object' || Array.isArray(datePlans)) datePlans={};
@@ -2904,357 +2936,281 @@ body{font-variant-numeric:tabular-nums;}
       return `${g.date} - ${t('startTime')}: ${g.startTime} - ${t('duration')}: ${g.duration} - ${t('total')}: ${g.totalWeight} kg\n${t('reportHeader')}\n${lines}`;
     }).join('\n\n');
   }
-  function reportDownloadHeaders(){
+  function reportLayoutLabels(){
     const byLang={
-      en:['Exercise','Planned KG','Done KG','Planned Reps','Done Reps','Planned Sets','Done Sets'],
-      de:['Übung','Geplante KG','Gemachte KG','Geplante Wdh.','Gemachte Wdh.','Geplante Sätze','Gemachte Sätze'],
-      fr:['Exercice','KG prévus','KG faits','Rép. prévues','Rép. faites','Séries prévues','Séries faites'],
-      it:['Esercizio','KG pianificati','KG fatti','Rip. pianificate','Rip. fatte','Serie pianificate','Serie fatte'],
-      es:['Ejercicio','KG planificados','KG hechos','Reps planificadas','Reps hechas','Series planificadas','Series hechas']
+      en:{date:'Date',start:'Start Time',duration:'Duration',totalVolume:'Total Volume',weight:'Weight (Done / Plan)',reps:'Reps (Done / Plan)',sets:'Sets (Done / Plan)',status:'Performance Status',targetHit:'Target Hit',underWeight:'Under planned weight',underReps:'Under planned reps',underSets:'Under planned sets',overTarget:'Above plan',logged:'Logged'},
+      de:{date:'Datum',start:'Startzeit',duration:'Dauer',totalVolume:'Total Volumen',weight:'Gewicht (Gemacht / Plan)',reps:'Wdh. (Gemacht / Plan)',sets:'Sätze (Gemacht / Plan)',status:'Status',targetHit:'Ziel erreicht',underWeight:'Unter geplantem Gewicht',underReps:'Unter geplanten Wdh.',underSets:'Unter geplanten Sätzen',overTarget:'Über Plan',logged:'Erfasst'},
+      fr:{date:'Date',start:'Heure de début',duration:'Durée',totalVolume:'Volume total',weight:'Poids (Fait / Plan)',reps:'Rép. (Fait / Plan)',sets:'Séries (Fait / Plan)',status:'Statut',targetHit:'Objectif atteint',underWeight:'Poids sous le plan',underReps:'Rép. sous le plan',underSets:'Séries sous le plan',overTarget:'Au-dessus du plan',logged:'Enregistré'},
+      it:{date:'Data',start:'Ora inizio',duration:'Durata',totalVolume:'Volume totale',weight:'Peso (Fatto / Plan)',reps:'Rip. (Fatto / Plan)',sets:'Serie (Fatto / Plan)',status:'Stato',targetHit:'Obiettivo raggiunto',underWeight:'Peso sotto il plan',underReps:'Rip. sotto il plan',underSets:'Serie sotto il plan',overTarget:'Sopra il plan',logged:'Registrato'},
+      es:{date:'Fecha',start:'Hora inicio',duration:'Duración',totalVolume:'Volumen total',weight:'Peso (Hecho / Plan)',reps:'Reps (Hecho / Plan)',sets:'Series (Hecho / Plan)',status:'Estado',targetHit:'Objetivo alcanzado',underWeight:'Peso por debajo del plan',underReps:'Reps por debajo del plan',underSets:'Series por debajo del plan',overTarget:'Por encima del plan',logged:'Registrado'}
     };
     return byLang[currentLang] || byLang.en;
   }
-  function reportDownloadHtml(){
-    const groups=progressGroups();
-    const headers=reportDownloadHeaders();
-    const css=`
-      body{font-family:Arial,Helvetica,sans-serif;color:#111827;margin:24px;background:#ffffff;}
-      h2{font-size:16px;margin:18px 0 8px;text-align:center;}
-      table{border-collapse:collapse;width:100%;margin:0 0 20px;table-layout:fixed;background:#ffffff;}
-      th,td{border:1px solid #4b5563;padding:7px 8px;font-size:12px;line-height:1.25;vertical-align:middle;word-wrap:break-word;text-align:center;background:#ffffff;}
-      th{background:#e5e7eb;font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
-      .meta th{background:#f3f4f6;color:#111827;}
-      .meta td{background:#ffffff;font-weight:700;}
-      .report th:first-child,.report td:first-child{text-align:center;width:32%;}
-      .num,.digit{font-weight:700;text-align:center;}
-      .exercise-summary td{background:#f9fafb;font-weight:700;text-align:center;}
-      .done,.done-head{color:#008000!important;font-weight:700!important;}
-      .done *,.done-head *{color:#008000!important;font-weight:700!important;}
-      td.done,th.done-head{mso-color-alt:#008000;mso-style-textfill-fill-color:#008000;}
-      .plan{color:#374151;}
-      .empty{color:#6b7280;font-style:italic;text-align:center;}
-    `;
-    const tableForGroup=g=>{
-      const meta=`<table class="meta"><tr><th>${esc(t('date'))}</th><th>${esc(t('startTime'))}</th><th>${esc(t('duration'))}</th><th>${esc(t('total'))}</th></tr><tr><td>${esc(g.date)}</td><td>${esc(g.startTime)}</td><td>${esc(g.duration)}</td><td>${esc(g.totalWeight)} kg</td></tr></table>`;
-      const body=g.exercises.map(ex=>{
-        const summary=`<tr class="exercise-summary"><td>${esc(displayExerciseName(ex.name))}</td><td colspan="3">${esc(t('everMax'))}: ${esc(ex.everMax)} kg</td><td colspan="3">${esc(t('maxToday'))}: ${esc(ex.todayMax)} kg</td></tr>`;
-        const doneStyle='color:#008000!important;font-weight:700!important;text-align:center;mso-color-alt:#008000;mso-style-textfill-fill-color:#008000;';
-        const doneSpan=v=>`<span style="${doneStyle}">${esc(reportCell(v))}</span>`;
-        const rows=ex.rows.map(r=>`<tr><td>&nbsp;</td><td class="num digit plan">${esc(reportCell(r.pKg))}</td><td class="num digit done" style="${doneStyle}">${doneSpan(r.dKg)}</td><td class="num digit plan">${esc(reportCell(r.pReps))}</td><td class="num digit done" style="${doneStyle}">${doneSpan(r.dReps)}</td><td class="num digit plan">${esc(reportCell(r.pSets))}</td><td class="num digit done" style="${doneStyle}">${doneSpan(r.dSets)}</td></tr>`).join('');
-        return summary+rows;
-      }).join('');
-      const head=`<tr>${headers.map((h,i)=>{ const done=[2,4,6].includes(i); return `<th class="${i?'num ':''}${done?'done-head':''}"${done?' style="color:#008000!important;font-weight:700!important;text-align:center;mso-color-alt:#008000;mso-style-textfill-fill-color:#008000;"':''}>${done?`<span style="color:#008000!important;font-weight:700!important;mso-color-alt:#008000;mso-style-textfill-fill-color:#008000;">${esc(h)}</span>`:esc(h)}</th>`; }).join('')}</tr>`;
-      return `<h2>${esc(g.date)}</h2>${meta}<table class="report">${head}${body}</table>`;
-    };
-    const content=groups.length?groups.map(tableForGroup).join(''):`<p class="empty">${esc(t('noReport'))}</p>`;
-    return `<!doctype html><html><head><meta charset="utf-8"><title>Report</title><style>${css}
-/* v190: PWA language menu changed to website/app-style dropdown list (no boxed popup) */
-.language-switch{
-  position:relative!important;
-  overflow:visible!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-.language-select{
-  appearance:none!important;
-  -webkit-appearance:none!important;
-  border:0!important;
-  background:transparent!important;
-  color:var(--gold)!important;
-  font-weight:800!important;
-  font-size:clamp(14px,3.2vw,17px)!important;
-  line-height:1!important;
-  letter-spacing:-.01em!important;
-  min-width:30px!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:0!important;
-  text-align:center!important;
-  text-align-last:center!important;
-  cursor:pointer!important;
-}
-.language-menu{
-  display:none;
-  position:absolute!important;
-  right:0!important;
-  top:calc(100% + 4px)!important;
-  z-index:1000!important;
-  min-width:30px!important;
-  max-height:none!important;
-  overflow:visible!important;
-  padding:2px 0 0!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-}
-.language-switch.open .language-menu{display:block!important;}
-.language-menu button{
-  display:block!important;
-  width:100%!important;
-  border:0!important;
-  background:transparent!important;
-  color:var(--muted)!important;
-  font-weight:800!important;
-  font-size:clamp(14px,3.2vw,17px)!important;
-  line-height:1!important;
-  padding:5px 0!important;
-  text-align:center!important;
-  cursor:pointer!important;
-}
-.language-menu button.active{display:none!important;}
-.language-menu button:active,.language-menu button:hover{
-  color:var(--gold)!important;
-  background:transparent!important;
-}
-@media(max-width:420px){
-  .language-select{font-size:14px!important;min-width:28px!important;}
-  .language-menu{top:calc(100% + 3px)!important;min-width:28px!important;}
-  .language-menu button{font-size:14px!important;padding:5px 0!important;}
-}
-@media(min-width:760px){
-  .language-select{font-size:18px!important;min-width:36px!important;}
-  .language-menu{min-width:36px!important;}
-  .language-menu button{font-size:18px!important;}
-}
-
-
-
-/* v191: dark mode only; language selector replaces removed Theme control */
-html{color-scheme:dark!important;}
-.theme-toggle{display:none!important;}
-.header-controls{
-  grid-column:3!important;
-  grid-row:1!important;
-  display:flex!important;
-  flex-direction:row!important;
-  align-items:flex-end!important;
-  justify-content:flex-end!important;
-  align-self:end!important;
-  gap:0!important;
-  min-width:0!important;
-  padding-top:0!important;
-}
-.language-switch{
-  position:relative!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  overflow:visible!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-.language-select{
-  appearance:none!important;
-  -webkit-appearance:none!important;
-  border:0!important;
-  background:transparent!important;
-  color:var(--gold)!important;
-  font-weight:900!important;
-  font-size:clamp(15px,3.8vw,20px)!important;
-  line-height:1!important;
-  letter-spacing:-.01em!important;
-  min-width:34px!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:0!important;
-  text-align:center!important;
-  cursor:pointer!important;
-}
-.language-menu{
-  display:none!important;
-  position:absolute!important;
-  right:0!important;
-  top:calc(100% + 6px)!important;
-  z-index:1000!important;
-  min-width:34px!important;
-  padding:0!important;
-  margin:0!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  overflow:visible!important;
-}
-.language-switch.open .language-menu{display:block!important;}
-.language-menu button{
-  display:block!important;
-  width:100%!important;
-  border:0!important;
-  background:transparent!important;
-  color:var(--muted)!important;
-  font-weight:900!important;
-  font-size:clamp(15px,3.8vw,20px)!important;
-  line-height:1!important;
-  padding:6px 0!important;
-  text-align:center!important;
-  cursor:pointer!important;
-}
-.language-menu button.active{display:none!important;}
-.language-menu button:active,.language-menu button:hover{color:var(--gold)!important;background:transparent!important;}
-@media(max-width:420px){
-  .header-controls{align-self:end!important;}
-  .language-select{font-size:15px!important;min-width:30px!important;}
-  .language-menu{top:calc(100% + 5px)!important;min-width:30px!important;}
-  .language-menu button{font-size:15px!important;padding:6px 0!important;}
-}
-@media(min-width:760px){
-  .language-select{font-size:20px!important;min-width:40px!important;}
-  .language-menu{min-width:40px!important;}
-  .language-menu button{font-size:20px!important;}
-}
-
-
-/* v192: language selector belongs to the main menu row, same level as PLAN / GO / LOG */
-.header-controls{display:none!important;}
-.main-nav{
-  grid-column:1/-1!important;
-  grid-row:2!important;
-  width:100%!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  overflow:visible!important;
-}
-.main-nav .language-switch.nav-lang{
-  position:relative!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  flex:0 0 auto!important;
-  min-width:auto!important;
-  height:auto!important;
-  padding:0!important;
-  margin:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  overflow:visible!important;
-  align-self:center!important;
-}
-.main-nav .language-select{
-  appearance:none!important;
-  -webkit-appearance:none!important;
-  border:0!important;
-  background:transparent!important;
-  color:var(--gold)!important;
-  font-weight:900!important;
-  font-size:inherit!important;
-  line-height:1!important;
-  letter-spacing:-.01em!important;
-  min-width:0!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:0!important;
-  text-align:center!important;
-  cursor:pointer!important;
-}
-.main-nav .language-menu{
-  display:none!important;
-  position:absolute!important;
-  left:50%!important;
-  right:auto!important;
-  transform:translateX(-50%)!important;
-  top:calc(100% + 8px)!important;
-  z-index:1000!important;
-  min-width:auto!important;
-  padding:0!important;
-  margin:0!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  overflow:visible!important;
-}
-.main-nav .language-switch.open .language-menu{display:block!important;}
-.main-nav .language-menu button{
-  display:block!important;
-  width:100%!important;
-  min-width:0!important;
-  border:0!important;
-  background:transparent!important;
-  color:var(--muted)!important;
-  font-weight:900!important;
-  font-size:inherit!important;
-  line-height:1!important;
-  padding:5px 0!important;
-  text-align:center!important;
-  cursor:pointer!important;
-}
-.main-nav .language-menu button.active{display:none!important;}
-.main-nav .language-menu button:active,.main-nav .language-menu button:hover{color:var(--gold)!important;background:transparent!important;}
-@media(max-width:420px){
-  .main-nav{gap:clamp(8px,2.7vw,16px)!important;}
-  .main-nav .language-select,.main-nav .language-menu button{font-size:12.5px!important;}
-}
-@media(min-width:760px){
-  .main-nav{justify-content:flex-end!important;gap:clamp(18px,2.5vw,34px)!important;}
-}
-
-
-/* v197: language dropdown letters only — no visible rectangle/background */
-.main-nav .language-menu{
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  outline:0!important;
-}
-.main-nav .language-menu button{
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-}
-.main-nav .language-menu button:active,
-.main-nav .language-menu button:hover{
-  background:transparent!important;
-}
-
-</style></head><body>${content}</body></html>`;
+  function reportDownloadHeaders(){
+    const L=reportLayoutLabels();
+    return [L.weight,L.reps,L.sets,L.status];
   }
-  function downloadWord(){ downloadFile('easy-gym-report.doc','application/msword',reportDownloadHtml()); }
-  function downloadPdf(){ const pdf=makeReportTablePdf(); downloadFile('easy-gym-report.pdf','application/pdf',pdf,true); }
+  function reportNum(v){
+    if(v===''||v===null||v===undefined) return null;
+    const n=parseFloat(String(v).replace(',', '.').replace(/[^0-9.\-]/g,''));
+    return Number.isFinite(n)?n:null;
+  }
+  function reportPair(done,planned,suffix=''){
+    const d=reportCell(done), p=reportCell(planned);
+    const unit=suffix && (d!=='-' || p!=='-') ? ' '+suffix : '';
+    return `${d} / ${p}${unit}`;
+  }
+  function reportRowStatus(r){
+    const L=reportLayoutLabels();
+    const pKg=reportNum(r.pKg), dKg=reportNum(r.dKg), pReps=reportNum(r.pReps), dReps=reportNum(r.dReps), pSets=reportNum(r.pSets), dSets=reportNum(r.dSets);
+    if(pKg===null && pReps===null && pSets===null) return L.logged;
+    if(pKg!==null && dKg!==null && dKg<pKg) return '⚠️ '+L.underWeight;
+    if(pReps!==null && dReps!==null && dReps<pReps) return '⚠️ '+L.underReps;
+    if(pSets!==null && dSets!==null && dSets<pSets) return '⚠️ '+L.underSets;
+    if((pKg!==null&&dKg!==null&&dKg>pKg)||(pReps!==null&&dReps!==null&&dReps>pReps)||(pSets!==null&&dSets!==null&&dSets>pSets)) return L.overTarget;
+    return L.targetHit;
+  }
+  const MAX_EVER_ICON_DATA = 'data:image/png;base64,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';
+  const MAX_TODAY_ICON_DATA = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAYAAACfKfiZAAAH+0lEQVR4nJ2YXahtVRXHf2PO9bH3Pufce86xvNfrtWsqkR+J0ZtaIZRICNF9KQuJIiGKeuhJehTqISgfCrSosA8p1L4pjOghMyOiIIwyjSS1q+m9nq+99/qac4we5trn7N25V69nwmCuvVh7/f/jP/5zzLWWmBkHHfXHbrf4/AaDS47g7/2GHOQe7qDg7Z13WHPmNM1WRXz8n4QPnDxQJgcmECYv05kR1FA15D+niR95/2smcSAC8Y+/segNVYgYUQzzCs+dQj/+wddE4kAEmh9/DUEJoUNRYqaYd5g37Jln0TvvOG8SB1PANYRW0RAwieBBc8W8YLlhTz0BX/3ceZF4zQTGd33UBNAqosHAA85DZtiMRAb66C/hZ996VRLnJGCfOGnx5C0Wbr3F9OGfG0B85BdmOsY6JUynKB3iDJdZAvVAYZCDZWAP3w9/fewVSWRnBf/0SWM1J1aKnaqI99yNy4PVv30AzAiTQJx2YIY4sDKimeC89TNJGWvhobvhmuvPXwG974tGJpB72qYjeIGLDqPf/jr4gEUlTitCjOAVXxhWgGWG5gIZWAHkltSYvgT3ffacKuwvwZ8fRUYlXd1Q1xXxcE5czrFlATNi1dKOa5QIJViuBK9obrtBDlaC5b0STz4Gv3vorCQWCMQvfMYYZFguTLa2GVuHFo7y2Q3aoyWhC0w3JrTNlJgZkhs2jMQZaEE/G+SSwD3gDR75zqsrYKdPwTCnrRu2tzdRL/j1ZaZXLKEozXhCO54SxIi+w/JIzIzoItFbkr8vg2SGZAbOQIB6Ex68a58KuwTCg/daHAiqxtbGy0xjTbEywrwSS083bqi3ptRdRRAj5Mb6VUdYPzzisM8omwA+Ys7ACUaakR5FgCcfhZf+bWclEP/xJ6KHyXTK1s4miKNcXcFWMrq2YbK5w3RnB3NKdIHjV19MfmaK1R2EiAF+OyJEEEP8HPgsYgOP3Hd2BaIPxLplvL1JEzoGK4fwyzlRlWZzTLUzJsZAwLjkbSfItiq0qRHpsFyhAEqQNiAuLILPHz/12H4Czfe/bKGtqadTptMd8I6VtVUkc1RbY6Y7E0LboigXX3sM2a4IVY1KWvdWehh6GHlk5DHvEa8JeL4EAsQafvWV3TJkAPrSv4hNQ1vVNBpYOrRGsVxQTSqm4wlt3RBR1o8fIvc5Nh4jokguiBckB5cLrhBcLmn9e0GaOeBdpwPPPb6oQNzZpKtq6npK5jyrRy8gRGW6PaGra6J2mCqHTxyFzR0ERTLbBfWFww8cfiC4oeAGglt2cMj2pPdz8cITcDqZMRGoxoSqpgsNo9U1JHPUkwldPSWGgKlx2Y1vgs0drGvBGeIdUoArwQ/AFSADgVKRIUipcFgXTTgff/v1XgnCJNVUnOfQheuEuqXemdB1EY2RI9ccRdQI04rMp/7vMsPnDslBCkFKUhSS2nDe3/1IhNN+wXg4YOOZRKC+/0sWq4ZWO5ZX1xAvVDsTurbFYsTMGB19HeH5FxEfcQLOCy4HKUgkSlLmeVoJyQM9UGZwxu35wAAVOP10ImAmxKrGS87S2iG6qqGtazQGYgxccsPl6HiCdi1ZJuCS0XwBLk/AFIKUvfmK1BF36+6ACyOc8Qmc3pTbLyQxDEfsImUxwA08zWRKCB2hU0yNYrhMrMa4zHC5kQ0EPwAZAEOQoSBDgYHCwFI/KCwdDxRyhRVb7AliEOreAyagET8qia3SVDUaDYvKiZveTFfvoBbwLsntBr38eSIhA6BQ0hZuKTLSBiSACaxEkGwv+9k8edkcOCTLyYYl1XaFRk21R/F5QawniBiuNKQUXAEMQEYgZS95bolEYVD2x7ml+mf9+YsC+0YMZCA47xGMrqnRELEYOfLW48SuJcaOzIPLJBmuAFf0O10hkMfk+LJXws9lPxsKLGnywMwH/exGt39SxAsxdGhoMVOIynD1MKGdIt5w3uFyjy+S8yWnB9e075e6Z77M9kj4We17T8wIWM/OZ6kP+MESsQ2YRixETCytlhBwCM6By4A87fPk7EVmqf5Oe8CewO6y61MdxaSEzcXSujiA4tilaGxRVcQU1MAM04hzQuYd4h3OC+LcXlaO/aCz7DPbU2Pm/ln2BgxXUwkAhtffTOg6LCgWDTEwDTjnEHOYEwRLd5k94SyEpdglNSM4d05IDWimwvob9wgUN71X/HAVFxUzQ0TQGBEVnAgeh4gkVfcBn4OMnwOeN6MCEbjw8j0CAGu3fCjVG3A4JCriHIZLj1c2f/WcjfcNWZR6dtnUQezDj+Ddn5IFAqP33CbLJ67FS44TT7MxxuFweARBzIG5RaD/H/Muj9JL3ss+9RAHKa545+5fFnJ6/ee/KaP14ziXs/PUGDFLptOkhEbBVBaBduceLJLAIxD6WQWeXoOwBMNjcPJOOSsBgGP3/ESW1i7GSU6sQgIXj5nDTNJvnQGyWNfZTjcPHoEXR3DqAmAF3vXhBbyzvpxedM+PZO0NV7P1ZIs2EVOfIjos+D5cL6/bkzv2pKLsxaSAv1wKxSrceCtc946F2skrfaSqfvBd23j4AZZOtORLDl9EfBGRMiK5IWXs94KAFKS+P3O/CdQl/P5KKI/C+26Dy67cZ5xXJDAbzQ+/Z+HvDyLDmmygSB6RIiKFQa5Irn3jAXGKhRw5s4Y8dx3ccD28/eZzfkE7LwLzQ//wU7P6v6BN/wJiSP8mJJJDdghZfgtcde15fbb7H4mvSiRlzSUhAAAAAElFTkSuQmCC';
+  function reportDataUriBytes(uri){
+    const b64=String(uri||'').split(',')[1]||'';
+    const raw=atob(b64), out=new Uint8Array(raw.length);
+    for(let i=0;i<raw.length;i++) out[i]=raw.charCodeAt(i);
+    return out;
+  }
+  function reportUtf8Bytes(value){ return new TextEncoder().encode(String(value==null?'':value)); }
+  function reportConcatBytes(parts){
+    const total=parts.reduce((n,p)=>n+p.length,0), out=new Uint8Array(total);
+    let offset=0; parts.forEach(p=>{out.set(p,offset);offset+=p.length;});
+    return out;
+  }
+  function reportU16(v){ return new Uint8Array([v&255,(v>>>8)&255]); }
+  function reportU32(v){ return new Uint8Array([v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]); }
+  let reportCrcTable=null;
+  function reportCrc32(bytes){
+    if(!reportCrcTable){
+      reportCrcTable=new Uint32Array(256);
+      for(let n=0;n<256;n++){
+        let c=n;
+        for(let k=0;k<8;k++) c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);
+        reportCrcTable[n]=c>>>0;
+      }
+    }
+    let c=0xFFFFFFFF;
+    for(let i=0;i<bytes.length;i++) c=reportCrcTable[(c^bytes[i])&255]^(c>>>8);
+    return (c^0xFFFFFFFF)>>>0;
+  }
+  function reportZipStored(files){
+    const now=new Date();
+    const dosTime=((now.getHours()&31)<<11)|((now.getMinutes()&63)<<5)|((Math.floor(now.getSeconds()/2))&31);
+    const dosDate=(((Math.max(1980,now.getFullYear())-1980)&127)<<9)|(((now.getMonth()+1)&15)<<5)|(now.getDate()&31);
+    const locals=[], centrals=[]; let offset=0;
+    files.forEach(file=>{
+      const name=reportUtf8Bytes(file.name), data=file.data instanceof Uint8Array?file.data:reportUtf8Bytes(file.data);
+      const crc=reportCrc32(data), flags=0x0800;
+      const local=reportConcatBytes([
+        reportU32(0x04034b50),reportU16(20),reportU16(flags),reportU16(0),reportU16(dosTime),reportU16(dosDate),
+        reportU32(crc),reportU32(data.length),reportU32(data.length),reportU16(name.length),reportU16(0),name,data
+      ]);
+      locals.push(local);
+      const central=reportConcatBytes([
+        reportU32(0x02014b50),reportU16(20),reportU16(20),reportU16(flags),reportU16(0),reportU16(dosTime),reportU16(dosDate),
+        reportU32(crc),reportU32(data.length),reportU32(data.length),reportU16(name.length),reportU16(0),reportU16(0),reportU16(0),
+        reportU16(0),reportU32(0),reportU32(offset),name
+      ]);
+      centrals.push(central); offset+=local.length;
+    });
+    const centralBytes=reportConcatBytes(centrals);
+    const end=reportConcatBytes([
+      reportU32(0x06054b50),reportU16(0),reportU16(0),reportU16(files.length),reportU16(files.length),
+      reportU32(centralBytes.length),reportU32(offset),reportU16(0)
+    ]);
+    return reportConcatBytes([...locals,centralBytes,end]);
+  }
+  function reportDocxEsc(value){
+    return String(value==null?'':value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function reportDocxRun(value,size=21,color='1E293B',bold=false){
+    return `<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:eastAsia="Arial" w:cs="Arial"/>${bold?'<w:b/><w:bCs/>':''}<w:color w:val="${color}"/><w:sz w:val="${size}"/><w:szCs w:val="${size}"/></w:rPr><w:t xml:space="preserve">${reportDocxEsc(value)}</w:t></w:r>`;
+  }
+  function reportDocxParagraph(runs,{line=220,after=0,before=0,keep=false,align='left'}={}){
+    return `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="${before}" w:after="${after}" w:line="${line}" w:lineRule="exact"/>${keep?'<w:keepNext/>':''}</w:pPr>${runs}</w:p>`;
+  }
+  function reportDocxCell(content,width,{top=0,bottom=0,left=0,right=80,v='center',shade='F8FAFC',topBorder='',bottomBorder=''}={}){
+    const borders=(topBorder||bottomBorder)?`<w:tcBorders>${topBorder?`<w:top w:val="single" w:sz="${topBorder}" w:space="0" w:color="CBD5E1"/>`:''}${bottomBorder?`<w:bottom w:val="single" w:sz="${bottomBorder}" w:space="0" w:color="${bottomBorder==='6'?'E2E8F0':'CBD5E1'}"/>`:''}</w:tcBorders>`:'';
+    return `<w:tc><w:tcPr><w:tcW w:w="${width}" w:type="dxa"/><w:vAlign w:val="${v}"/><w:shd w:val="clear" w:color="auto" w:fill="${shade}"/><w:tcMar><w:top w:w="${top}" w:type="dxa"/><w:left w:w="${left}" w:type="dxa"/><w:bottom w:w="${bottom}" w:type="dxa"/><w:right w:w="${right}" w:type="dxa"/></w:tcMar>${borders}</w:tcPr>${content}</w:tc>`;
+  }
+  function reportDocxImage(relId,name,cx,cy,id){
+    return `<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="${id}" name="${reportDocxEsc(name)}" descr="${reportDocxEsc(name)}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="${reportDocxEsc(name)}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="${relId}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>`;
+  }
+  function reportDocxSpacer(height=120){ return reportDocxParagraph('',{line:height,after:0,before:0}); }
+  function makeReportDocx(){
+    const groups=progressGroups(), L=reportLayoutLabels();
+    const statusHeader=currentLang==='en'?'Status':L.status;
+    let imageId=1;
+    const summaryTable=g=>{
+      const widths=[2675,2675,2675,2675];
+      const labels=[L.date,L.start,L.duration,L.totalVolume].map(v=>String(v).toUpperCase());
+      const values=[g.date,g.startTime,g.duration,g.totalWeight+' kg'];
+      const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
+      const row1=labels.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,18,'64748B',true),{line:190,keep:true}),widths[i],{top:45,bottom:0,right:130,topBorder:'12'})).join('');
+      const row2=values.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,28,'1E293B',true),{line:290,keep:true}),widths[i],{top:0,bottom:55,right:130,bottomBorder:'12'})).join('');
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${row1}</w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr>${row2}</w:tr></w:tbl>${reportDocxSpacer(120)}`;
+    };
+    const recordsTable=ex=>{
+      const widths=[360,1500,700,480,360,1700,700,4900];
+      const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
+      const cells=[
+        reportDocxCell(reportDocxParagraph(reportDocxImage('rId3','Max Ever trophy',166688,190500,imageId++),{line:420,keep:true,align:'center'}),widths[0],{top:20,bottom:20,right:20}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun('Max Ever:',21,'64748B',true),{line:230,keep:true}),widths[1],{left:35,right:20}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.everMax+' kg',21,'64748B',true),{line:230,keep:true}),widths[2],{right:0}),
+        reportDocxCell(reportDocxParagraph('',{line:230,keep:true}),widths[3],{right:0}),
+        reportDocxCell(reportDocxParagraph(reportDocxImage('rId4','Max Today fire',152400,190500,imageId++),{line:420,keep:true,align:'center'}),widths[4],{top:20,bottom:20,right:20}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun('Max Today:',21,'15803D',true),{line:230,keep:true}),widths[5],{left:35,right:20}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.todayMax+' kg',21,'15803D',true),{line:230,keep:true}),widths[6],{right:0}),
+        reportDocxCell(reportDocxParagraph('',{line:230,keep:true}),widths[7],{right:0})
+      ].join('');
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="430" w:hRule="atLeast"/></w:trPr>${cells}</w:tr></w:tbl>`;
+    };
+    const exerciseTable=ex=>{
+      const widths=[3210,2568,2568,2354];
+      const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
+      const heads=[L.weight,L.reps,L.sets,statusHeader];
+      const headCells=heads.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(String(v).toUpperCase(),16,'64748B',true),{line:185,keep:true}),widths[i],{top:55,bottom:55,right:100,topBorder:'12',bottomBorder:'12'})).join('');
+      const body=ex.rows.map(r=>{
+        const status=reportRowStatus(r), statusColor=String(status).indexOf('⚠️')===0?'B45309':(status===L.overTarget?'15803D':'64748B');
+        const vals=[reportPair(r.dKg,r.pKg,'kg'),reportPair(r.dReps,r.pReps),reportPair(r.dSets,r.pSets),status];
+        return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${vals.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,21,i===3?statusColor:'1E293B',i<3||i===3&&statusColor!=='64748B'),{line:230}),widths[i],{top:85,bottom:85,right:100,bottomBorder:'6'})).join('')}</w:tr>`;
+      }).join('');
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="CBD5E1"/></w:tblBorders></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr>${headCells}</w:tr>${body}</w:tbl>`;
+    };
+    const exerciseBlock=(ex,idx)=>`${reportDocxParagraph(reportDocxRun((idx+1)+'. '+displayExerciseName(ex.name),30,'1E293B',true),{line:310,after:35,keep:true})}${recordsTable(ex)}${reportDocxSpacer(65)}${exerciseTable(ex)}${reportDocxSpacer(150)}`;
+    const body=groups.length?groups.map(g=>summaryTable(g)+g.exercises.map(exerciseBlock).join('')).join(''):reportDocxParagraph(reportDocxRun(t('noReport'),21,'64748B',true),{line:230});
+    const documentXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:background w:color="F8FAFC"/><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="440" w:right="560" w:bottom="440" w:left="560" w:header="0" w:footer="0" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>`;
+    const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>`;
+    const rootRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>`;
+    const docRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-ever.png"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-today.png"/></Relationships>`;
+    const stamp=new Date().toISOString();
+    const core=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>Easy Gym LOG</dc:title><dc:creator>Easy Gym</dc:creator><cp:lastModifiedBy>Easy Gym</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">${stamp}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${stamp}</dcterms:modified></cp:coreProperties>`;
+    const app=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>Easy Gym</Application><DocSecurity>0</DocSecurity><ScaleCrop>false</ScaleCrop><Company></Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>1.0</AppVersion></Properties>`;
+    return reportZipStored([
+      {name:'[Content_Types].xml',data:contentTypes},{name:'_rels/.rels',data:rootRels},{name:'word/document.xml',data:documentXml},
+      {name:'word/_rels/document.xml.rels',data:docRels},{name:'word/media/max-ever.png',data:reportDataUriBytes(MAX_EVER_ICON_DATA)},
+      {name:'word/media/max-today.png',data:reportDataUriBytes(MAX_TODAY_ICON_DATA)},{name:'docProps/core.xml',data:core},{name:'docProps/app.xml',data:app}
+    ]);
+  }
+  function downloadWord(){ downloadFile('easy-gym-report.docx','application/vnd.openxmlformats-officedocument.wordprocessingml.document',makeReportDocx(),true); }
+  let reportIconPromise=null;
+  function reportLoadImage(src){ return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;}); }
+  function reportLoadIcons(){ if(!reportIconPromise) reportIconPromise=Promise.all([reportLoadImage(MAX_EVER_ICON_DATA),reportLoadImage(MAX_TODAY_ICON_DATA)]); return reportIconPromise; }
+  function reportFitCanvasText(ctx,value,maxWidth){
+    let s=String(value==null?'':value);
+    if(ctx.measureText(s).width<=maxWidth) return s;
+    while(s.length>1 && ctx.measureText(s+'…').width>maxWidth) s=s.slice(0,-1);
+    return s+'…';
+  }
+  function reportCanvasJpegBytes(canvas){
+    const raw=atob(canvas.toDataURL('image/jpeg',0.94).split(',')[1]), out=new Uint8Array(raw.length);
+    for(let i=0;i<raw.length;i++) out[i]=raw.charCodeAt(i);
+    return out;
+  }
+  function reportPdfAscii(value){ return new TextEncoder().encode(String(value)); }
+  function reportBuildImagePdf(images,pdfW=595,pdfH=842){
+    const n=images.length, maxId=2+n*3, objects=new Array(maxId+1);
+    const pageIds=Array.from({length:n},(_,i)=>3+i);
+    const contentIds=Array.from({length:n},(_,i)=>3+n+i);
+    const imageIds=Array.from({length:n},(_,i)=>3+n*2+i);
+    objects[1]=reportPdfAscii(`1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n`);
+    objects[2]=reportPdfAscii(`2 0 obj\n<< /Type /Pages /Kids [${pageIds.map(id=>id+' 0 R').join(' ')}] /Count ${n} >>\nendobj\n`);
+    images.forEach((img,i)=>{
+      const pageId=pageIds[i], contentId=contentIds[i], imageId=imageIds[i];
+      objects[pageId]=reportPdfAscii(`${pageId} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfW} ${pdfH}] /Resources << /XObject << /Im0 ${imageId} 0 R >> >> /Contents ${contentId} 0 R >>\nendobj\n`);
+      const stream=`q\n${pdfW} 0 0 ${pdfH} 0 0 cm\n/Im0 Do\nQ\n`, streamBytes=reportPdfAscii(stream);
+      objects[contentId]=reportConcatBytes([reportPdfAscii(`${contentId} 0 obj\n<< /Length ${streamBytes.length} >>\nstream\n`),streamBytes,reportPdfAscii(`endstream\nendobj\n`)]);
+      objects[imageId]=reportConcatBytes([reportPdfAscii(`${imageId} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${img.width} /Height ${img.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${img.bytes.length} >>\nstream\n`),img.bytes,reportPdfAscii(`\nendstream\nendobj\n`)]);
+    });
+    const header=new Uint8Array([37,80,68,70,45,49,46,52,10,37,255,255,255,255,10]);
+    const parts=[header], offsets=new Array(maxId+1).fill(0); let pos=header.length;
+    for(let id=1;id<=maxId;id++){ offsets[id]=pos; parts.push(objects[id]); pos+=objects[id].length; }
+    const xrefPos=pos;
+    let xref=`xref\n0 ${maxId+1}\n0000000000 65535 f \n`;
+    for(let id=1;id<=maxId;id++) xref+=String(offsets[id]).padStart(10,'0')+' 00000 n \n';
+    xref+=`trailer\n<< /Size ${maxId+1} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
+    parts.push(reportPdfAscii(xref));
+    return reportConcatBytes(parts);
+  }
+  async function makeReportTablePdf(){
+    const groups=progressGroups();
+    if(!groups.length) return makeSimplePdf(t('noReport'));
+    const L=reportLayoutLabels(), statusHeader=currentLang==='en'?'Status':L.status;
+    const [trophyIcon,fireIcon]=await reportLoadIcons();
+    const W=1190,H=1684,M=68,contentW=W-M*2,rowH=54;
+    const colors={bg:'#f8fafc',primary:'#1e293b',secondary:'#64748b',success:'#15803d',warning:'#b45309',border:'#cbd5e1',soft:'#e2e8f0'};
+    const pages=[];
+    let canvas,ctx,y;
+    const font=(size,bold=false)=>`${bold?'700':'400'} ${size}px Arial, "Segoe UI", sans-serif`;
+    const newPage=()=>{
+      canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;ctx=canvas.getContext('2d');
+      ctx.fillStyle=colors.bg;ctx.fillRect(0,0,W,H);ctx.textBaseline='alphabetic';ctx.lineCap='butt';y=M;
+    };
+    const finishPage=()=>{ if(canvas) pages.push({bytes:reportCanvasJpegBytes(canvas),width:W,height:H}); };
+    const line=(x1,y1,x2,y2,color=colors.border,width=2)=>{ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();};
+    const drawText=(value,x,base,size,bold=false,color=colors.primary,maxWidth=null)=>{ctx.font=font(size,bold);ctx.fillStyle=color;const shown=maxWidth?reportFitCanvasText(ctx,value,maxWidth):String(value);ctx.fillText(shown,x,base);};
+    const ensure=h=>{ if(y+h>H-M){finishPage();newPage();} };
+    const drawOverview=g=>{
+      ensure(102); line(M,y,W-M,y);
+      const labels=[L.date,L.start,L.duration,L.totalVolume], vals=[g.date,g.startTime,g.duration,g.totalWeight+' kg'], colW=contentW/4;
+      labels.forEach((v,i)=>drawText(String(v).toUpperCase(),M+i*colW,y+22,18,true,colors.secondary,colW-24));
+      vals.forEach((v,i)=>drawText(v,M+i*colW,y+55,28,true,colors.primary,colW-24));
+      line(M,y+70,W-M,y+70); y+=96;
+    };
+    const drawExerciseHeader=(ex,idx,continued=false)=>{
+      drawText((idx+1)+'. '+displayExerciseName(ex.name)+(continued?' (cont.)':''),M+16,y+30,30,true,colors.primary,contentW-32); y+=42;
+      const iconY=y+7, everIconX=M+16, everLabelX=everIconX+38, everValueX=everLabelX+142;
+      const todayIconX=M+Math.round(contentW*0.27), todayLabelX=todayIconX+38, todayValueX=todayLabelX+164;
+      ctx.drawImage(trophyIcon,everIconX,iconY,25,29); ctx.drawImage(fireIcon,todayIconX,iconY,23,29);
+      drawText('Max Ever:',everLabelX,y+29,21,true,colors.secondary); drawText(ex.everMax+' kg',everValueX,y+29,21,true,colors.secondary);
+      drawText('Max Today:',todayLabelX,y+29,21,true,colors.success); drawText(ex.todayMax+' kg',todayValueX,y+29,21,true,colors.success);
+      y+=53;
+      line(M+16,y,W-M-16,y);
+      const colW=[contentW*.30,contentW*.24,contentW*.24,contentW*.22], heads=[L.weight,L.reps,L.sets,statusHeader]; let x=M+16;
+      heads.forEach((v,i)=>{drawText(String(v).toUpperCase(),x,y+23,16,true,colors.secondary,colW[i]-20);x+=colW[i];});
+      line(M+16,y+36,W-M-16,y+36); y+=50;
+      return colW;
+    };
+    newPage();
+    groups.forEach((g,gi)=>{
+      drawOverview(g);
+      g.exercises.forEach((ex,idx)=>{
+        let rowIndex=0, continued=false;
+        while(rowIndex<ex.rows.length){
+          ensure(42+53+50+rowH+24);
+          const colW=drawExerciseHeader(ex,idx,continued); continued=true;
+          while(rowIndex<ex.rows.length && y+rowH+24<=H-M){
+            const r=ex.rows[rowIndex], status=reportRowStatus(r), statusColor=String(status).indexOf('⚠️')===0?colors.warning:(status===L.overTarget?colors.success:colors.secondary);
+            const vals=[reportPair(r.dKg,r.pKg,'kg'),reportPair(r.dReps,r.pReps),reportPair(r.dSets,r.pSets),status]; let x=M+16;
+            vals.forEach((v,i)=>{drawText(v,x,y+31,21,i<3||(i===3&&statusColor!==colors.secondary),i===3?statusColor:colors.primary,colW[i]-20);x+=colW[i];});
+            line(M+16,y+45,W-M-16,y+45,colors.soft,1.5); y+=rowH; rowIndex++;
+          }
+          line(M+8,y,W-M-8,y,colors.border,2); y+=22;
+          if(rowIndex<ex.rows.length){finishPage();newPage();}
+        }
+      });
+      if(gi<groups.length-1) y+=8;
+    });
+    finishPage();
+    return reportBuildImagePdf(pages,595,842);
+  }
+  async function downloadPdf(){
+    try{ downloadFile('easy-gym-report.pdf','application/pdf',await makeReportTablePdf(),true); }
+    catch(e){ console.error(e); toast(t('saveFailed')||'PDF could not be created'); }
+  }
   function pdfSafeText(value){
     return String(value==null?'':value).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^\x20-\x7E]/g,'?');
   }
   function pdfEsc(value){ return pdfSafeText(value).replace(/[\\()]/g,'\\$&'); }
-  function makeReportTablePdf(){
-    const groups=progressGroups();
-    if(!groups.length) return makeSimplePdf(t('noReport'));
-    const W=842, H=595, M=28;
-    const colW=[226,76,76,96,96,92,92];
-    const tableW=colW.reduce((a,b)=>a+b,0);
-    const rowH=20;
-    let pages=[];
-    let stream='';
-    let y=H-M;
-    function newPage(){ if(stream) pages.push(stream); stream=''; y=H-M; }
-    function ensure(h){ if(y-h<M) newPage(); }
-    function drawRect(x,top,w,h,fill){ if(fill){ stream+=fill+' rg '+x.toFixed(1)+' '+(top-h).toFixed(1)+' '+w.toFixed(1)+' '+h.toFixed(1)+' re f\n'; } stream+='0.28 0.32 0.38 RG 0.6 w '+x.toFixed(1)+' '+(top-h).toFixed(1)+' '+w.toFixed(1)+' '+h.toFixed(1)+' re S\n'; }
-    function text(value,x,base,size=8,bold=false,green=false,centerW=0){ const shown=pdfSafeText(value); const approx=shown.length*size*0.52; const tx=centerW?x+Math.max(2,(centerW-approx)/2):x; const color=green?'0.000 0.560 0.000 rg':'0.070 0.090 0.120 rg'; stream+='q '+color+' BT /F'+(bold?'2':'1')+' '+size+' Tf '+tx.toFixed(1)+' '+base.toFixed(1)+' Td ('+pdfEsc(shown)+') Tj ET Q\n'; }
-    function fit(value,w,size=8){ const s=pdfSafeText(reportCell(value)); const max=Math.max(1,Math.floor((w-8)/(size*0.52))); return s.length>max?s.slice(0,Math.max(0,max-1))+'…':s; }
-    function cell(x,top,w,h,value,opt={}){ drawRect(x,top,w,h,opt.fill||''); text(fit(value,w,opt.size||8),x,top-13,opt.size||8,!!opt.bold,!!opt.green,w); }
-    function row(values,opt={}){ let x=M; ensure(opt.h||rowH); values.forEach((v,i)=>{ const isGreen=!!(opt.greenCols&&opt.greenCols.includes(i)); const bold=!!opt.bold || !!(opt.boldCols&&opt.boldCols.includes(i)); const fill=isGreen ? (opt.greenFill || '0.925 1.000 0.935') : opt.fill; cell(x,y,colW[i],opt.h||rowH,v,{bold,green:isGreen,fill,size:opt.size||8}); x+=colW[i]; }); y-=opt.h||rowH; }
-    groups.forEach((g,gi)=>{
-      ensure(110);
-      text(g.date,M,y,12,true,false,tableW); y-=18;
-      const mw=tableW/4;
-      [[t('date'),t('startTime'),t('duration'),t('total')],[g.date,g.startTime,g.duration,g.totalWeight+' kg']].forEach((vals,ri)=>{ let x=M; ensure(rowH); vals.forEach(v=>{ cell(x,y,mw,rowH,v,{bold:true,fill:ri===0?'0.90 0.91 0.93':'',size:8}); x+=mw; }); y-=rowH; });
-      y-=6;
-      row(reportDownloadHeaders(),{bold:true,fill:'0.90 0.91 0.93',size:7.2,greenCols:[2,4,6]});
-      g.exercises.forEach(ex=>{
-        ensure(rowH*2);
-        row([displayExerciseName(ex.name),t('everMax'),ex.everMax+' kg',t('maxToday'),ex.todayMax+' kg','',''],{bold:true,fill:'0.97 0.97 0.98',size:7.5});
-        ex.rows.forEach(r=>row(['',reportCell(r.pKg),reportCell(r.dKg),reportCell(r.pReps),reportCell(r.dReps),reportCell(r.pSets),reportCell(r.dSets)],{greenCols:[2,4,6],boldCols:[1,2,3,4,5,6],size:8}));
-      });
-      if(gi<groups.length-1) y-=10;
-    });
-    if(stream) pages.push(stream);
-    return buildPdfDocument(pages,W,H);
-  }
-  function makeSimplePdf(text){
-    const W=612,H=792; const lines=String(text||'').split('\n').slice(0,80); const escPdf=s=>pdfEsc(s); let y=760; let stream='BT /F1 12 Tf 40 '+y+' Td '; lines.forEach((line,i)=>{ if(i){stream+='0 -16 Td ';} stream+='('+escPdf(line)+') Tj ';}); stream+='ET'; return buildPdfDocument([stream],W,H);
+    function makeSimplePdf(text){
+    const W=595,H=842; const lines=String(text||'').split('\n').slice(0,80); const escPdf=s=>pdfEsc(s); let y=810; let stream='BT /F1 12 Tf 40 '+y+' Td '; lines.forEach((line,i)=>{ if(i){stream+='0 -16 Td ';} stream+='('+escPdf(line)+') Tj ';}); stream+='ET'; return buildPdfDocument([stream],W,H);
   }
   function buildPdfDocument(streams,W,H){
     const objs=[];
@@ -3275,8 +3231,21 @@ html{color-scheme:dark!important;}
     out+='xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n'+offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n ').join('\n')+'\ntrailer << /Size '+(objs.length+1)+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF';
     return out;
   }
-  function downloadFile(name,mime,content,binary=false){ if(window.AndroidDownload&&typeof window.AndroidDownload.saveFile==='function'){ const b64=btoa(unescape(encodeURIComponent(content))); window.AndroidDownload.saveFile(name,mime,b64); return;} const blob=new Blob([content],{type:mime}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},200); }
-
+  function reportBytesToBase64(bytes){
+    let binary=''; const chunk=0x8000;
+    for(let i=0;i<bytes.length;i+=chunk) binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+chunk,bytes.length)));
+    return btoa(binary);
+  }
+  function downloadFile(name,mime,content,binary=false){
+    const bytes=content instanceof Uint8Array?content:null;
+    if(window.AndroidDownload&&typeof window.AndroidDownload.saveFile==='function'){
+      const b64=bytes?reportBytesToBase64(bytes):btoa(unescape(encodeURIComponent(String(content))));
+      window.AndroidDownload.saveFile(name,mime,b64); return;
+    }
+    const blob=new Blob([bytes||content],{type:mime}); const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},200);
+  }
   function openExerciseModal(target, sessionId=null){ modalTarget=target; modalSessionId=sessionId; editMode=false; selectedLibraryDelete.clear(); deletedLibraryNames.clear(); libraryDraft=[...exerciseLibrary]; libraryDirty=false; els.addExerciseModal.classList.remove('hidden'); els.customExerciseName.value=''; renderLibrary(); }
   function closeExerciseModal(){els.addExerciseModal.classList.add('hidden'); modalTarget=null; modalSessionId=null;}
   function setLibraryDeleteState(){ const enabled=editMode && selectedLibraryDelete.size>0; els.deleteLibraryBtn.style.display=''; els.deleteLibraryBtn.hidden=false; els.deleteLibraryBtn.disabled=!enabled; els.deleteLibraryBtn.classList.toggle('disabled',!enabled); }
@@ -3699,7 +3668,8 @@ html{color-scheme:dark!important;}
 
   async function boot(){
     try{
-      await loadLanguagePacks();
+      await (window.EASY_GYM_LANGUAGE_READY || Promise.resolve());
+      loadLanguagePacks();
       init();
     }catch(e){
       console.error(e);
