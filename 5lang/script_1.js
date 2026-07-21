@@ -158,7 +158,7 @@
     const exercises=(entry?.exercises||[]).map(ex=>({name:normalExercise(ex.name)||'Exercise', sets:(ex.sets||[]).filter(s=>isPositive(s.sets)&&isPositive(s.kg)&&isPositive(s.reps))})).filter(ex=>ex.sets.length);
     if(!exercises.length)return `<div class="empty">${esc(t('noCompletedExercises'))}</div>`;
     return exercises.map((ex,i)=>`<div class="exercise-card x-exercise-card x-go-card x-saved-card" data-mode="saved">
-      <div class="card-header-row">
+      <div class="card-header-row exercise-card-header-stacked">
         <div class="title-area x-exercise-title"><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(ex.name))}</span></div>
           <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
         <div class="control-box header-actions"><span class="go-saved-spacer" aria-hidden="true"></span></div>
@@ -175,7 +175,7 @@
     const exercises=(plan||[]).map(item=>({name:normalExercise(item.name)||'Exercise', lines:ensureLines(item).filter(line=>isPositive(line.sets)&&isPositive(line.kg)&&isPositive(line.reps))})).filter(ex=>ex.lines.length);
     if(!exercises.length)return `<div class="empty">${esc(t('noSavedPlan'))}</div>`;
     return exercises.map((ex,i)=>`<div class="exercise-card x-exercise-card x-plan-card x-saved-card" data-mode="saved">
-      <div class="card-header-row">
+      <div class="card-header-row exercise-card-header-stacked">
         <div class="title-area x-exercise-title"><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(ex.name))}</span></div>
           <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
         <div class="control-box header-actions"><span class="go-saved-spacer" aria-hidden="true"></span></div>
@@ -658,7 +658,7 @@
     if(mode==='plan'){
       const lines=ensureLines(item);
       return `<div class="exercise-card x-exercise-card x-plan-card" data-card-id="${esc(item.id)}" data-mode="plan">
-        <div class="card-header-row">
+        <div class="card-header-row exercise-card-header-stacked">
           <button class="title-area x-exercise-title" type="button" data-plan-name="${esc(item.id)}"><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(item.name)||t('chooseExercise'))}</span></button>
           <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
           <div class="control-box header-actions x-card-tools card-action-group">
@@ -687,7 +687,7 @@
     const first = group.first || group.items[0];
     const canDeleteGroup = !disabled && isDoAddedGroup(group);
     return `<div class="exercise-card x-exercise-card x-go-card" data-train-group="${esc(group.key)}" data-mode="go">
-      <div class="card-header-row">
+      <div class="card-header-row exercise-card-header-stacked">
         <button class="title-area x-exercise-title" type="button" ${disabled?'disabled':`data-train-name="${esc(first.sessionId)}"`}><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(first.name)||t('chooseExercise'))}</span></button>
           <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
         <div class="control-box header-actions x-card-tools card-action-group">
@@ -1333,11 +1333,11 @@
     let imageId=1;
     const brandingTable=()=>{
       const widths=[720,6900,3080], grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
-      const logo=reportDocxCell(reportDocxParagraph(reportDocxImage('rId5','Easy Gym logo',342900,342900,imageId++),{line:390,keep:true,align:'center'}),widths[0],{top:30,bottom:60,right:80,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
+      const logo=reportDocxCell(reportDocxParagraph(reportDocxImage('rId5','Easy Gym logo',228600,228600,imageId++),{line:560,keep:true,align:'center'}),widths[0],{top:60,bottom:80,right:80,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
       const brandRuns=reportDocxRun('EASY GYM',30,'1C1C1E',true)+reportDocxRun('   © 2026 Arthur Stivenson',16,'8E8E93',false);
-      const brand=reportDocxCell(reportDocxParagraph(brandRuns,{line:390,keep:true}),widths[1],{top:30,bottom:60,left:20,right:80,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
-      const title=reportDocxCell(reportDocxParagraph(reportDocxRun(String(L.reportTitle).toUpperCase(),20,'8E8E93',true),{line:390,keep:true,align:'right'}),widths[2],{top:30,bottom:60,left:0,right:0,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
-      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="570" w:hRule="atLeast"/></w:trPr>${logo}${brand}${title}</w:tr></w:tbl>${reportDocxSpacer(150)}`;
+      const brand=reportDocxCell(reportDocxParagraph(brandRuns,{line:560,keep:true}),widths[1],{top:60,bottom:80,left:20,right:80,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
+      const title=reportDocxCell(reportDocxParagraph(reportDocxRun(String(L.reportTitle).toUpperCase(),20,'8E8E93',true),{line:560,keep:true,align:'right'}),widths[2],{top:60,bottom:80,left:0,right:0,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="720" w:hRule="atLeast"/></w:trPr>${logo}${brand}${title}</w:tr></w:tbl>${reportDocxSpacer(150)}`;
     };
     const summaryTable=g=>{
       const widths=[2675,2675,2675,2675];
