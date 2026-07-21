@@ -60,7 +60,7 @@
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v255X-minimal-header';
+  const DEV_BUILD = 'v258X-log-refinement';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -1140,7 +1140,7 @@
                 <div class="horizontal-data-stream">
                   <span class="val-p" data-plan="${esc(reportCell(r.pKg))}">${esc(reportCell(r.pKg))}</span>
                   <span class="data-divider-slash" aria-hidden="true">/</span>
-                  <span class="val-d" data-done="${esc(reportCell(r.dKg))}">${esc(reportCell(r.dKg))} <span class="metric-unit">kg</span></span>
+                  <span class="val-d" data-done="${esc(reportCell(r.dKg))}">${esc(reportCell(r.dKg))}</span>
                 </div>
                 <div class="horizontal-data-stream">
                   <span class="val-p" data-plan="${esc(reportCell(r.pReps))}">${esc(reportCell(r.pReps))}</span>
