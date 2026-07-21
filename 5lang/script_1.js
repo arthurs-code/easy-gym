@@ -60,7 +60,7 @@
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v277X-PWA-adaptive-native-plan-share';
+  const DEV_BUILD = 'v278X-PWA-direct-ios-plan-share';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -1907,44 +1907,23 @@
       return;
     }
 
-    // Prefer a real Plan.json attachment. Chromium/Windows may reject JSON
-    // attachments even though the same native share sheet accepts text.
-    // Test several safe MIME declarations while keeping the exact filename.
-    const fileCandidates=[
-      new File([content],'Plan.json',{type:'application/json'}),
-      new File([content],'Plan.json',{type:'text/json'}),
-      new File([content],'Plan.json',{type:'text/plain'}),
-      new File([content],'Plan.json')
-    ];
-    let shareableFile=null;
-    if(typeof navigator.canShare==='function'){
-      for(const candidate of fileCandidates){
-        try{
-          if(navigator.canShare({files:[candidate]})){
-            shareableFile=candidate;
-            break;
-          }
-        }catch(error){
-          // Continue to the next declaration; text sharing remains available.
-        }
-      }
-    }else{
-      shareableFile=fileCandidates[0];
-    }
+    // iOS opens the native activity sheet directly when a shareable File is
+    // passed from the original tap. Use the same plain-file route that already
+    // works for Share LOG, while keeping the required .json filename.
+    const planFile=new File([content],'Plan.json',{
+      type:'text/plain',
+      lastModified:Date.now()
+    });
 
     try{
-      if(shareableFile){
-        await navigator.share({files:[shareableFile],title:'Easy Gym',text:'Plan.json'});
-      }else{
-        // Match the proven Share LOG path on platforms that block .json files:
-        // open the native share environment immediately and share the complete
-        // plan JSON as text instead of downloading anything locally.
-        await navigator.share({title:'Plan.json',text:content});
-      }
+      // Do not navigate to a Blob URL, create a download link, or add a text
+      // fallback. This call is intentionally the first asynchronous operation
+      // so the browser retains the tap's transient user activation.
+      await navigator.share({files:[planFile]});
       toast(t('shared'));
     }catch(error){
       if(error && error.name==='AbortError') return;
-      console.error('Easy Gym: Plan share could not be started.',error);
+      console.error('Easy Gym: native Plan.json sharing could not be started.',error);
       await showSharePlanUnsupported();
     }
   }

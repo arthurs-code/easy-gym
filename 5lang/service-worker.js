@@ -1,4 +1,4 @@
-const CACHE='easy-gym-pwa-v277x-adaptive-native-plan-share-r1';
+const CACHE='easy-gym-pwa-v278x-direct-ios-plan-share-r1';
 const ASSETS=[
   './','./index.html','./manifest.json','./script_0.js','./script_1.js','./script_2.js',
   './lang/config.js','./lang/loader.js','./lang/en.js','./lang/de.js','./lang/fr.js','./lang/it.js','./lang/es.js',
