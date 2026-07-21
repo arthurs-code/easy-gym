@@ -18,8 +18,8 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v227-language-packages';
-  const EMBEDDED_LANGUAGE_PACKS = {"en":{"code":"en","ui":{"langName":"English","days":{"mon":"Mon","tue":"Tue","wed":"Wed","thu":"Thu","fri":"Fri","sat":"Sat","sun":"Sun"},"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"plan":"PLAN","do":"GO","report":"LOG","manage":"mgmt","donate":"support","about":"info","selectDay":"Select the Day","addExercise":"EXERCISE","remove":"del","copy":"Copy","copied":"Copied","paste":"Paste","saveTraining":"Save training","saved":"Saved","startTraining":"Start Training","started":"Started","stopSaveTraining":"Stop and Save Training","done":"Done","activateTraining":"Activate Training","plannedNotTrained":"Planned · not trained","noTrainingDay":"No training on this day.","tapAddExercise":"Tap “+ EXERCISE” to build this day’s training.","noSavedPlan":"No saved plan for this day.","noCompletedExercises":"No completed exercises.","chooseExercise":"Choose exercise","editExercises":"Edit exercises","save":"Save","modalSave":"SAVE","delete":"del","writeOwnExercise":"Write your own exercise","kg":"KG","reps":"Reps","sets":"Sets","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"No saved LOG yet.","noReport":"No LOG","date":"Date","startTime":"Start Time","duration":"Duration","total":"Total","exercise":"Exercise","everMax":"Ever Max","maxToday":"Max Today","sharePlan":"Share Plan","sharePlanLink":"Share Plan as Link","directLinkComingSoon":"PLAN-Link ready.","planLinkReady":"Plan link ready","planLinkCopied":"Plan link copied","planLinkTooLarge":"Plan too large for link - use Share Plan file","savePlanFirst":"Save a plan first","creatingPlanLink":"Creating plan link","copyPlanLinkPrompt":"Copy this plan link","savePlan":"Save Plan","insertPlan":"Insert Plan","saveReport":"Save LOG","shareReport":"Share LOG","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Delete Data","supportTitle":"Support Easy Gym","supportIntro":"Easy Gym is ad-free. Support us by sharing or sending feedback.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Theme","themeToast":"Theme: ","planSaved":"Plan saved","reportSaved":"LOG saved","allDataSaved":"All data saved","shared":"Shared","fileSaved":"File saved","planInserted":"Plan inserted","dataRestored":"Data restored","dataDeleted":"Data deleted","insertFailed":"Insert failed","restoreFailed":"Restore failed","importFailed":"Import failed","trainingSaved":"Training saved","exerciseRemovedPlan":"Exercise removed from Plan","exerciseListSaved":"Exercise list saved","addFirst":"Add exercises to today’s training first","resumeTraining":"Resume training","noExercisesYet":"No exercises yet. Tap “+ EXERCISE” to build today’s training.","noTrainingPlanned":"No training planned for this day. Create it in Plan first.","reportHeader":"Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets","aboutHtml":"<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>An ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone.</p></div><div class=\"card about-card\"><h2>Preface</h2><p>I created Easy Gym for my own training. It has no ads or subscriptions. You can help by sharing the app, rating it in the App Store, or sending feedback. Contact: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Create a plan for any date. Use <strong>+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong>DEL</strong> to remove exercises. Save the plan when it is ready.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong>+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</p></div><div class=\"card about-card\"><h2>MGMT &amp; share</h2><p><strong>Share Plan as Link</strong> — Plan-Link will be available in Easy Gym from App Store.</p><p><strong>Share Plan File or LOG</strong> — When you share a file, we create a secure link you can send via WhatsApp or other messengers.</p><p><strong>Save File or LOG</strong> — saves it locally.</p><p><strong>Insert Plan File</strong> — imports a received plan file into Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</p></div>","supportShareTitle":"Share App","supportShareText":"Share with training partners","supportRateTitle":"Rate in the App Store","supportRateText":"Leave us a review","supportFeedbackTitle":"Feedback & Problems","supportFeedbackText":"Report bugs or suggest ideas","supportContactTitle":"Contact Us","supportContactText":"arthur.stivenson@gmail.com","shareApp":"Share App","rateApp":"Rate App","sendFeedback":"Send Feedback","supportContact":"Contact","supportShareMessage":"Easy Gym — focused training with no ads or subscriptions. https://easygym.ch","reviewUnavailable":"The App Store page could not be opened.","feedbackSubject":"Easy Gym feedback"},"exercises":{}}};
+  const LANG_PACK_VERSION = 'v230X-language-packages';
+  const EMBEDDED_LANGUAGE_PACKS = {"en":{"code":"en","ui":{"langName":"English","days":{"mon":"Mon","tue":"Tue","wed":"Wed","thu":"Thu","fri":"Fri","sat":"Sat","sun":"Sun"},"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"plan":"PLAN","do":"GO","report":"LOG","manage":"mgmt","donate":"support","about":"info","selectDay":"Select the Day","addExercise":"EXERCISE","remove":"del","copy":"Copy","copied":"Copied","paste":"Paste","saveTraining":"Save training","saved":"Saved","startTraining":"Start Training","started":"Started","stopSaveTraining":"Stop and Save Training","done":"Done","activateTraining":"Activate Training","plannedNotTrained":"Planned · not trained","noTrainingDay":"No training on this day.","tapAddExercise":"Tap “+ EXERCISE” to build this day’s training.","noSavedPlan":"No saved plan for this day.","noCompletedExercises":"No completed exercises.","chooseExercise":"Choose exercise","editExercises":"Edit exercises","save":"Save","modalSave":"SAVE","delete":"del","writeOwnExercise":"Write your own exercise","kg":"KG","reps":"Reps","sets":"Sets","download":"Download","word":"Word","pdf":"PDF","noSavedReport":"No saved LOG yet.","noReport":"No LOG","date":"Date","startTime":"Start Time","duration":"Duration","total":"Total","exercise":"Exercise","everMax":"Ever Max","maxToday":"Max Today","sharePlan":"Share Plan","sharePlanLink":"Share Plan as Link","directLinkComingSoon":"PLAN-Link ready.","planLinkReady":"Plan link ready","planLinkCopied":"Plan link copied","planLinkTooLarge":"Plan too large for link - use Share Plan file","savePlanFirst":"Save a plan first","creatingPlanLink":"Creating plan link","copyPlanLinkPrompt":"Copy this plan link","savePlan":"Save Plan","insertPlan":"Insert Plan","saveReport":"Save LOG","shareReport":"Share LOG","saveAllData":"Backup","restoreAllData":"Restore","deleteData":"Delete Data","mgmtShareSaveTitle":"Share & Save","mgmtDataTitle":"Data Backup & Imports","mgmtDangerTitle":"Danger Zone","supportTitle":"Support Easy Gym","supportIntro":"Easy Gym is ad-free. Support us by sharing or sending feedback.","confirmInsert":"Insert will override Plans - confirm","confirmRestore":"Restore will replace All Data - confirm","confirmDelete":"Delete will erase All Data - confirm","theme":"Theme","themeToast":"Theme: ","planSaved":"Plan saved","reportSaved":"LOG saved","allDataSaved":"All data saved","shared":"Shared","fileSaved":"File saved","planInserted":"Plan inserted","dataRestored":"Data restored","dataDeleted":"Data deleted","insertFailed":"Insert failed","restoreFailed":"Restore failed","importFailed":"Import failed","trainingSaved":"Training saved","exerciseRemovedPlan":"Exercise removed from Plan","exerciseListSaved":"Exercise list saved","addFirst":"Add exercises to today’s training first","resumeTraining":"Resume training","noExercisesYet":"No exercises yet. Tap “+ EXERCISE” to build today’s training.","noTrainingPlanned":"No training planned for this day. Create it in Plan first.","reportHeader":"Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets","aboutHtml":"<div class=\"app-view-container\"><div class=\"app-info-section\"><div class=\"app-group-title\">Preface</div><div class=\"app-group-card app-preface-card\"><div class=\"app-list-row app-preface-row\"><div class=\"app-row-left-group\"><p class=\"app-global-desc app-preface-body\">I created Easy Gym for my own training. An ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone. You can help by sharing the app, rating it in the App Store, or sending feedback. Contact: <span class=\"em-keyword\">arthur.stivenson@gmail.com</span></p></div></div></div></div><div class=\"app-info-section\"><div class=\"app-group-title\">User Guide</div><div class=\"app-group-card\"><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><rect height=\"15\" rx=\"2.5\" width=\"17\" x=\"3.5\" y=\"5.5\"></rect><path d=\"M7.5 3.5v4M16.5 3.5v4M3.5 9.5h17\"></path><path d=\"M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">PLAN</span><span class=\"app-global-desc\">Create a plan for any date. Use <strong class=\"em-keyword\">+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong class=\"em-keyword\">DEL</strong> to remove exercises. Save the plan when it is ready.</span></div></div></div><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><circle cx=\"12\" cy=\"12\" r=\"9\"></circle><path d=\"m10 8 6 4-6 4z\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">GO</span><span class=\"app-global-desc\">Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong class=\"em-keyword\">+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</span></div></div></div><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M4.5 8.5V4.5h4\"></path><path d=\"M5 7a8.5 8.5 0 1 1-1.1 8\"></path><path d=\"M12 7.5V12l3 2\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">LOG</span><span class=\"app-global-desc\">Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</span></div></div></div></div></div><div class=\"app-info-section\"><div class=\"app-group-title\">Management &amp; Share</div><div class=\"app-group-card\"><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M9.5 14.5 14.5 9.5\"></path><path d=\"M7.8 16.2 6.4 17.6a3.5 3.5 0 0 1-5-5l3.1-3.1a3.5 3.5 0 0 1 5 0\"></path><path d=\"m16.2 7.8 1.4-1.4a3.5 3.5 0 1 1 5 5l-3.1 3.1a3.5 3.5 0 0 1-5 0\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">Share Plan as Link</span><span class=\"app-global-desc\">Plan-Link will be available in Easy Gym from App Store.</span></div></div></div><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M12 15.5V3\"></path><path d=\"m7.5 7.5 4.5-4.5 4.5 4.5\"></path><path d=\"M8 9.5H6.5A2.5 2.5 0 0 0 4 12v6.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V12a2.5 2.5 0 0 0-2.5-2.5H16\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">Share Plan File or LOG</span><span class=\"app-global-desc\">When you share a file, we create a secure link you can send via WhatsApp or other messengers.</span></div></div></div><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M6 3.5h8l4 4V20.5H6z\"></path><path d=\"M14 3.5v4h4M9 12h6M9 15.5h6\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">Save File or LOG</span><span class=\"app-global-desc\">Saves it locally on your device.</span></div></div></div><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M12 3.5v11\"></path><path d=\"m7.5 10 4.5 4.5 4.5-4.5\"></path><path d=\"M4.5 18v2.5h15V18\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">Insert Plan File</span><span class=\"app-global-desc\">Imports a received plan file into Easy Gym.</span></div></div></div></div></div><div class=\"app-info-section\"><div class=\"app-group-title\">System &amp; Security</div><div class=\"app-group-card\"><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M7 18.5H5.8A3.8 3.8 0 0 1 5.2 11 6.5 6.5 0 0 1 17.8 9a4.6 4.6 0 0 1 .4 9.2H17\"></path><path d=\"M12 20.5v-9\"></path><path d=\"m8.5 15 3.5-3.5 3.5 3.5\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">BACKUP</span><span class=\"app-global-desc\">Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</span></div></div></div><div class=\"app-list-row\"><div class=\"app-row-left-group\"><span aria-hidden=\"true\" class=\"app-global-icon\"><svg viewbox=\"0 0 24 24\"><g><path d=\"M12 3.2 19 6v5.2c0 4.5-2.8 8-7 9.6-4.2-1.6-7-5.1-7-9.6V6z\"></path><path d=\"m8.8 12 2.1 2.1 4.4-4.5\"></path></g></svg></span><div class=\"app-text-column-stack\"><span class=\"app-global-title\">PRIVACY</span><span class=\"app-global-desc\">Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</span></div></div></div></div></div></div>","supportShareTitle":"Share App","supportShareText":"Share with training partners","supportRateTitle":"Rate in the App Store","supportRateText":"Leave us a review","supportFeedbackTitle":"Feedback & Problems","supportFeedbackText":"Report bugs or suggest ideas","supportContactTitle":"Contact Us","supportContactText":"arthur.stivenson@gmail.com","shareApp":"Share App","rateApp":"Rate App","sendFeedback":"Send Feedback","supportContact":"Contact","supportShareMessage":"Easy Gym — focused training with no ads or subscriptions. https://easygym.ch","reviewUnavailable":"The App Store page could not be opened.","feedbackSubject":"Easy Gym feedback"},"exercises":{}}};
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
     const englishPack = packMap.en || EMBEDDED_LANGUAGE_PACKS.en;
@@ -151,31 +151,41 @@
   function markDatePlanDirty(iso){ savedDatePlans[iso]=false; saveAll(); }
   function planListHtml(plan){ return `<ul class="home-plan-list">`+plan.map(e=>{ const lines=ensureLines(e); return `<li><span class="hp-name">${esc(displayExerciseName(e.name))}</span><span class="hp-meta">${lines.map(metricLineSummary).join('<br>')}</span></li>`; }).join('')+`</ul>`; }
   function completedListHtml(entry){ const rows=[]; (entry.exercises||[]).forEach(ex=>(ex.sets||[]).forEach(s=>rows.push({name:ex.name,sets:s.sets,kg:s.kg,reps:s.reps}))); return `<ul class="home-plan-list">`+rows.map(r=>`<li><span class="hp-name">${esc(displayExerciseName(r.name))}</span><span class="hp-meta">${esc(numVal(r.sets))}&nbsp;×&nbsp;${esc(numVal(r.kg))}&nbsp;kg&nbsp;×&nbsp;${esc(numVal(r.reps))}</span></li>`).join('')+`</ul>`; }
-  function readOnlyMetricBox(label,value){ return `<label class="metric-wrap disabled"><span class="metric-label-top">${esc(label)}</span><span class="metric-input-box disabled"><input type="text" value="${esc(numVal(value))}" readonly disabled></span></label>`; }
+  function readOnlyMetricBox(label,value){
+    return `<label class="x-data-field value-box disabled"><input class="set-input-field uniform-digit" type="text" value="${esc(numVal(value))}" aria-label="${esc(label)}" readonly disabled></label>`;
+  }
   function completedExerciseCardsHtml(entry){
     const exercises=(entry?.exercises||[]).map(ex=>({name:normalExercise(ex.name)||'Exercise', sets:(ex.sets||[]).filter(s=>isPositive(s.sets)&&isPositive(s.kg)&&isPositive(s.reps))})).filter(ex=>ex.sets.length);
     if(!exercises.length)return `<div class="empty">${esc(t('noCompletedExercises'))}</div>`;
-    return exercises.map((ex,i)=>`<div class="exercise-card completed-exercise-card">
-      <div class="exercise-top"><div class="exercise-number">${i+1}.</div>
-      <div class="name-box disabled"><input value="${esc(displayExerciseName(ex.name))}" readonly disabled></div></div>
-      ${ex.sets.map(s=>`<div class="metric-line"><div class="metric-row">
-        ${readOnlyMetricBox(t('kg'), s.kg)}
-        ${readOnlyMetricBox(t('reps'), s.reps)}
-        ${readOnlyMetricBox(t('sets'), s.sets)}
-      </div></div>`).join('')}
+    return exercises.map((ex,i)=>`<div class="exercise-card x-exercise-card x-go-card x-saved-card" data-mode="saved">
+      <div class="card-header-row">
+        <div class="title-area x-exercise-title"><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(ex.name))}</span></div>
+          <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
+        <div class="control-box header-actions"><span class="go-saved-spacer" aria-hidden="true"></span></div>
+      </div>
+      <div class="x-set-list">${ex.sets.map(s=>`<div class="card-values-row metric-line">
+        ${readOnlyMetricBox(t('kg'),s.kg)}
+        ${readOnlyMetricBox(t('reps'),s.reps)}
+        ${readOnlyMetricBox(t('sets'),s.sets)}
+        <div class="control-box cell-interactive row-interactive-cell"><span class="saved-status-badge" aria-label="${esc(t('saved'))}">${icon('copied')}</span></div>
+      </div>`).join('')}</div>
     </div>`).join('');
   }
   function readOnlyPlanExerciseCardsHtml(plan){
     const exercises=(plan||[]).map(item=>({name:normalExercise(item.name)||'Exercise', lines:ensureLines(item).filter(line=>isPositive(line.sets)&&isPositive(line.kg)&&isPositive(line.reps))})).filter(ex=>ex.lines.length);
     if(!exercises.length)return `<div class="empty">${esc(t('noSavedPlan'))}</div>`;
-    return exercises.map((ex,i)=>`<div class="exercise-card completed-exercise-card saved-plan-card">
-      <div class="exercise-top"><div class="exercise-number">${i+1}.</div>
-      <div class="name-box disabled"><input value="${esc(displayExerciseName(ex.name))}" readonly disabled></div></div>
-      ${ex.lines.map(line=>`<div class="metric-line"><div class="metric-row">
-        ${readOnlyMetricBox(t('kg'), line.kg)}
-        ${readOnlyMetricBox(t('reps'), line.reps)}
-        ${readOnlyMetricBox(t('sets'), line.sets)}
-      </div></div>`).join('')}
+    return exercises.map((ex,i)=>`<div class="exercise-card x-exercise-card x-plan-card x-saved-card" data-mode="saved">
+      <div class="card-header-row">
+        <div class="title-area x-exercise-title"><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(ex.name))}</span></div>
+          <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
+        <div class="control-box header-actions"><span class="go-saved-spacer" aria-hidden="true"></span></div>
+      </div>
+      <div class="x-set-list">${ex.lines.map(line=>`<div class="card-values-row metric-line">
+        ${readOnlyMetricBox(t('kg'),line.kg)}
+        ${readOnlyMetricBox(t('reps'),line.reps)}
+        ${readOnlyMetricBox(t('sets'),line.sets)}
+        <div class="control-box cell-interactive row-interactive-cell"><span class="saved-status-badge" aria-label="${esc(t('saved'))}">${icon('copied')}</span></div>
+      </div>`).join('')}</div>
     </div>`).join('');
   }
   function doneRowHtml(activateIso=null){
@@ -217,14 +227,14 @@
   function setButtonLabel(el,iconName,text){ if(!el)return; el.innerHTML=buttonHtml(iconName,text); el.setAttribute('aria-label',text); el.title=text; }
   function setNavButtonLabel(el,iconName,text){
     if(!el)return;
-    const iconOnly=el.dataset.tab==='donate'||el.dataset.tab==='about';
-    el.classList.toggle('nav-icon-only',iconOnly);
-    el.classList.toggle('nav-text-only',!iconOnly);
-    el.innerHTML=iconOnly?icon(iconName):textOnlyButtonHtml(text);
+    el.classList.remove('nav-icon-only','nav-text-only');
+    el.classList.add('x-bottom-nav-item');
+    el.innerHTML=buttonHtml(iconName,text);
     el.setAttribute('aria-label',text);
     el.title=text;
   }
   function setIconText(id,key,iconName){ const el=$(id); if(el) setButtonLabel(el,iconName,t(key)); }
+  function setMgmtRowText(id,key){ const el=$(id); if(!el)return; const text=t(key); const label=el.querySelector('.mgmt-row-title'); if(label) label.textContent=text; else el.textContent=text; el.setAttribute('aria-label',text); el.title=text; }
   function buildLanguageMenu(){
     if(!els.languageMenu) return;
     els.languageMenu.replaceChildren();
@@ -247,7 +257,8 @@
     document.querySelectorAll('[data-tab]').forEach(b=>{ const k=navKeys[b.dataset.tab]; if(k) setNavButtonLabel(b,TAB_ICONS[b.dataset.tab]||'about',t(k)); });
     setText('planChooseHint','selectDay'); setIconText('addExerciseBtn','addExercise','add'); setIconText('removeSelectedBtn','remove','remove');
     setIconText('downloadWordBtn','word','word'); setIconText('downloadPdfBtn','pdf','pdf');
-    setIconText('sharePlanBtn','sharePlan','share'); setIconText('sharePlanLinkBtn','sharePlanLink','share'); setIconText('manageSavePlanBtn','savePlan','save'); setIconText('insertPlanBtn','insertPlan','insert'); setIconText('manageSaveReportBtn','saveReport','save'); setIconText('shareReportBtn','shareReport','share'); setIconText('saveAllDataBtn','saveAllData','save'); setIconText('restoreAllDataBtn','restoreAllData','restore'); setIconText('deleteDataBtn','deleteData','delete');
+    setMgmtRowText('sharePlanBtn','sharePlan'); setMgmtRowText('sharePlanLinkBtn','sharePlanLink'); setMgmtRowText('manageSavePlanBtn','savePlan'); setMgmtRowText('manageSaveReportBtn','saveReport'); setMgmtRowText('shareReportBtn','shareReport'); setMgmtRowText('insertPlanBtn','insertPlan'); setMgmtRowText('saveAllDataBtn','saveAllData'); setMgmtRowText('restoreAllDataBtn','restoreAllData'); setMgmtRowText('deleteDataBtn','deleteData');
+    setText('mgmtShareSaveTitle','mgmtShareSaveTitle'); setText('mgmtDataTitle','mgmtDataTitle'); setText('mgmtDangerTitle','mgmtDangerTitle');
     setText('supportPageTitle','supportTitle'); setText('supportPageIntro','supportIntro');
     setText('supportShareTitle','supportShareTitle'); setText('supportShareText','supportShareText');
     setText('supportRateTitle','supportRateTitle'); setText('supportRateText','supportRateText');
@@ -339,7 +350,7 @@
     els.editExercisesBtn.addEventListener('click',()=>{editMode=true;libraryDraft=[...exerciseLibrary];libraryDirty=false;selectedLibraryDelete.clear();renderLibrary();});
     els.saveLibraryBtn.addEventListener('click', saveLibrary);
     els.deleteLibraryBtn.addEventListener('click', deleteCheckedLibrary);
-    els.customExerciseName.addEventListener('input',()=>updateCustomAdd());
+    els.customExerciseName.addEventListener('input',()=>{ updateCustomAdd(); if(!editMode) renderLibrary(); });
     els.addCustomExerciseBtn.addEventListener('click',()=>addCustomFromModal());
     els.customExerciseName.addEventListener('keydown',e=>{if(e.key==='Enter'){ if(editMode) saveLibrary(); else addCustomFromModal(); }});
     els.downloadWordBtn.addEventListener('click', downloadWord);
@@ -420,10 +431,29 @@
       const it=(datePlans[iso]||[]).find(x=>x.id===btn.dataset.planLinePlus); if(!it)return;
       const lines=ensureLines(it); const last=lines[lines.length-1]||{}; lines.push(makeLine({kg:last.kg??1,reps:last.reps??1,sets:last.sets??1})); syncFirstLine(it); markDatePlanDirty(iso); renderAll();
     }));
-    container.querySelectorAll('[data-plan-line-check]').forEach(cb=>cb.addEventListener('change',()=>{
-      const row=cb.closest('.metric-line');
-      if(row) row.classList.toggle('line-selected', cb.checked);
+    container.querySelectorAll('[data-x-plan-delete-line]').forEach(btn=>btn.addEventListener('click',()=>{
+      const list=datePlans[iso]||[]; const item=list.find(x=>x.id===btn.dataset.xPlanDeleteLine); if(!item)return;
+      const lines=ensureLines(item); const lineId=btn.dataset.xLineId;
+      if(lines.length<=1){ datePlans[iso]=list.filter(x=>x.id!==item.id); }
+      else { item.lines=lines.filter(x=>x.id!==lineId); syncFirstLine(item); }
+      markDatePlanDirty(iso); saveAll(); renderAll();
     }));
+    const syncCardTrash=(card)=>{ if(!card)return; const trash=card.querySelector('[data-x-plan-delete-selected]'); if(!trash)return; const any=!!card.querySelector('[data-plan-line-check]:checked'); trash.disabled=!any; };
+    container.querySelectorAll('[data-plan-line-check]').forEach(cb=>cb.addEventListener('change',()=>{ const row=cb.closest('.metric-line'); if(row) row.classList.toggle('line-selected', cb.checked); syncCardTrash(cb.closest('.x-plan-card')); }));
+    container.querySelectorAll('[data-x-plan-delete-selected]').forEach(btn=>{
+      syncCardTrash(btn.closest('.x-plan-card'));
+      btn.addEventListener('click',()=>{
+        const card=btn.closest('.x-plan-card'); if(!card)return;
+        const itemId=btn.dataset.xPlanDeleteSelected;
+        const selected=[...card.querySelectorAll('[data-plan-line-check]:checked')].map(cb=>cb.dataset.lineId).filter(Boolean);
+        if(!selected.length)return;
+        const list=datePlans[iso]||[]; const item=list.find(x=>x.id===itemId); if(!item)return;
+        const lines=ensureLines(item); const selectedSet=new Set(selected);
+        if(lines.length<=1 || selectedSet.size>=lines.length){ datePlans[iso]=list.filter(x=>x.id!==itemId); }
+        else { item.lines=lines.filter(line=>!selectedSet.has(line.id)); syncFirstLine(item); }
+        markDatePlanDirty(iso); saveAll(); renderAll();
+      });
+    });
     container.querySelectorAll('[data-metric-mode="plan"]').forEach(inp=>{
       inp.addEventListener('input',()=>{
         const it=(datePlans[iso]||[]).find(x=>x.id===inp.dataset.metricId); if(!it)return;
@@ -510,7 +540,7 @@
   function centerStrip(el, dataAttr, iso){ const b=el.querySelector('['+dataAttr+'="'+iso+'"]'); if(b){ el.scrollLeft = b.offsetLeft - el.clientWidth/2 + b.offsetWidth/2; } }
   function buildDateStrip(el, selectedIso, dataAttr){
     const today=todayISO(); const sets=stripSets();
-    const sig=[currentLang, today, [...sets.trained].sort().join(','), [...sets.planned].sort().join(',')].join('|');
+    const sig=['v230X',currentLang, today, [...sets.trained].sort().join(','), [...sets.planned].sort().join(',')].join('|');
     if(el.dataset.sig!==sig){
       const prev = el.children.length ? el.scrollLeft : null;
       const N=365; const base=new Date(); base.setHours(0,0,0,0);
@@ -518,14 +548,15 @@
       for(let off=-N; off<=N; off++){
         const dt=new Date(base.getFullYear(),base.getMonth(),base.getDate()+off); const iso=isoOf(dt);
         const trained=sets.trained.has(iso); const planned=sets.planned.has(iso);
-        const cls=['day-link','with-date',iso===today?'is-today':'',trained?'trained':(planned?'planned':'')].filter(Boolean).join(' ');
-        const ddmmyy=`${String(dt.getDate()).padStart(2,'0')}.${String(dt.getMonth()+1).padStart(2,'0')}.${String(dt.getFullYear()).slice(2)}`;
-        html+=`<button class="${cls}" ${dataAttr}="${iso}"><span class="dl-day">${dayShort(DAYS[(dt.getDay()+6)%7]).toUpperCase()}</span><span class="dl-date">${ddmmyy}</span></button>`;
+        const cls=['day-link','with-date','calendar-day',iso===today?'is-today':'',trained?'trained':(planned?'planned':'')].filter(Boolean).join(' ');
+        const ddmm=`${String(dt.getDate()).padStart(2,'0')}.${String(dt.getMonth()+1).padStart(2,'0')}.`;
+        html+=`<button class="${cls}" ${dataAttr}="${iso}" type="button"><span class="dl-day day-name">${dayShort(DAYS[(dt.getDay()+6)%7]).toUpperCase()}</span><span class="dl-date day-date">${ddmm}</span></button>`;
       }
       el.innerHTML=html; el.dataset.sig=sig;
       if(prev!=null) el.scrollLeft=prev;
     }
-    const centerIso=selectedIso||today; if(el.clientWidth>0 && el.children.length && !el.dataset.initialCentered){ centerStrip(el, dataAttr, centerIso); el.dataset.initialCentered='1'; }
+    const centerIso=selectedIso||today;
+    if(el.clientWidth>0 && el.children.length && !el.dataset.initialCentered){ centerStrip(el, dataAttr, centerIso); el.dataset.initialCentered='1'; }
     el.querySelectorAll('.day-link.active').forEach(b=>b.classList.remove('active'));
     if(selectedIso){ const sb=el.querySelector('['+dataAttr+'="'+selectedIso+'"]'); if(sb) sb.classList.add('active'); }
   }
@@ -618,38 +649,32 @@
     els.planList.querySelectorAll('[data-remove-check],[data-plan-line-check]').forEach(cb=>cb.addEventListener('change',updatePlanRemoveState));
     updatePlanRemoveState();
   }
+  function xRowMetric(unit,value,mode,item,field,disabled,lineId=null){
+    const id=mode==='plan'?item.id:item.sessionId;
+    return `<label class="x-data-field value-box x-field-${field} ${disabled?'disabled':''}"><input class="set-input-field uniform-digit" inputmode="numeric" pattern="[0-9]*" type="text" value="${esc(numVal(value))}" aria-label="${esc(unit)}" data-metric-mode="${mode}" data-metric-id="${esc(id)}" ${lineId?`data-line-id="${esc(lineId)}"`:''} data-field="${field}" ${disabled?'disabled':''}></label>`;
+  }
   function exerciseCard(item,i,mode){
     const disabled = mode==='train' && savedWorkout?.date===selectedTrainDate;
-    const showPlus = mode==='train' && !disabled;
     if(mode==='plan'){
       const lines=ensureLines(item);
-      return `<div class="exercise-card" data-card-id="${esc(item.id)}">
-        <div class="exercise-top plan-top"><div class="exercise-number">${i+1}.</div>
-        <div class="name-box" data-plan-name="${esc(item.id)}"><input value="${esc(displayExerciseName(item.name)||'')}" placeholder="${esc(t('chooseExercise'))}" readonly></div>
-        <button class="plus plan-line-plus" type="button" data-plan-line-plus="${esc(item.id)}" aria-label="Add KG Reps Sets line">+</button>
-        <input class="check" type="checkbox" data-remove-check value="${esc(item.id)}" aria-label="${esc(t('remove'))}"></div>
-        ${lines.map((line,idx)=>`<div class="metric-line">
-          <div class="metric-row ${idx>0?'with-line-check':''}">
-            ${metricBox(t('kg'), line.kg, mode, item, 'kg', false, line.id)}
-            ${metricBox(t('reps'), line.reps, mode, item, 'reps', false, line.id)}
-            ${metricBox(t('sets'), line.sets, mode, item, 'sets', false, line.id)}
-            ${idx>0?`<label class="line-select-wrap"><input class="check line-select" type="checkbox" data-plan-line-check="${esc(item.id)}" data-line-id="${esc(line.id)}" aria-label="Select line for remove"></label>`:''}
+      return `<div class="exercise-card x-exercise-card x-plan-card" data-card-id="${esc(item.id)}" data-mode="plan">
+        <div class="card-header-row">
+          <button class="title-area x-exercise-title" type="button" data-plan-name="${esc(item.id)}"><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(item.name)||t('chooseExercise'))}</span></button>
+          <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
+          <div class="control-box header-actions x-card-tools card-action-group">
+            <button class="x-delete-group-btn x-plan-trash btn-action btn-trash" type="button" data-x-plan-delete-selected="${esc(item.id)}" aria-label="${esc(t('remove'))}" disabled>${icon('remove')}</button>
+            <button class="add-set-btn btn-action btn-add" type="button" data-plan-line-plus="${esc(item.id)}" aria-label="Add KG Reps Sets line">${icon('add')}</button>
           </div>
-        </div>`).join('')}
+        </div>
+        <div class="x-set-list">${lines.map((line,idx)=>`<div class="card-values-row metric-line" data-line-id="${esc(line.id)}">
+          ${xRowMetric(t('kg'),line.kg,'plan',item,'kg',false,line.id)}
+          ${xRowMetric(t('reps'),line.reps,'plan',item,'reps',false,line.id)}
+          ${xRowMetric(t('sets'),line.sets,'plan',item,'sets',false,line.id)}
+          <label class="control-box cell-interactive x-row-check-wrap row-interactive-cell"><input class="x-row-check" type="checkbox" data-plan-line-check="${esc(item.id)}" data-line-id="${esc(line.id)}" aria-label="${esc(t('remove'))}"></label>
+        </div>`).join('')}</div>
       </div>`;
     }
-    const checkbox = showPlus?`<button class="plus" data-train-plus>+</button>`:'';
-    const nameClick = disabled?'':`data-train-name="${esc(item.sessionId)}"`;
-    return `<div class="exercise-card" data-card-id="${esc(item.sessionId)}">
-      <div class="exercise-top"><div class="exercise-number">${i+1}.</div>
-      <div class="name-box ${disabled?'disabled':''}" ${nameClick}><input value="${esc(displayExerciseName(item.name)||'')}" placeholder="${esc(t('chooseExercise'))}" readonly ${disabled?'disabled':''}></div>${checkbox}</div>
-      <div class="metric-row">
-        ${metricBox(t('kg'), item.kg, mode, item, 'kg', disabled)}
-        ${metricBox(t('reps'), item.reps, mode, item, 'reps', disabled)}
-        ${metricBox(t('sets'), item.sets, mode, item, 'sets', disabled)}
-      </div>
-      ${mode==='train'?setButtons(item,disabled):''}
-    </div>`;
+    return '';
   }
   function metricBox(label,value,mode,item,field,disabled,lineId=null){const id=mode==='plan'?item.id:item.sessionId;return `<label class="metric-wrap ${disabled?'disabled':''}"><span class="metric-label-top">${label}</span><span class="metric-input-box ${disabled?'disabled':''}"><input inputmode="numeric" pattern="[0-9]*" type="text" value="${esc(numVal(value))}" data-metric-mode="${mode}" data-metric-id="${esc(id)}" ${lineId?`data-line-id="${esc(lineId)}"`:''} data-field="${field}" ${disabled?'disabled':''}></span></label>`;}
   function setButtons(item,disabled){ const total=Math.max(0,Math.floor(Number(item.sets)||0)); if(!total) return ''; const checked=Number(item.checked||0); let html='<div class="set-buttons">'; for(let n=1;n<=total;n++){html+=`<button class="set-btn ${checked>=n?'checked':''}" data-set-n="${n}" ${disabled?'disabled':''}>${n}</button>`;} return html+'</div>'; }
@@ -659,25 +684,28 @@
   function isDoAddedGroup(group){ return !!(group && Array.isArray(group.items) && group.items.length && group.items.every(isDoAddedItem)); }
   function trainGroupCard(group,i){
     const disabled = savedWorkout?.date===selectedTrainDate;
-    const showPlus = !disabled;
     const first = group.first || group.items[0];
     const canDeleteGroup = !disabled && isDoAddedGroup(group);
-    return `<div class="exercise-card train-group-card" data-train-group="${esc(group.key)}">
-      <div class="exercise-top train-top"><div class="exercise-number">${i+1}.</div>
-      <div class="name-box ${disabled?'disabled':''}" ${disabled?'':`data-train-name="${esc(first.sessionId)}"`}><input value="${esc(displayExerciseName(first.name)||'')}" placeholder="${esc(t('chooseExercise'))}" readonly ${disabled?'disabled':''}></div>
-      ${showPlus?`<button class="plus train-line-plus" data-train-plus data-train-plus-session="${esc(first.sessionId)}" aria-label="Add KG Reps Sets line">+</button>`:'<span></span>'}
-      ${canDeleteGroup?`<input class="check" type="checkbox" data-train-group-check="${esc(group.key)}" aria-label="${esc(t('remove'))}">`:'<span></span>'}</div>
-      ${group.items.map((item,idx)=>{
-        const canDeleteLine = idx>0 && !disabled && isDoAddedItem(item);
-        return `<div class="train-metric-line metric-line" data-card-id="${esc(item.sessionId)}">
-        <div class="metric-row ${canDeleteLine?'with-line-check':''}">
-          ${metricBox(t('kg'), item.kg, 'train', item, 'kg', disabled)}
-          ${metricBox(t('reps'), item.reps, 'train', item, 'reps', disabled)}
-          ${metricBox(t('sets'), item.sets, 'train', item, 'sets', disabled)}
-          ${canDeleteLine?`<label class="line-select-wrap"><input class="check line-select" type="checkbox" data-train-line-check="${esc(item.sessionId)}" aria-label="Select line for remove"></label>`:''}
+    return `<div class="exercise-card x-exercise-card x-go-card" data-train-group="${esc(group.key)}" data-mode="go">
+      <div class="card-header-row">
+        <button class="title-area x-exercise-title" type="button" ${disabled?'disabled':`data-train-name="${esc(first.sessionId)}"`}><span class="exercise-num x-exercise-index">${i+1}.</span><span>${esc(displayExerciseName(first.name)||t('chooseExercise'))}</span></button>
+          <div class="right-aligned-labels-subgrid" aria-hidden="true"><span class="header-right-label">${esc(t('kg'))}</span><span class="header-right-label">${esc(t('reps'))}</span><span class="header-right-label">${esc(t('sets'))}</span></div>
+        <div class="control-box header-actions x-card-tools card-action-group">
+          ${canDeleteGroup?`<button class="x-delete-group-btn btn-action btn-trash" type="button" data-x-train-delete-group="${esc(group.key)}" aria-label="${esc(t('remove'))}">${icon('remove')}</button>`:''}
+          ${!disabled?`<button class="add-set-btn btn-action btn-add" type="button" data-train-plus data-train-plus-session="${esc(first.sessionId)}" aria-label="Add KG Reps Sets line">${icon('add')}</button>`:`<span class="go-saved-spacer" aria-hidden="true"></span>`}
         </div>
-        ${setButtons(item,disabled)}
-      </div>`}).join('')}
+      </div>
+      <div class="x-set-list">${group.items.map((item,idx)=>{
+        const total=Math.max(0,Math.floor(Number(item.sets)||0)); const checked=Math.min(total,Math.max(0,Number(item.checked)||0)); const complete=total>0&&checked>=total;
+        const canDeleteLine=idx>0&&!disabled&&isDoAddedItem(item);
+        const progress=`${checked}/${total}`;
+        return `<div class="card-values-row metric-line" data-card-id="${esc(item.sessionId)}">
+          ${xRowMetric(t('kg'),item.kg,'train',item,'kg',disabled)}
+          ${xRowMetric(t('reps'),item.reps,'train',item,'reps',disabled)}
+          ${xRowMetric(t('sets'),item.sets,'train',item,'sets',disabled)}
+          <div class="control-box cell-interactive x-go-action-cell row-interactive-cell">${canDeleteLine?`<button class="x-inline-delete" type="button" data-x-train-delete-line="${esc(item.sessionId)}" aria-label="${esc(t('remove'))}">×</button>`:''}<button class="x-check-btn uniform-digit ${complete?'completed':(checked>0?'partial':'')}" type="button" data-x-set-progress="${esc(item.sessionId)}" ${disabled?'disabled':''} aria-label="${esc(t('sets'))}: ${checked}/${total}"><span>${progress}</span></button></div>
+        </div>`;
+      }).join('')}</div>
     </div>`;
   }
   function clonePlanForCopy(list){
@@ -852,19 +880,32 @@
   function wireTrainCards(){
     els.trainList.querySelectorAll('[data-train-name]').forEach(box=>box.addEventListener('click',()=>openExerciseModal('train-replace', box.dataset.trainName)));
     els.trainList.querySelectorAll('[data-train-plus]').forEach(btn=>btn.addEventListener('click',()=>addTrainLine(btn.dataset.trainPlusSession)));
-    els.trainList.querySelectorAll('[data-train-group-check]').forEach(cb=>cb.addEventListener('change',updateTrainRemoveState));
-    els.trainList.querySelectorAll('[data-train-line-check]').forEach(cb=>cb.addEventListener('change',()=>{ const row=cb.closest('.metric-line'); if(row) row.classList.toggle('line-selected', cb.checked); updateTrainRemoveState(); }));
+    els.trainList.querySelectorAll('[data-x-train-delete-group]').forEach(btn=>btn.addEventListener('click',()=>{
+      if(isTrainLocked())return; const iso=selectedTrainDate; const key=btn.dataset.xTrainDeleteGroup; const list=trainSessions[iso]||[];
+      const items=list.filter(item=>trainGroupKey(item)===key); if(!items.length||!items.every(isDoAddedItem))return;
+      trainSessions[iso]=list.filter(item=>trainGroupKey(item)!==key); saveAll(); renderTrain();
+    }));
+    els.trainList.querySelectorAll('[data-x-train-delete-line]').forEach(btn=>btn.addEventListener('click',(e)=>{
+      e.stopPropagation(); if(isTrainLocked())return; const iso=selectedTrainDate; const id=btn.dataset.xTrainDeleteLine; const it=findTrain(id); if(!it||!isDoAddedItem(it))return;
+      trainSessions[iso]=(trainSessions[iso]||[]).filter(x=>x.sessionId!==id); saveAll(); renderTrain();
+    }));
     els.trainList.querySelectorAll('[data-metric-mode="train"]').forEach(inp=>{
       inp.addEventListener('input',()=>{
         const it=findTrain(inp.dataset.metricId); if(!it||isTrainLocked())return;
         const cleaned=cleanMetricText(inp.value); if(inp.value!==cleaned) inp.value=cleaned;
         it[inp.dataset.field]=cleaned;
         if(inp.dataset.field==='sets' && Number(it.checked)>Number(cleaned)) it.checked=Number(cleaned)||0;
-        saveAll();
-        setTrainSaveState();
+        saveAll(); setTrainSaveState();
       });
       inp.addEventListener('blur',()=>renderTrain());
     });
+    els.trainList.querySelectorAll('[data-x-set-progress]').forEach(btn=>btn.addEventListener('click',()=>{
+      if(isTrainLocked())return; const it=findTrain(btn.dataset.xSetProgress); if(!it)return;
+      const total=Math.max(0,Math.floor(Number(it.sets)||0)); if(!total)return;
+      const checked=Math.max(0,Number(it.checked)||0); it.checked=checked>=total?0:checked+1;
+      if(it.trainAdded && it.checked>0) it.addedStarted=true;
+      saveAll(); renderTrain();
+    }));
     els.trainList.querySelectorAll('[data-set-n]').forEach(btn=>btn.addEventListener('click',()=>{if(isTrainLocked())return; const card=btn.closest('[data-card-id]'); const it=findTrain(card.dataset.cardId); if(!it)return; const n=Number(btn.dataset.setN); it.checked = Number(it.checked)>=n ? n-1 : n; if(it.trainAdded && it.checked>0){it.addedStarted=true;} saveAll(); renderTrain();}));
   }
   function findTrain(sessionId){return (trainSessions[selectedTrainDate]||[]).find(x=>x.sessionId===sessionId);}
@@ -1033,6 +1074,16 @@
     return out.map(({_key,...x})=>x);
   }
   function reportCell(v){ return v===''||v===null||v===undefined ? '-' : String(v); }
+  function logRowTargetHit(row){
+    const pairs=[['pKg','dKg'],['pReps','dReps'],['pSets','dSets']];
+    for(const [plannedKey,doneKey] of pairs){
+      const planned=reportNum(row&&row[plannedKey]);
+      if(planned===null) continue;
+      const done=reportNum(row&&row[doneKey]);
+      if(done===null || done<planned) return false;
+    }
+    return true;
+  }
   function renderProgress(){
     const groups = progressGroups();
     const hasProgress = journal.length>0;
@@ -1041,7 +1092,59 @@
     els.downloadWordBtn.disabled=!hasProgress;
     els.downloadPdfBtn.disabled=!hasProgress;
     if(!hasProgress){els.journalList.innerHTML=`<div class="empty">${esc(t('noSavedReport'))}</div>`;return;}
-    els.journalList.innerHTML = groups.map(g=>`<div class="card"><table class="progress-table progress-table-v91"><colgroup><col class="exercise-col"><col class="num plan-num"><col class="num done-num"><col class="num plan-num"><col class="num done-num"><col class="num plan-num"><col class="num done-num"></colgroup><tbody><tr class="workout-row"><td colspan="7"><span class="pg-meta"><span class="pg-cell"><span class="pg-k">${esc(t('date'))}</span> ${esc(g.date)}</span><span class="pg-cell"><span class="pg-k">${esc(t('startTime'))}</span> ${esc(g.startTime)}</span><span class="pg-cell"><span class="pg-k">${esc(t('duration'))}</span> ${esc(g.duration)}</span><span class="pg-cell"><span class="pg-k">${esc(t('total'))}</span> ${esc(g.totalWeight)} kg</span></span></td></tr><tr><th>${esc(t('exercise'))}</th><th class="num plan-head">P-KG</th><th class="num done-head">D-KG</th><th class="num plan-head">P-${esc(t('reps'))}</th><th class="num done-head">D-${esc(t('reps'))}</th><th class="num plan-head">P-${esc(t('sets'))}</th><th class="num done-head">D-${esc(t('sets'))}</th></tr>${g.exercises.map(ex=>`<tr class="exercise-summary-row"><td colspan="7"><div class="exercise-summary-line"><span class="progress-ex-name">${esc(displayExerciseName(ex.name))}</span><span class="progress-stat"><span class="pg-k">${esc(t('everMax'))}</span>${esc(ex.everMax)} kg</span><span class="progress-stat"><span class="pg-k">${esc(t('maxToday'))}</span>${esc(ex.todayMax)} kg</span></div></td></tr>${ex.rows.map(r=>`<tr class="set-row"><td>&nbsp;</td><td class="num plan-val">${esc(reportCell(r.pKg))}</td><td class="num done-val">${esc(reportCell(r.dKg))}</td><td class="num plan-val">${esc(reportCell(r.pReps))}</td><td class="num done-val">${esc(reportCell(r.dReps))}</td><td class="num plan-val">${esc(reportCell(r.pSets))}</td><td class="num done-val">${esc(reportCell(r.dSets))}</td></tr>`).join('')}`).join('')}</tbody></table></div>`).join('');
+    els.journalList.innerHTML = groups.map(g=>`<section class="log-workout-group">
+      <div class="log-workout-meta" aria-label="${esc(t('report'))}">
+        <div class="log-meta-cell"><span class="log-meta-label">${esc(t('date'))}</span><strong class="log-meta-value">${esc(g.date)}</strong></div>
+        <div class="log-meta-cell"><span class="log-meta-label">${esc(t('startTime'))}</span><strong class="log-meta-value">${esc(g.startTime)}</strong></div>
+        <div class="log-meta-cell"><span class="log-meta-label">${esc(t('duration'))}</span><strong class="log-meta-value">${esc(g.duration)}</strong></div>
+        <div class="log-meta-cell"><span class="log-meta-label">${esc(t('total'))}</span><strong class="log-meta-value">${esc(g.totalWeight)} kg</strong></div>
+      </div>
+      ${g.exercises.map((ex,exerciseIndex)=>`<article class="exercise-card log-history-card">
+        <div class="exercise-card-header">
+          <div class="log-title-stack">
+            <h2 class="exercise-title"><span class="exercise-num">${exerciseIndex+1}.</span> ${esc(displayExerciseName(ex.name))}</h2>
+            <div class="meta-subline lbl">
+              <span>${esc(t('everMax'))} <strong class="gold-accent-text">${esc(ex.everMax)} kg</strong></span>
+              <span class="log-record-separator" aria-hidden="true">•</span>
+              <span>${esc(t('maxToday'))} <strong class="gold-accent-text">${esc(ex.todayMax)} kg</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="matrix-centered-box">
+          <div class="matrix-unified-grid-layout matrix-header-grid" aria-hidden="true">
+            <div class="header-right-label">${esc(t('kg'))}</div>
+            <div class="header-right-label">${esc(t('reps'))}</div>
+            <div class="header-right-label">${esc(t('sets'))}</div>
+            <div></div>
+          </div>
+          <div class="matrix-grid-rows-wrapper">
+            ${ex.rows.map(r=>{
+              const targetHit=logRowTargetHit(r);
+              return `<div class="matrix-unified-grid-layout log-matrix-data-row" data-set-row>
+                <div class="horizontal-data-stream">
+                  <span class="val-p" data-plan="${esc(reportCell(r.pKg))}">${esc(reportCell(r.pKg))}</span>
+                  <span class="data-divider-slash" aria-hidden="true">/</span>
+                  <span class="val-d" data-done="${esc(reportCell(r.dKg))}">${esc(reportCell(r.dKg))} <span class="metric-unit">kg</span></span>
+                </div>
+                <div class="horizontal-data-stream">
+                  <span class="val-p" data-plan="${esc(reportCell(r.pReps))}">${esc(reportCell(r.pReps))}</span>
+                  <span class="data-divider-slash" aria-hidden="true">/</span>
+                  <span class="val-d" data-done="${esc(reportCell(r.dReps))}">${esc(reportCell(r.dReps))}</span>
+                </div>
+                <div class="horizontal-data-stream">
+                  <span class="val-p" data-plan="${esc(reportCell(r.pSets))}">${esc(reportCell(r.pSets))}</span>
+                  <span class="data-divider-slash" aria-hidden="true">/</span>
+                  <span class="val-d" data-done="${esc(reportCell(r.dSets))}">${esc(reportCell(r.dSets))}</span>
+                </div>
+                <div class="action-status-cell">
+                  <span class="indicator-icon-clean ${targetHit?'state-hit':'state-missed'}" aria-label="${targetHit?'Target reached':'Target missed'}">${targetHit?'✓':'✕'}</span>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>
+      </article>`).join('')}
+    </section>`).join('');
   }
   function exerciseEverMaxMap(){
     const map={};
@@ -1103,27 +1206,42 @@
   }
   function reportLayoutLabels(){
     const byLang={
-      en:{date:'Date',start:'Start Time',duration:'Duration',totalVolume:'Total Volume',weight:'Weight (Done / Plan)',reps:'Reps (Done / Plan)',sets:'Sets (Done / Plan)',status:'Performance Status',targetHit:'Target Hit',underWeight:'Under planned weight',underReps:'Under planned reps',underSets:'Under planned sets',overTarget:'Above plan',logged:'Logged'},
-      de:{date:'Datum',start:'Startzeit',duration:'Dauer',totalVolume:'Total Volumen',weight:'Gewicht (Gemacht / Plan)',reps:'Wdh. (Gemacht / Plan)',sets:'Sätze (Gemacht / Plan)',status:'Status',targetHit:'Ziel erreicht',underWeight:'Unter geplantem Gewicht',underReps:'Unter geplanten Wdh.',underSets:'Unter geplanten Sätzen',overTarget:'Über Plan',logged:'Erfasst'},
-      fr:{date:'Date',start:'Heure de début',duration:'Durée',totalVolume:'Volume total',weight:'Poids (Fait / Plan)',reps:'Rép. (Fait / Plan)',sets:'Séries (Fait / Plan)',status:'Statut',targetHit:'Objectif atteint',underWeight:'Poids sous le plan',underReps:'Rép. sous le plan',underSets:'Séries sous le plan',overTarget:'Au-dessus du plan',logged:'Enregistré'},
-      it:{date:'Data',start:'Ora inizio',duration:'Durata',totalVolume:'Volume totale',weight:'Peso (Fatto / Plan)',reps:'Rip. (Fatto / Plan)',sets:'Serie (Fatto / Plan)',status:'Stato',targetHit:'Obiettivo raggiunto',underWeight:'Peso sotto il plan',underReps:'Rip. sotto il plan',underSets:'Serie sotto il plan',overTarget:'Sopra il plan',logged:'Registrato'},
-      es:{date:'Fecha',start:'Hora inicio',duration:'Duración',totalVolume:'Volumen total',weight:'Peso (Hecho / Plan)',reps:'Reps (Hecho / Plan)',sets:'Series (Hecho / Plan)',status:'Estado',targetHit:'Objetivo alcanzado',underWeight:'Peso por debajo del plan',underReps:'Reps por debajo del plan',underSets:'Series por debajo del plan',overTarget:'Por encima del plan',logged:'Registrado'}
+      en:{date:'Date',start:'Start Time',duration:'Duration',totalVolume:'Total Volume',weight:'Weight',reps:'Reps',sets:'Sets',status:'Status',targetHit:'Target Hit',hitShort:'Hit',underWeight:'Under planned weight',underReps:'Under planned reps',underSets:'Under planned sets',overTarget:'Above plan',logged:'Logged',reportTitle:'Workout Report',formatNote:'(All values formatted as Plan / Done)'},
+      de:{date:'Datum',start:'Startzeit',duration:'Dauer',totalVolume:'Total Volumen',weight:'Gewicht',reps:'Wdh.',sets:'Sätze',status:'Status',targetHit:'Ziel erreicht',hitShort:'Ziel',underWeight:'Unter geplantem Gewicht',underReps:'Unter geplanten Wdh.',underSets:'Unter geplanten Sätzen',overTarget:'Über Plan',logged:'Erfasst',reportTitle:'Trainingsbericht',formatNote:'(Alle Werte als Plan / Gemacht)'},
+      fr:{date:'Date',start:'Heure de début',duration:'Durée',totalVolume:'Volume total',weight:'Poids',reps:'Rép.',sets:'Séries',status:'Statut',targetHit:'Objectif atteint',hitShort:'Atteint',underWeight:'Poids sous le plan',underReps:'Rép. sous le plan',underSets:'Séries sous le plan',overTarget:'Au-dessus du plan',logged:'Enregistré',reportTitle:"Rapport d'entraînement",formatNote:'(Toutes les valeurs : Plan / Fait)'},
+      it:{date:'Data',start:'Ora inizio',duration:'Durata',totalVolume:'Volume totale',weight:'Peso',reps:'Rip.',sets:'Serie',status:'Stato',targetHit:'Obiettivo raggiunto',hitShort:'Raggiunto',underWeight:'Peso sotto il plan',underReps:'Rip. sotto il plan',underSets:'Serie sotto il plan',overTarget:'Sopra il plan',logged:'Registrato',reportTitle:'Rapporto di allenamento',formatNote:'(Tutti i valori: Plan / Fatto)'},
+      es:{date:'Fecha',start:'Hora inicio',duration:'Duración',totalVolume:'Volumen total',weight:'Peso',reps:'Reps',sets:'Series',status:'Estado',targetHit:'Objetivo alcanzado',hitShort:'Logrado',underWeight:'Peso por debajo del plan',underReps:'Reps por debajo del plan',underSets:'Series por debajo del plan',overTarget:'Por encima del plan',logged:'Registrado',reportTitle:'Informe de entrenamiento',formatNote:'(Todos los valores: Plan / Hecho)'}
     };
     return byLang[currentLang] || byLang.en;
   }
   function reportDownloadHeaders(){
     const L=reportLayoutLabels();
-    return [L.weight,L.reps,L.sets,L.status];
+    return [L.weight,L.reps,L.sets,''];
   }
   function reportNum(v){
     if(v===''||v===null||v===undefined) return null;
     const n=parseFloat(String(v).replace(',', '.').replace(/[^0-9.\-]/g,''));
     return Number.isFinite(n)?n:null;
   }
-  function reportPair(done,planned,suffix=''){
-    const d=reportCell(done), p=reportCell(planned);
-    const unit=suffix && (d!=='-' || p!=='-') ? ' '+suffix : '';
-    return `${d} / ${p}${unit}`;
+  function reportPair(planned,done,suffix=''){
+    const p=reportCell(planned), d=reportCell(done);
+    const unit=suffix && (p!=='-' || d!=='-') ? ' '+suffix : '';
+    return `${p} / ${d}${unit}`;
+  }
+  function reportFormatVolume(value){
+    const n=reportNum(value);
+    if(n===null) return reportCell(value);
+    const rounded=Math.round(n*100)/100;
+    const parts=String(rounded).split('.');
+    parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,"'");
+    return parts.join('.');
+  }
+  function reportStatusDisplay(status,L){
+    const raw=String(status==null?'':status);
+    const missed=raw.indexOf('⚠️')===0;
+    return missed
+      ? {text:'✕',color:'FF453A',bold:true,kind:'miss'}
+      : {text:'✓',color:'34C759',bold:true,kind:'hit'};
   }
   function reportRowStatus(r){
     const L=reportLayoutLabels();
@@ -1135,6 +1253,7 @@
     if((pKg!==null&&dKg!==null&&dKg>pKg)||(pReps!==null&&dReps!==null&&dReps>pReps)||(pSets!==null&&dSets!==null&&dSets>pSets)) return L.overTarget;
     return L.targetHit;
   }
+  const REPORT_LOGO_DATA = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAIAAAC2BqGFAABNoElEQVR42u29d5xc13EmWnXODZ2muyfnCGCAwSARkSTABGZSpEgxSFSg7LUtWc6W1km2vGtp12v7yUkryYqWZckSxSCSopgjSILIOc1gMDmnzvGGU/vHDX17iAEF+v3ee/vW/YMgzHB6urtu3TpVX331Ffor2+HyHuj8g+D/xMf7/Pjscl4CARDQeq3/M60MAORYAAHxF3+a9AtdQ0QAAiL4P9nCJVNTyact5yN6T7u8l0cjAwAgUfrt//FYYnQSJUO9H4+27gvrt/zH4z3jCZFjMbocj77kc/7jcamQskzgli4elOnygjEiICICEP3/5OLYHwdACLpMW1tnJb2XoS/TlxkDhkw3RKGogyBgjCEyAHQvLC2THV3kK1r6jfKfJPcJ5P3Wu3/oF7/hL561mUSCCITgElN9EkMQ4hf3IPKckMsauuTLJMxL/z7OGRHl80Lk86FoYOOq6KZVvq1r6zpa/DVhyaciYwjAAJHIeVnL4UkgEhASESIjK8KZljcIhoxIWLkOIQIRIEMktA4eQPvUQAAiBAQEZEQECEhApauB6DxLAAAQApL144hATp5Awr04iIimiemsNhM3+odTh87O942bQ5Nx0kEJSLLEhbA+wLLXExlzTLzUr7GsYMHSdbiEoRGBMczldBKwvrvyvpuabt1ZtXVNRAqAmc3FFlML8UIyUzB0QYgMEYAQCBGEQARBQhCSlZMzBgjEgKw7gIgYkhWIPD4mEBGAIQhgzHP8CEAkAYLA+nFhCgK0bCEATQHWl0T2dbJinHOZgABIEEMUwrI7+n1STVWgJhoKVwRADczH8a0T8Sdfm332zcl4LKMEFFnmpmkud+fZhn6XMcsNjcybYyxnaM7QMKmY0zasqf6dj6/+6J2N/mBxqH9qz77Jgydj/aOZ8XlI5KSigU4sQALCUjAhJ55btw8hoGNcO9q7xkQEy00BAJkTPBgAgbA8l8jJ763/IRGRICIkAEMAOVGQIQoCRCQQRIjoOBuVAiUCyAwqfEZNxGxvkNd2VOza0rBrR1uwqqrvgvjqI+d/+POBZLIYDIeEMC8aScoMXW5S19C4JGpd1NCcs1xO86vS535p3R883FIRNl5+9cJ3Hxt483hmPq2ir1LxBxRVkWXG0HoAIgPb0ByRCIDZ33TvdBBE5cc1vjtZIjv2AAnbyIi2t1qXzxPBhXOYARBZ3yT7GQgkyLqBrKfYv5usVyQCwzA13dCLmlHIqJRY1Yh3X1v7Kw90t69pO3w09ydfOfbKm0P+aBXiRc7JpYb2WNUxdLk7X9TQEsdMWutdU/21P1p/3bWhw/tG/+Irp145mtOlqlAkqqoyQyIhhGnaNROieyQyBO+Xtu/aH9iyProhoRQLLC9lQAIECevHhceXiOyLReUlG5DltWhdHEFkX3LH9xGR7Ktsuzc5J4l1bzHGgTFTsFw2l0/Ot1Rkfu3els/+p/X+YNV//ebAX377OFcCksxFeRh5l6FLhrUMjXbQWt7QnLNssnDjrvbvfmlTc03ui1898K2n07FCpVLhkzg3dZ1IEKB1AiICEEMkK9ai9WHQQQhsO1uhgsCOqk6db0dq5ySx3db1afuMIftrdKxtxyjrkCMgJ1She37ZHuv87byA7etgxRxPPkJCIALnnHE5lyuY2fimttzffG7djbu6v/N0/LNffDmvK6o/aJqGa9yLGdrOLxxDv+sY9Rpa4iyTLN52Xfsjf7VJFOd/44v7H3k1G2lo9/kUQ9est81cKyKClSlYNy4DdByWgJj1T9fYAIhWwC19SvuioPt5hfUOBaFteeEEeCcG22GXQLge6oQiAgJC6/i1nmaFDrKvcskcRFYsIBII4CQ3RIJMzrmk+Bfn5yM48+Xf6/7kRzY+83ruE3/0Qs7wyb6AcGx9EUM7rsFlf/TiZ6jzuTln2Yy2c2vTY/9jQzE389E/ePtn+6GuvYuBMAzdtQo5hnYONfdjuv6LFvTlHHrOe0BkCFZigAyZ87Po5BaISEhk3/6O01ov6jiz/fvQ9WP05sYEwrlpbHu7P2DFZkQUJKzg5kQjdNJEAEASYBrFUChUZOGnXxwI8+zD97Z3NLU8/eoZQAmZ5JY5yxgauOyvvHiuQgQAjKFWNNoaA4//9dZoIPnJP9r74gmlvq1Nz+eJrDPNuZalcGzFC3RuY2Joh1znj112oe1ghAil8IKIVnJLwsYkbY8txW3Hsa1n2SeenR7aUJpwvrZ92rrNnF9I7j1sl39kebOwrhw6GZN7XBMQAjMMXZYlFqh5/vWhxlDh4XvbOI+++OagGgi5F/IihkYEQC77o5cwNACCSd/4/KZrNquf/e97f/S6qGtt0/I5K20oeWYpPyVy4q9bl1uWZwwZQ/Q8i9mGJUS0Igw6WRxjdl3B7CsDiMCQOCLnyDlKjEkSMo4MwfobPJfTuopODu45fIncY4JKya6dIboJMIFzfUq3hv2VaZiyhKRE3tg7tHUl/+gdq44P5E73TfmCISGEa5Z3F9vor+y4aJ1DwuScZVO5/3Tviu/++Zrv/ujQZ748XtG4ksyiDUXZXoll97oTPOxMFS1rAlrHJBE62Dm3oiRaEZyR57MTmW52xpEBQyFI1w1dM3XTME0hBBGh43gEwDjnnCOXmMQ5AggiIcAUQhAwRCuSW3HZA/y4L0fu8UllqaTlpMwpeewfEyRURYons5tq5p7+h50LhejNn34ullUUf5BoOVAJcblWFoLQNVEXYa98dQcZsTt/a980dQR93DCFlVqUBWO36LWCnJNRuMeglVxZsdg2vfW5EGxHB2Hd+Fbk4YwRUaFQLBY0Eqaq8Eg4UF0dqKoMV1VFotGAosgIoGtaJluMJzLzseTiYn4hnk9lNM0gZKCqiqrIyMA0yRR2HEBAb7HmSWDcut45HNxcxYEOyHOjE5my6luYGPvD+wJ//bmrvvCd0f/2rWPBqkYhLg+9s9+FrhkfualpRb35u395ejgRqWlS9WIRGUO33Hd7WuRWzLZPuMHDPtCYfXZZ8ZoBAAgrV0EERAFEjAHnCMiK+UK+qAV9bE1n7aZNK3p6e3rWrGys9ykKEiqFnCGMnKQgk1SJg6Sg6mMSZ3qhuDif7Ds/feLU+LGTUyfOTo/PLOqaFgz6VJ8MAIbulCUeDMuq4yWOiGCaVoLn3Fpe6GQppsVMXQvVNP3w5cEPXjfy8B2tP3xuYGw+7Q9FlkP7Lu7RiGDoRsjPX/q7DViYv/uPT8V5pyqRoFIezNwjA0vHmJVi2REZLIsiksns/yg4t+sW2+LO3xJnwhT5XCGgwrq1nTfs3rLjqnX19U2k56ZGRgfPnErODRbi8zNTCwUt7w9VLC7EhElKIMiQApFIpL6lqblpTU9jZ3dzdV01QG5qYvLo0cSLe+f27B++MDiDjIXDfs6ZaQpBgpwPwhkSYCqja7rw+bhf5aawE0RvZeQa3QkpBESyoi7MzHxmt/m3f7zrT78z+Pc/6AvVtJimeRmG5gwz6eIDN9V8+/fa/uHfTv3FI8XKunpT15FZx5WDBFr5AGPMgYHQyRCYG7gRmA0qoWVTy7gcEYA4gqJwIaCYzdRVB26+eevtd920cmXH7Nhw/9H9Zw7u5/mRiF83hdza2RmqrFcD/vrW+qpKkdbp7afezMcXZJ9vbHhqarZg6JApghyUu9pX7Lqhd+2O+vooIPpHZqS3zpnPvjLw6p7zqXTR51cUReYMAMAUlM/rpilu2lF15frwa0czB04lA35JCCdguLctEVgVGTArxSYSnGOuQO3q+JN/uWE66/vgH+zXWKUkyxdFVC9uaMZYLp35h99pvf/KwEe+dHbvcFW0QjGFk8FYMdp+F2SHZoZOFkuWH3OnPGMIgMSAnMwPJIYIJEuMMdByhfpq37333XTvA3f6JX50z/Pn9j3PClNRX7FzRV1rVxev7DGlutmJWDITGz47MDObWLsqmNTVKp7taA4qwagQyBCFUUykipPT8fP9U2NjqYpIzRVX9XatCXe2mSKp68GuBRH42atjr78zOjoey2Z1ZBipUDeurX3w1pZbbr6xukZ87jP/4x9flKtDYJhliLddnJNwwGYX9yXGpGx86pu/WXXLrlUf+tODB/opFIlc1KkvEqMZgqaL+jr/xg7/hanC+SkW8CvCqsYACWwczKp5vTknoAAHj2RA1uEDzIVJkTFgAIiESD5FMjWNm8ZH7r/6lz/9SyryN376vXPv/LSjgV21vrM+2lXb3qTUXnFusOLCyQGteKaxPhRi43J+8Pr1dUokXA+cK4GYKTKJOMpBJswKVdS113av67zp5s0D5wbPnR48e+Cd+cGq4ZWtm3atMIb2KcX0b9+2/lO3bxtL+tOFPCCEVCnqz51+Z9/5/rVd8/ODF+ZVpY3IcHBUC111i38bHXOqaiBBTBKaCLx5Jv/BG8wtq0IHzqVde7y3oRFR143mSqmlRn3hQGo+LUWqmTCFfSYTACNvqurNlrBUJLjZl41jcCeGSIwpMtMymXU9TZ/9o0/19q5/4/F/Pfbi99oa6cP3X1tTJ6UWU+GOzqlc/YtfPTJ+/lBTPWlgjhxMtnWs3XjNNWqIvfba6aNHJycnkkKYPgUIoGAAkyAQYK2Nwa3rV163s7etoy26Z/+ZsyMVueSbT07fdN91YXP+7P5+X+hC0WQiW0xn9RynjJ931UV6NzadeepHyAJO5W3Xi2SjMQ4Ka6UuLvaKIITgqnp6PJPJ6+vaVMmXszKcX8ijLYN11gq/BAMTeUEcPYCiDQt4cSI7htkpHWPgAg0MEZEYgNV4QCBF4hIDKGYf/sTu3/i9z4ydOfEPv31PlEY+9qErKlvXYbh2qu9MbfeVR4+MHXj9R9UR4+Zb6oo68nyxpefGYFP06WfefPqJ04sLoPrA7wOFM4MQkDgD06DYohifSr++79hPnj7zm7+2c/e9N/mDb6RSMZ6b/Nk/PfOJzz7Q1WPm01pET/O6psr29tTiVH56uOeWj0xNTeZmJg0eMYUgN/WwAL0SYFXK9Vw7CUGqKk3PmzNxs7NeqQxKiSLJ/CKtQOmiNSEy1lHvM0xzbE5HLoEnL7KOX8bQzXusWpi5x7IVLZzKhdsFGyGAT+FgGhFV+uO//N2bbrnup1//+yMvfm/HhubrHvqCiB3X9Hwxk/Q1bzvwyqmB04d6uivaGqtThWIxlrrqttvPTc5/84//ZeB8zu9ngQjEszi2gHkDDYEEICH5ZapQRMRHET+OxfTf/8Lrf/iZ2U8+fPtrT744Np5pq01NXBhdtWmlMXx+5PikifPnjp0KhKT2FSuKasOBF/+miqnJvABTB2KOmcnxYoGeihE8TWgikDhbTONkjNqivkiAx/KE/CIV4MU9mgFUBqCg41wSGGcuLG+hbMhcz0YLDsASVcyKLYAADIi5aRxAwCeZxWJXa+Vf/f1/bqip/8pvfwzTZx+6d3M6TUawUsCa5PkDjRvWvvxvr0+cO1hRE0AKj46lQDN2Pfihl9/Y/61v7jU1CIX4aBymU6xocm9+C0SpIswSlxjVBMyWKPlq+D9+62xTXXDXrbtMs1BVySA7PDeqB1VGqrLuis7kfCqg6PVb7zpzfN8775y6bUfjREygMISQyPoAS0MtlaPJ1v8LhlgwcTEtemolv8KFoIv2FJfldUhgGiZLFxGZdQg48QqdqEUEghyUxmrP2eU1WoUJs889DuD3SaZW7O1u/Ob3/zwosa/9/gNt0fl77r+pti4wt5DIjLwJmZlw88YDP31Gy8eu/cB1u7a3RIJsRVvFbb/68edfPfiNr++VgWnAD4/zkbisEZckG/TgHDlnXGJMYkxiJrKZrHx2RgLTVCrY175zyDALVQ0t0eogKr6fPXE4IqUNrpw+l44ETVa1SVf8P/7u97Q8Ds2LyZguMdMwBZGw+jBWGud0YEpuvLTvY1K2ILiVM8JlEWiISJAQpJvCxeOtmtrqi1gGJiAq/V5CF5ArgXOAAIrCzGJh/erGr//znyZnZr/3Z5/esU7etLXb195rKpE13TUBf0DPiMTwQmPP9o7r7p7LGAdOziVmEz3X3fn8S/v+5btvBRRpPs8OT0o5k0sScsYIOaKFKknIJWQSIgfGGGNcwpwp9c3Lfh8upODA3uM1zZH9B6fffGvUyGT+9fELq6/olnMT8zF/09ZbH/3ON/YfSfhV/uzhgqYJRBJWmAbhkA3R0110cusyAosAIfI5t27Ey+TeWRiwEA7Oalm4FJmdeEVO/uH8g+xvMgQEUmUmdH1NV+1XvvX7iamJJ778Z1vXqF3rNk/PGUpVRK0IGAK4QBNbi6GGQ6dmHvvKt4++8k5lgG7++H2nLox//3t7VEmaz7GT0xIilzgC42g5MJcYlxmXGZPQ+geXkUnIJElhWV2eTvFwEM4NxBrreSGZra8NffjDGxbmC899/4VoW2/vXb/88x/802NPHAv7pESe9vYZkmS3w4kECoJSMVjiBni+57R+LDzMLhIum3uHAkC4vR0PwuL9ZQhL0CoXegSGwIAUmYFpNNeE/u6rv66n44/+9Z9fvzUQ9LMki6y8ZjUuDrJgddKcbZR7Rk/27Xvj59FA9oar29oaqjvWb8lK4W9945FC1sib/MQUMm4VoByRITJk3EPSQQ/aZrFfTCaJqbS8skrzSb5cHnwB2ripOy8KH/lALVZvadpx55Pf/do/fXsfqnJ9BRwYxnge/T4QBByIBAgGSOQkeE4ljF5HpiXEJnw/JEcEYZpo0yHIiQMlFNGT2hHZZYx9RFs5BgPkDCUGKsIX/+pjNVW+r//B53u7aPXmK2JTEwnhr2uU9JGFqUW5umXl5Nljhojf9uA1ASk/evZCqLK2or33qR+8NDIYlyR+bIwTQ4khMA7IkdmGdsBf+wMLIgYgkCGZQjAZzYJBOvGVHdWppJZKG4nFmN/PV175Mbm24Zv//b999wd9wUqpXhGjcX5mmisqCgJGRIKQo5PECS+/hNxSoUTaRScLEUScludbScsGDmSICCCcZMaGGb3dSwsoslpQzmsSIjFEBFJkbuTzf/gnH9yxa/V3Pv+XEXP8qg88PDylzZ2b6L71jnw8ZuR1kUwXzEioq7ZjxVUhJf+Tf/xBU5g6Nl09NDL34gvHgwqcmGaZIlMVJOSMcWAcGWfICJkDhFvcGauvJRgyIAZoMkBmiHBIuWJrxzsHzvgCFSs2rIt0bjt3+vQ/f/Zv3jyaVcM8KBuLWfnQuAKclRHshVWUodOJA9fwHpzaaXo5FQ1elOb2njApAQpCp8wptTLJ7lCQ21NyUSSw82VEJEVmhWz+rlvXffxXr3nuX36SHju3+8qO/a+8lU7m9Wxi4Wffv+eju+KL2ck51V9rphbm0tOj+986pRQSPTu3gb/6peefSsayRcGHF1GRAZAxJiGXALnF7mPMbfEwACJu4fKCEREIAOCMCS2+Yf2qaH0T90194JduTJL89g//ec9zhwfnoaqGk27GsuzMvKwBlxgSAXO7nLgsdCw8xBvXzZzDkd4PPxptehCz4jK6/fsy8FCUmCp2og8MBEMUptncEP6DP/vA6LEjh5995s4bO+rXXpE/O9/Woob8ibmFCT0+PDZhJosgxYdXrW6IzSSCAbZ1e1ugtn1qcvLAvn6/wk6MISFjnBNKwDhjHBkHO0Yzp9+NRITMoiVYTRzkjGWyhZuuXfvLn9je33emsoKdOvB2QJ9R5ueqInK1Zs6lzeEMH4zJgjHO0YV6vU6Ldm+91Hd127ZI6FBzrMyLCMA0BVx+6HAIRC5y4eCf5Hg3lfWR7e62Dc5xNAv6b37m2sZ68bdfemT9qupwx8azo6mjb59qqKzYetO2umZIprTFRSb74oFI7f/19UNaSrtlZ1gXii9c9cLP988vZAumNJ1CWWJWm5kxDkxCxhC5fTSxEi0B3V44ERAYJtWG+c3dxlf/9rGZ6cX1rbBrPe9qD/THmBB6IkfHp+S5rIScMcachqfzxynByKkeXNqik+457VQSVEpDrB+ny03vUJgEJBxSCkGJMm11++03QeROzdh5p8RZIa9fua31vg9v2vPoK0Z6YeWKylcffUmfGrz33o7K0Ex69hQFq+MJKhaL0Wjg8X99OzM63lBpimIuHKnSTNp/eEgGHI6hAGT2AWjVJCUrW8ishaYwYIDM9nRknKEm2Mpace7wyaOnF1UJTRMXk3CoX3vhlPnocfZCvzKXk5nMGLdvDi+LCjz9dgLy0HdsvN/GSO3/YJ2Wdvp9Cdrxsh4thDBNw8sOskM/eCkM1sFPDsxkh25Vwl//te1GcnrfK4e6mqNyTfOv/ZctvHY7GEUFnxruOx3paRhOFBU1d/bkbCTiv+nq5lDIZ1KueeXKvoGxydG4Rnw6yWRJAiYx7k3pmNOrZM7h7FDLnDRXAPPLon+OT0IIhTY9RgcnyTyKUylK5RBQQolxZl8YQGTIELlzsHr646X6g5xXQCoB1KJkVQRTGEIwr4F+4RiNAASiVKzAu0sfLH1hgXlCklg+p916Q+fOa9te/rfn5qcXNnc2Nq3v/NcfHNPi5zfv3rRudevAmf6FianYYk5G7FnXvmpts55Pj5wdD/gCkj9y7ORxrWDO5ZSiyXwqB+QADK3oDBxsvg24575LbQKBLgsbgXI6ixeDps7BNGzuKQdJsdzRSzBhTtxg6BCunHKh7INajXeHN+l2BtEzrCYu/zC00xYnbpR6Os7bsGlZwJx5JLSLcJI5/tJDvUZ8bv+eEw1hmJlPv/WdH/SdKA4PJg+/+fqnfueahq6a6VmDoeT3K3MT0+kcDZ4fnxub/PBHrspl0319owgwlbTaBAwYQ8aBcXIwQUQLXkQbxXRGOhDJSxHjSH4FTcaFSRa9TdiUAkTLncGyMnM7RE5VgmUzhE6aZ9Mlval7ecZHZS32XziPBuRogZ9gfwIkzy2KLiPZzviIBJdZvmDs3FJ71fbaQy/ty8ZiN93axRFffGUo6Gf33dW2OJ+c7b+wbuuK9Gg8mytMDAwIU188MtTUWnvDdV3haHRuITY7kyqaUjyHnDNCzq0KBdxE3Q7QDvLu4JnoPe+JgDhDQyDjnIgEMIYkI5nCykos4zJCZMiAMYZWnclsOo8LRbo5LVmdIQJvbuAhIjlVxWUa2mrEM/COKljoqcezcengBgIIAffd2SaZmSPvHF/VEWnpbActe/tu3WR+I5eTUIQr/cVMOh7LpyYnrtq5FqvXSLn51MJUKGBGa2oPnh3VcnqioGgmKjJHYMCYNZ9h3+YuMdGiGJFAxixHRkTOwLqnTaB0DhhyYQifoshk6Abli0JVUWJoCpsZhcBsp2YIhMCcQInvipH2JId3VMZtKAq77YW0/Fm4TNZhkX2ofI7Tzj0cJA/L63sGUCiaLY3qrTtrx86OJRYSIS7Fk9mKxnp/uK6pJeqvrauMBoORQCajp2Lx7bdenwv1njyTzFU0925t0TUDVWV8fF6YOJ9FQo4MnTOQlXPanGkBm68jAEHiSEIks5QpQqFg5nX5A1cHvvvblXdf4dc1I69LFQHpho0hP+eawVWZSxKTOJcliTHGrBOdOeHDM+dELpPMvWmsRqJD67RtSyiEsI7s5easlj0MTeG0JR2MyqWAlafl9uAE45hOm9dsq6qs8731Qn/QL3VvbldVeXJwKJsvpuP5lu6uyoqGWCI9nyi2rWw8P5J85emXCgWzsLii0GZmC4E1QNPTSU2weJ4xjgjMHvFyIqkznVoae7KciiNkMoakKr91j3/r6rpvPrdw89rcA9vE+Mjcl/5TyzUnI//60vQnd8nrm1mWt3/hh1Pnp0iWedFEYeg+v2qZ03ZRLAFnBGUpn3vwIoF3Zsj6F+NuIX3ZTCUS5lJ2PaDTe7BQf5vvRQRoGkJW2e27qkQqc+7c2Or6SGp6tj/JmlurBg6fC/h5KKzU1lUs8KChp7J5aejU/l3bIoL7NT37yGMz9z2wuZDPzs9nNBNTGnKGBMwbLj2tNC8JETiCptP6nuifPehbFVzMpwe++bktB/efO9efWLGuvXXjlb/3wLa1Hd/KTZ9v37ByxdV3rdwZv+dXv4dc/vVb2XSu438+MaqqXBAIcmAG8FbjUMJ9XV6ph/XopYSapTmPy8GjGWdObbJ0GoA8swzWJWUMChq1NyrbugMTIzNaNlvbUKdWVE5O600bb7j7d3+z4G8+8s7A5MhsJCTJDONzM7t2dW/fta27NSAz2LWjprm5Kh5LFLLFgsF1kzEL5SmDg93Wu9sbJSQyiQUV897OiRacnV7QzIDa2lF15V0PjCewa8cHQ933CvWK7fd9PtTS3Xrtp4zIjT03fOyfvnTHrpqJnTuv/+vvfuUz93Tk8oaVV6M7duGc784gkvCkbm4GWRoGt0gfZFxqFnFZQ1t8YcRSo8SdjXWkFNAlMzKgfFFsXu2vrGAjowsVKLo2rA51dHW0sOOvv7WQzj/w6w+v2b7rzNEJPZtQFB6pbtpy5wNFMiamMruvX93QGFb9PJnIGprIaQycoIF2emD3gpdQzRFszNgnma+8M/3kC6PR5u6tH/yEr21391UPXPPBD+996QXkdcIwo61req66d2D/MUkiY2H/Vev9n/r12+eLVaMv/M2dG821nZGiRozbqaKNO5AA9LDmqQxJcoFh138ZIyITli8N2fKQEpk6kXBgOptYjt4gZDu0PVEGm7tlEDQ1kfCHwi88/toTX3syVBldfUVXbJrAlHbcc/+6G+8fPjWMZrGrt0ZPDY72TxQF37f/QjKe9/mUVDInTEgV3RkBhoy5xZqLR7horQ17gcgZ8ryuvn2+uO/143OJNl6xRs/kN93xWTUQPfT4l6RAxEj0Na9u9OPE2N6v6VOvDR/fG5BZMH/0C3/xyNd+cPSmTUzi9kdAe/LDCddUmq/zDngtmTO28ehLjxi/RyvL4kGRezRQiaGOJcqublDQz7obWS5byOezLc3R1Wvqfuu/P9R7+32LmVA+ob3+0oljRyY33HrHyhs+MDexwPMLA8fO9PdN5bNZTkZtdQAYJJPZok5pDaFEmXSusQMVO+iZnf5Y97VGUs70TafwZ+9MHfzxX6VihqT6zULyygf/pP/YgaE9X5VwODv6cn2jPzk1euadE2dPzT/5031n++LJgvrhu+quX5VjwqSSDoQ7ZeRtpLgwD9mzpPZArn2/CyFMcSmc9BKVod35deM+UWkaHUvsHWRIBY06GnlzFJI53SzkG1v93TfuePO18SMvPDU/kyiaIDhEQ/Kerp4Hf/P+rquuGz+2r64hXFXlW9VZ190VPD+wKHNKp/NFAwqGg6iB53XQhS2tN4ZAwkIqiUxBZlxUNLLUbFp64sUT1U1fvOLhv1aNMZWnrr/vI49//Vsf/dQtMqUmByZJahge118/ONc3VWxOBT50U/sLr4+dn/MLVsVICHD1X3AJLciuLEplCoE7eFcyPb0fj17Cv3Yb3d5xUztwIBV1aqujCgVzWS2byNWv6ji058LY4YOxTEZT5GgV39ITqKvzTY+c/qc/+XJVfWtlx8rYTGzblvYtd39gqhCNx1KMS9mMpplYNJExZnU4BJQgNNtxnPFYK0oSCVMIMPWCyZK66uPG6SnpySd+eub5ryCbKUy+3VKf7l7X86Nvv7Q4Onf29Pxzzx1RqlpiBb6YhtnxqbkEf32o+mSskqMQpc9Tqhi8fVBaWsAsPdPgffQMCeyhSjevcrKaUk8HmXtdSQhqq2KKIk/NJ5kJuga5uYmVayIj04V13aHd99zGpeDk0TdG5ot73hz8+z/954d/5574YjFn6BMn33ry307u2BwVZBaLhmEyQyCzSDg2wmPfnCUc0enEkhAEAgQJYRqGkQR/pVbw+cThYe7//vd8/lR3qz58enTdqsDQUO3Tzw9kivzQ6cWJwsjWK1cb+ZP37K7ddVX00LD2swP5QEAiazDSZV8BlaZFPMBSWWHoeAEACFHGRrws4B9Lk3olFMENWcLiSSGCEAAMasMggOKxnCkQ9UQunTt4ItNa79txbY/UsWNsKNu0elIvHn/ogc2jc8aRtw53b9qGKo6deuGjD3TFk6QV8qZBgkAIezTRq+pieRqzeVE2fgYorHEqIQQDkdHYLPgamcZ0UxSzr/z0ZX7bqvxsqn9gOFrZvHdgOp1J5IgN9A31dPQ+dFfrtnWVR4+Ph4yMJAd1046+9rwXCCfP8oyRkg0Yks2ZdQf37TcoxPvoglsDPPZHKlFHEN05JleZgUxBHEWVXwBRPKVPzmT9sogEMbuQqmltPLTnRPDM2CNPzX7snsaGMKQE7LymVTNC4/1Di2ajGtgUrS3EszlT0wxdiKVQY+nuRa/JSwQIYQPxgCE/r1RofZNo6ly5aWWupsJ86bm++krf4bOJxWJuRXvzqdN9zVVSb6vvinY+PBv46vf7Uol8VGUSqppQJLZkfB+xnIru5F3uT5C3prByu/djaCjly+DWu6VP7QykMgIhSFGwwkeaTrpuJpPGxIR25c3bNToBucyFmcKFo2M1UU7Z+fE0zc+ND55bXLupu759la8Q0rLBgaEhMg0hwNB0Q6Ag4LjkXLC5ZlSG7Nj1BCLIDJM5WtUsfuP2lrt/6f7qhpqvfOEbBw+N8JB/aCI3FTMn5xNyINLSWLOpk7Zvb23sqMmfyL780rnaCByfkjUDkQtRQt9c4QRwGNIlG8NSaN/qz9J76tQs32Gx5imtF7NuFwQARhaq5+prIJkC/CrKgLoBPjSZzJ5/ZfhXule3rVmvJ+dbN/jeevFw9+rWVGoxwIq3f/Tj6XzN9ELxzGDGz9LNbf5kpqAlYjKvEsI0hYOuuJ2OEsnBzn3QM+YpcWboejJrdrZGt7ZMZXM8UNM+9NZPZmemfrJfXNFt9LbyuXgx4GeqHu/pbZ5JZdtXNc5NL/jMTGVt+MnD2dFCSOI2IdYiP9utKU/djSTcotweo7OvN5IzUedAbHTZdINS2lhK72zUlUocMDszkRkgmEJAvmi0NvgTicKPv7P3qq319b2rz5+5cP2NvTMz2XSusPnGj80WqucmBhdmZ+dH9k9NpBYW2Wce7uA+zGVztnJB6fa0IpdF6bO7EDb4IQQgyJxlswUu+T7xwfbb14runmvre9fv+c5fvrJv4fmjhdooKnqxNlyxqsnXWOXb1luxZn31Nx5JPff8BcqmLgzGFIkPpwKSQmCpH5Ag9DBiXXjIZocKb9MFsSx+QClDw/dzGNqabi7AXUoULZUeJ+8hwRkahtB04ZfBx1lPu3Ty3NjMfK76nanaBuXMsZyq0K5bb1MiNYvHDoSU/MHj+wum0bNxRbiq6vip07Ek3V8XCvhQ4hbwK9A+H8qIhXa9L4gzBDITab1nZeOn76jd0qr7K+orGlaOn3z7X56eKqC6qZP3trC9Z4znj+Tv2Rm+Yl1Da0e4qTm6ZX31D584detGua3aqNKMSj8mNIkxt9XtHnKeMVt0Jalc63skbUrnJFgM1Mv3aIZCkLCvpOcKO6m79z5BIL1omoKCQTWdze+44coNO+Vnn9x3YTwWy0hXbm1sX7veYCBro7mZ/rpaXTBc2RRa3a5q+aTh4xfG8i+8MXWgr5AvIKCPlSIFIQmwdDYcjEGRMJfXUFIfur3roSuV5lrFX70SJbZvz6s/fWJP0Ifrm6WuOv7YnuzpGWJotNRl126Qo1UVQ/2TQUhnTakypGcyeHzI9MkkNA+2g8KabCpNGtrjtE5Q8cgIeNhh5BVLex+HoZMYOlh3KXCSey9bbTQSBMWCIQxDkpmmi441rcSCN+ycicfTOvqbmyvHRxfrGuI+8scWUiuq+caeSGwhs/fls4cHIRjCyRjlRO4zD3V+8+nk/kldkiQgE8ieq3dAYOAckUQirXe113769oZdK0EN10Zqa1Op/LM/3/fO2ydaI8Ik9sTerKpi3zRWhwgIjgwUVu0fwUK+79SUqeXqK/GxfSCh6FvgCzmJM6sAFojAkDN00jYsqeCgFxclpzdaRjQCIEaE4n0chg4B26tyRi7lzhueEMA0KVc0s7miT0GB0guPv9Vcr8qhaLhaPXx0VgkpqUS+yqeoStCUpX97frYuKgVU5DKvqqaJBH70zvAHb6zPF/Ez9zTn8uPP9VOF3+avIAgkBCRFYoVCkbj6wd0rPrJDbankNR2rfX7f0cPHX3j5xMz4eH2IhmfYGyNKQcgcTAGkGXpQoXgGDp5I6JlcZ1QPVkC9D5/pp4LgY2mVScD5EpEhuwcMCMIszY2X4bQldQFP7YhgmiZZVcBlGtrOmW22c/mFRc8RgAhFE9I5M5vTKqOqEDAwGD96rOgLTUT8vLOjal1v/T9//2gQuRZPyGZhJk6moM4aujAt9o1QRw3euqt5IYW5vL5594Yvta6L/ddnD8+qIUUYBEAgcQKiVFpb2dX4id3VO1qLtc0NFXWt2Vz61Z/vfeONY8V8LurHQyPKqQUVOXAmCAAFJXUMqroq06lJ6GoUkRb+9CGaSYqMkKdSsqRYYgv2NCpzhDAQyEJpTQDTQ7V36Uluq5Y85CJLEaukHHBZWYfVRfEAduAZkvZImgEVdcppqOV1pTGcLxo33twdCgVOHzjX1hHevGvVhTFR6Tef3pO+48pwALX2WqmjPfrWgdjRcfrwdera3qa/++75jz+0dfOdO3l0zeaNPV+YSn/my3sWjajCBDIwDCFQvv3ajk9eo7bXqhUNq/0VVRcGJ5565u2xgfNNleZsQXr6nLpQVBg3UQjS8gIEAGgAI3GqloEzePwdY+8pWMxC1oDZgg5gGAUGwBnjgkvIOWMSMMY441ziRMi5JMlgGoZppxMO89CZY6UyjM80zUsmHcsbmjMHnrTFShyiNLKyMTkkBlA0KKtjIllYqSiqjEYh17J508pNVwSk+UOHJjWgVe2BwfHiC4dyjXVYV8XP9sVSAj7/cOSaLVVMrUwsmK++PLTxQ38gBetNqrjx4f/8u/39f/540mBBrWjWVPp/5Y6W3T0QjgRrO3qzefHMM2/se/OgD7L1YTw4rJyYD2gEimRqOe26jVWf++hVx89NZ9N5gyTdQCBhmIIhNoYlxpAYco5+HwuH1UDYFwwpksJln8yYxDkTIHJ5ofp9NdWBL3/r1I9ena/wc81wiIcesOUiaj5Ey7N2L0UJI9N04GhbKXHJqepgaACmCfEsJFMFReahcODY4VGNVYqKuvEzfZVKumddnVmhrO3wnR7IzEyQGcGTY6K7Xb3lmpbJmKisrPzkH9//D5//n2/++Pu3/s4/Gtk5tabuk7/+KwfPf3lkobiiVb2qO7+qw6zrXB8KV544dvKtN48PDY/XBIxMnr95wT+aViQmJIvLydjKaHLret+tt25LJKm/b0zTc8RVQ9f8ioQSR4UBkdBNAEZkIMkkhCybul6QOJhFU5GDOzY3jozOnDp0vkLEBDFhH8hYAtQQwTMkbkFwUGLpXXZlCKZZgkM9nCiicq6O1f6J53kqlRemGa0MUpAPnesr6Ke1rL71xrbz/fM3X9txYaRQFdECst4/IQTDV08XW3848vBn72/fsBMrN33i8x2P/NXD3Tt2d26/xogfqu4M/85Dmw/uP7z7AzcUqH7j9TcM7X/hpRf2vbPviJlZqPLzM1PqgSl/kbjCTUswSRD4VTY+l/+zLz2zsTvY3bOCsO7Nt2cHh4cDIZWA64YOuh6OypGQXCxSsLJqdnJBQaNoiECkujosTFP54EM3f+cHe9/cM4iCRopVshQ2beksR1CojNRfChamEJcWL70U987SfHJmBwTaFSd48g2blAwI81mIp410ptjWGj5zLPbgQ1uSWePCqeEC81VWFE+dW7hyc1Uylk1lMBziU0NGMMgP9WXbX5762NVXQibfuvG6q+/+tWe/98VfavwvfjaVT0ysXF0RS/U2XnVfdujQ4Sf//rGnj4+MJxqipin482d8Y3k/Z6SgYdrdH8YQdIKFFNaoOHghe+78ya6u2o/dvyng23D61KnjZ2Pbtq9b0R4xigVRSNX2XpPMFCYO70mnir6qmtqW+lwsvvW6qx/58bOP//RCc6Pv6CQ/H+eKaghi6OmHX1SMEQguFZ6tUCz7oxcR6zBh50rWWa88fSCVFX6ZI5VB3uQR+7eSfQLA9lC+tSHQ0hx5662xhiZFMzG5kAr5pWgQ+yeKL781lymy+fniSIy6W/h/fqBqRXPg4DunGxqbWjZcpSf6O9Y1nH3nwPCZo6u7o/GJ8eT8IjPZyLEXzhze/8Ofng/yXF0ITo7xl4dDC4ZP4abTxLQlmxBAAJvJ8rmU4ByFwAPnsq+/PbRzR8O6jety82PHT061rGpUFVyIFSQp/dNH9lw4N9XQXNXQGp0em+jqWTc0PPq3XzsghdR3BnE0JsuqhBZJqpRuoVckyEoEGDKtWLy6x7emSX3mcD6WQ/lik7PLGvqaVayjlj91IJkVAYmVqvxSuPYw/JDIMKk9olX6zU2bWk+dmem7kHzp9ZnWpoAvpCoS29Yb2Xs8ZeSyBrFAUPmLz3QgY5uu3xZoXrP36R/1bOoOyWOFmUMdbY1PPXFYgpxsmufPzkzP5gIVFV/9Yd+6VRVA+NghdjoRMhFlNIUrq2aTFtEdK0kXcXCeZTVRVQEzaTx9YuTWG1c0NTeODI6d6ZsXupiczmuL00FJKKFAU0vD+HgsGcut39r7kx+/MhXT++f4dJIrAQ7AbfkXixHlKBtR+TYJRNQLhSvX+NY0+Z45UrxsQ1+9Ajrq+NMHU1kRkCTmUfP1MsFcYR/K61QfNv2U23Fl68xkoioirV0ZjAbIF/L7gyoaOTOTKhZpPA7TMVEX9m2/5+66dXd0X/XhMwcP9R98Zm1PZWZq2MjGdah5e885ldHQZP7w6bmMCOzeUjk/NvXkMRxJBxXJLJ1IFmeOlRihducfBTBIZLluitoKGpmHrlqjs7OmmE6n47nhocV8rjAXpw29oabWxjVXrOs/d4HQV1+vvvT6+dkUPz3NmMwAJLRlmZnT+8fyKrvEcdTzhat71DUtvmeOFJYz9CV6hmR60meXGebO2hEReeTWBcFsms/HtcnxePfq5kSssH5NBQfycQkZ7T2Ry2k4l4JUXkxl4NEXp2YXqjG8BczYXQ/f2nd2Zu8L76QXM4f2DTA9WWBVr++bGJrKzWXEi28OCcV/eMo/mmCKbJiWOgsggCV5ZQ8OMYcgisgAJUSGMsxm5ayGAR+cPDsvUSaV1jvXrvzQx67rvWJNZTTU358O+IzE9OlkMl8RgMWFOU2H+QyaxJFJ9jiBO20BZMtHOA/ngBQlkufy1cql6QZguQqV6Wd55IDR0yAQICHMpqWUxk+eml65pqFQFGcuZI6OmsViob7aH40oT7xVQFlqqJQqVDoxRY9969uJkf369CsV6b2bN7a9/srg8aOTF0aKr+4dYKo0l1ZnF3OxHOXy+jNvTt59YwMDEI6KJyIyxoBxayTZKuuYTYfkzJpYZlwASxV52A/prJHP5ZD0Q4eGNH/kymu6r9lZbwh29Ph0bDFP6NO1Yj6n6QbG88wqW4AxhzFdRjgoiQALWjLYeelW1qWWWghL8coz2FUaZvFOSRMQgsQhVsBYQTnTtygxau9qfOfgQmMVDyvGyEhK5fq2Vay5wa9wkStgS6t68uz001/7UmLo6IWTY0FJn07jgePzQ1PZodni6fMzFKhQOXAgnwr5RKpWhR0rmFEA7sypIGPMEtOzHNkaQbQ5N4wxayiR5QzuUxABigUjkTUiSn7Pky+nY1OZAtY3BZKLeS2r5zM5AkRhajpldYbcGo2xB2TK5KDdShA9wjQAHqYHXXZ6Z1otlpLcG3mUhm05QI/wkKXbDtNZKTyb6e+f6VnfNjU63Rjhc/N5HuQHT6f9PuLFTAYrPv1Rf2oy1dTaMx3PvfHSKS74oTOxVE7nghkgFjKk61lZlQzhW92oF3R5U6e/vopf2xt8ZyAlQLZ4llY+4AhF2qeUYMyaYxIAKAgZFEySJCnsZyZha2MgsGFD3/np733/eEVtw4Z2X1NjcHg0HVTMgI8RoCHAIMacgOFAw+iywKiUAnhKibIhfLx8Xgc5VSeVmpZEUNZegbKFGJzDZJJnTOXVPRdWdoRJqeifyB3uy7XW8MYwyxdgIk4b2+kTH77twT/8u7betZvWVh09On3gTOz0eG4mofdPFhsrFZ/CFQkqpWKkwscJHryxdvuWup7eyM27ajurSDcZZ2jb2ta3tQUrwArWtrMzZBJjjJD7ZFZT6UMuLyzmGhtlXlkzt6Ad239u4EI8lzMKOkQDJAyrvcqEPZvK3GkLb+ehRHahMslHLxHhfcRoS/MGvcRdF7vyqGO7/EqQENNFFisqpy6kR4amr97ZPTmV10y298jifIZaGwLFIp0+k9p/mvWuXMxOHHvksZNvDDAuicmYmdMhWaRzY4UbNwU2tas7e4K/fFftZFKeSEg966rnplKLk3Pr20yOQjhnlJv+YGnixCJRM7A4koAA6JOwKqoiiePn01/7n6+cP3YmpBp11XxuLpUtGDVRLGgiWzCFadrErJKwURmFpvyf3o/v0JjfDyUMQHhkIQBKAtsO581SZGYl7p8jGz2elCqY9MSz5z77W7sPvVNTUyX2nkjWV7L2tqpjfZnxFOx75vvzZ6teP5btW1TW1WkVKm1a4Ts1VLh2nV+SWDapPXhLY11dsLHBf9s10R/9fHJFrX769GKxUNhQD/uGtQVNkTnZSy2s88qju11qmtpMdpIlaKivKOqMy4wzxcfMq3e1zU7GzGIGiBZi+URca4uSoRuCHGnxpa5ZEhW3aWnkKZ9LoxeCLn+g0xoXcD3Xqsa9/Ue3jebuQSACkDktZFlCVw+ezfSdHd1147qz5+LXbqld1RIMB7EqrJgGHBmERDw7Pq/dvc3fVK+8eDDfWsV++daaD9/S9OGbagfGin2jxUileuzIjBlPaLr+1KszNUHNFNg3CWHVtCBLZgmtl+YOobRUwLntCZAzqPBjVVWFpunFbLG9pXLzxqZ1G+o3X9FQVRUQgMWCqRV1LjF7NYaj/wK4VB7Dbq2hq8zrqMfaJfK/g3snXOy1vDFePtPiSsO7MAuOJ3iB5O8/fmbNiuiqtStOnZ5VfKqfF9f2RNtqcDph9o/qf/yRyu1d7NkDhcMT8OTefE9nIJHVn3xpCjg89cbsvj2Db+2fmZ3LddTgvmEai+Nr5+jgBBtPK5I9+I42o8lj3iVDaYDol6gyxKurAjOzSV0H0vLnzy989VtHR4amJVVRFQaSmge/xEkIYqxEAlsii0RU6st7eTwesZD3WLUjXaIH7pKcLJ0sfNcwJ5Qm023UQRCTuYgVeFyT+iYLP3t6/933XP/3/eOpRGbtnZvkRm1qJhcO5N48rc8lFydiYjYDlUEYisEPfjbR0wSLcWEIGJijgZFkKMROj+JoHIbn4JF9YqEgTWckJoMsO3K+Xm0H75AO2je4EFgdgNpKNVShDA4tNjRWtraEDx6bDitYzGnBSoWYNDmXRUFCCEHWOhsbFLUJHJ7Ot5diWt4EISBCzi693lBaHrpDU5Txc6GMUEkOPb6kvGfrdxByhqNxqapJfeyVqc2bhu66f/dPfvTc6/umj5+OVVVXga6tSWoTC2I2ixEfZTWIBuC506I6hLNZPD9LGR0eOcKu6oSDozSR4nmTJRaRiHFuaxiA29xAD88Cy2BF63ZuDJsdrTXCFEMjiRtvv/amm1ZFgq/Mxws1YSgo4eG+CRmY7DOLGvkCjsydo8L2rkhNZTx9d27Xon4KAZdssbBLSRu49Ei82IHrpo7OIWSlW4CMM8zrfDzOMob89R8eWdkubd+x/dFHLpwfSKRThauvblnRrGxsZVs6WUjFmhBW+jCswE8O0rEx6KyG1TWwkBLPnoahuJQ3bK0xV58DShPvVDpCygb0CIBMQRUqrq4Ta3pa+0aSc3Ha99qRv/u7lzW9EApiVUf72CzVVQSu2NaS0YEBCHtrUQlXcLveRO/OO5a8KALBpYnol6oMnW6jOzi7fLemdPYCIiPkkozjKSlV5GfHxXd/tOeOO3puual3x2oZi2nTUO68vbs6IndUS11Raq+goERVAayvgIACguDWjUp3PdMNIQCRO5Ly9lQLugs3PDRZlzNvf5MjaCaurDK2rInWNTe//fb5UJBnNENLTk2Mpyrq6+eLlZW+0N0fuT5S4Zd0g3O02HNlI29wUZqGTUl08R63iBN0qeBxcfTOFLCt1Wyv5S8cz2VMnySh0zIjxPJdq654CHqijKO4kMhjQ4guTOQkY+re+25bXMjo2enEXLFpReemdVGV8y3rqxsrGZBZLFJnDWutgkSGulvkHZtbzg+lTaKczh3hkpLqg7MtYMlQKbqMDAHgl/H2lel77rt2dHzswMGJTWtqZWZs3txYXeVr7lk9N6P7KyvfOLqgskIFyzAmKX75xIXswIIE4F7RcnJ0eRvP7WUhQ6OobVslraiVXzypx/OXA5OaAra1U1uN9OKJXFpXJY7eLRxlr+rKzzv6kq52OAJpBmSK0FABpwbSQTF1+713FlKpqcnJYycTvZt7G1rDBvGuNQ1r2qVVDRBP6IrE2uvlUwOFW66s7li5+tSpMcGlnC7J3Frgx5FxB6VDKKmul/wcgDhSXuc3tyceumfjyjUd3/jGs7UR9aYbuiSJhfystXf1hYnAuePn33rl4P59oyFfbm4+J/kClVH1cF9mcEGyh1nKZpUvkvu6c9LI0CgWt66QVjb4XjplvA9Dmx21/KUTuZSuShJ6WDv2thhHStnrUmXpDpBgDHJF0ExRHWRHzyb9xuTNH7yDgZmaGnnrramOFc2haPDwkdhMvCJS6ZP9IEmsPoKNtYHDx6Y/eFtHa2fPRH9/AXhaV2TJAkZtkY2SCruHmC8zQsS0Ju3uSP7qXSuuvf36R7//2LFT6Z2bovlM3BB8xaZNE3P+1595J5ueCYeDNdVyPquPzRqrO4LBoHLsfPbCAnPXI4F3L4fn4KWSgCJYkwlGUdu+QlrR4Hvp9OUbekeHaKvmLx7PpQxV4ujdn+GuPVmS6Hn6tQ6bGYAxSueZEBQNsaN9CZEdueGW3S3t9cmJsycODRtc3bG1ubXWIDJ719Zfua0xGUumE8VQJHho38Bdt63q2XBFcXqwUCwsFHymQFmy9PgtMMKq/pAzYIwYYr4IQogHr8j//kc3XnnzNY/84JG335q+8YbOTRsaU/HMht3Xz8xLT/z4JVmlcCC49Yqmjq7mqrBcHxYVAab41JMXshcWOFmgNpRuXyrbhFLat2D7NkOjqG1fKXXWqS+dNuJ5dpke3Sraa5nl0dwNHWUTYljWz/H6tPuV3fKgZA5MQVE/HDufmRo7vWXLuo1XXUPa5KkDw2+8PZ1lgc6uiDChIhJYu62DA1eYGQkpL798Yn1v5PY7r21Uin5jMZkzEjksGNzuByMCoTBR0yFfME3T3NQJf/6R6O/+6u7a1qZ//fa/7T8wc/XW1t03rTaKua5rbh4aSDz1/aciQdYUNTvqDZ+cKyTnQddGZ/NVYS77lFNDuYF5j6EdiQgEKBNKKVvaAgyZUSxevVpuqVFfOWMkljH0sgVLtig4Z34FKQseBZolp8LSfafkSWoBETkKwQQxJtNUSjJMWlFNrx3WRyYf//THdtx434Ota8+//LPXBvadHj0jG7IsDKFURNSKyhXVvq42nxIMvfjkga7ukd23Xb/75u0Xzp0/1j99dDgzNGssZEEzGDIM+lhtlPe2B2+7su6Wq5sCkdq33hp84tE9OU36yD09K1e3GRjirZveeeHYdP/pq3esWdnsD0Z8yCSzkL1wYfbE+fFMzjCbfAyFxNFdc+Yo0zgeTbR0xMMxCQEBg4ogNwzTFMtKuS07lZXKGZLEo0EOiyYCE64aOJb0Qko12dImDjozIIwxAOJCAJNpLqcUTWNVjTE2y7/41QO3Xtl/z93X/+rnPtV//OSRfYfByBXA1z84nxicmwtK9Xe0VNQG12zsnJ1I/PAbj65c17l+8+ot27pUZmbz2YxGuaIpySzkVyIBKeiXEqnCnr3j+/a+NjaV7l4RXdfTVdfeiUokkchOHN6DEG9YXTkxN//OG9nYvG4K1lxXcUV37d0fuLpvYCybmAMISQzt/aueCV0qQ3YAhEAPvIcAglBiVBFU8pphGGK5NanSMop3MBMvCoL6KIcRgWivaEPC8nEHjxqN929XlAiZEJZ6HggClMxkkZ+cxq4qLcL4o68l3j761G27Wm6//ZqPb+wZHRo7dfgUanP5vFbbXtVQrc5Mz5+/oLU3VbS0R8+eXzx15pWqhlC4pq6pPhr0q37J1DRzMFucm82MjCamZ5JM4mu6wtfvWhENh7lSnc1mR0dOFlKL2aI0Ol04N5Sci5uZAmgGGAT7+7LP7Z+5uqfiY3f2+te0T44OyBKWtatcXWwvo6O0Z9SesxBCRAJYV+WPzyfzumDsskpwwKlsMJvVO+plEJpbXlLZSCeU5H9ctpStfeFOpjuyj5Y6DABy0AT0zat1QaM5QnNp/NZTEz979ce7r2q9afeWW+79UDaTH+wfGB0Z6xucP3Qk7pPF2FgmraHCoKujfuWq6KM/7z+gcdUHBIaKwjSBUKmrqdq2sbG7JdTSUr2YKY6Njy3Gj8ayRb3AJAMSqeL4ohlPQ6rIMwboJnAgVQEu0Ztn0jNz+3/jwQ2q6pNYGoiXlWseQMUjb+SZFEMwNKOmRqqqkM+cLWYKElfwosywiyuic86SBZhL6p1N/pAvVzAFZ+Wtm5I4bNmEjDftsxEDhkQMmEDBkBOZhByBmXNZKV5gjRVmdZAvFOh7Px9/9MXxK9YEdm1fuXVz96YtaxaT2dWbjVwyNjsfN3KJWCzVviIUW1zsaQ1Jfr/MjJAPAr5AMBCsiPgUiWm6sZAsPPbiuYHh+aIu/KoUUXlAETMpcWYaxhNyLAe68MQ4pIBEDWExsGh+44mTH7qtRVVl8p5DJVFBLweO0DvMwhhoeldjUCExOJ0v6qGQDy668ka6aBNL4hDPGP2T5o3bI2217Oy0IfmlJag2eqfgvW20MnYJADAbA2OAAoAjCJOIUBK64GMJNpcVtQFRFUJE2Hs298bxkxH/yc4m9Yq19au7WzpaI9tXrFL8AUHM0HO5LG26UpchR6RrOTOWyC8kshcGY30jiQvj2fnFohBQFcawX0IdFzJicB5HYljUma1/z9HNPAkwZ8DQAlYFcCJpPv/mTDSgyDyge7XY3qUg5c1r7flibmxcUZHO5IfmtUssJl8mdJAwme/sdPYmQ9+8KnB2Igcou2O4tJS76vYbHHK2K4LsKmsyW7eNBJDVQSUBTACKgsnHEzibwYgqqvwsEAEh4Nxk8dTwmPTsWFMVNDZCdbWvNloRCgZVv1LUiql0Lp4oTE4X5hP6YgoyBeAIAR+E/KhImNVgIgkLWYznEAiBA8r28ubSjgcLJGCEjMVyjDOm6YaiOkmDdzMHlbdGsTTzyRjTinpzFV/T6BubjI3GTMkiwV9G1kEky9LZSX10MrN9ZejFw6nFoiHLrDQDiEsFKzzj2lDGCCxpQTqisuSK5KG12huQaYTzOb6QI58kQooZUlggCAEFDQazC5hMGNNK3C8nEISmQ7oo0gXSBBoCVRV8CugCCgaOxzFdZBmNCYHgyGuSs48O0RXOs4TVbHIGyjCf5/MFBZjM5dKaYTdQeLzKs7cCCBBFIbvz6tqIrL8+XkjmSA1fJt2AAGRGC2l2dDh319Xh6zZUPP52jvnChmGiFxqkcrDDmSHy3G4eK5f6bMyRi7LiiiX5JCwptbzJ8zk+nyOJgcJFUKEKlUIqqDIqHGTGCKGoo2ZCXodMAfI6FAwsmsyJvwSMoWwj4zaDmzGAkiamQ9OzHgIBWJlEpLNLuTSzW6Y35BZluq7XVrJr11YuLM4fGikQckS+XOxYVnoeQDClYv/gwo7u3M6eikPnM2MJTVEka9UuenkNri87iBJ6mWTldQy5fC5XLdJyOUDhiOVaXxpEhs5zGsxnyNvNt4QcHZQdS6t1uEs6QQDmLJa0GSCOPzhSTfacq0DCpUAklqv5lbjhrkonEZDEZS2duO2a9mq18PZg9vyUxmU/ct9yQ+HLA/8CVIUNzuPevlQYjft31ktGmrykD/DuNiq1ddzhO7rYeGNpOSoyW7DfVoWWkFvgHAe0RaIZQ5QQJYYyQ4mhxIFbougMOEeO7h9rrwAgsyTTkVuBgyOTHCCbO6RT5uKrroS99QOMuVuysYyu4WDQTleAOJfymcyGFeHr14ZnFmIvn8oZBnFJpeXlSbnsr1xOvQoZA2CT8+k19VJXQ1BS5VMDCdVarurBxt8lIY4l/ONd3Eu3S+QsXXcEim1FdVbazmfDnzY5xlpxZ8VccJ4ClmQbInMFCW3KI7N0dJHZcpAO4ZQhY+hR43KpkY6unlfGsVx21+n6M84Nw4jIxd/+0JqgOfdaf/bNUxkuyZKvslw6tswm1nJfXGYQXEiKmkrlElmtp4Gv7qhOF4wLY2k1GBTCtE+VkpKIs4GlpC7imejCchmQ0uAN2mNnJQSfMat3BfZOIgsOZS5MjMBsK1vsJEc/2mbdOYIqrtIrK7GZ3IZ5adsllAgKHmWucu4XlopCxrhJJGnp331wfYtv8cxM5pG3k5omZF8lkxS4KISN6KB3F9+ibMEbICvqxHxalqA9qq9b1ZQpGIOjccUfdHj+HmgDy7oBpbQayxKUkqxZSbYePbRyd0etJcNmTQB6tDOdlcw21ZFxx77oOLUDo9pXlLm68q6SbAlftDJ9BLooWkYePBqIS5JpmkxLfubedb2Vmclk+gdvp+cXCpIa5GqFlVUtt0WZy/7IpRewI5MkxXduNB72YXOouHF1s0DeNzSLsk+SJCqvnHDpqKndKseyYV9wd+95X8fTnMIy2XO0+V3IHCMyXuKRurKi9hMd3rhXr9i9xRxll6UyO5eY4rbJC8glqZDPBlnhtz7U21uTmY4nfnywMDCckhS/HKix8pPlF7D/ApvuAQRymYRxZjzjk6DBn9uwqr6+oebCyGw2q0mqT2KMyodrl2LWiEsFTV3TUsnDHHAE32V210Bue4WVTlTmtFoc8iO8m2dU2pfi9lyRPJe3REH2NlOsFfOIjEuGaeiZ5Jpm329/qKfVFx+fjz16pHBmIMEYcjXKuGwFgEtvuo9ePLJ4CSlEkhIQwjg7kdUMqpHSq1sC2zeuyuv65NRCsWgglyVJ5syLVltENkehZYnMGBAswVZLq6+duf6yCe3SPWEJLnlkux3vhyVcZiyp0kG5mDuVdUkQPGAZlLaYWweqrutGNlUVFHdf3frhaxsC2sy58cWfHMieH8syRClQxeWAo1p+MY92T1J75yyyJYJiJMx3sw/0XMzQsitqpVt61TWtUX9182BM2ntm7sTAXDpnAnGQFcaQW7vn0VnChyXdibL5/fIdOmVmWGZTUvmKgaX0IfRm8iV9gBIpiLwAemm2Gz1ZP1pqWMIwwdC4JBoqlSt7G3euCVdKmbn5mSPDhRdO5lM5kzPG/JWSHCQyS4kWe9eme8ew7nLfpbNz7za0E0j0QnrBL5s7On1b2uWO5qi/smFRD56fzPWPxqYXM4lUIZfXiwaIknU9/c2yyQwsG2gvCzwE3o0f774STt2xRNChDPKiMiKCyzSFcv14z68lhuhTWTikVIYDHXWBte3hrjq1AlKLC7PnxrN7B40zE0UAkNSgpEaALV3F+S5De0SaSluUy516OUMjMhBaIbNIQo/6cU2D1NsorWiuqK6pktRQwZRzJs9pRkE3dNMGCoQgpyq050IdJr0gQCHskhgRGCMhDGFY75jsNcFA1l0sCIgEs1Y4gWmP6lhiv3bZR/YWRSIQIIQh7E1HSEJYmaBwNJ4FCQLkjIG9TgU4Y7LE/SoPqRCUgZu5fDoxu5AamCmcnDD6ZwzDJETkckAKVJVH12UM7TFp+bpqj4Ms69FOLiH0XDGfAaHJDOrCrC1KLZW8sVKuCCh+VfKrEuPcnfe0bnTOABAFlcYEnRl+Yb0fZNZCE7Clqe0TBjhDRCaEPSSCjDtYhbv2nYisH3OirwCyfldJ2rW0bKm05BLQq/AlBBV1M5kpziW1mYQ+maCJBMRytrEkJcCUCiYpyzF0ywxdro6+ZC84XpzofhFTW5fLBFMThLpJQoAqYUAFlaPELJgGsCRv4aXDIlwsHED5rewu1F3KEaKLSFZ6Tr2S05CHL45o31hle71hKT/XUuwu6iKnUUG36BIgc0RrURn3ORXGcnRGXO5jvWsB+7sXYl3yYXmk+ySTwJ4+L4+QRPBuUPzdKDl63iGBR+rl0k/7v+9RQqis2nPJarD3EiC9hA2li2V1+It/mpLusQWdgCWe814j6Jf+nf++p/87H+6MlXiflxPLgLZLwqSlbQXv611eOu78wr/nf8fH8vFg2eW+S9CJ/3j8e6wM76VNap149L+vh/0/ZmNAvLSENHuve9hOu/7Du5f1YitBfX9C3UsDphtJ/t89p/4/9aB3Kzn+ew1dHkzoPyxdziT6xR7/CyuiXFQyhfQaAAAAAElFTkSuQmCC';
   const MAX_EVER_ICON_DATA = 'data:image/png;base64,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';
   const MAX_TODAY_ICON_DATA = 'data:image/png;base64,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';
   function reportDataUriBytes(uri){
@@ -1195,14 +1314,14 @@
   function reportDocxEsc(value){
     return String(value==null?'':value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  function reportDocxRun(value,size=21,color='1E293B',bold=false){
-    return `<w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:eastAsia="Arial" w:cs="Arial"/>${bold?'<w:b/><w:bCs/>':''}<w:color w:val="${color}"/><w:sz w:val="${size}"/><w:szCs w:val="${size}"/></w:rPr><w:t xml:space="preserve">${reportDocxEsc(value)}</w:t></w:r>`;
+  function reportDocxRun(value,size=21,color='1E293B',bold=false,font='Arial',italic=false){
+    return `<w:r><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:eastAsia="${font}" w:cs="${font}"/>${bold?'<w:b/><w:bCs/>':''}${italic?'<w:i/><w:iCs/>':''}<w:color w:val="${color}"/><w:sz w:val="${size}"/><w:szCs w:val="${size}"/></w:rPr><w:t xml:space="preserve">${reportDocxEsc(value)}</w:t></w:r>`;
   }
   function reportDocxParagraph(runs,{line=220,after=0,before=0,keep=false,align='left'}={}){
     return `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="${before}" w:after="${after}" w:line="${line}" w:lineRule="exact"/>${keep?'<w:keepNext/>':''}</w:pPr>${runs}</w:p>`;
   }
-  function reportDocxCell(content,width,{top=0,bottom=0,left=0,right=80,v='center',shade='F8FAFC',topBorder='',bottomBorder=''}={}){
-    const borders=(topBorder||bottomBorder)?`<w:tcBorders>${topBorder?`<w:top w:val="single" w:sz="${topBorder}" w:space="0" w:color="CBD5E1"/>`:''}${bottomBorder?`<w:bottom w:val="single" w:sz="${bottomBorder}" w:space="0" w:color="${bottomBorder==='6'?'E2E8F0':'CBD5E1'}"/>`:''}</w:tcBorders>`:'';
+  function reportDocxCell(content,width,{top=0,bottom=0,left=0,right=80,v='center',shade='FFFFFF',topBorder='',bottomBorder='',topBorderColor='CBD5E1',bottomBorderColor='CBD5E1'}={}){
+    const borders=(topBorder||bottomBorder)?`<w:tcBorders>${topBorder?`<w:top w:val="single" w:sz="${topBorder}" w:space="0" w:color="${topBorderColor}"/>`:''}${bottomBorder?`<w:bottom w:val="single" w:sz="${bottomBorder}" w:space="0" w:color="${bottomBorderColor}"/>`:''}</w:tcBorders>`:'';
     return `<w:tc><w:tcPr><w:tcW w:w="${width}" w:type="dxa"/><w:vAlign w:val="${v}"/><w:shd w:val="clear" w:color="auto" w:fill="${shade}"/><w:tcMar><w:top w:w="${top}" w:type="dxa"/><w:left w:w="${left}" w:type="dxa"/><w:bottom w:w="${bottom}" w:type="dxa"/><w:right w:w="${right}" w:type="dxa"/></w:tcMar>${borders}</w:tcPr>${content}</w:tc>`;
   }
   function reportDocxImage(relId,name,cx,cy,id){
@@ -1211,63 +1330,71 @@
   function reportDocxSpacer(height=120){ return reportDocxParagraph('',{line:height,after:0,before:0}); }
   function makeReportDocx(){
     const groups=progressGroups(), L=reportLayoutLabels();
-    const statusHeader=currentLang==='en'?'Status':L.status;
     let imageId=1;
+    const brandingTable=()=>{
+      const widths=[720,6900,3080], grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
+      const logo=reportDocxCell(reportDocxParagraph(reportDocxImage('rId5','Easy Gym logo',342900,342900,imageId++),{line:390,keep:true,align:'center'}),widths[0],{top:30,bottom:60,right:80,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
+      const brandRuns=reportDocxRun('EASY GYM',30,'1C1C1E',true)+reportDocxRun('   © 2026 Arthur Stivenson',16,'8E8E93',false);
+      const brand=reportDocxCell(reportDocxParagraph(brandRuns,{line:390,keep:true}),widths[1],{top:30,bottom:60,left:20,right:80,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
+      const title=reportDocxCell(reportDocxParagraph(reportDocxRun(String(L.reportTitle).toUpperCase(),20,'8E8E93',true),{line:390,keep:true,align:'right'}),widths[2],{top:30,bottom:60,left:0,right:0,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="570" w:hRule="atLeast"/></w:trPr>${logo}${brand}${title}</w:tr></w:tbl>${reportDocxSpacer(150)}`;
+    };
     const summaryTable=g=>{
       const widths=[2675,2675,2675,2675];
       const labels=[L.date,L.start,L.duration,L.totalVolume].map(v=>String(v).toUpperCase());
-      const values=[g.date,g.startTime,g.duration,g.totalWeight+' kg'];
+      const values=[g.date,g.startTime,g.duration,reportFormatVolume(g.totalWeight)+' kg'];
       const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
-      const row1=labels.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,18,'64748B',true),{line:190,keep:true}),widths[i],{top:45,bottom:0,right:130,topBorder:'12'})).join('');
-      const row2=values.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,28,'1E293B',true),{line:290,keep:true}),widths[i],{top:0,bottom:55,right:130,bottomBorder:'12'})).join('');
-      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${row1}</w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr>${row2}</w:tr></w:tbl>${reportDocxSpacer(120)}`;
+      const row1=labels.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,16,'8E8E93',true),{line:180,keep:true,align:i===3?'right':'left'}),widths[i],{top:20,bottom:35,right:i===3?0:120,bottomBorder:'6',bottomBorderColor:'E5E5EA'})).join('');
+      const row2=values.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,28,i===3?'000000':'1C1C1E',true),{line:290,keep:true,align:i===3?'right':'left'}),widths[i],{top:45,bottom:35,right:i===3?0:120})).join('');
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${row1}</w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr>${row2}</w:tr></w:tbl>${reportDocxSpacer(230)}`;
     };
     const recordsTable=ex=>{
-      const widths=[360,1500,700,480,360,1700,700,4900];
+      const widths=[360,1250,720,420,360,1420,720,5450];
       const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
       const cells=[
-        reportDocxCell(reportDocxParagraph(reportDocxImage('rId3','Max Ever trophy',166688,190500,imageId++),{line:420,keep:true,align:'center'}),widths[0],{top:20,bottom:20,right:20}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun('Max Ever:',21,'64748B',true),{line:230,keep:true}),widths[1],{left:35,right:20}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.everMax+' kg',21,'64748B',true),{line:230,keep:true}),widths[2],{right:0}),
-        reportDocxCell(reportDocxParagraph('',{line:230,keep:true}),widths[3],{right:0}),
-        reportDocxCell(reportDocxParagraph(reportDocxImage('rId4','Max Today fire',152400,190500,imageId++),{line:420,keep:true,align:'center'}),widths[4],{top:20,bottom:20,right:20}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun('Max Today:',21,'15803D',true),{line:230,keep:true}),widths[5],{left:35,right:20}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.todayMax+' kg',21,'15803D',true),{line:230,keep:true}),widths[6],{right:0}),
-        reportDocxCell(reportDocxParagraph('',{line:230,keep:true}),widths[7],{right:0})
+        reportDocxCell(reportDocxParagraph(reportDocxImage('rId3','Max Ever trophy',190500,228600,imageId++),{line:360,keep:true,align:'center'}),widths[0],{top:20,bottom:20,right:20}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun('Max Ever:',19,'3A3A3C',false),{line:210,keep:true}),widths[1],{left:25,right:10}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.everMax+' kg',19,'1C1C1E',true),{line:210,keep:true}),widths[2],{right:0}),
+        reportDocxCell(reportDocxParagraph('',{line:210,keep:true}),widths[3],{right:0}),
+        reportDocxCell(reportDocxParagraph(reportDocxImage('rId4','Max Today fire',182880,228600,imageId++),{line:360,keep:true,align:'center'}),widths[4],{top:20,bottom:20,right:20}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun('Max Today:',19,'3A3A3C',false),{line:210,keep:true}),widths[5],{left:25,right:10}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.todayMax+' kg',19,'34C759',true),{line:210,keep:true}),widths[6],{right:0}),
+        reportDocxCell(reportDocxParagraph(reportDocxRun(L.formatNote,16,'8E8E93',false,'Arial',true),{line:210,keep:true,align:'right'}),widths[7],{right:0})
       ].join('');
-      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="430" w:hRule="atLeast"/></w:trPr>${cells}</w:tr></w:tbl>`;
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="390" w:hRule="atLeast"/></w:trPr>${cells}</w:tr></w:tbl>`;
     };
     const exerciseTable=ex=>{
-      const widths=[3210,2568,2568,2354];
+      const widths=[2675,2675,2675,2675];
       const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
-      const heads=[L.weight,L.reps,L.sets,statusHeader];
-      const headCells=heads.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(String(v).toUpperCase(),16,'64748B',true),{line:185,keep:true}),widths[i],{top:55,bottom:55,right:100,topBorder:'12',bottomBorder:'12'})).join('');
+      const heads=reportDownloadHeaders();
+      const headCells=heads.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(String(v).toUpperCase(),16,'8E8E93',true),{line:180,keep:true,align:i===3?'right':'left'}),widths[i],{top:45,bottom:45,right:i===3?120:80,bottomBorder:'6',bottomBorderColor:'E5E5EA'})).join('');
       const body=ex.rows.map(r=>{
-        const status=reportRowStatus(r), statusColor=String(status).indexOf('⚠️')===0?'B45309':(status===L.overTarget?'15803D':'64748B');
-        const vals=[reportPair(r.dKg,r.pKg,'kg'),reportPair(r.dReps,r.pReps),reportPair(r.dSets,r.pSets),status];
-        return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${vals.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,21,i===3?statusColor:'1E293B',i<3||i===3&&statusColor!=='64748B'),{line:230}),widths[i],{top:85,bottom:85,right:100,bottomBorder:'6'})).join('')}</w:tr>`;
+        const info=reportStatusDisplay(reportRowStatus(r),L);
+        const vals=[reportPair(r.pKg,r.dKg,'kg'),reportPair(r.pReps,r.dReps),reportPair(r.pSets,r.dSets),info.text];
+        return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${vals.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,i===3?18:20,i===3?info.color:'1C1C1E',i===3?info.bold:false,i===3?'Segoe UI Symbol':'Arial'),{line:220,align:i===3?'right':'left'}),widths[i],{top:75,bottom:75,right:i===3?120:80,bottomBorder:'4',bottomBorderColor:'F2F2F7'})).join('')}</w:tr>`;
       }).join('');
-      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="CBD5E1"/></w:tblBorders></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr>${headCells}</w:tr>${body}</w:tbl>`;
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr>${headCells}</w:tr>${body}</w:tbl>`;
     };
-    const exerciseBlock=(ex,idx)=>`${reportDocxParagraph(reportDocxRun((idx+1)+'. '+displayExerciseName(ex.name),30,'1E293B',true),{line:310,after:35,keep:true})}${recordsTable(ex)}${reportDocxSpacer(65)}${exerciseTable(ex)}${reportDocxSpacer(150)}`;
-    const body=groups.length?groups.map(g=>summaryTable(g)+g.exercises.map(exerciseBlock).join('')).join(''):reportDocxParagraph(reportDocxRun(t('noReport'),21,'64748B',true),{line:230});
-    const documentXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:background w:color="F8FAFC"/><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="440" w:right="560" w:bottom="440" w:left="560" w:header="0" w:footer="0" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>`;
+    const exerciseBlock=(ex,idx)=>`${reportDocxParagraph(reportDocxRun((idx+1)+'. '+displayExerciseName(ex.name),28,'1C1C1E',true),{line:290,after:25,keep:true})}${recordsTable(ex)}${reportDocxSpacer(45)}${exerciseTable(ex)}${reportDocxSpacer(220)}`;
+    const body=brandingTable()+(groups.length?groups.map(g=>summaryTable(g)+g.exercises.map(exerciseBlock).join('')).join(''):reportDocxParagraph(reportDocxRun(t('noReport'),20,'8E8E93',true),{line:220}));
+    const documentXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:background w:color="FFFFFF"/><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="560" w:right="620" w:bottom="560" w:left="620" w:header="0" w:footer="0" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>`;
     const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>`;
     const rootRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>`;
-    const docRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-ever.png"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-today.png"/></Relationships>`;
+    const docRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-ever.png"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-today.png"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/easy-gym-logo.png"/></Relationships>`;
     const stamp=new Date().toISOString();
-    const core=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>Easy Gym LOG</dc:title><dc:creator>Easy Gym</dc:creator><cp:lastModifiedBy>Easy Gym</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">${stamp}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${stamp}</dcterms:modified></cp:coreProperties>`;
+    const core=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>Easy Gym Workout Report</dc:title><dc:creator>Easy Gym</dc:creator><cp:lastModifiedBy>Easy Gym</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">${stamp}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${stamp}</dcterms:modified></cp:coreProperties>`;
     const app=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>Easy Gym</Application><DocSecurity>0</DocSecurity><ScaleCrop>false</ScaleCrop><Company></Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>1.0</AppVersion></Properties>`;
     return reportZipStored([
       {name:'[Content_Types].xml',data:contentTypes},{name:'_rels/.rels',data:rootRels},{name:'word/document.xml',data:documentXml},
       {name:'word/_rels/document.xml.rels',data:docRels},{name:'word/media/max-ever.png',data:reportDataUriBytes(MAX_EVER_ICON_DATA)},
-      {name:'word/media/max-today.png',data:reportDataUriBytes(MAX_TODAY_ICON_DATA)},{name:'docProps/core.xml',data:core},{name:'docProps/app.xml',data:app}
+      {name:'word/media/max-today.png',data:reportDataUriBytes(MAX_TODAY_ICON_DATA)},{name:'word/media/easy-gym-logo.png',data:reportDataUriBytes(REPORT_LOGO_DATA)},
+      {name:'docProps/core.xml',data:core},{name:'docProps/app.xml',data:app}
     ]);
   }
   function downloadWord(){ downloadFile('easy-gym-report.docx','application/vnd.openxmlformats-officedocument.wordprocessingml.document',makeReportDocx(),true); }
   let reportIconPromise=null;
   function reportLoadImage(src){ return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;}); }
-  function reportLoadIcons(){ if(!reportIconPromise) reportIconPromise=Promise.all([reportLoadImage(MAX_EVER_ICON_DATA),reportLoadImage(MAX_TODAY_ICON_DATA)]); return reportIconPromise; }
+  function reportLoadIcons(){ if(!reportIconPromise) reportIconPromise=Promise.all([reportLoadImage(REPORT_LOGO_DATA),reportLoadImage(MAX_EVER_ICON_DATA),reportLoadImage(MAX_TODAY_ICON_DATA)]); return reportIconPromise; }
   function reportFitCanvasText(ctx,value,maxWidth){
     let s=String(value==null?'':value);
     if(ctx.measureText(s).width<=maxWidth) return s;
@@ -1275,7 +1402,7 @@
     return s+'…';
   }
   function reportCanvasJpegBytes(canvas){
-    const raw=atob(canvas.toDataURL('image/jpeg',0.94).split(',')[1]), out=new Uint8Array(raw.length);
+    const raw=atob(canvas.toDataURL('image/jpeg',0.96).split(',')[1]), out=new Uint8Array(raw.length);
     for(let i=0;i<raw.length;i++) out[i]=raw.charCodeAt(i);
     return out;
   }
@@ -1307,40 +1434,56 @@
   async function makeReportTablePdf(){
     const groups=progressGroups();
     if(!groups.length) return makeSimplePdf(t('noReport'));
-    const L=reportLayoutLabels(), statusHeader=currentLang==='en'?'Status':L.status;
-    const [trophyIcon,fireIcon]=await reportLoadIcons();
-    const W=1190,H=1684,M=68,contentW=W-M*2,rowH=54;
-    const colors={bg:'#f8fafc',primary:'#1e293b',secondary:'#64748b',success:'#15803d',warning:'#b45309',border:'#cbd5e1',soft:'#e2e8f0'};
+    const L=reportLayoutLabels();
+    const [brandLogo,trophyIcon,fireIcon]=await reportLoadIcons();
+    const W=1190,H=1684,M=68,contentW=W-M*2,rowH=50;
+    const colors={bg:'#ffffff',primary:'#1c1c1e',black:'#000000',secondary:'#8e8e93',body:'#3a3a3c',success:'#34c759',warning:'#b45309',border:'#e5e5ea',soft:'#f2f2f7'};
     const pages=[];
     let canvas,ctx,y;
-    const font=(size,bold=false)=>`${bold?'700':'400'} ${size}px Arial, "Segoe UI", sans-serif`;
+    const font=(size,bold=false,italic=false)=>`${italic?'italic ':''}${bold?'700':'400'} ${size}px Arial, "Segoe UI", sans-serif`;
+    const line=(x1,y1,x2,y2,color=colors.border,width=2)=>{ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();};
+    const drawText=(value,x,base,size,bold=false,color=colors.primary,maxWidth=null,italic=false)=>{ctx.font=font(size,bold,italic);ctx.fillStyle=color;const shown=maxWidth?reportFitCanvasText(ctx,value,maxWidth):String(value);ctx.fillText(shown,x,base);return ctx.measureText(shown).width;};
+    const drawTextRight=(value,right,base,size,bold=false,color=colors.primary,maxWidth=null,italic=false)=>{ctx.font=font(size,bold,italic);const shown=maxWidth?reportFitCanvasText(ctx,value,maxWidth):String(value);ctx.fillStyle=color;ctx.fillText(shown,right-ctx.measureText(shown).width,base);};
+    const drawBranding=()=>{
+      const top=y;
+      ctx.drawImage(brandLogo,M,top,54,54);
+      const brandX=M+68;
+      const brandWidth=drawText('EASY GYM',brandX,top+34,30,true,colors.primary);
+      drawText('© 2026 Arthur Stivenson',brandX+brandWidth+18,top+34,16,false,colors.secondary,360);
+      drawTextRight(String(L.reportTitle).toUpperCase(),W-M,top+34,18,true,colors.secondary,330);
+      line(M,top+68,W-M,top+68,colors.primary,3);
+      y=top+94;
+    };
     const newPage=()=>{
       canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;ctx=canvas.getContext('2d');
-      ctx.fillStyle=colors.bg;ctx.fillRect(0,0,W,H);ctx.textBaseline='alphabetic';ctx.lineCap='butt';y=M;
+      ctx.fillStyle=colors.bg;ctx.fillRect(0,0,W,H);ctx.textBaseline='alphabetic';ctx.lineCap='butt';y=M;drawBranding();
     };
     const finishPage=()=>{ if(canvas) pages.push({bytes:reportCanvasJpegBytes(canvas),width:W,height:H}); };
-    const line=(x1,y1,x2,y2,color=colors.border,width=2)=>{ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();};
-    const drawText=(value,x,base,size,bold=false,color=colors.primary,maxWidth=null)=>{ctx.font=font(size,bold);ctx.fillStyle=color;const shown=maxWidth?reportFitCanvasText(ctx,value,maxWidth):String(value);ctx.fillText(shown,x,base);};
     const ensure=h=>{ if(y+h>H-M){finishPage();newPage();} };
     const drawOverview=g=>{
-      ensure(102); line(M,y,W-M,y);
-      const labels=[L.date,L.start,L.duration,L.totalVolume], vals=[g.date,g.startTime,g.duration,g.totalWeight+' kg'], colW=contentW/4;
-      labels.forEach((v,i)=>drawText(String(v).toUpperCase(),M+i*colW,y+22,18,true,colors.secondary,colW-24));
-      vals.forEach((v,i)=>drawText(v,M+i*colW,y+55,28,true,colors.primary,colW-24));
-      line(M,y+70,W-M,y+70); y+=96;
+      ensure(96);
+      const labels=[L.date,L.start,L.duration,L.totalVolume], vals=[g.date,g.startTime,g.duration,reportFormatVolume(g.totalWeight)+' kg'], colW=contentW/4;
+      labels.forEach((v,i)=>i===3?drawTextRight(String(v).toUpperCase(),M+(i+1)*colW,y+18,16,true,colors.secondary,colW-22):drawText(String(v).toUpperCase(),M+i*colW,y+18,16,true,colors.secondary,colW-22));
+      line(M,y+29,W-M,y+29,colors.border,2);
+      vals.forEach((v,i)=>i===3?drawTextRight(v,M+(i+1)*colW,y+62,28,true,colors.black,colW-22):drawText(v,M+i*colW,y+62,28,true,colors.primary,colW-22));
+      y+=96;
     };
     const drawExerciseHeader=(ex,idx,continued=false)=>{
-      drawText((idx+1)+'. '+displayExerciseName(ex.name)+(continued?' (cont.)':''),M+16,y+30,30,true,colors.primary,contentW-32); y+=42;
-      const iconY=y+7, everIconX=M+16, everLabelX=everIconX+38, everValueX=everLabelX+142;
-      const todayIconX=M+Math.round(contentW*0.27), todayLabelX=todayIconX+38, todayValueX=todayLabelX+164;
-      ctx.drawImage(trophyIcon,everIconX,iconY,25,29); ctx.drawImage(fireIcon,todayIconX,iconY,23,29);
-      drawText('Max Ever:',everLabelX,y+29,21,true,colors.secondary); drawText(ex.everMax+' kg',everValueX,y+29,21,true,colors.secondary);
-      drawText('Max Today:',todayLabelX,y+29,21,true,colors.success); drawText(ex.todayMax+' kg',todayValueX,y+29,21,true,colors.success);
-      y+=53;
-      line(M+16,y,W-M-16,y);
-      const colW=[contentW*.30,contentW*.24,contentW*.24,contentW*.22], heads=[L.weight,L.reps,L.sets,statusHeader]; let x=M+16;
-      heads.forEach((v,i)=>{drawText(String(v).toUpperCase(),x,y+23,16,true,colors.secondary,colW[i]-20);x+=colW[i];});
-      line(M+16,y+36,W-M-16,y+36); y+=50;
+      drawText((idx+1)+'. '+displayExerciseName(ex.name)+(continued?' (cont.)':''),M,y+29,28,true,colors.primary,contentW); y+=39;
+      const recordsBase=y+27;
+      const everIconX=M, everLabelX=everIconX+31;
+      const todayIconX=M+310, todayLabelX=todayIconX+31;
+      ctx.drawImage(trophyIcon,everIconX,y+1,22,26);
+      ctx.drawImage(fireIcon,todayIconX,y+1,21,26);
+      const everLabelW=drawText('Max Ever:',everLabelX,recordsBase,19,false,colors.body);
+      drawText(ex.everMax+' kg',everLabelX+everLabelW+8,recordsBase,19,true,colors.primary);
+      const todayLabelW=drawText('Max Today:',todayLabelX,recordsBase,19,false,colors.body);
+      drawText(ex.todayMax+' kg',todayLabelX+todayLabelW+8,recordsBase,19,true,colors.success);
+      drawTextRight(L.formatNote,W-M,recordsBase,16,false,colors.secondary,390,true);
+      y+=43;
+      const colW=contentW/4, heads=reportDownloadHeaders();
+      heads.forEach((v,i)=>i===3?drawTextRight(String(v).toUpperCase(),M+(i+1)*colW-12,y+18,16,true,colors.secondary,colW-18):drawText(String(v).toUpperCase(),M+i*colW+4,y+18,16,true,colors.secondary,colW-18));
+      line(M,y+28,W-M,y+28,colors.border,2); y+=40;
       return colW;
     };
     newPage();
@@ -1349,15 +1492,16 @@
       g.exercises.forEach((ex,idx)=>{
         let rowIndex=0, continued=false;
         while(rowIndex<ex.rows.length){
-          ensure(42+53+50+rowH+24);
+          ensure(39+43+40+rowH+34);
           const colW=drawExerciseHeader(ex,idx,continued); continued=true;
-          while(rowIndex<ex.rows.length && y+rowH+24<=H-M){
-            const r=ex.rows[rowIndex], status=reportRowStatus(r), statusColor=String(status).indexOf('⚠️')===0?colors.warning:(status===L.overTarget?colors.success:colors.secondary);
-            const vals=[reportPair(r.dKg,r.pKg,'kg'),reportPair(r.dReps,r.pReps),reportPair(r.dSets,r.pSets),status]; let x=M+16;
-            vals.forEach((v,i)=>{drawText(v,x,y+31,21,i<3||(i===3&&statusColor!==colors.secondary),i===3?statusColor:colors.primary,colW[i]-20);x+=colW[i];});
-            line(M+16,y+45,W-M-16,y+45,colors.soft,1.5); y+=rowH; rowIndex++;
+          while(rowIndex<ex.rows.length && y+rowH+34<=H-M){
+            const r=ex.rows[rowIndex], info=reportStatusDisplay(reportRowStatus(r),L);
+            const vals=[reportPair(r.pKg,r.dKg,'kg'),reportPair(r.pReps,r.dReps),reportPair(r.pSets,r.dSets)];
+            vals.forEach((v,i)=>drawText(v,M+i*colW+4,y+30,20,false,colors.primary,colW-18));
+            drawTextRight(info.text,W-M-12,y+30,18,info.bold,info.color,colW-18);
+            line(M,y+43,W-M,y+43,colors.soft,1.5); y+=rowH; rowIndex++;
           }
-          line(M+8,y,W-M-8,y,colors.border,2); y+=22;
+          y+=28;
           if(rowIndex<ex.rows.length){finishPage();newPage();}
         }
       });
@@ -1413,10 +1557,40 @@
   }
   function openExerciseModal(target, sessionId=null){ modalTarget=target; modalSessionId=sessionId; editMode=false; selectedLibraryDelete.clear(); deletedLibraryNames.clear(); libraryDraft=[...exerciseLibrary]; libraryDirty=false; els.addExerciseModal.classList.remove('hidden'); els.customExerciseName.value=''; renderLibrary(); }
   function closeExerciseModal(){els.addExerciseModal.classList.add('hidden'); modalTarget=null; modalSessionId=null;}
-  function setLibraryDeleteState(){ const enabled=editMode && selectedLibraryDelete.size>0; els.deleteLibraryBtn.style.display=''; els.deleteLibraryBtn.hidden=false; els.deleteLibraryBtn.disabled=!enabled; els.deleteLibraryBtn.classList.toggle('disabled',!enabled); }
-  function renderLibrary(){ $('modalTitle').textContent=t('chooseExercise'); els.editExercisesBtn.style.display=editMode?'none':''; els.saveLibraryBtn.style.display=''; setLibraryDeleteState(); els.exerciseModalHelp.textContent=''; els.customRow.style.display=''; if(editMode){ els.libraryList.innerHTML = libraryDraft.map((name,i)=>`<div class="library-edit-row"><input class="library-checkbox" type="checkbox" data-lib-check="${i}" ${selectedLibraryDelete.has(i)?'checked':''}><input data-lib-name="${i}" value="${esc(displayExerciseName(name))}"><span></span></div>`).join(''); els.libraryList.querySelectorAll('[data-lib-check]').forEach(c=>c.addEventListener('change',()=>{const i=Number(c.dataset.libCheck); c.checked?selectedLibraryDelete.add(i):selectedLibraryDelete.delete(i); renderLibrary();})); els.libraryList.querySelectorAll('[data-lib-name]').forEach(inp=>inp.addEventListener('input',()=>{libraryDraft[Number(inp.dataset.libName)]=canonicalExerciseName(inp.value);libraryDirty=true;renderLibrarySaveOnly();})); } else { els.libraryList.innerHTML = exerciseLibrary.map(name=>`<div class="library-choice"><button type="button" class="exercise-choice-name" data-choice="${esc(name)}">${esc(displayExerciseName(name))}</button><span></span></div>`).join(''); els.libraryList.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>chooseExercise(b.dataset.choice))); } updateCustomAdd(); }
+  function setLibraryDeleteState(){
+    const enabled=editMode && selectedLibraryDelete.size>0;
+    els.deleteLibraryBtn.style.display=editMode?'inline-flex':'none';
+    els.deleteLibraryBtn.hidden=!editMode;
+    els.deleteLibraryBtn.disabled=!enabled;
+    els.deleteLibraryBtn.classList.toggle('disabled',!enabled);
+  }
+  function renderLibrary(){
+    $('modalTitle').textContent=t('chooseExercise');
+    els.editExercisesBtn.style.display=editMode?'none':'inline-flex';
+    els.saveLibraryBtn.style.display=editMode?'inline-flex':'none';
+    setLibraryDeleteState();
+    els.exerciseModalHelp.textContent='';
+    els.customRow.style.display='';
+    if(editMode){
+      els.libraryList.innerHTML = libraryDraft.map((name,i)=>`<div class="library-edit-row x-library-edit-row"><input class="library-checkbox" type="checkbox" data-lib-check="${i}" ${selectedLibraryDelete.has(i)?'checked':''}><input data-lib-name="${i}" value="${esc(displayExerciseName(name))}"><span></span></div>`).join('');
+      els.libraryList.querySelectorAll('[data-lib-check]').forEach(c=>c.addEventListener('change',()=>{const i=Number(c.dataset.libCheck); c.checked?selectedLibraryDelete.add(i):selectedLibraryDelete.delete(i); renderLibrary();}));
+      els.libraryList.querySelectorAll('[data-lib-name]').forEach(inp=>inp.addEventListener('input',()=>{libraryDraft[Number(inp.dataset.libName)]=canonicalExerciseName(inp.value);libraryDirty=true;renderLibrarySaveOnly();}));
+    } else {
+      const query=normalExercise(els.customExerciseName.value).toLocaleLowerCase(currentLang);
+      const filtered=exerciseLibrary.filter(name=>!query || displayExerciseName(name).toLocaleLowerCase(currentLang).includes(query));
+      els.libraryList.innerHTML = filtered.map(name=>`<button type="button" class="exercise-select-row" data-choice="${esc(name)}"><span class="exercise-item-name">${esc(displayExerciseName(name))}</span>${icon('add')}</button>`).join('');
+      els.libraryList.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>chooseExercise(b.dataset.choice)));
+    }
+    updateCustomAdd();
+  }
   function renderLibrarySaveOnly(){ updateCustomAdd(); }
-  function updateCustomAdd(){ const has=!!normalExercise(els.customExerciseName.value); els.addCustomExerciseBtn.style.display='none'; const enabled=editMode?(libraryDirty||has):has; els.saveLibraryBtn.disabled=!enabled; els.saveLibraryBtn.classList.toggle('disabled',!enabled); }
+  function updateCustomAdd(){
+    const has=!!normalExercise(els.customExerciseName.value);
+    els.addCustomExerciseBtn.style.display=(!editMode&&has)?'inline-flex':'none';
+    const enabled=editMode?(libraryDirty||has):false;
+    els.saveLibraryBtn.disabled=!enabled;
+    els.saveLibraryBtn.classList.toggle('disabled',!enabled);
+  }
   function addCustomFromModal(){ const name=normalExercise(els.customExerciseName.value); if(name) chooseExercise(name); }
   function chooseExercise(name){ name=normalExercise(name); if(!name)return; if(!exerciseLibrary.includes(name)){exerciseLibrary.push(name); save(KEYS.library, exerciseLibrary);} if(modalTarget==='date-add') addDatePlanExercise(name); else if(modalTarget==='date-replace') replaceDatePlanExercise(modalSessionId,name); else if(modalTarget==='plan-add') addPlanExercise(name); else if(modalTarget==='plan-replace') replacePlanExercise(modalSessionId,name); else if(modalTarget==='train-add') addTrainExercise(name); else if(modalTarget==='train-replace') replaceTrainExercise(modalSessionId,name); }
   function removeExerciseNamesFromPlans(names){
@@ -1833,7 +2007,8 @@
 
   async function boot(){
     try{
-      await loadLanguagePacks();
+      await (window.EASY_GYM_LANGUAGE_READY || Promise.resolve());
+      loadLanguagePacks();
       init();
     }catch(e){
       console.error(e);
