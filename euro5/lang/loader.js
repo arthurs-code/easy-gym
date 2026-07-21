@@ -1,4 +1,4 @@
-/* Easy Gym v223 — language-package loader.
+/* Easy Gym v225 — language-package loader.
    Loads the enabled language files before the app starts.
    Works from GitHub Pages, normal web hosting, and direct local file opening. */
 (function (root, doc) {
@@ -18,7 +18,7 @@
 
   var versionSuffix = (root.location && root.location.protocol === 'file:')
     ? ''
-    : '?v=' + encodeURIComponent(config.version || 'v223');
+    : '?v=' + encodeURIComponent(config.version || 'v225');
 
   function loadLanguage(code) {
     if (root.EASY_GYM_LANGUAGE_PACKS[code]) return Promise.resolve(true);

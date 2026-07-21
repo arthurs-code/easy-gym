@@ -1,4 +1,4 @@
-/* Easy Gym v223 — NEW LANGUAGE TEMPLATE
+/* Easy Gym v225 — NEW LANGUAGE TEMPLATE
 
 HOW TO USE
 1. Copy this file and rename it, for example: pt.js
@@ -41,7 +41,7 @@ HOW TO USE
     "do": "GO",
     "report": "LOG",
     "manage": "mgmt",
-    "donate": "heart",
+    "donate": "support",
     "about": "info",
     "selectDay": "Select the Day",
     "addExercise": "EXERCISE",
@@ -99,7 +99,7 @@ HOW TO USE
     "restoreAllData": "Restore",
     "deleteData": "Delete Data",
     "supportTitle": "Support Easy Gym",
-    "supportIntro": "Easy Gym is free and ad-free. If it helps your training, a small donation keeps it growing — thank you.",
+    "supportIntro": "Easy Gym is ad-free. Support us by sharing or sending feedback.",
     "confirmInsert": "Insert will override Plans - confirm",
     "confirmRestore": "Restore will replace All Data - confirm",
     "confirmDelete": "Delete will erase All Data - confirm",
@@ -124,7 +124,22 @@ HOW TO USE
     "noExercisesYet": "No exercises yet. Tap “+ EXERCISE” to build today’s training.",
     "noTrainingPlanned": "No training planned for this day. Create it in Plan first.",
     "reportHeader": "Exercise / P-KG / D-KG / P-Reps / D-Reps / P-Sets / D-Sets",
-    "aboutHtml": "<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>A free, ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone.</p></div><div class=\"card about-card\"><h2>Preface</h2><p>I created Easy Gym for my own training. It is free and has no ads. Like it? Support me with a donation. Want your own app? Write to: arthur.stivenson@gmail.com.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Create a plan for any date. Use <strong>+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong>DEL</strong> to remove exercises. Save the plan when it is ready.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong>+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</p></div><div class=\"card about-card\"><h2>MGMT &amp; share</h2><p><strong>Share Plan as Link</strong> — Plan-Link will be available in Easy Gym from App Store.</p><p><strong>Share Plan File or LOG</strong> — When you share a file, we create a secure link you can send via WhatsApp or other messengers.</p><p><strong>Save File or LOG</strong> — saves it locally.</p><p><strong>Insert Plan File</strong> — imports a received plan file into Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</p></div>"
+    "aboutHtml": "<div class=\"card about-card\"><h2>Easy Gym — Plan, Go, Log</h2><p>An ad-free training tracker for serious training. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone.</p></div><div class=\"card about-card\"><h2>Preface</h2><p>I created Easy Gym for my own serious training. It is an ad-free training tracker with no subscriptions. Build your PLAN, start your workout in GO, and keep every result in LOG — all on your phone. You can help by sharing the app, rating it in the App Store, or sending feedback. Contact: arthur.stivenson@gmail.com. More info: www.easygym.ch.</p></div><div class=\"card about-card\"><h2>PLAN</h2><p>Create a plan for any date. Use <strong>+ EXERCISE</strong> to add exercises with kg, reps, and sets. Use <strong>DEL</strong> to remove exercises. Save the plan when it is ready.</p></div><div class=\"card about-card\"><h2>GO</h2><p>Start from a saved PLAN. You can adjust kg, reps, and sets during the workout or add another <strong>+ EXERCISE</strong>. Your original PLAN stays unchanged for next time.</p></div><div class=\"card about-card\"><h2>LOG</h2><p>Compare planned targets with actual results. Completed sets are marked green. Save or share your final training log.</p></div><div class=\"card about-card\"><h2>MGMT &amp; share</h2><p><strong>Share Plan as Link</strong> — Plan-Link will be available in Easy Gym from App Store.</p><p><strong>Share Plan File or LOG</strong> — When you share a file, we create a secure link you can send via WhatsApp or other messengers.</p><p><strong>Save File or LOG</strong> — saves it locally.</p><p><strong>Insert Plan File</strong> — imports a received plan file into Easy Gym.</p></div><div class=\"card about-card\"><h2>Backup</h2><p>Backup saves a full copy. Restore recovers your data. Delete Data wipes everything after confirmation.</p></div><div class=\"card about-card\"><h2>Privacy</h2><p>Easy Gym works on your phone. Your plans and logs stay on your device unless you share them.</p></div>",
+    "supportShareTitle": "Share App",
+    "supportShareText": "Share with training partners",
+    "supportRateTitle": "Rate in the App Store",
+    "supportRateText": "Leave us a review",
+    "supportFeedbackTitle": "Feedback & Problems",
+    "supportFeedbackText": "Report bugs or suggest ideas",
+    "supportContactTitle": "Contact Us",
+    "supportContactText": "arthur.stivenson@gmail.com",
+    "shareApp": "Share App",
+    "rateApp": "Rate App",
+    "sendFeedback": "Send Feedback",
+    "supportContact": "Contact",
+    "supportShareMessage": "Easy Gym — focused training with no ads or subscriptions. https://easygym.ch",
+    "reviewUnavailable": "The App Store page could not be opened.",
+    "feedbackSubject": "Easy Gym feedback"
   },
   "exercises": {}
 };

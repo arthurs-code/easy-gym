@@ -1,6 +1,6 @@
-EASY GYM v223 — LANGUAGE PACKAGES
+EASY GYM v225 — LANGUAGE PACKAGES
 
-The app version remains v223.
+The app version remains v225.
 
 FILES
 - config.js: selects the visible languages, their order, and the default language.
