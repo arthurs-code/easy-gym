@@ -1,0 +1,3 @@
+Easy Gym PWA v274X
+Built directly from Easy Gym PWA v273X.
+PWA build marker: v274X-PWA-support-report-layout
