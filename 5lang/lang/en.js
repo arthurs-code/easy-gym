@@ -77,6 +77,7 @@
     "maxToday": "Max Today",
     "sharePlan": "Share Plan",
     "sharePlanLink": "Share Plan as Link",
+    "sharePlanLinkUnavailable": "Available in App Store version",
     "directLinkComingSoon": "PLAN-Link ready.",
     "planLinkReady": "Plan link ready",
     "planLinkCopied": "Plan link copied",
@@ -152,7 +153,20 @@
     "supportClearingNumber": "Clearing Nr",
     "supportBank": "Bank",
     "supportDonateAlt": "Swiss payment QR code",
-    "supportDonateAmount": "Message: Easy Gym"
+    "supportDonateAmount": "Message: Easy Gym",
+    "dialogCancel": "Cancel",
+    "dialogOk": "OK",
+    "confirmDeleteTitle": "Delete all data?",
+    "confirmDeleteMessage": "This permanently removes all plans, workouts and settings from this device.",
+    "confirmDeleteAction": "Delete Data",
+    "confirmInsertTitle": "Replace existing plans?",
+    "confirmInsertMessage": "Importing this file will overwrite the plans currently stored in Easy Gym.",
+    "confirmInsertAction": "Insert Plan",
+    "confirmRestoreTitle": "Restore all data?",
+    "confirmRestoreMessage": "Restoring this backup will replace all current Easy Gym data on this device.",
+    "confirmRestoreAction": "Restore",
+    "sharePlanUnsupportedTitle": "Share Plan unavailable",
+    "sharePlanUnsupportedMessage": "File sharing is not supported in this browser. Use Save Plan instead."
   },
   "exercises": {}
 };
