@@ -1,3 +1,3 @@
-Easy Gym PWA v278X
-Built directly from Easy Gym PWA v277X.
-PWA build marker: v278X-PWA-direct-ios-plan-share
+Easy Gym PWA v292X
+Built directly from Easy Gym PWA v291X.
+PWA build marker: v292X-PWA-restored-utility-uppercase-kg-empty-go
