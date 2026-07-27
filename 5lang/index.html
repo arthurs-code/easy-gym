@@ -6032,7 +6032,7 @@ body.eg-dialog-open{overflow:hidden!important}
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v297X-PWA-insert-plan-message';
+  const DEV_BUILD = 'v298X-PWA-total-volume';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -6610,14 +6610,16 @@ body.eg-dialog-open{overflow:hidden!important}
         const total=Math.max(0,Math.floor(Number(it.sets)||0));
         const completed=Math.min(total,Math.max(0,Math.floor(Number(it.checked)||0)));
         const kg=Math.max(0,Number(it.kg)||0);
-        return sum+(kg*completed);
+        const reps=Math.max(0,Number(it.reps)||0);
+        return sum+(kg*reps*completed);
       },0);
     }
     const saved=journalForDate(iso);
     return (saved&&saved.exercises||[]).reduce((sum,exercise)=>sum+(exercise.sets||[]).reduce((rowSum,row)=>{
       const completed=Math.max(0,Number(row.sets)||0);
       const kg=Math.max(0,Number(row.kg)||0);
-      return rowSum+(kg*completed);
+      const reps=Math.max(0,Number(row.reps)||0);
+      return rowSum+(kg*reps*completed);
     },0),0);
   }
   function formatTrainMass(value){
@@ -6660,7 +6662,7 @@ body.eg-dialog-open{overflow:hidden!important}
   function centerStrip(el, dataAttr, iso){ const b=el.querySelector('['+dataAttr+'="'+iso+'"]'); if(b){ el.scrollLeft = b.offsetLeft - el.clientWidth/2 + b.offsetWidth/2; } }
   function buildDateStrip(el, selectedIso, dataAttr){
     const today=todayISO(); const sets=stripSets();
-    const sig=['v297X',currentLang, today, [...sets.planned].sort().join(',')].join('|');
+    const sig=['v298X',currentLang, today, [...sets.planned].sort().join(',')].join('|');
     if(el.dataset.sig!==sig){
       const prev = el.children.length ? el.scrollLeft : null;
       const N=365; const base=new Date(); base.setHours(0,0,0,0);
@@ -7297,7 +7299,7 @@ body.eg-dialog-open{overflow:hidden!important}
         if(!group){ group={name,rows:[],todayMax:0,everMax:everMax[name]||0}; byName.push(group); }
         (ex.sets||[]).forEach(s=>{
           const sets=Number(s.sets)||0, kg=Number(s.kg)||0, reps=Number(s.reps)||0;
-          if(sets>0 && kg>0) totalWeight+=sets*kg;
+          if(sets>0 && kg>0 && reps>0) totalWeight+=sets*kg*reps;
           if(!(sets>0 && kg>0 && reps>0)) return;
           group.todayMax=Math.max(group.todayMax,kg);
           group.everMax=Math.max(group.everMax,kg);
@@ -8330,7 +8332,7 @@ body.eg-dialog-open{overflow:hidden!important}
 </script>
 <script>
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){
-  navigator.serviceWorker.register('./service-worker.js?v=297X',{updateViaCache:'none'})
+  navigator.serviceWorker.register('./service-worker.js?v=298X',{updateViaCache:'none'})
     .then(registration=>registration.update())
     .catch(()=>{});
 }

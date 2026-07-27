@@ -1,3 +1,3 @@
-Easy Gym PWA v297X
-Built directly from Easy Gym PWA v296X.
-PWA build marker: v297X-PWA-insert-plan-message
+Easy Gym PWA v298X
+Built directly from Easy Gym PWA v297X.
+PWA build marker: v298X-PWA-total-volume
