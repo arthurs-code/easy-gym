@@ -1,4 +1,4 @@
-/* Easy Gym v308X language package: de
+/* Easy Gym v309X language package: de
    Edit text values only. Keep object keys unchanged. */
 (function (root) {
   'use strict';

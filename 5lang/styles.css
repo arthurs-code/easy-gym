@@ -6108,3 +6108,6 @@ body.eg-dialog-open{overflow:hidden!important}
   padding-left:40px!important;
   box-sizing:border-box!important;
 }
+
+/* ---- pwa-v309x-plan-go-state-guards ---- */
+#savePlanRow.is-hidden{display:none!important;}

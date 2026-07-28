@@ -60,7 +60,7 @@
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v307X-PWA-info-add-language';
+  const DEV_BUILD = 'v309X-PWA-plan-go-state-guards';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -357,7 +357,7 @@
       return;
     }
     try{
-      const response=await fetch(`./info/${code}.html?v=308X`,{cache:'no-store'});
+      const response=await fetch(`./info/${code}.html?v=309X`,{cache:'no-store'});
       if(!response.ok) throw new Error(`INFO_${response.status}`);
       const html=await response.text();
       infoHtmlCache[code]=html;
@@ -720,7 +720,7 @@
   function centerStrip(el, dataAttr, iso){ const b=el.querySelector('['+dataAttr+'="'+iso+'"]'); if(b){ el.scrollLeft = b.offsetLeft - el.clientWidth/2 + b.offsetWidth/2; } }
   function buildDateStrip(el, selectedIso, dataAttr){
     const today=todayISO(); const sets=stripSets();
-    const sig=['v307X',currentLang, today, [...sets.planned].sort().join(',')].join('|');
+    const sig=['v309X',currentLang, today, [...sets.planned].sort().join(',')].join('|');
     if(el.dataset.sig!==sig){
       const prev = el.children.length ? el.scrollLeft : null;
       const N=365; const base=new Date(); base.setHours(0,0,0,0);
@@ -786,6 +786,11 @@
     if(!has){
       els.planActionRow.style.display='none';
       els.savePlanRow.style.display='none';
+      els.savePlanRow.classList.add('is-hidden');
+      setButtonLabel(els.savePlanBtn,'save',t('saveTraining'));
+      els.savePlanBtn.disabled=true;
+      els.savePlanBtn.classList.remove('saved');
+      els.savePlanBtn.classList.add('disabled');
       els.planList.innerHTML='';
       updatePlanCopyState();
       updatePlanActivateState(null);
@@ -795,6 +800,7 @@
 
     // PLAN controls stay visible for every selected day. App logic only enables/disables them.
     els.planActionRow.style.display='';
+    els.savePlanRow.classList.remove('is-hidden');
     els.savePlanRow.style.display='flex';
     const setDisabled=(btn,disabled)=>{ if(!btn)return; btn.disabled=!!disabled; btn.classList.toggle('disabled',!!disabled); };
     const done=journalForDate(iso);
@@ -861,6 +867,7 @@
   function trainGroups(list){ const out=[]; (list||[]).forEach(it=>{ const key=trainGroupKey(it); let g=out.find(x=>x.key===key); if(!g){ g={key,first:it,items:[]}; out.push(g); } g.items.push(it); }); return out; }
   function trainGroupCard(group,i){
     const disabled = savedWorkout?.date===selectedTrainDate;
+    const progressDisabled = disabled || !trainStartTimes[selectedTrainDate];
     const first = group.first || group.items[0];
     return `<div class="exercise-card x-exercise-card x-go-card" data-train-group="${esc(group.key)}" data-mode="go">
       <div class="card-header-row exercise-card-header-stacked">
@@ -877,7 +884,7 @@
           ${xRowMetric(t('kg'),item.kg,'train',item,'kg',disabled)}
           ${xRowMetric(t('reps'),item.reps,'train',item,'reps',disabled)}
           ${xRowMetric(t('sets'),item.sets,'train',item,'sets',disabled)}
-          <div class="control-box cell-interactive x-go-action-cell row-interactive-cell"><button class="x-check-btn uniform-digit ${complete?'completed':(checked>0?'partial':'')}" type="button" data-x-set-progress="${esc(item.sessionId)}" ${disabled?'disabled':''} aria-label="${esc(t('sets'))}: ${checked}/${total}"><span>${progress}</span></button></div>
+          <div class="control-box cell-interactive x-go-action-cell row-interactive-cell"><button class="x-check-btn uniform-digit ${complete?'completed':(checked>0?'partial':'')} ${progressDisabled?'disabled':''}" type="button" data-x-set-progress="${esc(item.sessionId)}" ${progressDisabled?'disabled':''} aria-disabled="${progressDisabled?'true':'false'}" aria-label="${esc(t('sets'))}: ${checked}/${total}"><span>${progress}</span></button></div>
         </div>`;
       }).join('')}</div>
     </div>`;
@@ -1073,14 +1080,14 @@
       inp.addEventListener('blur',()=>renderTrain());
     });
     els.trainList.querySelectorAll('[data-x-set-progress]').forEach(btn=>btn.addEventListener('click',()=>{
-      if(isTrainLocked())return; const it=findTrain(btn.dataset.xSetProgress); if(!it)return;
+      if(isTrainLocked() || !trainStartTimes[selectedTrainDate])return; const it=findTrain(btn.dataset.xSetProgress); if(!it)return;
       const total=Math.max(0,Math.floor(Number(it.sets)||0)); if(!total)return;
       const checked=Math.max(0,Number(it.checked)||0); it.checked=checked>=total?0:checked+1;
       if(it.trainAdded && it.checked>0) it.addedStarted=true;
       updateTrainItemPerformanceStatus(it);
       saveAll(); renderTrain();
     }));
-    els.trainList.querySelectorAll('[data-set-n]').forEach(btn=>btn.addEventListener('click',()=>{if(isTrainLocked())return; const card=btn.closest('[data-card-id]'); const it=findTrain(card.dataset.cardId); if(!it)return; const n=Number(btn.dataset.setN); it.checked = Number(it.checked)>=n ? n-1 : n; if(it.trainAdded && it.checked>0){it.addedStarted=true;} updateTrainItemPerformanceStatus(it); saveAll(); renderTrain();}));
+    els.trainList.querySelectorAll('[data-set-n]').forEach(btn=>btn.addEventListener('click',()=>{if(isTrainLocked() || !trainStartTimes[selectedTrainDate])return; const card=btn.closest('[data-card-id]'); const it=findTrain(card.dataset.cardId); if(!it)return; const n=Number(btn.dataset.setN); it.checked = Number(it.checked)>=n ? n-1 : n; if(it.trainAdded && it.checked>0){it.addedStarted=true;} updateTrainItemPerformanceStatus(it); saveAll(); renderTrain();}));
   }
   function findTrain(sessionId){return (trainSessions[selectedTrainDate]||[]).find(x=>x.sessionId===sessionId);}
   function isTrainSavedState(iso=selectedTrainDate){ return !!iso && ((savedWorkout?.date===iso) || (!!journalForDate(iso) && !activeDatePlans[iso] && !trainStartTimes[iso])); }
