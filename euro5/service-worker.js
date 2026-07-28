@@ -1,8 +1,8 @@
-const CACHE='easy-gym-pwa-v308x-info-preface-alignment-r1';
+const CACHE='easy-gym-pwa-v309x-plan-go-state-guards-r1';
 const ASSETS=[
   './','./index.html','./manifest.json','./styles.css','./script_0.js','./script_1.js','./script_2.js',
   './lang/config.js','./lang/loader.js','./lang/en.js','./lang/de.js','./lang/fr.js','./lang/it.js','./lang/es.js',
-  './info/en.html','./info/de.html','./info/fr.html','./info/it.html','./info/es.html','./info/README_INFO_TEXTS.txt','./README_GITHUB_PWA_V308X.txt',
+  './info/en.html','./info/de.html','./info/fr.html','./info/it.html','./info/es.html','./info/README_INFO_TEXTS.txt','./README_GITHUB_PWA_V309X.txt',
   './icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png'
 ];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).catch(()=>{}));});
