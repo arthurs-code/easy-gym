@@ -64,7 +64,7 @@ HOW TO USE
     "noSavedPlan": "No saved plan for this day.",
     "noCompletedExercises": "No completed exercises.",
     "chooseExercise": "Choose exercise",
-    "editExercises": "Edit exercises",
+    "editExercises": "Edit",
     "save": "Save",
     "modalSave": "SAVE",
     "delete": "del",

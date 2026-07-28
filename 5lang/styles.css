@@ -6109,5 +6109,23 @@ body.eg-dialog-open{overflow:hidden!important}
   box-sizing:border-box!important;
 }
 
-/* ---- pwa-v309x-plan-go-state-guards ---- */
+/* ---- pwa-v311x-short-plan-actions ---- */
 #savePlanRow.is-hidden{display:none!important;}
+
+
+/* ---- pwa-v314x-picker-title-go-total-capacity ---- */
+/* Keep the exercise-picker header concise in PLAN and GO.
+   Give the live TOTAL field extra horizontal room and anchor it to the left
+   of its wider centre track, so values up to 10'000 KG remain separated
+   from TIME in every built-in language. */
+#trainControls.eg-action-sub-menu-bar{
+  grid-template-columns:minmax(0,31fr) minmax(0,38fr) minmax(0,31fr)!important;
+}
+#trainControls .train-mass{
+  justify-self:start!important;
+  text-align:left!important;
+}
+#trainControls .train-time{
+  justify-self:end!important;
+  text-align:right!important;
+}
