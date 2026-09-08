@@ -1,3 +1,2 @@
-Easy Gym PWA v315X — responsive test
-Base: approved Easy-Gym-PWA-v314X-GitHub.zip
-Layout layer: identical to App Store v315X responsive.css/responsive.js
+Easy Gym PWA v316X
+Base: PWA v315X from approved PWA v314X

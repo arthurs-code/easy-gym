@@ -1,4 +1,4 @@
-/* v315X: shared responsive layout layer; load after the approved base CSS.
+/* v316X: shared responsive layout layer; load after the approved base CSS.
    No workout state, control visibility, translations or native actions change. */
 :root {
   --eg-layout-width: 1024px;
