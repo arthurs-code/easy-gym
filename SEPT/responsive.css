@@ -1,0 +1,87 @@
+/* v315X: shared responsive layout layer; load after the approved base CSS.
+   No workout state, control visibility, translations or native actions change. */
+:root {
+  --eg-layout-width: 1024px;
+  --eg-viewport-height: 100vh;
+  --eg-viewport-top: 0px;
+  --eg-safe-left: env(safe-area-inset-left, 0px);
+  --eg-safe-right: env(safe-area-inset-right, 0px);
+  --eg-content-width: min(var(--eg-layout-width), calc(100% - var(--eg-safe-left) - var(--eg-safe-right)));
+  --v251-shell-width: 100%;
+  --v252-shell-width: var(--eg-layout-width);
+}
+@supports (height: 100dvh) {
+  :root { --eg-viewport-height: 100dvh; }
+}
+body {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
+.eg-viewport-shell {
+  flex: 0 1 auto !important;
+  width: var(--eg-content-width) !important;
+  max-width: var(--eg-layout-width) !important;
+  min-width: 0 !important;
+  min-height: calc(100vh - var(--x-header-h) - var(--x-nav-h) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 12px) !important;
+  min-height: calc(100dvh - var(--x-header-h) - var(--x-nav-h) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 12px) !important;
+  margin-left: var(--eg-safe-left) !important;
+  margin-right: var(--eg-safe-right) !important;
+}
+.eg-system-header-anchor,
+.eg-system-nav-bar {
+  width: var(--eg-content-width) !important;
+  max-width: var(--eg-layout-width) !important;
+  left: calc(50% + (var(--eg-safe-left) - var(--eg-safe-right)) / 2) !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+.eg-viewport-shell .section,
+#progress .log-workout-group,
+.log-history-card,
+#donate .pwa-support-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+/* All modal content fits the visible window, including with the keyboard up.
+   Keep the existing scrolling exercise list and all its controls. */
+.modal,
+#easyGymDialog {
+  top: var(--eg-viewport-top) !important;
+  bottom: auto !important;
+  height: var(--eg-viewport-height) !important;
+  box-sizing: border-box !important;
+}
+#addExerciseModal .x-exercise-sheet {
+  width: min(760px, calc(100% - var(--eg-safe-left) - var(--eg-safe-right))) !important;
+  max-width: 760px !important;
+  height: var(--eg-viewport-height) !important;
+  max-height: var(--eg-viewport-height) !important;
+  min-height: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  overflow-y: auto !important;
+}
+#addExerciseModal .x-exercise-sheet > :not(.x-exercise-select-list) {
+  flex-shrink: 0 !important;
+}
+#addExerciseModal .x-exercise-select-list {
+  flex: 1 1 auto !important;
+  min-height: 44px !important;
+  overflow-y: auto !important;
+}
+#easyGymDialog {
+  padding: max(12px, env(safe-area-inset-top)) max(12px, var(--eg-safe-right)) max(12px, env(safe-area-inset-bottom)) max(12px, var(--eg-safe-left)) !important;
+}
+.eg-confirm-card {
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-wrap: anywhere;
+}
+.eg-confirm-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.eg-confirm-actions button { white-space: normal; overflow-wrap: anywhere; }
+@media (min-width: 700px) {
+  .eg-viewport-shell .section { padding-left: 24px !important; padding-right: 24px !important; }
+  /* Retain the same single-column exercise order and visual controls. */
+  .eg-viewport-shell .x-exercise-card { width: 100% !important; }
+}
