@@ -1,0 +1,23 @@
+{
+  "source": "Easy-Gym-PWA-v316X-GitHub",
+  "core": "e2bc10c6db1da735428b82a4c948987527d06b8c6e47076a07fccb7e96395f82",
+  "body": "b08e74b2f76c277faf158b3342b7807f917e0c9fe5120db5c60e12348ce1d174",
+  "files": {
+    "Publish/css/base.css": "983b23c309678bf78f659a2084da974a2de417012e2570241dec44d5f13090d5",
+    "Publish/css/responsive.css": "a8f81f7044fd969ca21d4e678c23f22094a2ed8187e1dafaf9a19ebd9612d26e",
+    "Publish/js/responsive.js": "694c3d96c52264f26313a2e2ae2702b7148dc63dcc0e31923bf08921af6277bf",
+    "Publish/icons/favicon-32.png": "ffe91baec27a0222676af90f3b9f4e03db6157a21f03fd358bac452d766c205f",
+    "Publish/icons/icon-180.png": "364e1da9ada2efeb59913dce6b3a839ddd7d4848408d579d320c304cef4f2cda",
+    "Publish/icons/icon-192.png": "09182bef9d5f7e6d95694e9612da8c1bb949c94a107df5d3d9628edfde365d75",
+    "Publish/icons/icon-512.png": "d1e97f611cccf0bd77db94491b8457a600c457703932ed8a053344559b4b4a46",
+    "Publish/icons/maskable-512.png": "d1e97f611cccf0bd77db94491b8457a600c457703932ed8a053344559b4b4a46"
+  },
+  "ui": {
+    "en": "6e4cc550384f4ea242b673acc299135f46a740d8dca1d10d7208de7e09b2c6df",
+    "de": "532d0d338ec15ddc7da0dbd4431e6527bc38f7a0a7b8e47d5f4c578ab035b07f",
+    "fr": "46797cd1862375ec052624e891c340f01911e45a6d7597e6488fa3cea1b43cb2",
+    "it": "477f9e135c15cc3ca0e6fc559bbf5616435be6b606eecf33d4ec67d8f1633ad3",
+    "es": "dbe3e16e754df7bec1926ad170153abdf11e2230c388341977ca0566a12a4b09"
+  },
+  "library": "701e3e480f3dc12818738d5eabf0339222255e2959f18ef44e6c2cebada8caea"
+}

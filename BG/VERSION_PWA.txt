@@ -1,0 +1,2 @@
+Easy Gym PWA v317X
+Base: PWA v316X. Editable content structure aligned with App Store v317X.

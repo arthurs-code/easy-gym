@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<script src="./js/theme.js?v=317X"></script>
+<title>Easy Gym</title>
+<!-- Easy Gym PWA v317X: editable content and GitHub Pages test build -->
+<link rel="manifest" href="manifest.json?v=317X">
+<link rel="apple-touch-icon" href="icons/icon-180.png?v=317X">
+<link rel="stylesheet" href="./css/base.css?v=317X">
+
+<link rel="stylesheet" href="./css/responsive.css?v=317X">
+<link rel="stylesheet" href="./css/custom.css?v=317X">
+<script defer src="./js/responsive.js?v=317X"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png?v=317X">
+</head>
+<body>
+<div class="app eg-viewport-shell">
+<header class="header eg-system-header-anchor">
+  <img class="logo" src="icons/header-logo.png?v=317X" alt="Easy Gym icon">
+  <div><div class="brand-title">EASY GYM</div><div class="brand-sub">© 2026 Arthur Stivenson . All rights reserved</div></div>
+
+<div class="language-switch nav-lang" id="languageSwitch" aria-label="Language">
+      <button id="languageSelect" class="language-select" type="button" aria-label="Language" aria-haspopup="listbox" aria-expanded="false">EN</button>
+      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language options"></div>
+    </div>
+</header>
+<nav class="main-nav eg-system-nav-bar">
+    <button class="nav-link nav-text-only active" data-tab="plan" aria-label="PLAN" title="PLAN"><span class="btn-text">PLAN</span></button><button class="nav-link nav-text-only" data-tab="train" aria-label="GO" title="GO"><span class="btn-text">GO</span></button><button class="nav-link nav-text-only" data-tab="progress" aria-label="LOG" title="LOG"><span class="btn-text">LOG</span></button><button class="nav-link nav-text-only" data-tab="explanations" aria-label="mgmt" title="mgmt"><span class="btn-text">mgmt</span></button><button class="nav-link nav-icon-only" data-tab="donate" aria-label="heart" title="heart"><svg class="ui-icon ui-icon-donate" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 8.7c0 5.2-8.8 10.3-8.8 10.3S3.2 13.9 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6z"></path></svg></button><button class="nav-link nav-icon-only" data-tab="about" aria-label="info" title="info"><svg class="ui-icon ui-icon-about" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></button>
+      
+  </nav>
+<main>
+<section id="home" class="section">
+  <h2 class="compact-title" id="homeGreeting">Today</h2>
+  <div class="card" id="homeTodayCard"></div>
+  <div class="action-row"><button class="action" id="homeStartBtn">Start training</button></div>
+</section>
+<section id="plan" class="section active">
+  <div id="planDayButtons" class="date-strip"></div>
+  <div id="planChooseHint" class="empty exercise-typography-empty">Select the Day</div>
+  <div class="action-row eg-action-sub-menu-bar eg-action-sub-menu-container" id="planActionRow" style="display:none"><div class="plan-action-primary-row"><button class="action small" id="addExerciseBtn">Add Exercise</button><button class="action small danger disabled" id="removeSelectedBtn" type="button" disabled hidden aria-hidden="true" tabindex="-1">Remove</button><button class="action small disabled" id="copyPlanBtn" type="button" disabled>Copy</button></div><div class="plan-action-secondary-row"><button class="action small disabled" id="activatePlanBtn" type="button" disabled>Activate Training</button><button class="action small disabled" id="planShareLinkBtn" type="button" disabled aria-disabled="true">Share Plan</button></div></div>
+  <h2 class="compact-title" id="planTitle" style="display:none"></h2>
+  <div id="planList" style="display:none"></div>
+  <div class="action-row is-hidden" id="savePlanRow" style="display:none"><button class="action" id="savePlanBtn">Save Mon-plan</button></div>
+</section>
+<section id="train" class="section">
+  <div id="trainDayButtons" class="date-strip"></div>
+  <div id="trainControls" class="train-controls eg-action-sub-menu-bar"></div>
+  <div id="trainList"></div>
+  <div class="action-row" id="saveTrainingRow" style="display:none"><button class="action" id="saveTrainingBtn">Stop and Save Training</button></div>
+</section>
+<section id="progress" class="section">
+  <div id="journalList"></div>
+  <div class="action-row download-row" id="progressActions"><button class="action small" id="downloadWordBtn">Word</button><button class="action small" id="downloadPdfBtn">PDF</button></div>
+</section>
+<section id="explanations" class="section explain manage-section"><div class="app-view-container"><div class="app-group-title" id="mgmtShareSaveTitle">Share &amp; Save</div><div class="app-group-card"><button class="app-list-row app-row-interactive" id="sharePlanBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M12 15.5V3"/><path d="m7.5 7.5 4.5-4.5 4.5 4.5"/><path d="M8 9.5H6.5A2.5 2.5 0 0 0 4 12v6.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V12a2.5 2.5 0 0 0-2.5-2.5H16"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title">SHARE PLAN</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="manageSavePlanBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M5 3.5h12l2 2v15H5z"/><path d="M8 3.5v6h8v-6"/><path d="M8 20.5v-7h8v7"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title">SAVE PLAN</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button></div><div class="app-group-title" id="mgmtDataTitle">Data Backup &amp; Imports</div><div class="app-group-card"><button class="app-list-row app-row-interactive" id="insertPlanBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M12 3.5v11"/><path d="m7.5 10 4.5 4.5 4.5-4.5"/><path d="M4.5 18v2.5h15V18"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title">INSERT PLAN</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="addLanguageBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title">ADD LANGUAGE</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="saveAllDataBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M7 18.5H5.8A3.8 3.8 0 0 1 5.2 11 6.5 6.5 0 0 1 17.8 9a4.6 4.6 0 0 1 .4 9.2H17"/><path d="M12 20.5v-9"/><path d="m8.5 15 3.5-3.5 3.5 3.5"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title">BACKUP</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="restoreAllDataBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/><path d="M12 8v5l3 2"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title">RESTORE</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button></div><div class="app-group-title" id="mgmtDangerTitle">Danger Zone</div><div class="app-group-card danger-card"><button class="app-list-row app-row-interactive danger-action-row" id="deleteDataBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon destructive-red-modifier" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="m7 7 1 13h8l1-13"/><path d="M10 11v5M14 11v5"/></svg></span><span class="app-text-column-stack"><span class="app-global-title mgmt-row-title destructive-red-modifier">DELETE DATA</span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button></div><input type="file" id="insertPlanInput" accept="application/json,.json" hidden><input type="file" id="restoreAllDataInput" accept="application/json,.json" hidden></div></section>
+<section id="donate" class="section about-section support-section"><div class="app-view-container"><div class="app-group-title" id="supportPageTitle">Support Easy Gym</div><span id="supportPageIntro" hidden>Easy Gym is ad-free. Support us by sharing or sending feedback.</span><div class="app-group-card" role="list"><button class="app-list-row app-row-interactive" id="shareAppBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M12 15.5V3"/><path d="m7.5 7.5 4.5-4.5 4.5 4.5"/><path d="M8 9.5H6.5A2.5 2.5 0 0 0 4 12v6.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V12a2.5 2.5 0 0 0-2.5-2.5H16"/></svg></span><span class="app-text-column-stack"><span class="app-global-title"><span id="supportShareTitle">Share App</span></span><span class="app-global-desc"><span id="supportShareText">Share with training partners</span></span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="rateAppBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg fill-icon" viewBox="0 0 24 24"><path d="m12 2.65 2.92 5.91 6.52.95-4.72 4.6 1.11 6.49L12 17.53 6.17 20.6l1.11-6.49-4.72-4.6 6.52-.95L12 2.65Z"/></svg></span><span class="app-text-column-stack"><span class="app-global-title"><span id="supportRateTitle">Rate in the App Store</span></span><span class="app-global-desc"><span id="supportRateText">Leave us a review</span></span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="sendFeedbackBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="M5.5 4.5h10A3.5 3.5 0 0 1 19 8v5a3.5 3.5 0 0 1-3.5 3.5H10L5 20v-3.55A3.5 3.5 0 0 1 2 13V8a3.5 3.5 0 0 1 3.5-3.5Z"/><path d="M10.5 8v3.4"/><path d="M10.5 14h.01"/></svg></span><span class="app-text-column-stack"><span class="app-global-title"><span id="supportFeedbackTitle">Feedback &amp; Problems</span></span><span class="app-global-desc"><span id="supportFeedbackText">Report bugs or suggest ideas</span></span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button><button class="app-list-row app-row-interactive" id="contactSupportBtn" type="button"><span class="app-row-left-group"><span class="app-global-icon" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span><span class="app-text-column-stack"><span class="app-global-title"><span id="supportContactTitle">Contact Us</span></span><span class="app-global-desc"><span id="supportContactText">arthur.stivenson@gmail.com</span></span></span></span><span class="app-global-chevron" aria-hidden="true"><svg class="app-inline-svg" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button></div></div></section>
+<section id="about" class="section explain about-section"><div id="aboutContent"></div></section>
+</main>
+</div>
+<div class="modal hidden" id="addExerciseModal">
+  <div class="modal-panel x-exercise-sheet">
+    <div class="x-sheet-handle" aria-hidden="true"></div>
+    <div class="modal-head x-modal-top-bar eg-choose-exercise-header-bar">
+      <div class="modal-title-row x-modal-title-area eg-choose-exercise-title-row">
+        <h2 id="modalTitle" class="eg-choose-exercise-main-title">Choose exercise</h2>
+        <button class="x-modal-tool eg-overlay-edit-trigger" id="editExercisesBtn" type="button">Edit</button>
+        <div class="eg-choose-exercise-actions-group">
+          <button class="x-modal-tool disabled eg-overlay-action-trigger" id="saveLibraryBtn" type="button" disabled>Save</button>
+          <button class="x-modal-tool x-danger-tool disabled eg-overlay-action-trigger destructive" id="deleteLibraryBtn" type="button" disabled>Delete</button>
+        </div>
+      </div>
+      <button class="modal-close x-close-modal" id="closeModalBtn" type="button" aria-label="Close">×</button>
+    </div>
+    <p class="help" id="exerciseModalHelp"></p>
+    <div class="custom-row x-custom-row" id="customRow">
+      <input id="customExerciseName" class="x-modal-input" placeholder="Write your own exercise" autocomplete="off">
+      <button class="add-mini x-create-exercise" id="addCustomExerciseBtn" type="button" style="display:none" aria-label="Create exercise">+</button>
+    </div>
+    <div id="libraryList" class="library-list x-exercise-select-list"></div>
+  </div>
+</div>
+
+<div class="hidden" id="easyGymDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="easyGymDialogTitle" aria-describedby="easyGymDialogMessage">
+  <div class="eg-confirm-card" id="easyGymDialogCard" tabindex="-1">
+    <h2 class="eg-confirm-title" id="easyGymDialogTitle">Easy Gym</h2>
+    <p class="eg-confirm-message" id="easyGymDialogMessage"></p>
+    <div class="eg-confirm-actions">
+      <button class="eg-confirm-button eg-confirm-cancel" id="easyGymDialogCancel" type="button">Cancel</button>
+      <button class="eg-confirm-button eg-confirm-primary" id="easyGymDialogConfirm" type="button">OK</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<!-- Generated from Content/. Run BUILD-CONTENT after editing. -->
+<script src="./generated/content.js?v=317X"></script>
+<script src="./lang/loader.js?v=317X"></script>
+<script src="./js/app.js?v=317X"></script>
+<script src="./js/service-worker-registration.js?v=317X"></script>
+</body></html>

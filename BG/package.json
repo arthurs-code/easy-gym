@@ -1,0 +1,11 @@
+{
+  "name": "easy-gym-pwa",
+  "version": "317.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-content.cjs",
+    "check": "node tools/build-content.cjs --check",
+    "test": "node tools/test-content.cjs && node tools/test-editor-workflow.cjs && node tools/test-pwa.cjs"
+  },
+  "engines": {"node": ">=18"}
+}
