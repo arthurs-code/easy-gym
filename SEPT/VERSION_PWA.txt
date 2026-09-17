@@ -1,2 +1,0 @@
-Easy Gym PWA v316X
-Base: PWA v315X from approved PWA v314X
