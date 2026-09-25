@@ -1,1 +1,43 @@
-/* Optional visual overrides. Empty to preserve App Store v317X parity. */
+/* v318X: website v67 branding, scoped to the PWA header only.
+   One immutable logo lockup; copyright is separate HTML, aligned left.
+   Fixed header height and body offset use the same existing variable. */
+:root{--x-header-h:128px}
+.header.eg-system-header-anchor{
+  grid-template-columns:minmax(0,1fr) 48px!important;
+  column-gap:12px!important;
+  padding:calc(env(safe-area-inset-top) + 8px) 12px 8px!important;
+  background:#050505!important;
+}
+.header.eg-system-header-anchor > .eg-brand-lockup{
+  grid-column:1!important;grid-row:1!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:flex-start!important;justify-content:center!important;
+  width:100%!important;max-width:360px!important;min-width:0!important;
+  height:auto!important;margin:0!important;gap:0!important;overflow:visible!important;
+}
+.header.eg-system-header-anchor .eg-brand-image{
+  display:block!important;width:100%!important;height:auto!important;
+  max-width:360px!important;min-width:0!important;
+  object-fit:contain!important;border-radius:0!important;box-shadow:none!important;
+}
+.header.eg-system-header-anchor .brand-sub{
+  display:block!important;width:100%!important;max-width:100%!important;
+  margin:-5px 0 0!important;padding:0!important;
+  font-size:11px!important;font-weight:400!important;line-height:1.2!important;
+  color:#777B84!important;text-align:left!important;
+  white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+}
+.header.eg-system-header-anchor .language-switch.nav-lang{
+  grid-column:2!important;grid-row:1!important;align-self:center!important;
+}
+@media(max-width:419px){
+  :root{--x-header-h:112px}
+  .header.eg-system-header-anchor{
+    grid-template-columns:minmax(0,1fr) 42px!important;
+    column-gap:8px!important;padding-left:8px!important;padding-right:8px!important;
+  }
+}
+@media(max-height:500px) and (orientation:landscape){
+  :root{--x-header-h:112px}
+  .header.eg-system-header-anchor > .eg-brand-lockup{max-width:300px!important}
+}
