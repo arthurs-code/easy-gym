@@ -1,4 +1,4 @@
-/* Easy Gym PWA v319X — compatibility language loader.
+/* Easy Gym PWA v320X — compatibility language loader.
    generated/content.js preloads dictionaries built from Content/.
    This loader retains enabled-language and startup-ready behavior.
    Edit Content/ and run BUILD-CONTENT instead of changing this file. */

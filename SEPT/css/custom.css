@@ -1,4 +1,4 @@
-/* v319X: website v67 branding, scoped to the PWA header only.
+/* v320X: website v67 branding, scoped to the PWA header only.
    One immutable logo lockup; copyright is separate HTML, aligned left.
    Fixed header height and body offset use the same existing variable. */
 :root{--x-header-h:128px}
@@ -16,13 +16,13 @@
   height:auto!important;margin:0!important;gap:0!important;overflow:visible!important;
 }
 .header.eg-system-header-anchor .eg-brand-image{
-  display:block!important;width:80%!important;height:auto!important;
+  display:block!important;width:76%!important;height:auto!important;
   max-width:360px!important;min-width:0!important;
   object-fit:contain!important;border-radius:0!important;box-shadow:none!important;
 }
 .header.eg-system-header-anchor .brand-sub{
   display:block!important;width:100%!important;max-width:100%!important;
-  margin:-5px 0 0!important;padding:0!important;
+  margin:-4px 0 0!important;padding:0!important;
   font-size:11px!important;font-weight:400!important;line-height:1.2!important;
   color:#777B84!important;text-align:left!important;
   white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
@@ -40,4 +40,12 @@
 @media(max-height:500px) and (orientation:landscape){
   :root{--x-header-h:112px}
   .header.eg-system-header-anchor > .eg-brand-lockup{max-width:300px!important}
+}
+
+/* Natural header height removes the unused fixed track above the calendar.
+   Eight pixels below the copyright instead of roughly 32px in v319X.
+   header-layout.js keeps the fixed-header body offset in sync. */
+.header.eg-system-header-anchor{
+  height:auto!important;min-height:0!important;
+  align-content:start!important;
 }
