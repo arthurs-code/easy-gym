@@ -1,4 +1,4 @@
-/* v318X: website v67 branding, scoped to the PWA header only.
+/* v319X: website v67 branding, scoped to the PWA header only.
    One immutable logo lockup; copyright is separate HTML, aligned left.
    Fixed header height and body offset use the same existing variable. */
 :root{--x-header-h:128px}
@@ -16,7 +16,7 @@
   height:auto!important;margin:0!important;gap:0!important;overflow:visible!important;
 }
 .header.eg-system-header-anchor .eg-brand-image{
-  display:block!important;width:100%!important;height:auto!important;
+  display:block!important;width:80%!important;height:auto!important;
   max-width:360px!important;min-width:0!important;
   object-fit:contain!important;border-radius:0!important;box-shadow:none!important;
 }
