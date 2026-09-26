@@ -1,4 +1,4 @@
-/* v320X: measure the natural fixed header; no workout state changes. */
+/* v321X: measure the natural fixed header; no workout state changes. */
 (function () {
   'use strict';
   var header = document.querySelector('.eg-system-header-anchor');

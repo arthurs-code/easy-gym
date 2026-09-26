@@ -18,7 +18,7 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v320X';
+  const LANG_PACK_VERSION = 'v321X';
   const EMBEDDED_LANGUAGE_PACKS = window.EASY_GYM_LANGUAGE_PACKS;
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
@@ -60,7 +60,7 @@
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v320X-PWA-maintainable-test';
+  const DEV_BUILD = 'v321X-PWA-maintainable-test';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -358,7 +358,7 @@
       return;
     }
     try{
-      const response=await fetch(`./info/${code}.html?v=320X`,{cache:'no-store'});
+      const response=await fetch(`./info/${code}.html?v=321X`,{cache:'no-store'});
       if(!response.ok) throw new Error(`INFO_${response.status}`);
       const html=await response.text();
       infoHtmlCache[code]=html;
