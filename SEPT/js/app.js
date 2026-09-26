@@ -18,7 +18,7 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v321X';
+  const LANG_PACK_VERSION = 'v322X';
   const EMBEDDED_LANGUAGE_PACKS = window.EASY_GYM_LANGUAGE_PACKS;
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
@@ -59,8 +59,27 @@
     library:PACKAGE_PREFIX+'exerciseLibrary.v1', start:PACKAGE_PREFIX+'trainStartTimes.v1', backup:PACKAGE_PREFIX+'backupReady.v1', theme:PACKAGE_PREFIX+'theme.v1',
     datePlans:PACKAGE_PREFIX+'datePlans.v1', savedDatePlans:PACKAGE_PREFIX+'savedDatePlans.v1', activeDatePlans:PACKAGE_PREFIX+'activeDatePlans.v1', lang:PACKAGE_PREFIX+'lang.v1'
   };
+  // A single atomic record keeps workout rows, start time and LOG consistent.
+  // Existing v321 keys are read on first launch and retained as migration fallback.
+  const STATE_KEY = PACKAGE_PREFIX+'state.v1';
+  const STATE_FIELDS = ['week','train','saved','journal','library','start','backup','datePlans','savedDatePlans','activeDatePlans'];
+  const initialState = readState();
+  let saveWarningShown = false;
+  function readState(){
+    try{
+      const value=JSON.parse(localStorage.getItem(STATE_KEY));
+      if(!value || value.schema!==1 || !value.data) return null;
+      for(const field of STATE_FIELDS){
+        const item=value.data[KEYS[field]];
+        if(field==='backup'){ if(typeof item!=='boolean') return null; }
+        else if(field==='journal'||field==='library'){ if(!Array.isArray(item)) return null; }
+        else if(!item || typeof item!=='object' || Array.isArray(item)) return null;
+      }
+      return value.data;
+    }catch{ return null; }
+  }
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v321X-PWA-maintainable-test';
+  const DEV_BUILD = 'v322X-PWA-maintainable-test';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -107,10 +126,11 @@
   function cacheEls(){ ['planDayButtons','planChooseHint','planActionRow','savePlanRow','trainDayButtons','planList','trainList','planTitle','trainControls','savePlanBtn','removeSelectedBtn','copyPlanBtn','activatePlanBtn','planShareLinkBtn','saveTrainingBtn','startTrainingBtn','timerText','addExerciseModal','libraryList','customExerciseName','addCustomExerciseBtn','editExercisesBtn','saveLibraryBtn','deleteLibraryBtn','customRow','exerciseModalHelp','journalList','downloadWordBtn','downloadPdfBtn','sharePlanBtn','sharePlanLinkBtn','manageSavePlanBtn','manageSaveAllPlansBtn','printPlanBtn','insertPlanBtn','addLanguageBtn','insertPlanInput','manageSaveReportBtn','shareReportBtn','printReportBtn','saveAllDataBtn','restoreAllDataBtn','restoreAllDataInput','deleteDataBtn','easyGymDialog','easyGymDialogCard','easyGymDialogTitle','easyGymDialogMessage','easyGymDialogCancel','easyGymDialogConfirm','toast','homeTodayCard','homeStartBtn','homeGreeting','aboutContent','languageSelect','languageSwitch','languageMenu'].forEach(id=>els[id]=$(id)); }
   function uid(){return Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4)}
   function emptyDays(){return Object.fromEntries(DAYS.map(d=>[d,[]]));}
-  function load(key, fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
+  function load(key, fallback){if(initialState && Object.prototype.hasOwnProperty.call(initialState,key)) return initialState[key]; try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}}
   function save(key, val){
     try{
-      localStorage.setItem(key, JSON.stringify(val));
+      const serialized=JSON.stringify(val);
+      if(localStorage.getItem(key)!==serialized) localStorage.setItem(key, serialized);
       return true;
     }catch(error){
       console.error('Easy Gym: local data could not be saved.', error);
@@ -118,23 +138,31 @@
     }
   }
   function saveAll(){
-    return [
-      save(KEYS.week, weekPlans),
-      save(KEYS.train, trainSessions),
-      save(KEYS.saved, savedPlanDays),
-      save(KEYS.journal, journal),
-      save(KEYS.library, exerciseLibrary),
-      save(KEYS.start, trainStartTimes),
-      save(KEYS.backup, backupReady),
-      save(KEYS.datePlans, datePlans),
-      save(KEYS.savedDatePlans, savedDatePlans),
-      save(KEYS.activeDatePlans, activeDatePlans)
-    ].every(Boolean);
+    const values=[weekPlans,trainSessions,savedPlanDays,journal,exerciseLibrary,trainStartTimes,backupReady,datePlans,savedDatePlans,activeDatePlans];
+    const data=Object.fromEntries(STATE_FIELDS.map((field,i)=>[KEYS[field],values[i]]));
+    const ok=save(STATE_KEY,{schema:1,data});
+    if(ok) saveWarningShown=false;
+    else if(!saveWarningShown && els.easyGymDialog){
+      saveWarningShown=true;
+      showEasyGymDialog({title:'Easy Gym',message:t('localSaveFailed'),confirmLabel:t('dialogOk'),notice:true});
+    }
+    return ok;
+  }
+  function restoreOpenTraining(){
+    const iso=Object.keys(trainStartTimes||{}).filter(date=>{
+      const start=Number(trainStartTimes[date]);
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(start) || start<=0) return false;
+      if(!Array.isArray(trainSessions[date]) || !trainSessions[date].length) return false;
+      // A completed older session must not block a later repeat on the same date.
+      return !journal.some(entry=>entry.date===date && Date.parse(entry.endedAt)>=start);
+    }).sort((a,b)=>Number(trainStartTimes[b])-Number(trainStartTimes[a]))[0];
+    if(iso){ selectedTrainDate=iso; selectedPlanDate=iso; activeTab='train'; savedWorkout=null; }
   }
   function flushLocalState(){ saveAll(); }
   window.addEventListener('pagehide', flushLocalState);
   document.addEventListener('visibilitychange',()=>{
     if(document.visibilityState==='hidden') flushLocalState();
+    else tickLiveTimer();
   });
   function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
   function t(key){ return (I18N[currentLang]&&I18N[currentLang][key]) || I18N.en[key] || key; }
@@ -351,20 +379,14 @@
     });
   }
 
-  async function loadInfoContainer(lang=currentLang){
+  function loadInfoContainer(lang=currentLang){
     const code=normalizeLang(lang);
-    if(infoHtmlCache[code]){
-      if(code===currentLang && els.aboutContent) els.aboutContent.innerHTML=infoHtmlCache[code];
-      return;
-    }
-    try{
-      const response=await fetch(`./info/${code}.html?v=321X`,{cache:'no-store'});
-      if(!response.ok) throw new Error(`INFO_${response.status}`);
-      const html=await response.text();
+    if(!els.aboutContent || code!==currentLang) return;
+    const html=t('aboutHtml');
+    if(infoHtmlCache[code]!==html || els.aboutContent.dataset.language!==code){
+      els.aboutContent.innerHTML=html;
+      els.aboutContent.dataset.language=code;
       infoHtmlCache[code]=html;
-      if(code===currentLang && els.aboutContent) els.aboutContent.innerHTML=html;
-    }catch(error){
-      if(code===currentLang && els.aboutContent) els.aboutContent.innerHTML=t('aboutHtml');
     }
   }
   function applyLanguageUi(){
@@ -392,7 +414,7 @@
     setIconText('homeStartBtn','startTraining','start');
     const custom=$('customExerciseName'); if(custom) custom.placeholder=t('writeOwnExercise');
     const close=$('closeModalBtn'); if(close) close.setAttribute('aria-label','Close');
-    if(els.aboutContent){ els.aboutContent.innerHTML=infoHtmlCache[currentLang]||t('aboutHtml'); loadInfoContainer(currentLang); }
+    // INFO is inserted only when opened.
   }
   function changeLanguage(lang){ currentLang=normalizeLang(lang); save(KEYS.lang,currentLang); renderAll(); }
 
@@ -443,7 +465,7 @@
     if(meta) meta.setAttribute('content', '#000000');
   }
 
-  function init(){ currentLang=normalizeLang(load(KEYS.lang,DEFAULT_LANGUAGE)); applyTheme(); cacheEls(); buildLanguageMenu(); wire(); normalizeData(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
+  function init(){ currentLang=normalizeLang(load(KEYS.lang,DEFAULT_LANGUAGE)); applyTheme(); cacheEls(); buildLanguageMenu(); wire(); normalizeData(); restoreOpenTraining(); if(!selectedPlanDate) selectedPlanDate=todayISO(); renderAll(); updateTimerLoop(); handleIncomingPlanLink();}
   function normalizeData(){
     for(const d of DAYS){ if(!Array.isArray(weekPlans[d])) weekPlans[d]=[]; if(!Array.isArray(trainSessions[d])) trainSessions[d]=[]; }
     if(!datePlans || typeof datePlans!=='object' || Array.isArray(datePlans)) datePlans={};
@@ -714,7 +736,13 @@
     applyLanguageUi();
     document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===activeTab));
     document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active', s.id===activeTab));
-    renderHome(); renderDays(); renderPlan(); renderTrain(); renderProgress(); renderExplanations(); updateTimerLoop();
+    if(activeTab==='home') renderHome();
+    else if(activeTab==='plan'){ renderDays(); renderPlan(); }
+    else if(activeTab==='train') renderTrain();
+    else if(activeTab==='progress') renderProgress();
+    else if(activeTab==='explanations') renderExplanations();
+    else if(activeTab==='about') loadInfoContainer();
+    updateTimerLoop();
   }
   // ---- Swipeable date strip (drag/finger), shared by Plan and Do-it ----
   function stripSets(){ return { planned:new Set(Object.keys(datePlans||{}).filter(iso=>hasDatePlan(iso))) }; }
@@ -1245,9 +1273,15 @@
     const exercises=collectCompleted(plannedExercises);
     if(!exercises.length)return;
     const savedEntry={id:uid(),date:iso,day:weekdayOf(iso),startedAt:new Date(start).toISOString(),endedAt:new Date(end).toISOString(),durationMs:end-start,plannedExercises,exercises};
+    const previous={expandedLogId,savedWorkout,saved:savedDatePlans[iso],active:activeDatePlans[iso],start:trainStartTimes[iso]};
     journal.unshift(savedEntry);
     expandedLogId=savedEntry.id;
-    savedDatePlans[iso]=true; activeDatePlans[iso]=false; savedWorkout={date:iso,durationMs:end-start}; delete trainStartTimes[iso]; saveAll(); renderAll();
+    savedDatePlans[iso]=true; activeDatePlans[iso]=false; savedWorkout={date:iso,durationMs:end-start}; delete trainStartTimes[iso];
+    if(!saveAll()){
+      journal.shift(); expandedLogId=previous.expandedLogId; savedWorkout=previous.savedWorkout;
+      savedDatePlans[iso]=previous.saved; activeDatePlans[iso]=previous.active; trainStartTimes[iso]=previous.start;
+    }
+    renderAll();
   }
   function collectCompleted(plannedExercises=null){
     const out=[];
@@ -1815,7 +1849,7 @@
     els.saveLibraryBtn.classList.toggle('disabled',!enabled);
   }
   function addCustomFromModal(){ const name=normalExercise(els.customExerciseName.value); if(name) chooseExercise(name); }
-  function chooseExercise(name){ name=normalExercise(name); if(!name)return; if(!exerciseLibrary.includes(name)){exerciseLibrary.push(name); save(KEYS.library, exerciseLibrary);} if(modalTarget==='date-add') addDatePlanExercise(name); else if(modalTarget==='date-replace') replaceDatePlanExercise(modalSessionId,name); else if(modalTarget==='plan-add') addPlanExercise(name); else if(modalTarget==='plan-replace') replacePlanExercise(modalSessionId,name); else if(modalTarget==='train-add') addTrainExercise(name); else if(modalTarget==='train-replace') replaceTrainExercise(modalSessionId,name); }
+  function chooseExercise(name){ name=normalExercise(name); if(!name)return; if(!exerciseLibrary.includes(name)){exerciseLibrary.push(name); saveAll();} if(modalTarget==='date-add') addDatePlanExercise(name); else if(modalTarget==='date-replace') replaceDatePlanExercise(modalSessionId,name); else if(modalTarget==='plan-add') addPlanExercise(name); else if(modalTarget==='plan-replace') replacePlanExercise(modalSessionId,name); else if(modalTarget==='train-add') addTrainExercise(name); else if(modalTarget==='train-replace') replaceTrainExercise(modalSessionId,name); }
   function removeExerciseNamesFromPlans(names){
     const removeSet = new Set([...names].map(normalExercise).filter(Boolean));
     if(!removeSet.size) return false;
@@ -1935,7 +1969,7 @@
   function saveReportFile(){ downloadFile(`easy-gym-report-${todayISO()}.txt`,'text/plain',progressText('open')||t('noReport')); toast(t('reportSaved')); }
   function saveAllPlansFile(){ downloadFile(`easy-gym-all-plans-${todayISO()}.json`,'application/json',JSON.stringify(allPlansPayload(),null,2)); toast(t('fileSaved')); }
   function saveAllLogsFile(){ downloadFile(`easy-gym-all-logs-${todayISO()}.json`,'application/json',JSON.stringify(allLogsPayload(),null,2)); toast(t('fileSaved')); }
-  function saveAllDataFile(){ downloadFile(`easy-gym-backup-${todayISO()}.json`,'application/json',JSON.stringify(allDataPayload(),null,2)); backupReady=true; save(KEYS.backup,true); renderExplanations(); toast(t('allDataSaved')); }
+  function saveAllDataFile(){ downloadFile(`easy-gym-backup-${todayISO()}.json`,'application/json',JSON.stringify(allDataPayload(),null,2)); backupReady=true; saveAll(); renderExplanations(); toast(t('allDataSaved')); }
   async function shareFile(name,mime,content){
     const canNativeShare=typeof navigator!=='undefined' && typeof navigator.share==='function';
     if(canNativeShare){
