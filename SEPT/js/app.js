@@ -18,7 +18,7 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v322X';
+  const LANG_PACK_VERSION = 'v323X';
   const EMBEDDED_LANGUAGE_PACKS = window.EASY_GYM_LANGUAGE_PACKS;
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
@@ -64,7 +64,6 @@
   const STATE_KEY = PACKAGE_PREFIX+'state.v1';
   const STATE_FIELDS = ['week','train','saved','journal','library','start','backup','datePlans','savedDatePlans','activeDatePlans'];
   const initialState = readState();
-  let saveWarningShown = false;
   function readState(){
     try{
       const value=JSON.parse(localStorage.getItem(STATE_KEY));
@@ -79,7 +78,7 @@
     }catch{ return null; }
   }
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v322X-PWA-maintainable-test';
+  const DEV_BUILD = 'v323X-PWA-maintainable-test';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -140,13 +139,7 @@
   function saveAll(){
     const values=[weekPlans,trainSessions,savedPlanDays,journal,exerciseLibrary,trainStartTimes,backupReady,datePlans,savedDatePlans,activeDatePlans];
     const data=Object.fromEntries(STATE_FIELDS.map((field,i)=>[KEYS[field],values[i]]));
-    const ok=save(STATE_KEY,{schema:1,data});
-    if(ok) saveWarningShown=false;
-    else if(!saveWarningShown && els.easyGymDialog){
-      saveWarningShown=true;
-      showEasyGymDialog({title:'Easy Gym',message:t('localSaveFailed'),confirmLabel:t('dialogOk'),notice:true});
-    }
-    return ok;
+    return save(STATE_KEY,{schema:1,data});
   }
   function restoreOpenTraining(){
     const iso=Object.keys(trainStartTimes||{}).filter(date=>{
