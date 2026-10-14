@@ -18,7 +18,7 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v323X';
+  const LANG_PACK_VERSION = 'v324X';
   const EMBEDDED_LANGUAGE_PACKS = window.EASY_GYM_LANGUAGE_PACKS;
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
@@ -78,7 +78,7 @@
     }catch{ return null; }
   }
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v323X-PWA-maintainable-test';
+  const DEV_BUILD = 'v324X-PWA-maintainable-test';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -394,6 +394,8 @@
     setIconText('downloadWordBtn','word','word'); setIconText('downloadPdfBtn','pdf','pdf');
     setMgmtRowText('sharePlanBtn','sharePlan'); setMgmtRowText('manageSavePlanBtn','savePlan'); setMgmtRowText('insertPlanBtn','insertPlan'); setMgmtRowText('addLanguageBtn','addLanguage'); setMgmtRowText('saveAllDataBtn','saveAllData'); setMgmtRowText('restoreAllDataBtn','restoreAllData'); setMgmtRowText('deleteDataBtn','deleteData');
     setText('mgmtShareSaveTitle','mgmtShareSaveTitle'); setText('mgmtDataTitle','mgmtDataTitle'); setText('mgmtDangerTitle','mgmtDangerTitle');
+    setMgmtRowText('manageSupportBtn','donate');
+    $('manageSupportTitle').textContent=t('donate').toLocaleUpperCase();
     setText('supportPageTitle','supportTitle'); setText('supportPageIntro','supportIntro');
     setText('supportShareTitle','supportShareTitle'); setText('supportShareText','supportShareText');
     setText('supportRateTitle','supportRateTitle'); setText('supportRateText','supportRateText');
@@ -491,6 +493,7 @@
     document.querySelectorAll('[data-lang-option]').forEach(btn=>btn.addEventListener('click',(e)=>{ e.stopPropagation(); changeLanguage(btn.dataset.langOption); }));
     document.addEventListener('click',()=>{ if(els.languageSwitch) els.languageSwitch.classList.remove('open'); if(els.languageSelect) els.languageSelect.setAttribute('aria-expanded','false'); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ if(els.languageSwitch) els.languageSwitch.classList.remove('open'); if(els.languageSelect) els.languageSelect.setAttribute('aria-expanded','false'); } });
+    $('manageSupportBtn').addEventListener('click',()=>{activeTab='donate';renderAll();});
     document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{activeTab=btn.dataset.tab; if(activeTab==='train'){savedWorkout=null; if(selectedPlanDate) selectedTrainDate=selectedPlanDate;} if(activeTab==='plan' && selectedTrainDate){selectedPlanDate=selectedTrainDate;} renderAll();}));
     els.addExerciseModal.addEventListener('click',e=>{if(e.target===els.addExerciseModal)closeExerciseModal();});
     if(els.easyGymDialog){
@@ -727,7 +730,7 @@
 
   function renderAll(){
     applyLanguageUi();
-    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===activeTab));
+    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===(activeTab==='donate'?'explanations':activeTab)));
     document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active', s.id===activeTab));
     if(activeTab==='home') renderHome();
     else if(activeTab==='plan'){ renderDays(); renderPlan(); }
@@ -1441,7 +1444,7 @@
   }
   function reportDownloadHeaders(){
     const L=reportLayoutLabels();
-    return [L.weight,L.reps,L.sets,''];
+    return [L.weight,L.reps,L.sets,L.status];
   }
   function reportNum(v){ return performanceNumber(v); }
   function reportPair(planned,done,suffix=''){
@@ -1460,9 +1463,7 @@
   function reportStatusDisplay(status,L){
     const raw=String(status==null?'':status);
     const missed=raw.indexOf('⚠️')===0;
-    return missed
-      ? {text:'✕',color:'FF453A',bold:true,kind:'miss'}
-      : {text:'✓',color:'34C759',bold:true,kind:'hit'};
+    return {text:raw.replace(/^⚠️\s*/,''),color:'1C1C1E',bold:false,kind:missed?'miss':'hit'};
   }
   function reportRowStatus(r){
     const L=reportLayoutLabels();
@@ -1481,8 +1482,6 @@
     return L.targetHit;
   }
   const REPORT_LOGO_DATA = window.EASY_GYM_REPORT_ASSETS.REPORT_LOGO_DATA;
-  const MAX_EVER_ICON_DATA = window.EASY_GYM_REPORT_ASSETS.MAX_EVER_ICON_DATA;
-  const MAX_TODAY_ICON_DATA = window.EASY_GYM_REPORT_ASSETS.MAX_TODAY_ICON_DATA;
   function reportDataUriBytes(uri){
     const b64=String(uri||'').split(',')[1]||'';
     const raw=atob(b64), out=new Uint8Array(raw.length);
@@ -1559,14 +1558,12 @@
     const groups=progressGroups(), L=reportLayoutLabels();
     let imageId=1;
     const brandingTable=()=>{
-      const widths=[920,7080,2700], grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
-      const logo=reportDocxCell(reportDocxParagraph(reportDocxImage('rId5','Easy Gym logo',342900,342900,imageId++),{line:620,keep:true,align:'center'}),widths[0],{top:35,bottom:45,right:90,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
-      const brandStack=
-        reportDocxParagraph(reportDocxRun('EASY GYM',30,'1C1C1E',true),{line:330,keep:true})+
-        reportDocxParagraph(reportDocxRun('© 2026 Arthur Stivenson . All rights reserved',14,'8E8E93',false),{line:190,keep:true});
-      const brand=reportDocxCell(brandStack,widths[1],{top:35,bottom:45,left:15,right:90,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
-      const title=reportDocxCell(reportDocxParagraph(reportDocxRun(String(L.reportTitle).toUpperCase(),22,'1C1C1E',true),{line:620,keep:true,align:'right'}),widths[2],{top:35,bottom:45,left:0,right:40,bottomBorder:'18',bottomBorderColor:'1C1C1E'});
-      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="760" w:hRule="atLeast"/></w:trPr>${logo}${brand}${title}</w:tr></w:tbl>${reportDocxSpacer(130)}`;
+      const widths=[7600,3100], grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
+      const brandStack=reportDocxParagraph(reportDocxImage('rId5','Easy Gym',2565900,628650,imageId++),{line:1040,keep:true})+
+        reportDocxParagraph(reportDocxRun('© 2026 Arthur Stivenson · All rights reserved',14,'777B84'),{line:190,keep:true});
+      const brand=reportDocxCell(brandStack,widths[0],{bottom:100,bottomBorder:'12',bottomBorderColor:'1C1C1E'});
+      const title=reportDocxCell(reportDocxParagraph(reportDocxRun(String(L.reportTitle).toUpperCase(),22,'1C1C1E',true),{line:300,keep:true,align:'right'}),widths[1],{bottom:100,bottomBorder:'12',bottomBorderColor:'1C1C1E'});
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${brand}${title}</w:tr></w:tbl>${reportDocxSpacer(130)}`;
     };
     const summaryTable=g=>{
       const widths=[2675,2675,2675,2675];
@@ -1579,19 +1576,11 @@
       return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${row1}</w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr>${row2}</w:tr></w:tbl>${reportDocxSpacer(230)}`;
     };
     const recordsTable=ex=>{
-      const widths=[360,1250,720,420,360,1420,720,5450];
+      const widths=[2675,2675,5350];
       const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
-      const cells=[
-        reportDocxCell(reportDocxParagraph(reportDocxImage('rId3','Apex trophy',190500,228600,imageId++),{line:360,keep:true,align:'center'}),widths[0],{top:20,bottom:20,right:20}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun('Apex:',19,'3A3A3C',false),{line:210,keep:true}),widths[1],{left:25,right:10}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.everMax+' KG',19,'1C1C1E',true),{line:210,keep:true}),widths[2],{right:0}),
-        reportDocxCell(reportDocxParagraph('',{line:210,keep:true}),widths[3],{right:0}),
-        reportDocxCell(reportDocxParagraph(reportDocxImage('rId4','Max Today fire',182880,228600,imageId++),{line:360,keep:true,align:'center'}),widths[4],{top:20,bottom:20,right:20}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun(t('maxToday')+':',19,'3A3A3C',false),{line:210,keep:true}),widths[5],{left:25,right:10}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun(ex.todayMax+' KG',19,'34C759',true),{line:210,keep:true}),widths[6],{right:0}),
-        reportDocxCell(reportDocxParagraph(reportDocxRun(L.formatNote,16,'8E8E93',false,'Arial',true),{line:210,keep:true,align:'right'}),widths[7],{right:0})
-      ].join('');
-      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="390" w:hRule="atLeast"/></w:trPr>${cells}</w:tr></w:tbl>`;
+      const values=[t('everMax')+': '+ex.everMax+' KG',t('maxToday')+': '+ex.todayMax+' KG',L.formatNote];
+      const cells=values.map((value,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(value,i===2?16:19,i===2?'777B84':'1C1C1E'),{line:240,keep:true,align:i===2?'right':'left'}),widths[i],{top:20,bottom:20})).join('');
+      return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr>${cells}</w:tr></w:tbl>`;
     };
     const exerciseTable=ex=>{
       const widths=[2675,2675,2675,2675];
@@ -1602,7 +1591,7 @@
       const body=ex.rows.map(r=>{
         const info=reportStatusDisplay(reportRowStatus(r),L);
         const vals=[reportPair(r.pKg,r.dKg,'KG'),reportPair(r.pReps,r.dReps),reportPair(r.pSets,r.dSets),info.text];
-        return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${vals.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,i===3?18:20,i===3?info.color:'1C1C1E',i===3?info.bold:false,i===3?'Segoe UI Symbol':'Arial'),{line:220,align:columnAlign[i]}),widths[i],{top:75,bottom:75,left:i===0?0:50,right:i===0?80:50,bottomBorder:'4',bottomBorderColor:'F2F2F7'})).join('')}</w:tr>`;
+        return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${vals.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,i===3?18:20,i===3?info.color:'1C1C1E',i===3?info.bold:false,'Arial'),{line:220,align:columnAlign[i]}),widths[i],{top:75,bottom:75,left:i===0?0:50,right:i===0?80:50,bottomBorder:'4',bottomBorderColor:'F2F2F7'})).join('')}</w:tr>`;
       }).join('');
       return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr>${headCells}</w:tr>${body}</w:tbl>`;
     };
@@ -1611,21 +1600,21 @@
     const documentXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:background w:color="FFFFFF"/><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="560" w:right="620" w:bottom="560" w:left="620" w:header="0" w:footer="0" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>`;
     const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>`;
     const rootRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>`;
-    const docRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-ever.png"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/max-today.png"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/easy-gym-logo.png"/></Relationships>`;
+    const docRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/easy-gym-logo.png"/></Relationships>`;
     const stamp=new Date().toISOString();
     const core=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>Easy Gym Workout Report</dc:title><dc:creator>Easy Gym</dc:creator><cp:lastModifiedBy>Easy Gym</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">${stamp}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${stamp}</dcterms:modified></cp:coreProperties>`;
     const app=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>Easy Gym</Application><DocSecurity>0</DocSecurity><ScaleCrop>false</ScaleCrop><Company></Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>1.0</AppVersion></Properties>`;
     return reportZipStored([
       {name:'[Content_Types].xml',data:contentTypes},{name:'_rels/.rels',data:rootRels},{name:'word/document.xml',data:documentXml},
-      {name:'word/_rels/document.xml.rels',data:docRels},{name:'word/media/max-ever.png',data:reportDataUriBytes(MAX_EVER_ICON_DATA)},
-      {name:'word/media/max-today.png',data:reportDataUriBytes(MAX_TODAY_ICON_DATA)},{name:'word/media/easy-gym-logo.png',data:reportDataUriBytes(REPORT_LOGO_DATA)},
+      {name:'word/_rels/document.xml.rels',data:docRels},
+      {name:'word/media/easy-gym-logo.png',data:reportDataUriBytes(REPORT_LOGO_DATA)},
       {name:'docProps/core.xml',data:core},{name:'docProps/app.xml',data:app}
     ]);
   }
   function downloadWord(){ downloadFile('easy-gym-report.docx','application/vnd.openxmlformats-officedocument.wordprocessingml.document',makeReportDocx(),true); }
   let reportIconPromise=null;
   function reportLoadImage(src){ return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;}); }
-  function reportLoadIcons(){ if(!reportIconPromise) reportIconPromise=Promise.all([reportLoadImage(REPORT_LOGO_DATA),reportLoadImage(MAX_EVER_ICON_DATA),reportLoadImage(MAX_TODAY_ICON_DATA)]); return reportIconPromise; }
+  function reportLoadIcons(){ if(!reportIconPromise) reportIconPromise=Promise.all([reportLoadImage(REPORT_LOGO_DATA)]); return reportIconPromise; }
   function reportFitCanvasText(ctx,value,maxWidth){
     let s=String(value==null?'':value);
     if(ctx.measureText(s).width<=maxWidth) return s;
@@ -1666,7 +1655,7 @@
     const groups=progressGroups();
     if(!groups.length) return makeSimplePdf(t('noReport'));
     const L=reportLayoutLabels();
-    const [brandLogo,trophyIcon,fireIcon]=await reportLoadIcons();
+    const [brandLogo]=await reportLoadIcons();
     const W=1190,H=1684,M=68,contentW=W-M*2,rowH=50;
     const colors={bg:'#ffffff',primary:'#1c1c1e',black:'#000000',secondary:'#8e8e93',body:'#3a3a3c',success:'#34c759',warning:'#b45309',border:'#e5e5ea',soft:'#f2f2f7'};
     const pages=[];
@@ -1678,13 +1667,11 @@
     const drawTextCenter=(value,center,base,size,bold=false,color=colors.primary,maxWidth=null,italic=false)=>{ctx.font=font(size,bold,italic);const shown=maxWidth?reportFitCanvasText(ctx,value,maxWidth):String(value);ctx.fillStyle=color;ctx.fillText(shown,center-ctx.measureText(shown).width/2,base);};
     const drawBranding=()=>{
       const top=y;
-      ctx.drawImage(brandLogo,M,top,64,64);
-      const brandX=M+82;
-      drawText('EASY GYM',brandX,top+29,30,true,colors.primary,360);
-      drawText('© 2026 Arthur Stivenson . All rights reserved',brandX,top+55,14,false,colors.secondary,510);
+      ctx.drawImage(brandLogo,M,top,269.4,66);
+      drawText('© 2026 Arthur Stivenson · All rights reserved',M,top+85,14,false,colors.secondary,510);
       drawTextRight(String(L.reportTitle).toUpperCase(),W-M-4,top+38,18,true,colors.primary,330);
-      line(M,top+80,W-M,top+80,colors.primary,3);
-      y=top+106;
+      line(M,top+100,W-M,top+100,colors.primary,3);
+      y=top+126;
     };
     const newPage=()=>{
       canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;ctx=canvas.getContext('2d');
@@ -1713,14 +1700,12 @@
     const drawExerciseHeader=(ex,idx,continued=false)=>{
       drawText((idx+1)+'. '+displayExerciseName(ex.name)+(continued?' (cont.)':''),M,y+29,28,true,colors.primary,contentW); y+=39;
       const recordsBase=y+27;
-      const everIconX=M, everLabelX=everIconX+31;
-      const todayIconX=M+310, todayLabelX=todayIconX+31;
-      ctx.drawImage(trophyIcon,everIconX,y+1,22,26);
-      ctx.drawImage(fireIcon,todayIconX,y+1,21,26);
-      const everLabelW=drawText('Apex:',everLabelX,recordsBase,19,false,colors.body);
+      const everLabelX=M;
+      const todayLabelX=M+310;
+      const everLabelW=drawText(t('everMax')+':',everLabelX,recordsBase,19,false,colors.body);
       drawText(ex.everMax+' KG',everLabelX+everLabelW+8,recordsBase,19,true,colors.primary);
       const todayLabelW=drawText(t('maxToday')+':',todayLabelX,recordsBase,19,false,colors.body);
-      drawText(ex.todayMax+' KG',todayLabelX+todayLabelW+8,recordsBase,19,true,colors.success);
+      drawText(ex.todayMax+' KG',todayLabelX+todayLabelW+8,recordsBase,19,true,colors.primary);
       drawTextRight(L.formatNote,W-M,recordsBase,16,false,colors.secondary,390,true);
       y+=43;
       const colW=contentW/4, heads=reportDownloadHeaders();
@@ -1748,7 +1733,7 @@
               if(i===0) drawText(v,left+4,y+30,20,false,colors.primary,colW-18);
               else drawTextCenter(v,center,y+30,20,false,colors.primary,colW-18);
             });
-            drawTextCenter(info.text,M+3.5*colW,y+30,18,info.bold,'#'+info.color,colW-18);
+            drawTextCenter(info.text,M+3.5*colW,y+30,14,info.bold,'#'+info.color,colW-18);
             line(M,y+43,W-M,y+43,colors.soft,1.5); y+=rowH; rowIndex++;
           }
           y+=28;
@@ -2287,7 +2272,7 @@
         const info=reportStatusDisplay(reportRowStatus(r),L);
         return `<tr><td>${e(reportPair(r.pKg,r.dKg,'KG'))}</td><td>${e(reportPair(r.pReps,r.dReps))}</td><td>${e(reportPair(r.pSets,r.dSets))}</td><td class="eg-status ${info.kind==='miss'?'miss':'hit'}">${e(info.text)}</td></tr>`;
       }).join('');
-      return `<section class="eg-exercise"><div class="eg-exercise-heading"><h2>${idx+1}. ${e(displayExerciseName(ex.name))}</h2><div class="eg-records"><span>${e(t('everMax'))}: <strong>${e(ex.everMax)} KG</strong></span><span>·</span><span>${e(t('maxToday'))}: <strong>${e(ex.todayMax)} KG</strong></span><span class="eg-note">${e(L.formatNote)}</span></div></div><table class="eg-data"><colgroup><col><col><col><col></colgroup><thead><tr><th>${e(L.weight)}</th><th>${e(L.reps)}</th><th>${e(L.sets)}</th><th></th></tr></thead><tbody>${rows}</tbody></table></section>`;
+      return `<section class="eg-exercise"><div class="eg-exercise-heading"><h2>${idx+1}. ${e(displayExerciseName(ex.name))}</h2><div class="eg-records"><span>${e(t('everMax'))}: <strong>${e(ex.everMax)} KG</strong></span><span>·</span><span>${e(t('maxToday'))}: <strong>${e(ex.todayMax)} KG</strong></span><span class="eg-note">${e(L.formatNote)}</span></div></div><table class="eg-data"><colgroup><col><col><col><col></colgroup><thead><tr><th>${e(L.weight)}</th><th>${e(L.reps)}</th><th>${e(L.sets)}</th><th>${e(L.status)}</th></tr></thead><tbody>${rows}</tbody></table></section>`;
     };
     const sessions=groups.map(g=>`<section class="eg-session">${summaryTable(g)}${g.exercises.map(exerciseTable).join('')}</section>`).join('');
     return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${e(L.reportTitle)}</title><style>
@@ -2305,8 +2290,9 @@
       .eg-summary{margin-bottom:26px}.eg-summary th{font-size:10px;color:#8e8e93;text-transform:uppercase;letter-spacing:.5px;text-align:left;padding:0 6px 4px;border-bottom:1px solid #e5e5ea}.eg-summary td{font-size:16px;font-weight:700;padding:6px 6px 0}.eg-summary th:last-child,.eg-summary td:last-child{text-align:right}
       .eg-exercise{margin-bottom:24px;page-break-inside:auto;break-inside:auto}.eg-exercise-heading{page-break-after:avoid;break-after:avoid}.eg-exercise h2{font-size:18px;margin:0 0 4px}.eg-records{font-size:12px;color:#636366;margin-bottom:8px;white-space:normal}.eg-records span{margin-right:7px}.eg-records strong{color:#1c1c1e}.eg-note{float:right;font-size:10px;color:#8e8e93;font-style:italic}
       .eg-data th,.eg-data td{width:25%;padding:8px 10px;border-bottom:1px solid #f2f2f7;font-size:13px;text-align:right;vertical-align:middle}.eg-data th{font-size:10px;color:#8e8e93;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #e5e5ea}.eg-data th:first-child,.eg-data td:first-child{text-align:left}.eg-status{font-size:16px!important;font-weight:800!important}.eg-status.hit{color:#248a3d}.eg-status.miss{color:#d70015}
+      .eg-logo{width:180px!important;height:auto!important;display:block!important;float:none!important}.eg-copy{display:block!important;margin:4px 0 0!important}.eg-status{font-size:11px!important;font-weight:400!important;color:#1c1c1e!important}
       @media print{.eg-report{max-width:none}.eg-note{float:right}}
-    </style></head><body><main class="eg-report"><table class="eg-brand"><tr><td class="eg-brand-left"><img class="eg-logo" src="${REPORT_LOGO_DATA}" alt="G"><span class="eg-name">EASY GYM</span><span class="eg-copy">© 2026 Arthur Stivenson</span></td><td class="eg-brand-right">${e(String(L.reportTitle).toUpperCase())}</td></tr></table>${sessions}</main></body></html>`;
+    </style></head><body><main class="eg-report"><table class="eg-brand"><tr><td class="eg-brand-left"><img class="eg-logo" src="${REPORT_LOGO_DATA}" alt="Easy Gym"><span class="eg-copy">© 2026 Arthur Stivenson</span></td><td class="eg-brand-right">${e(String(L.reportTitle).toUpperCase())}</td></tr></table>${sessions}</main></body></html>`;
   }
   function printReportInBrowser(html){
     const frame=document.createElement('iframe');
