@@ -5906,8 +5906,8 @@ body.eg-dialog-open{overflow:hidden!important}
 #donate.support-section .app-view-container > .app-group-title:first-child{
   margin-top:4px!important;
 }
-#donate.support-section .app-group-title,
-#donate.support-section .app-global-title{
+#explanations #supportPageTitle,
+#explanations #mgmtSupportCard .app-global-title{
   text-transform:uppercase!important;
 }
 

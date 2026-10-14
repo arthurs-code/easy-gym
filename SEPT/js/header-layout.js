@@ -1,4 +1,4 @@
-/* v324X: measure the natural fixed header; no workout state changes. */
+/* v325X: measure the natural fixed header; no workout state changes. */
 (function () {
   'use strict';
   var header = document.querySelector('.eg-system-header-anchor');

@@ -18,7 +18,7 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v324X';
+  const LANG_PACK_VERSION = 'v325X';
   const EMBEDDED_LANGUAGE_PACKS = window.EASY_GYM_LANGUAGE_PACKS;
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
@@ -78,7 +78,7 @@
     }catch{ return null; }
   }
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v324X-PWA-maintainable-test';
+  const DEV_BUILD = 'v325X-PWA-maintainable-test';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -394,8 +394,6 @@
     setIconText('downloadWordBtn','word','word'); setIconText('downloadPdfBtn','pdf','pdf');
     setMgmtRowText('sharePlanBtn','sharePlan'); setMgmtRowText('manageSavePlanBtn','savePlan'); setMgmtRowText('insertPlanBtn','insertPlan'); setMgmtRowText('addLanguageBtn','addLanguage'); setMgmtRowText('saveAllDataBtn','saveAllData'); setMgmtRowText('restoreAllDataBtn','restoreAllData'); setMgmtRowText('deleteDataBtn','deleteData');
     setText('mgmtShareSaveTitle','mgmtShareSaveTitle'); setText('mgmtDataTitle','mgmtDataTitle'); setText('mgmtDangerTitle','mgmtDangerTitle');
-    setMgmtRowText('manageSupportBtn','donate');
-    $('manageSupportTitle').textContent=t('donate').toLocaleUpperCase();
     setText('supportPageTitle','supportTitle'); setText('supportPageIntro','supportIntro');
     setText('supportShareTitle','supportShareTitle'); setText('supportShareText','supportShareText');
     setText('supportRateTitle','supportRateTitle'); setText('supportRateText','supportRateText');
@@ -493,7 +491,6 @@
     document.querySelectorAll('[data-lang-option]').forEach(btn=>btn.addEventListener('click',(e)=>{ e.stopPropagation(); changeLanguage(btn.dataset.langOption); }));
     document.addEventListener('click',()=>{ if(els.languageSwitch) els.languageSwitch.classList.remove('open'); if(els.languageSelect) els.languageSelect.setAttribute('aria-expanded','false'); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ if(els.languageSwitch) els.languageSwitch.classList.remove('open'); if(els.languageSelect) els.languageSelect.setAttribute('aria-expanded','false'); } });
-    $('manageSupportBtn').addEventListener('click',()=>{activeTab='donate';renderAll();});
     document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{activeTab=btn.dataset.tab; if(activeTab==='train'){savedWorkout=null; if(selectedPlanDate) selectedTrainDate=selectedPlanDate;} if(activeTab==='plan' && selectedTrainDate){selectedPlanDate=selectedTrainDate;} renderAll();}));
     els.addExerciseModal.addEventListener('click',e=>{if(e.target===els.addExerciseModal)closeExerciseModal();});
     if(els.easyGymDialog){
@@ -730,7 +727,7 @@
 
   function renderAll(){
     applyLanguageUi();
-    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===(activeTab==='donate'?'explanations':activeTab)));
+    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===activeTab));
     document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active', s.id===activeTab));
     if(activeTab==='home') renderHome();
     else if(activeTab==='plan'){ renderDays(); renderPlan(); }
