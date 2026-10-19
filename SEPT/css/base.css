@@ -6129,3 +6129,10 @@ body.eg-dialog-open{overflow:hidden!important}
   justify-self:end!important;
   text-align:right!important;
 }
+
+/* v329: year and weekday form one centered label; prevent double-tap zoom. */
+html, body { touch-action: manipulation; }
+.date-strip .day-link.with-date .dl-day {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  gap:5px!important; white-space:nowrap!important;
+}

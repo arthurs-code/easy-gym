@@ -18,7 +18,7 @@
     : ['en'];
   const DEFAULT_LANGUAGE = String(LANGUAGE_CONFIG.defaultLanguage || LANGS[0] || 'en').toLowerCase();
   const LANG_PACK_BASE = './lang/';
-  const LANG_PACK_VERSION = 'v327X';
+  const LANG_PACK_VERSION = 'v329X';
   const EMBEDDED_LANGUAGE_PACKS = window.EASY_GYM_LANGUAGE_PACKS;
   function applyLanguagePacks(loaded){
     const packMap = Object.fromEntries(loaded.filter(([,pack])=>pack).map(([lang,pack])=>[lang,pack]));
@@ -78,7 +78,7 @@
     }catch{ return null; }
   }
   const LEGACY_KEYS = [];
-  const DEV_BUILD = 'v327X-PWA-maintainable-test';
+  const DEV_BUILD = 'v329X-PWA-maintainable-test';
   const DEV_BUILD_KEY = PACKAGE_PREFIX+'devBuild.v1';
   // Production data preservation: an app update must never erase plans, active
   // workouts, LOG history, the exercise library, or user preferences. The build
@@ -155,8 +155,18 @@
   window.addEventListener('pagehide', flushLocalState);
   document.addEventListener('visibilitychange',()=>{
     if(document.visibilityState==='hidden') flushLocalState();
-    else tickLiveTimer();
+    else { refreshCalendarToday(); tickLiveTimer(); }
   });
+  function refreshCalendarToday(){
+    const today=todayISO();
+    for(const [el,iso,attr] of [[els.planDayButtons,selectedPlanDate,'data-plan-iso'],[els.trainDayButtons,selectedTrainDate,'data-train-iso']]){
+      if(el && el.dataset.today!==today) buildDateStrip(el,iso,attr);
+    }
+  }
+  window.addEventListener('pageshow',refreshCalendarToday);
+  window.addEventListener('focus',refreshCalendarToday);
+  // Suppress browser double-tap zoom without swallowing individual button clicks.
+  document.addEventListener('dblclick',event=>event.preventDefault(),{passive:false});
   function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
   function t(key){ return (I18N[currentLang]&&I18N[currentLang][key]) || I18N.en[key] || key; }
   function dayShort(day){ return ((I18N[currentLang]&&I18N[currentLang].days)||I18N.en.days)[day] || day; }
@@ -725,7 +735,12 @@
     }
   }
 
+  let lastRenderedTab=null;
   function renderAll(){
+    const entering=lastRenderedTab!==activeTab;
+    lastRenderedTab=activeTab;
+    if(entering && activeTab==='plan' && els.planDayButtons) delete els.planDayButtons.dataset.initialCentered;
+    if(entering && activeTab==='train' && els.trainDayButtons) delete els.trainDayButtons.dataset.initialCentered;
     applyLanguageUi();
     document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active', b.dataset.tab===activeTab));
     document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active', s.id===activeTab));
@@ -739,10 +754,10 @@
   }
   // ---- Swipeable date strip (drag/finger), shared by Plan and Do-it ----
   function stripSets(){ return { planned:new Set(Object.keys(datePlans||{}).filter(iso=>hasDatePlan(iso))) }; }
-  function centerStrip(el, dataAttr, iso){ const b=el.querySelector('['+dataAttr+'="'+iso+'"]'); if(b){ el.scrollLeft = b.offsetLeft - el.clientWidth/2 + b.offsetWidth/2; } }
+  function centerStrip(el, dataAttr, iso){ const b=el.querySelector('['+dataAttr+'="'+iso+'"]'); if(b){ const r=b.getBoundingClientRect(), frame=el.getBoundingClientRect(); el.scrollLeft += r.left+r.width/2-frame.left-el.clientLeft-el.clientWidth/2; } }
   function buildDateStrip(el, selectedIso, dataAttr){
     const today=todayISO(); const sets=stripSets();
-    const sig=['v314X',currentLang, today, [...sets.planned].sort().join(',')].join('|');
+    const sig=['v329X',currentLang, today, [...sets.planned].sort().join(',')].join('|');
     if(el.dataset.sig!==sig){
       const prev = el.children.length ? el.scrollLeft : null;
       const N=365; const base=new Date(); base.setHours(0,0,0,0);
@@ -752,9 +767,9 @@
         const planned=sets.planned.has(iso);
         const cls=['day-link','with-date','calendar-day',iso===today?'is-today':'',planned?'planned':''].filter(Boolean).join(' ');
         const ddmm=`${String(dt.getDate()).padStart(2,'0')}.${String(dt.getMonth()+1).padStart(2,'0')}.`;
-        html+=`<button class="${cls}" ${dataAttr}="${iso}" type="button"><span class="dl-day day-name">${dayShort(DAYS[(dt.getDay()+6)%7]).toUpperCase()}</span><span class="dl-date day-date">${ddmm}</span></button>`;
+        html+=`<button class="${cls}" ${dataAttr}="${iso}" type="button"><span class="dl-day day-name"><span class="calendar-year">${String(dt.getFullYear()).slice(-2)}</span><span>${dayShort(DAYS[(dt.getDay()+6)%7]).toUpperCase()}</span></span><span class="dl-date day-date">${ddmm}</span></button>`;
       }
-      el.innerHTML=html; el.dataset.sig=sig;
+      el.innerHTML=html; el.dataset.sig=sig; el.dataset.today=today;
       if(prev!=null) el.scrollLeft=prev;
     }
     const centerIso=selectedIso||today;
@@ -773,7 +788,7 @@
   }
   function renderDays(){
     buildDateStrip(els.planDayButtons, selectedPlanDate, 'data-plan-iso');
-    ensureStripBehavior(els.planDayButtons, 'data-plan-iso', iso=>{ selectedPlanDate=iso; renderAll(); });
+    ensureStripBehavior(els.planDayButtons, 'data-plan-iso', iso=>{ selectedPlanDate=iso; selectedTrainDate=iso; renderAll(); });
   }
   function hasSavedPlan(day){return !!savedPlanDays[day] && (weekPlans[day]||[]).length>0 && isPlanValid(day);}
   function isPlanSaved(day){return hasSavedPlan(day);}
@@ -1017,7 +1032,7 @@
   function renderTrain(){
     // Do-it: swipeable date strip; train the selected date's planned session.
     buildDateStrip(els.trainDayButtons, selectedTrainDate, 'data-train-iso');
-    ensureStripBehavior(els.trainDayButtons, 'data-train-iso', iso=>{ selectedTrainDate=iso; renderAll(); });
+    ensureStripBehavior(els.trainDayButtons, 'data-train-iso', iso=>{ selectedTrainDate=iso; selectedPlanDate=iso; renderAll(); });
     const iso=selectedTrainDate;
     els.trainControls.classList.remove('done-state','saved-state','is-visible');
     els.trainControls.style.display = iso ? '' : 'none';
@@ -1563,11 +1578,16 @@
       const row2=values.map((v,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(v,28,i===3?'000000':'1C1C1E',true),{line:290,keep:true,align:summaryAlign[i]}),widths[i],{top:45,bottom:35,left:i===0?0:40,right:i===3?50:(i===0?120:40)})).join('');
       return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${row1}</w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr>${row2}</w:tr></w:tbl>${reportDocxSpacer(230)}`;
     };
-    const recordsTable=ex=>{
-      const widths=[2675,2675,5350];
+    const noteDates=new Set();
+    const measure=document.createElement('canvas').getContext('2d');
+    measure.font='12.6666667px Arial';
+    const recordsTable=(ex,showNote)=>{
+      const recordValues=[t('everMax')+': '+ex.everMax+' KG',t('maxToday')+': '+ex.todayMax+' KG'];
+      const recordWidths=recordValues.map(value=>Math.ceil(measure.measureText(value).width*15)+240);
+      const widths=[...recordWidths,10700-recordWidths[0]-recordWidths[1]];
       const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
-      const values=[t('everMax')+': '+ex.everMax+' KG',t('maxToday')+': '+ex.todayMax+' KG',L.formatNote];
-      const cells=values.map((value,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(value,i===2?16:19,i===2?'777B84':'1C1C1E'),{line:240,keep:true,align:i===2?'right':'left'}),widths[i],{top:20,bottom:20})).join('');
+      const values=[...recordValues,showNote?L.formatNote:''];
+      const cells=values.map((value,i)=>reportDocxCell(reportDocxParagraph(reportDocxRun(value,i===2?16:19,i===2?'777B84':'1C1C1E'),{line:240,keep:true,align:i===2?'center':'left'}),widths[i],{top:20,bottom:20,right:i===2?0:240})).join('');
       return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr>${cells}</w:tr></w:tbl>`;
     };
     const exerciseTable=ex=>{
@@ -1583,8 +1603,8 @@
       }).join('');
       return `<w:tbl><w:tblPr><w:tblW w:w="10700" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr>${headCells}</w:tr>${body}</w:tbl>`;
     };
-    const exerciseBlock=(ex,idx)=>`${reportDocxParagraph(reportDocxRun((idx+1)+'. '+displayExerciseName(ex.name),28,'1C1C1E',true),{line:290,after:25,keep:true})}${recordsTable(ex)}${reportDocxSpacer(45)}${exerciseTable(ex)}${reportDocxSpacer(220)}`;
-    const body=(groups.length?groups.map(g=>summaryTable(g)+g.exercises.map(exerciseBlock).join('')).join(''):reportDocxParagraph(reportDocxRun(t('noReport'),20,'8E8E93',true),{line:220}));
+    const exerciseBlock=(ex,idx,showNote)=>`${reportDocxParagraph(reportDocxRun((idx+1)+'. '+displayExerciseName(ex.name),28,'1C1C1E',true),{line:290,after:25,keep:true})}${recordsTable(ex,showNote)}${reportDocxSpacer(45)}${exerciseTable(ex)}${reportDocxSpacer(220)}`;
+    const body=(groups.length?groups.map(g=>summaryTable(g)+g.exercises.map((ex,idx)=>{const showNote=!noteDates.has(g.date);noteDates.add(g.date);return exerciseBlock(ex,idx,showNote);}).join('')).join(''):reportDocxParagraph(reportDocxRun(t('noReport'),20,'8E8E93',true),{line:220}));
     const documentXml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:background w:color="FFFFFF"/><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="560" w:right="620" w:bottom="560" w:left="620" w:header="0" w:footer="0" w:gutter="0"/><w:cols w:space="720"/><w:docGrid w:linePitch="360"/></w:sectPr></w:body></w:document>`;
     const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>`;
     const rootRels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>`;
@@ -1675,16 +1695,18 @@
       });
       y+=96;
     };
-    const drawExerciseHeader=(ex,idx,continued=false)=>{
+    const noteDates=new Set();
+    const drawExerciseHeader=(ex,idx,continued=false,showNote=false)=>{
       drawText((idx+1)+'. '+displayExerciseName(ex.name)+(continued?' (cont.)':''),M,y+29,28,true,colors.primary,contentW); y+=39;
       const recordsBase=y+27;
       const everLabelX=M;
-      const todayLabelX=M+310;
       const everLabelW=drawText(t('everMax')+':',everLabelX,recordsBase,19,false,colors.body);
-      drawText(ex.everMax+' KG',everLabelX+everLabelW+8,recordsBase,19,true,colors.primary);
+      const everValueW=drawText(ex.everMax+' KG',everLabelX+everLabelW+8,recordsBase,19,true,colors.primary);
+      const todayLabelX=everLabelX+everLabelW+8+everValueW+24;
       const todayLabelW=drawText(t('maxToday')+':',todayLabelX,recordsBase,19,false,colors.body);
-      drawText(ex.todayMax+' KG',todayLabelX+todayLabelW+8,recordsBase,19,true,colors.primary);
-      drawTextRight(L.formatNote,W-M,recordsBase,16,false,colors.secondary,390,true);
+      const todayValueW=drawText(ex.todayMax+' KG',todayLabelX+todayLabelW+8,recordsBase,19,true,colors.primary);
+      const noteLeft=todayLabelX+todayLabelW+8+todayValueW+24;
+      if(showNote) drawTextCenter(L.formatNote,(noteLeft+W-M)/2,recordsBase,16,false,colors.secondary,W-M-noteLeft,true);
       y+=43;
       const colW=contentW/4, heads=reportDownloadHeaders();
       heads.forEach((v,i)=>{
@@ -1702,7 +1724,10 @@
         let rowIndex=0, continued=false;
         while(rowIndex<ex.rows.length){
           ensure(39+43+40+rowH+34);
-          const colW=drawExerciseHeader(ex,idx,continued); continued=true;
+          const showNote=!continued&&!noteDates.has(g.date);
+          const colW=drawExerciseHeader(ex,idx,continued,showNote);
+          if(showNote) noteDates.add(g.date);
+          continued=true;
           while(rowIndex<ex.rows.length && y+rowH+34<=H-M){
             const r=ex.rows[rowIndex], info=reportStatusDisplay(reportRowStatus(r),L);
             const vals=[reportPair(r.pKg,r.dKg,'KG'),reportPair(r.pReps,r.dReps),reportPair(r.pSets,r.dSets)];
